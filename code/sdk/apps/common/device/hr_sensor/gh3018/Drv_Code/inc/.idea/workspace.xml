@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="edb349d4-2fba-47bf-90c0-143d50d15c0b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../../../../.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../dev_manager/dev_manager.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../dev_manager/dev_manager.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../gSensor/qmi8658/qmi8658.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../gSensor/qmi8658/qmi8658.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../gSensor/qmi8658/qmi8658.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../gSensor/qmi8658/qmi8658.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vc9201/module_heart_vc_int.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../vc9201/module_heart_vc_int.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vc9201/vcHr02Hci.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../vc9201/vcHr02Hci.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../m_sensor/qmc6309/qmc6309.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../m_sensor/qmc6309/qmc6309.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../sensor_iic/sensor_iic.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../sensor_iic/sensor_iic.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../sensor_iic/sensor_iic.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../sensor_iic/sensor_iic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../timestamp/timestamp.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../timestamp/timestamp.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_func/common_countdown.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_func/common_countdown.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_func/common_stopwatch.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_func/common_stopwatch.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_key/common_key.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_key/common_key.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_lang/lang_conf.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_lang/lang_conf.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_lang/lang_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_lang/lang_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_lang/lang_table.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_lang/lang_table.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_lang/lang_txtid.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_lang/lang_txtid.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_lang/name_99_table.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_lang/name_99_table.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_call_log.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_call_log.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_call_log.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_call_log.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_cfg.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_cfg.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_contacts.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_contacts.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_contacts.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_contacts.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_message.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_message.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_message.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_message.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_weather.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_weather.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_weather.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_nor_vm/nor_vm_weather.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_offscr/common_offscreen.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_offscr/common_offscreen.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_parse/common_le_set.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_parse/common_le_set.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_remind/alarm_manage.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_remind/alarm_manage.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_gs_task.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_gs_task.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_hr_task.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_hr_task.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_hr_task.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_hr_task.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_mag_task.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_mag_task.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_mag_task.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_mag_task.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_task/comm_task.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_task/comm_task.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_task/comm_task.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_task/comm_task.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_task/minute_task.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_task/minute_task.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/common_data.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/common_data.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/common_data.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/common_data.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/common_widget.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/common_widget.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/common_widget.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/common_widget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_bo.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_bo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_calorie.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_calorie.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_clock.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_clock.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_date.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_date.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_distance.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_distance.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_hr.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_hr.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_num_str.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_num_str.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_num_str.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_num_str.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_pace.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_pace.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_step.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_step.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_time.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_time.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_weather.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_weather.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_week.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_widget/widget_week.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/include/comm_call.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/include/comm_call.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/include/ui_act_id.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/include/ui_act_id.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/include/ui_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/include/ui_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/include/ui_menu.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/include/ui_menu.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/lv_watch.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/lv_watch.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/lv_watch.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/lv_watch.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/poc_modem/poc_modem_cache.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/poc_modem/poc_modem_cache.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/poc_modem/poc_modem_cache.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/poc_modem/poc_modem_cache.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/poc_modem/poc_modem_ui.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/poc_modem/poc_modem_ui.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/poc_modem/poc_modem_vm.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/poc_modem/poc_modem_vm.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/poc_modem/poc_modem_vm.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/poc_modem/poc_modem_vm.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/about/about.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/about/about.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/al_name_99/al_name_ex.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/al_name_99/al_name_ex.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/al_name_99/al_name_list.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/al_name_99/al_name_list0.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/al_name_99/al_name_list1.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_modify.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_modify.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_remind.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_remind.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_repeat.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_repeat.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_repeat.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_repeat.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_time.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_time.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_time.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/alarm/alarm_time.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/bo/bo_sample.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/bo/bo_sample.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_dial.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_dial.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_disc.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_disc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_end.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_end.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_in.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_in.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_log.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_log.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_online.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_online.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_out.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_out.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_volume.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/call_volume.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/contacts.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/call/contacts.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/countdown/countdown_over.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/countdown/countdown_over.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/countdown/countdown_over.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/countdown/countdown_over.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/countdown/countdown_state.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/countdown/countdown_state.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/countdown/countdown_time.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/countdown/countdown_time.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/countdown/countdown_time.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/countdown/countdown_time.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/disp_ctrl/backlight.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/disp_ctrl/backlight.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/disp_ctrl/screen_sleep.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/disp_ctrl/screen_sleep.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/hr/hr_sample.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/hr/hr_sample.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/hr_warn/hr_warn.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/hr_warn/hr_warn.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/lang_sel/lang_sel.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/lang_sel/lang_sel.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/lang_sel/lang_sel.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/lang_sel/lang_sel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/menu/common_list.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/menu/common_list.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/menu/common_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/menu/common_list.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/menu_view/menu_view.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/menu_view/menu_view.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/message/msg_detail.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/message/msg_detail.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/message/msg_list.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/message/msg_list.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/message/msg_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/message/msg_list.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/off_wrist/off_wrist.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/off_wrist/off_wrist.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/remote_music/remote_music.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/remote_music/remote_music.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/reset/reset.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/reset/reset.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/settings/settings_list.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/settings/settings_list.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/sound_ctrl/sound_ctrl.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/sound_ctrl/sound_ctrl.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/sound_ctrl/sound_ctrl.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/sound_ctrl/sound_ctrl.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/stopwatch/stopwatch_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/stopwatch/stopwatch_main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/stopwatch/stopwatch_over.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/stopwatch/stopwatch_over.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/stopwatch/stopwatch_state.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/stopwatch/stopwatch_state.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/tool_box/tool_box.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/tool_box/tool_box.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/unit_switch/unit_switch.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/unit_switch/unit_switch.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/unit_switch/unit_switch.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/unit_switch/unit_switch.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/watchface/watchface_07.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/watchface/watchface_07.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/watchface/watchface_08.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/watchface/watchface_08.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/watchface/watchface_10.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/watchface/watchface_10.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/watchface/watchface_11.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/watchface/watchface_11.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/weather/weather_data.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/weather/weather_data.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/weather/weather_report.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/weather/weather_report.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/worship_time/worship_time.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/ui_menu/worship_time/worship_time.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lvgl/src/extra/libs/qrcode/qrcodegen.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lvgl/src/extra/libs/qrcode/qrcodegen.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lvgl/src/font/font_common_num_24.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lvgl/src/font/font_common_num_24.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lvgl/src/font/font_common_num_32.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lvgl/src/font/font_common_num_32.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lvgl/src/font/lv_font.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lvgl/src/font/lv_font.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lvgl/src/widgets/lv_label.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lvgl/src/widgets/lv_label.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lvgl/src/widgets/lv_label.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lvgl/src/widgets/lv_label.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lvgl/src/widgets/lv_textarea.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lvgl/src/widgets/lv_textarea.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/ui/jl_images/FILE_index.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/ui/jl_images/FILE_index.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/ui/jl_images/FILE_index.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/ui/jl_images/FILE_index.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../watch/board/br28/board_701n_lvgl_demo/board_701n_lvgl_demo.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../watch/board/br28/board_701n_lvgl_demo/board_701n_lvgl_demo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../watch/board/br28/board_701n_lvgl_demo/board_701n_lvgl_demo_cfg.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../watch/board/br28/board_701n_lvgl_demo/board_701n_lvgl_demo_cfg.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../watch/common/task_table.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../watch/common/task_table.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../watch/include/app_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../watch/include/app_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../watch/include/user_cfg_id.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../watch/include/user_cfg_id.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../watch/task_manager/bt/bt.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../watch/task_manager/bt/bt.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../watch/task_manager/bt/bt_event_fun.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../watch/task_manager/bt/bt_event_fun.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../watch/task_manager/music/music.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../watch/task_manager/music/music.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../watch/ui/lcd/STYLE_WATCH_NEW/ui_action_file.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../watch/ui/lcd/STYLE_WATCH_NEW/ui_action_file.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../watch/ui/lcd/STYLE_WATCH_NEW/ui_action_music.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../watch/ui/lcd/STYLE_WATCH_NEW/ui_action_music.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/app.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/app.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/FILE.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/FILE.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/app.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/app.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/jl_isd.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/jl_isd.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/jl_isd.fw" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/jl_isd.fw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/md5.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/md5.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/res.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/res.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/update.ufw" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/update.ufw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/upgrade.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/download/watch/upgrade.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.0.0.preopt.bc" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.0.0.preopt.bc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.0.2.internalize.bc" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.0.2.internalize.bc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.0.4.opt.bc" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.0.4.opt.bc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.0.5.precodegen.bc" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.0.5.precodegen.bc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.objs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.objs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.resolution.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.elf.resolution.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/sdk.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/symbol_tbl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/tools/symbol_tbl.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/ui_driver/imb_demo.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/ui_driver/imb_demo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/ui_driver/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/ui_driver/lvgl/lv_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../cpu/br28/ui_driver/lvgl/lvgl_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../cpu/br28/ui_driver/lvgl/lvgl_main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/font/bin_out/font_common_num_18.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/font/bin_out/font_common_num_18.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/font/bin_out/font_common_num_24.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/font/bin_out/font_common_num_24.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/font/多国语言字符集/所有字符集.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/font/多国语言字符集/所有字符集.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/font/多国语言字符集/数字+标号.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/font/多国语言字符集/数字+标号.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/about/01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_icon/30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/16x28/ye/11.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/16x28/ye/11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/16x28/ye/15.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/16x28/ye/15.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/re/21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/30x40/wh/21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/comm_num/36x56/wh/21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/100_100_icon/11.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/100_100_icon/11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/100_100_icon/12.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/100_100_icon/12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/100_100_icon/13.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/100_100_icon/13.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/100_100_icon/14.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/100_100_icon/14.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/100_100_icon/15.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/100_100_icon/15.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/88_88_icon/11.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/88_88_icon/11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/88_88_icon/12.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/88_88_icon/12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/88_88_icon/13.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/88_88_icon/13.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/88_88_icon/14.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/88_88_icon/14.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/88_88_icon/15.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/menu/88_88_icon/15.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/remind/hr_warn/00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/settings/05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/settings/07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/sound_ctrl/01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/pic/pic_tool/pic/sound_ctrl/02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/tools/font/font_common_32.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/tools/font/font_common_32.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/tools/font/font_common_num_24.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/tools/font/font_common_num_24.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/tools/font/font_common_num_32.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/tools/font/font_common_num_32.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../ui/tools/font/font_common_num_64.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../ui/tools/font/font_common_num_64.bin" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../../../../.." />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2023" />
+    <option name="minorVersion" value="2.2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2fo9sh7KiWtlqjpXRG4Os1ZsS7o" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="edb349d4-2fba-47bf-90c0-143d50d15c0b" name="Changes" comment="" />
+      <created>1714456772668</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714456772668</updated>
+      <workItem from="1714456773380" duration="7000" />
+      <workItem from="1714979848313" duration="3000" />
+    </task>
+    <servers />
+  </component>
+</project>

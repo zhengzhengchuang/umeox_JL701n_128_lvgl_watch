@@ -1,0 +1,1261 @@
+{
+    "-name": "dial",
+    "-type": "project",
+    "activePage": 0,
+    "chip_type": "BR28",
+    "lang_excel": "../../../UITools/多国语言_watch.xls",
+    "pages": [
+        {
+            "-class": "ScenesScreen",
+            "-name": "ScenesScreen",
+            "-type": "page",
+            "caption": "页面_0",
+            "layer": [
+                {
+                    "-class": "NewLayer",
+                    "-name": "图层_0",
+                    "-type": "NewLayer",
+                    "caption": "图层",
+                    "icon": "config/images/layer.ico",
+                    "layout": [
+                        {
+                            "-class": "NewLayout",
+                            "-name": "布局_1",
+                            "-type": "NewLayout",
+                            "caption": "布局",
+                            "clip": true,
+                            "icon": "config/images/layout.ico",
+                            "layout": [
+                                {
+                                    "-class": "NewLayout",
+                                    "-name": "watch_2",
+                                    "-type": "NewLayout",
+                                    "caption": "watch",
+                                    "clip": true,
+                                    "icon": "../../../UITools/control/ex/watch.png",
+                                    "layout": [
+                                        {
+                                            "-class": "NewFrame",
+                                            "-name": "watch_hour_3",
+                                            "-type": "ImageList",
+                                            "caption": "watch_hour",
+                                            "icon": "config/images/page_white_vector.png",
+                                            "property": [
+                                                {
+                                                    "-name": "id",
+                                                    "-type": "id",
+                                                    "caption": "ID号",
+                                                    "ename": "NewFrame_2",
+                                                    "id": 0
+                                                },
+                                                {
+                                                    "-name": "element_css",
+                                                    "-type": "struct",
+                                                    "caption": "CSS元素",
+                                                    "info": "",
+                                                    "struct": [
+                                                        [
+                                                            {
+                                                                "-name": "align",
+                                                                "-type": "enum",
+                                                                "caption": "对齐方式",
+                                                                "default": "ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "ALIGN_LEFT": 0
+                                                                    },
+                                                                    {
+                                                                        "ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "ALIGN_RIGHT": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "invisible",
+                                                                "-type": "enum",
+                                                                "caption": "默认隐藏",
+                                                                "default": "false",
+                                                                "enum": [
+                                                                    {
+                                                                        "true": 1
+                                                                    },
+                                                                    {
+                                                                        "false": 0
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "flags",
+                                                                "-type": "enum",
+                                                                "caption": "标志",
+                                                                "default": "ELM_FLAG_NORMAL",
+                                                                "enum": [
+                                                                    {
+                                                                        "ELM_FLAG_NORMAL": 0
+                                                                    },
+                                                                    {
+                                                                        "ELM_FLAG_HEAD": 1
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "rect",
+                                                                "-type": "rect",
+                                                                "caption": "坐标",
+                                                                "rect": {
+                                                                    "height": 165,
+                                                                    "width": 42,
+                                                                    "x": 202,
+                                                                    "y": 79
+                                                                }
+                                                            },
+                                                            {
+                                                                "-name": "background_color",
+                                                                "-type": "background-color",
+                                                                "background-color": "",
+                                                                "caption": "背景颜色"
+                                                            },
+                                                            {
+                                                                "-name": "background_image",
+                                                                "-type": "background-image",
+                                                                "background-image": "",
+                                                                "caption": "背景图片",
+                                                                "image-type": ""
+                                                            },
+                                                            {
+                                                                "-name": "border",
+                                                                "-type": "border",
+                                                                "border": {
+                                                                    "bottom": 0,
+                                                                    "left": 0,
+                                                                    "right": 0,
+                                                                    "top": 0
+                                                                },
+                                                                "caption": "边框",
+                                                                "gray-color": 0
+                                                            }
+                                                        ]
+                                                    ]
+                                                },
+                                                {
+                                                    "-name": "cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: X",
+                                                    "default": 20,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: Y",
+                                                    "default": 19,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: X",
+                                                    "default": 227,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: Y",
+                                                    "default": 227,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "image",
+                                                    "-type": "piclist",
+                                                    "caption": "图片列表",
+                                                    "default": "",
+                                                    "image-type": "ARGB8565",
+                                                    "list": [
+                                                        "config/表盘1/时针/hour.png"
+                                                    ],
+                                                    "maxlength": 30
+                                                }
+                                            ],
+                                            "tip": "",
+                                            "version": "1",
+                                            "widget": [
+                                            ]
+                                        },
+                                        {
+                                            "-class": "NewFrame",
+                                            "-name": "watch_min_4",
+                                            "-type": "ImageList",
+                                            "caption": "watch_min",
+                                            "icon": "config/images/page_white_vector.png",
+                                            "property": [
+                                                {
+                                                    "-name": "id",
+                                                    "-type": "id",
+                                                    "caption": "ID号",
+                                                    "ename": "NewFrame_3",
+                                                    "id": 0
+                                                },
+                                                {
+                                                    "-name": "element_css",
+                                                    "-type": "struct",
+                                                    "caption": "CSS元素",
+                                                    "info": "",
+                                                    "struct": [
+                                                        [
+                                                            {
+                                                                "-name": "align",
+                                                                "-type": "enum",
+                                                                "caption": "对齐方式",
+                                                                "default": "ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "ALIGN_LEFT": 0
+                                                                    },
+                                                                    {
+                                                                        "ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "ALIGN_RIGHT": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "invisible",
+                                                                "-type": "enum",
+                                                                "caption": "默认隐藏",
+                                                                "default": "false",
+                                                                "enum": [
+                                                                    {
+                                                                        "true": 1
+                                                                    },
+                                                                    {
+                                                                        "false": 0
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "flags",
+                                                                "-type": "enum",
+                                                                "caption": "标志",
+                                                                "default": "ELM_FLAG_NORMAL",
+                                                                "enum": [
+                                                                    {
+                                                                        "ELM_FLAG_NORMAL": 0
+                                                                    },
+                                                                    {
+                                                                        "ELM_FLAG_HEAD": 1
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "rect",
+                                                                "-type": "rect",
+                                                                "caption": "坐标",
+                                                                "rect": {
+                                                                    "height": 184,
+                                                                    "width": 29,
+                                                                    "x": 211,
+                                                                    "y": 56
+                                                                }
+                                                            },
+                                                            {
+                                                                "-name": "background_color",
+                                                                "-type": "background-color",
+                                                                "background-color": "",
+                                                                "caption": "背景颜色"
+                                                            },
+                                                            {
+                                                                "-name": "background_image",
+                                                                "-type": "background-image",
+                                                                "background-image": "",
+                                                                "caption": "背景图片",
+                                                                "image-type": ""
+                                                            },
+                                                            {
+                                                                "-name": "border",
+                                                                "-type": "border",
+                                                                "border": {
+                                                                    "bottom": 0,
+                                                                    "left": 0,
+                                                                    "right": 0,
+                                                                    "top": 0
+                                                                },
+                                                                "caption": "边框",
+                                                                "gray-color": 0
+                                                            }
+                                                        ]
+                                                    ]
+                                                },
+                                                {
+                                                    "-name": "cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: X",
+                                                    "default": 15,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: Y",
+                                                    "default": 12,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: X",
+                                                    "default": 227,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: Y",
+                                                    "default": 227,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "image",
+                                                    "-type": "piclist",
+                                                    "caption": "图片列表",
+                                                    "default": "",
+                                                    "image-type": "ARGB8565",
+                                                    "list": [
+                                                        "config/表盘1/分针/min.png"
+                                                    ],
+                                                    "maxlength": 30
+                                                }
+                                            ],
+                                            "tip": "",
+                                            "version": "1",
+                                            "widget": [
+                                            ]
+                                        },
+                                        {
+                                            "-class": "NewFrame",
+                                            "-name": "watch_sec_5",
+                                            "-type": "ImageList",
+                                            "caption": "watch_sec",
+                                            "icon": "config/images/page_white_vector.png",
+                                            "property": [
+                                                {
+                                                    "-name": "id",
+                                                    "-type": "id",
+                                                    "caption": "ID号",
+                                                    "ename": "NewFrame_4",
+                                                    "id": 0
+                                                },
+                                                {
+                                                    "-name": "element_css",
+                                                    "-type": "struct",
+                                                    "caption": "CSS元素",
+                                                    "info": "",
+                                                    "struct": [
+                                                        [
+                                                            {
+                                                                "-name": "align",
+                                                                "-type": "enum",
+                                                                "caption": "对齐方式",
+                                                                "default": "ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "ALIGN_LEFT": 0
+                                                                    },
+                                                                    {
+                                                                        "ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "ALIGN_RIGHT": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "invisible",
+                                                                "-type": "enum",
+                                                                "caption": "默认隐藏",
+                                                                "default": "false",
+                                                                "enum": [
+                                                                    {
+                                                                        "true": 1
+                                                                    },
+                                                                    {
+                                                                        "false": 0
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "flags",
+                                                                "-type": "enum",
+                                                                "caption": "标志",
+                                                                "default": "ELM_FLAG_NORMAL",
+                                                                "enum": [
+                                                                    {
+                                                                        "ELM_FLAG_NORMAL": 0
+                                                                    },
+                                                                    {
+                                                                        "ELM_FLAG_HEAD": 1
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "rect",
+                                                                "-type": "rect",
+                                                                "caption": "坐标",
+                                                                "rect": {
+                                                                    "height": 248,
+                                                                    "width": 27,
+                                                                    "x": 211,
+                                                                    "y": 9
+                                                                }
+                                                            },
+                                                            {
+                                                                "-name": "background_color",
+                                                                "-type": "background-color",
+                                                                "background-color": "",
+                                                                "caption": "背景颜色"
+                                                            },
+                                                            {
+                                                                "-name": "background_image",
+                                                                "-type": "background-image",
+                                                                "background-image": "",
+                                                                "caption": "背景图片",
+                                                                "image-type": ""
+                                                            },
+                                                            {
+                                                                "-name": "border",
+                                                                "-type": "border",
+                                                                "border": {
+                                                                    "bottom": 0,
+                                                                    "left": 0,
+                                                                    "right": 0,
+                                                                    "top": 0
+                                                                },
+                                                                "caption": "边框",
+                                                                "gray-color": 0
+                                                            }
+                                                        ]
+                                                    ]
+                                                },
+                                                {
+                                                    "-name": "cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: X",
+                                                    "default": 13,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: Y",
+                                                    "default": 34,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: X",
+                                                    "default": 227,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: Y",
+                                                    "default": 227,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "image",
+                                                    "-type": "piclist",
+                                                    "caption": "图片列表",
+                                                    "default": "",
+                                                    "image-type": "ARGB8565",
+                                                    "list": [
+                                                        "config/表盘1/秒针/sec.png"
+                                                    ],
+                                                    "maxlength": 30
+                                                }
+                                            ],
+                                            "tip": "",
+                                            "version": "1",
+                                            "widget": [
+                                            ]
+                                        }
+                                    ],
+                                    "property": [
+                                        {
+                                            "-name": "id",
+                                            "-type": "id",
+                                            "caption": "ID号",
+                                            "ename": "WATCH",
+                                            "id": 0
+                                        },
+                                        {
+                                            "-name": "element_css",
+                                            "-type": "struct",
+                                            "caption": "CSS元素",
+                                            "info": "",
+                                            "struct": [
+                                                [
+                                                    {
+                                                        "-name": "align",
+                                                        "-type": "enum",
+                                                        "caption": "对齐方式",
+                                                        "default": "ALIGN_CENTER",
+                                                        "enum": [
+                                                            {
+                                                                "ALIGN_LEFT": 0
+                                                            },
+                                                            {
+                                                                "ALIGN_CENTER": 1
+                                                            },
+                                                            {
+                                                                "ALIGN_RIGHT": 2
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "-name": "invisible",
+                                                        "-type": "enum",
+                                                        "caption": "默认隐藏",
+                                                        "default": "false",
+                                                        "enum": [
+                                                            {
+                                                                "true": 1
+                                                            },
+                                                            {
+                                                                "false": 0
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "-name": "flags",
+                                                        "-type": "enum",
+                                                        "caption": "标志",
+                                                        "default": "ELM_FLAG_NORMAL",
+                                                        "enum": [
+                                                            {
+                                                                "ELM_FLAG_NORMAL": 0
+                                                            },
+                                                            {
+                                                                "ELM_FLAG_HEAD": 1
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "-name": "rect",
+                                                        "-type": "rect",
+                                                        "caption": "坐标",
+                                                        "rect": {
+                                                            "height": 454,
+                                                            "width": 454,
+                                                            "x": 0,
+                                                            "y": 0
+                                                        }
+                                                    },
+                                                    {
+                                                        "-name": "background_color",
+                                                        "-type": "background-color",
+                                                        "background-color": "#ff000000",
+                                                        "caption": "背景颜色"
+                                                    },
+                                                    {
+                                                        "-name": "background_image",
+                                                        "-type": "background-image",
+                                                        "background-image": "config/表盘1/bg.png",
+                                                        "caption": "背景图片",
+                                                        "image-type": "RGB565"
+                                                    },
+                                                    {
+                                                        "-name": "border",
+                                                        "-type": "border",
+                                                        "border": {
+                                                            "bottom": 0,
+                                                            "left": 0,
+                                                            "right": 0,
+                                                            "top": 0
+                                                        },
+                                                        "caption": "边框",
+                                                        "gray-color": 0
+                                                    }
+                                                ]
+                                            ]
+                                        },
+                                        {
+                                            "-name": "source",
+                                            "-type": "text-str",
+                                            "caption": "数据源",
+                                            "default": "rtc",
+                                            "maxlength": 8
+                                        },
+                                        {
+                                            "-name": "action",
+                                            "-type": "action",
+                                            "action": [
+                                                {
+                                                    "-name": "event",
+                                                    "-type": "enum",
+                                                    "caption": "事件",
+                                                    "default": "KEY_OK",
+                                                    "enum": [
+                                                        {
+                                                            "KEY_OK": 13
+                                                        },
+                                                        {
+                                                            "KEY_CANCLE": 14
+                                                        },
+                                                        {
+                                                            "KEY_MENU": 15
+                                                        },
+                                                        {
+                                                            "KEY_MODE": 16
+                                                        },
+                                                        {
+                                                            "KEY_LEFT": 37
+                                                        },
+                                                        {
+                                                            "KEY_UP": 38
+                                                        },
+                                                        {
+                                                            "KEY_RIGHT": 39
+                                                        },
+                                                        {
+                                                            "KEY_DOWN": 40
+                                                        },
+                                                        {
+                                                            "TOUCH_DOWN": 129
+                                                        },
+                                                        {
+                                                            "TOUCH_UP": 130
+                                                        },
+                                                        {
+                                                            "TOUCH_MOVE": 131
+                                                        },
+                                                        {
+                                                            "TOUCH_HOLD": 132
+                                                        },
+                                                        {
+                                                            "TOUCH_CLICK": 133
+                                                        },
+                                                        {
+                                                            "TOUCH_DOUBLE_CLICK": 134
+                                                        },
+                                                        {
+                                                            "ON_CHANGE_INIT": 151
+                                                        },
+                                                        {
+                                                            "ENUM_KEY": 1
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "-name": "action",
+                                                    "-type": "enum",
+                                                    "caption": "动作",
+                                                    "default": "SHOW",
+                                                    "enum": [
+                                                        {
+                                                            "SHOW": 0
+                                                        },
+                                                        {
+                                                            "HIDE": 1
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "-name": "object",
+                                                    "-type": "text-str",
+                                                    "caption": "对象",
+                                                    "default": "",
+                                                    "object": ""
+                                                },
+                                                {
+                                                    "-name": "args",
+                                                    "-type": "text-str",
+                                                    "args": "",
+                                                    "caption": "参数",
+                                                    "default": ""
+                                                },
+                                                {
+                                                    "values": [
+                                                    ]
+                                                }
+                                            ],
+                                            "caption": "事件属性"
+                                        },
+                                        {
+                                            "-name": "luascript",
+                                            "-type": "luascript",
+                                            "caption": "Lua脚本",
+                                            "luascript": [
+                                                {
+                                                    "code": "print('watch onload\\n')\nfunction watch_timer_call_back(arg)\n\tlocal watch = gui:getComponentByName('WATCH')\n\tlocal sys_time = sys:getTime()\n\twatch:setWatchTime(sys_time.hour, sys_time.minute, sys_time.second)\nend\n\narg = {}\nwatch_timer = sys:createTimer(arg, watch_timer_call_back, 500)\nwatch_timer:run()\n\nlocal watch = gui:getComponentByName('WATCH')\nlocal sys_time = sys:getTime()\nwatch:setWatchTime(sys_time.hour, sys_time.minute, sys_time.second, false)\n",
+                                                    "event": "ONLOAD",
+                                                    "type": 0
+                                                },
+                                                {
+                                                    "code": "print('watch unload\\n')\nwatch_timer:stop()\nsys:deleteTimer(watch_timer)\nwatch_timer = nil",
+                                                    "event": "UNLOAD",
+                                                    "type": 1
+                                                },
+                                                {
+                                                    "code": "print('touch down')\n\ngui:touchEventTakeover(true)",
+                                                    "event": "TOUCH_DOWN",
+                                                    "type": 2
+                                                },
+                                                {
+                                                    "code": "print('touch move')",
+                                                    "event": "TOUCH_MOVE",
+                                                    "type": 3
+                                                },
+                                                {
+                                                    "code": "print('touch move right')",
+                                                    "event": "TOUCH_R_MOVE",
+                                                    "type": 4
+                                                },
+                                                {
+                                                    "code": "print('touch move left')",
+                                                    "event": "TOUCH_L_MOVE",
+                                                    "type": 5
+                                                },
+                                                {
+                                                    "code": "print('touch move down')",
+                                                    "event": "TOUCH_D_MOVE",
+                                                    "type": 6
+                                                },
+                                                {
+                                                    "code": "print('touch move up')",
+                                                    "event": "TOUCH_U_MOVE",
+                                                    "type": 7
+                                                },
+                                                {
+                                                    "code": "print(\"watch touch up\")\n\nlocal curr_page = gui:getComponentByName('PAGE_0')\ncurr_page:hide()\n\nlocal next_page = gui:getComponentByName(0X4020010)\nnext_page:show()\n",
+                                                    "event": "TOUCH_HOLD",
+                                                    "type": 8
+                                                },
+                                                {
+                                                    "code": "print('touch up')",
+                                                    "event": "TOUCH_UP",
+                                                    "type": 9
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "tip": "",
+                                    "version": "1",
+                                    "widget": [
+                                    ]
+                                }
+                            ],
+                            "property": [
+                                {
+                                    "-name": "id",
+                                    "-type": "id",
+                                    "caption": "ID号",
+                                    "ename": "BaseForm_3",
+                                    "id": 0
+                                },
+                                {
+                                    "-name": "element_css",
+                                    "-type": "struct",
+                                    "caption": "CSS元素",
+                                    "info": "",
+                                    "struct": [
+                                        [
+                                            {
+                                                "-name": "align",
+                                                "-type": "enum",
+                                                "caption": "对齐方式",
+                                                "default": "ALIGN_CENTER",
+                                                "enum": [
+                                                    {
+                                                        "ALIGN_LEFT": 0
+                                                    },
+                                                    {
+                                                        "ALIGN_CENTER": 1
+                                                    },
+                                                    {
+                                                        "ALIGN_RIGHT": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "-name": "invisible",
+                                                "-type": "enum",
+                                                "caption": "默认隐藏",
+                                                "default": "false",
+                                                "enum": [
+                                                    {
+                                                        "true": 1
+                                                    },
+                                                    {
+                                                        "false": 0
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "-name": "flags",
+                                                "-type": "enum",
+                                                "caption": "标志",
+                                                "default": "ELM_FLAG_NORMAL",
+                                                "enum": [
+                                                    {
+                                                        "ELM_FLAG_NORMAL": 0
+                                                    },
+                                                    {
+                                                        "ELM_FLAG_HEAD": 1
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "-name": "rect",
+                                                "-type": "rect",
+                                                "caption": "坐标",
+                                                "rect": {
+                                                    "height": 454,
+                                                    "width": 454,
+                                                    "x": 0,
+                                                    "y": 0
+                                                }
+                                            },
+                                            {
+                                                "-name": "background_color",
+                                                "-type": "background-color",
+                                                "background-color": "#ff000000",
+                                                "caption": "背景颜色"
+                                            },
+                                            {
+                                                "-name": "background_image",
+                                                "-type": "background-image",
+                                                "background-image": "",
+                                                "caption": "背景图片",
+                                                "image-type": ""
+                                            },
+                                            {
+                                                "-name": "border",
+                                                "-type": "border",
+                                                "border": {
+                                                    "bottom": 0,
+                                                    "left": 0,
+                                                    "right": 0,
+                                                    "top": 0
+                                                },
+                                                "caption": "边框",
+                                                "gray-color": 0
+                                            }
+                                        ]
+                                    ]
+                                },
+                                {
+                                    "-name": "action",
+                                    "-type": "action",
+                                    "action": [
+                                        {
+                                            "-name": "event",
+                                            "-type": "enum",
+                                            "caption": "事件",
+                                            "default": "KEY_OK",
+                                            "enum": [
+                                                {
+                                                    "KEY_OK": 13
+                                                },
+                                                {
+                                                    "KEY_CANCLE": 14
+                                                },
+                                                {
+                                                    "KEY_MENU": 15
+                                                },
+                                                {
+                                                    "KEY_MODE": 16
+                                                },
+                                                {
+                                                    "KEY_LEFT": 37
+                                                },
+                                                {
+                                                    "KEY_UP": 38
+                                                },
+                                                {
+                                                    "KEY_RIGHT": 39
+                                                },
+                                                {
+                                                    "KEY_DOWN": 40
+                                                },
+                                                {
+                                                    "TOUCH_DOWN": 129
+                                                },
+                                                {
+                                                    "TOUCH_UP": 130
+                                                },
+                                                {
+                                                    "TOUCH_MOVE": 131
+                                                },
+                                                {
+                                                    "TOUCH_HOLD": 132
+                                                },
+                                                {
+                                                    "TOUCH_CLICK": 133
+                                                },
+                                                {
+                                                    "TOUCH_DOUBLE_CLICK": 134
+                                                },
+                                                {
+                                                    "ON_CHANGE_INIT": 151
+                                                },
+                                                {
+                                                    "ENUM_KEY": 1
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "-name": "action",
+                                            "-type": "enum",
+                                            "caption": "动作",
+                                            "default": "SHOW",
+                                            "enum": [
+                                                {
+                                                    "SHOW": 0
+                                                },
+                                                {
+                                                    "HIDE": 1
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "-name": "object",
+                                            "-type": "text-str",
+                                            "caption": "对象",
+                                            "default": "",
+                                            "object": ""
+                                        },
+                                        {
+                                            "-name": "args",
+                                            "-type": "text-str",
+                                            "args": "",
+                                            "caption": "参数",
+                                            "default": ""
+                                        },
+                                        {
+                                            "values": [
+                                            ]
+                                        }
+                                    ],
+                                    "caption": "事件属性"
+                                },
+                                {
+                                    "-name": "luascript",
+                                    "-type": "luascript",
+                                    "caption": "Lua脚本",
+                                    "luascript": [
+                                        {
+                                            "code": "",
+                                            "event": "ONLOAD",
+                                            "type": 0
+                                        },
+                                        {
+                                            "code": "",
+                                            "event": "UNLOAD",
+                                            "type": 1
+                                        },
+                                        {
+                                            "code": "",
+                                            "event": "TOUCH_DOWN",
+                                            "type": 2
+                                        },
+                                        {
+                                            "code": "",
+                                            "event": "TOUCH_MOVE",
+                                            "type": 3
+                                        },
+                                        {
+                                            "code": "",
+                                            "event": "TOUCH_R_MOVE",
+                                            "type": 4
+                                        },
+                                        {
+                                            "code": "",
+                                            "event": "TOUCH_L_MOVE",
+                                            "type": 5
+                                        },
+                                        {
+                                            "code": "",
+                                            "event": "TOUCH_D_MOVE",
+                                            "type": 6
+                                        },
+                                        {
+                                            "code": "",
+                                            "event": "TOUCH_U_MOVE",
+                                            "type": 7
+                                        },
+                                        {
+                                            "code": "",
+                                            "event": "TOUCH_HOLD",
+                                            "type": 8
+                                        },
+                                        {
+                                            "code": "",
+                                            "event": "TOUCH_UP",
+                                            "type": 9
+                                        }
+                                    ]
+                                }
+                            ],
+                            "tip": "",
+                            "version": "1",
+                            "widget": [
+                            ]
+                        }
+                    ],
+                    "property": [
+                        {
+                            "-name": "id",
+                            "-type": "id",
+                            "caption": "ID号",
+                            "ename": "BaseForm_2",
+                            "id": 0
+                        },
+                        {
+                            "-name": "element_css",
+                            "-type": "struct",
+                            "caption": "CSS元素",
+                            "info": "",
+                            "struct": [
+                                [
+                                    {
+                                        "-name": "align",
+                                        "-type": "enum",
+                                        "caption": "对齐方式",
+                                        "default": "ALIGN_CENTER",
+                                        "enum": [
+                                            {
+                                                "ALIGN_LEFT": 0
+                                            },
+                                            {
+                                                "ALIGN_CENTER": 1
+                                            },
+                                            {
+                                                "ALIGN_RIGHT": 2
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "-name": "invisible",
+                                        "-type": "enum",
+                                        "caption": "默认隐藏",
+                                        "default": "false",
+                                        "enum": [
+                                            {
+                                                "true": 1
+                                            },
+                                            {
+                                                "false": 0
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "-name": "z_order",
+                                        "-type": "int8",
+                                        "caption": "z轴坐标",
+                                        "default": 0,
+                                        "max": 128,
+                                        "min": 0
+                                    },
+                                    {
+                                        "-name": "rect",
+                                        "-type": "rect",
+                                        "caption": "坐标",
+                                        "rect": {
+                                            "height": 454,
+                                            "width": 454,
+                                            "x": 0,
+                                            "y": 0
+                                        }
+                                    },
+                                    {
+                                        "-name": "background_color",
+                                        "-type": "background-color",
+                                        "background-color": "#8DEEDB",
+                                        "caption": "背景颜色"
+                                    },
+                                    {
+                                        "-name": "background_image",
+                                        "-type": "background-image",
+                                        "background-image": "",
+                                        "caption": "背景图片",
+                                        "image-type": ""
+                                    },
+                                    {
+                                        "-name": "border",
+                                        "-type": "border",
+                                        "border": {
+                                            "bottom": 0,
+                                            "left": 0,
+                                            "right": 0,
+                                            "top": 0
+                                        },
+                                        "caption": "边框",
+                                        "gray-color": 0
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "-name": "color_format",
+                            "-type": "color-format",
+                            "caption": "颜色类型",
+                            "default": "OSD16",
+                            "enum": [
+                                {
+                                    "OSD16": 2
+                                },
+                                {
+                                    "OSD1": 4
+                                }
+                            ]
+                        },
+                        {
+                            "-name": "action",
+                            "-type": "action",
+                            "action": [
+                                {
+                                    "-name": "event",
+                                    "-type": "enum",
+                                    "caption": "事件",
+                                    "default": "KEY_OK",
+                                    "enum": [
+                                        {
+                                            "KEY_OK": 13
+                                        },
+                                        {
+                                            "KEY_CANCLE": 14
+                                        },
+                                        {
+                                            "KEY_MENU": 15
+                                        },
+                                        {
+                                            "KEY_MODE": 16
+                                        },
+                                        {
+                                            "KEY_LEFT": 37
+                                        },
+                                        {
+                                            "KEY_UP": 38
+                                        },
+                                        {
+                                            "KEY_RIGHT": 39
+                                        },
+                                        {
+                                            "KEY_DOWN": 40
+                                        },
+                                        {
+                                            "TOUCH_DOWN": 129
+                                        },
+                                        {
+                                            "TOUCH_UP": 130
+                                        },
+                                        {
+                                            "TOUCH_MOVE": 131
+                                        },
+                                        {
+                                            "TOUCH_HOLD": 132
+                                        },
+                                        {
+                                            "TOUCH_CLICK": 133
+                                        },
+                                        {
+                                            "TOUCH_DOUBLE_CLICK": 134
+                                        },
+                                        {
+                                            "ON_CHANGE_INIT": 151
+                                        },
+                                        {
+                                            "ENUM_KEY": 1
+                                        }
+                                    ]
+                                },
+                                {
+                                    "-name": "action",
+                                    "-type": "enum",
+                                    "caption": "动作",
+                                    "default": "SHOW",
+                                    "enum": [
+                                        {
+                                            "SHOW": 0
+                                        },
+                                        {
+                                            "HIDE": 1
+                                        }
+                                    ]
+                                },
+                                {
+                                    "-name": "object",
+                                    "-type": "text-str",
+                                    "caption": "对象",
+                                    "default": "",
+                                    "object": ""
+                                },
+                                {
+                                    "-name": "args",
+                                    "-type": "text-str",
+                                    "args": "",
+                                    "caption": "参数",
+                                    "default": ""
+                                },
+                                {
+                                    "values": [
+                                    ]
+                                }
+                            ],
+                            "caption": "事件属性"
+                        },
+                        {
+                            "-name": "luascript",
+                            "-type": "luascript",
+                            "caption": "Lua脚本",
+                            "luascript": [
+                                {
+                                    "code": "",
+                                    "event": "ONLOAD",
+                                    "type": 0
+                                },
+                                {
+                                    "code": "",
+                                    "event": "UNLOAD",
+                                    "type": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "tip": "",
+                    "version": "1",
+                    "widget": [
+                    ]
+                }
+            ],
+            "property": [
+                {
+                    "rect": {
+                        "height": 454,
+                        "width": 454,
+                        "x": 0,
+                        "y": 0
+                    }
+                }
+            ]
+        }
+    ]
+}

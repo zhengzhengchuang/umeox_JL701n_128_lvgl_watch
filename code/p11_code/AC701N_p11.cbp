@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CodeBlocks_project_file>
+<FileVersion major="1" minor="6" />
+<Project>
+<Option title="AC701N_p11" />
+<Option compiler="q32s_lto_compiler" />
+<Build>
+<Target title="Release">
+<Option output="cpu/br28/post_build/p11.elf" prefix_auto="0" extension_auto="0" />
+<Option object_output="obj/Release/" />
+<Option type="1" />
+<Option compiler="q32s_lto_compiler" />
+<Compiler>
+<Add option="-integrated-as" />
+<Add option="-g" />
+<Add option="-O0" />
+<Add option="-flto" />
+<Add option="-Os" />
+<Add option="-Wcast-align" />
+<Add option="-w" />
+<Add option="-fallow-pointer-null" />
+<Add option="-Wincompatible-pointer-types" />
+<Add option="-fprefer-gnu-section" />
+<Add option="-Werror=undef" />
+<Add option="-Wframe-larger-than=32" />
+<Add option="-Werror=incompatible-pointer-types" />
+<Add option="-Werror=return-type" />
+<Add option="-Werror=implicit-function-declaration" />
+<Add option="-D__GCC_Q32S__" />
+<Add option="-DPMU_SYSTEM" />
+<Add option="-DCONFIG_FPGA_ENABLE" />
+<Add directory="include/cpu/br28" />
+<Add directory="include/generic" />
+<Add directory="apps" />
+<Add directory="apps/common" />
+<Add directory="apps/common/sport" />
+<Add directory="apps/common/device" />
+<Add directory="include/device" />
+<Add directory="apps/common/device/hr_sensor/vchr02" />
+</Compiler>
+<Linker>
+<Add option="--plugin-opt=-inline-threshold=5" />
+<Add option="--plugin-opt=save-temps" />
+<Add option="--plugin-opt=-inline-normal-into-special-section=true" />
+<Add option="--plugin-opt=-dont-used-symbol-list=malloc,free,sprintf,printf,puts,putchar" />
+<Add option="--sort-common" />
+<Add option="--plugin-opt=-warn-stack-size=32" />
+<Add option="--start-group" />
+<Add option="cpu/br28/liba/cpu.a" />
+<Add option="cpu/br28/liba/printf.a" />
+<Add option="cpu/br28/liba/vad_algo.a" />
+<Add option="cpu/br28/liba/cbuf.a" />
+<Add option="cpu/br28/liba/lbuf.a" />
+<Add option="cpu/br28/liba/lbuf.a " />
+<Add option="cpu/br28/liba/bank_switch.a" />
+<Add option="cpu/br28/liba/algo_gsensor.a" />
+<Add option="--end-group" />
+<Add option="-Tcpu/br28/p11.ld" />
+<Add option="-M=cpu/br28/post_build/p11.map" />
+<Add library="C:\JL\pi32\q32s-lib\libm.a" />
+</Linker>
+<ExtraCommands>
+<Add before="$compiler $options $includes -D__LD__ -E -P cpu\br28\p11_ld.c -o cpu\br28\p11.ld" />
+<Mode before="always" />
+<Add after="cpu\br28\post_build\download.bat p11" />
+<Mode after="always" />
+</ExtraCommands>
+</Target>
+</Build>
+<Unit filename="apps/app_config.h" />
+<Unit filename="apps/common/device/bmp280/bmp280.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/device/gSensor/SC7A20.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/device/gSensor/gSensor_algo.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/device/gSensor/gSensor_manage.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/device/gSensor/msa310.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/device/gSensor/msa310_function.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/device/hr_sensor/hrSensor_manage.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/device/hr_sensor/hrs3603.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/device/hr_sensor/vchr02/module_heart_vc_int.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/device/hr_sensor/vchr02/vcHr02Hci.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/device/hr_sensor/vchr02/vcHr02Hci.h" />
+<Unit filename="apps/common/sport/sensor_api.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/common/sport/sensor_api.h" />
+<Unit filename="apps/debug.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/lib_config.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/main.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/msg.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/msg.h" />
+<Unit filename="apps/timer.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/timer.h" />
+<Unit filename="cpu/br28/common.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/iic.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/iic_soft.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/spi.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/test.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/uart.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/vad_api.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/vad_develop.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="include/cpu/br28/common.h" />
+<Unit filename="include/cpu/br28/debug.h" />
+<Unit filename="include/cpu/br28/gp_timer_api.h" />
+<Unit filename="include/cpu/br28/gpio.h" />
+<Unit filename="include/cpu/br28/hwi.h" />
+<Unit filename="include/cpu/br28/iic_api.h" />
+<Unit filename="include/cpu/br28/iic_hw.h" />
+<Unit filename="include/cpu/br28/iic_soft.h" />
+<Unit filename="include/cpu/br28/includes.h" />
+<Unit filename="include/cpu/br28/interrupt_hw.h" />
+<Unit filename="include/cpu/br28/lp_timer_api.h" />
+<Unit filename="include/cpu/br28/power/lp_ipc.h" />
+<Unit filename="include/cpu/br28/power/p11.h" />
+<Unit filename="include/cpu/br28/power/p11_app.h" />
+<Unit filename="include/cpu/br28/power/p11_csfr.h" />
+<Unit filename="include/cpu/br28/power/p11_io_imap.h" />
+<Unit filename="include/cpu/br28/power/p11_io_omap.h" />
+<Unit filename="include/cpu/br28/power/p11_sfr.h" />
+<Unit filename="include/cpu/br28/power/p33.h" />
+<Unit filename="include/cpu/br28/power/p33_api.h" />
+<Unit filename="include/cpu/br28/power/p33_app.h" />
+<Unit filename="include/cpu/br28/power/p33_sfr.h" />
+<Unit filename="include/cpu/br28/power/power_api.h" />
+<Unit filename="include/cpu/br28/power/power_wakeup.h" />
+<Unit filename="include/cpu/br28/power_interface.h" />
+<Unit filename="include/cpu/br28/ram_share.h" />
+<Unit filename="include/cpu/br28/spi_hw.h" />
+<Unit filename="include/cpu/br28/typedef.h" />
+<Unit filename="include/cpu/br28/uart.h" />
+<Unit filename="include/cpu/br28/usr_timer.h" />
+<Unit filename="include/cpu/br28/vad_algo.h" />
+<Unit filename="include/cpu/br28/vad_hw.h" />
+<Unit filename="include/device/SC7A20.h" />
+<Unit filename="include/device/bmp280.h" />
+<Unit filename="include/device/gSensor_algo.h" />
+<Unit filename="include/device/gSensor_manage.h" />
+<Unit filename="include/device/hrSensor_manage.h" />
+<Unit filename="include/device/hrs3603.h" />
+<Unit filename="include/device/msa310.h" />
+<Unit filename="include/device/msa310_function.h" />
+<Unit filename="include/device/p11_algo_api.h" />
+<Unit filename="include/generic/bank_switch.h" />
+<Unit filename="include/generic/circular_buf.h" />
+<Unit filename="include/generic/printf.h" />
+<Unit filename="include/generic/sensor_gp_timer.h" />
+</Project>
+</CodeBlocks_project_file>

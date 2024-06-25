@@ -1,0 +1,7 @@
+//如字模保存在SPI FLASH, SPIFLASH_Read(__g_font_buf,offset,size);
+//如字模已加载到SDRAM,直接返回偏移地址即可如:return (uint8_t*)(sdram_fontddr+offset);
+int cpuaddr = 0x4000000 + RES_BASE_ADDR;
+
+lv_open_font(cpuaddr + font_common_32_address + offset, size);
+
+return get_g_font_buf();

@@ -1,0 +1,37 @@
+{
+    "name":"杰理科技LUA API",
+    "version":"1.0.0",
+    "title":"LUA API说明",
+    "description":"手表项目API说明文档，这里是文档总介绍，目前先空缺，后续在apidoc.json中完善",
+	"header":{
+		"title":"文档说明",
+		"filename":"doc\\header.md"
+	},
+	"footer":{
+		"title":"文档结尾",
+		"filename":"doc\\footer.md"
+	},
+	"order":[
+		"gui",
+		"公共方法",
+		"布局控件",
+		"电量控件",
+		"图片控件",
+		"文本控件",
+		"时间控件",
+		"数字控件",
+		"表格控件",
+		"compass",
+		"multiprogress",
+		"progress",
+		"slider",
+		"watch",
+		"bt",
+		"bsp",
+		"spi",
+		"iic",
+		"sys",
+		"music",
+		"device"
+	]
+}

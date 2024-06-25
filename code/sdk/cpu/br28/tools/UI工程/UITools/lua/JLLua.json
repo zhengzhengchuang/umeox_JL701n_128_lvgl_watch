@@ -1,0 +1,2994 @@
+[
+{
+    "demo": "gpio = bsp:getGpioControl(\"A\", 5)   -- 创建PA5为操作对象\ngpio:setOutput()    -- PA5设置为输出模式\ngpio:outputHigh()   -- PA5输出高电平",
+    "key": "setOutput()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置指定GPIO对象的工作模式为输出模式，此时不能读取GPIO的输入电平。",
+    "type": "function"
+},
+{
+    "demo": "gpio = bsp:getGpioControl(\"A\", 5)   -- 创建PA5为操作对象\ngpio:outputHigh()    -- PA5设置输出高电平",
+    "key": "outputHigh()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置指定GPIO对象输出高电平",
+    "type": "function"
+},
+{
+    "demo": "gpio = bsp:getGpioControl(\"A\", 5)   -- 创建PA5为操作对象\ngpio:outputLow()    -- PA5设置输出低电平",
+    "key": "outputLow()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置指定GPIO对象输出低电平",
+    "type": "function"
+},
+{
+    "demo": "gpio = bsp:getGpioControl(\"A\", 5)   -- 创建PA5为操作对象\ngpio:setInput()    -- PA5设置为输入模式",
+    "key": "setInput()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置指定GPIO对象为输入模式",
+    "type": "function"
+},
+{
+    "demo": "gpio = bsp:getGpioControl(\"A\", 5)   -- 创建PA5为操作对象\ngpio:read()    -- PA5设置为输入模式",
+    "key": "read()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "读取指定GPIO对象的输入电平",
+    "type": "function"
+},
+{
+    "demo": "gpio = bsp:getGpioControl(\"A\", 5)   -- 创建PA5为操作对象\ngpio:setPullUp(1)    -- PA5上拉电阻打开\ngpio:setPullUp(0)    -- PA5上拉电阻关闭",
+    "key": "setPullUp(onoff)",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置指定GPIO对象的上拉电阻开关",
+    "type": "function"
+},
+{
+    "demo": "gpio = bsp:getGpioControl(\"A\", 5)   -- 创建PA5为操作对象\ngpio:setPullDown(1)    -- PA5下拉电阻打开\ngpio:setPullDown(0)    -- PA5下拉电阻关闭",
+    "key": "setPullDown()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置指定GPIO对象的下拉电阻开关",
+    "type": "function"
+},
+{
+    "demo": "gpio = bsp:getGpioControl(\"A\", 5)   -- 创建PA5为操作对象\ngpio:setDie()",
+    "key": "setDie()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置指定GPIO对象的die功能",
+    "type": "function"
+},
+{
+    "demo": "gpio = bsp:getGpioControl(\"A\", 5)   -- 创建PA5为操作对象",
+    "key": "getGpioControl()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "创建指定gpio为操作对象",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\niic0:setBaud(300000)    -- 设置波特率为300K",
+    "key": "setBaud()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置IIC设备的波特率",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\niic0:start()",
+    "key": "start()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "开始IIC通信",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\niic0:stop()     -- 停止iic通信",
+    "key": "stop()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "停止IIC通信",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\niic0:sendByte(0xfc)     -- 发送0xfc",
+    "key": "sendByte()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "IIC发送一个字节",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\nbyte = iic0:readByte()      -- IIC0读取一个字节\nprint(byte)     -- 打印读取到的数据",
+    "key": "readByte()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "IIC读取一个字节数据",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\niic0:setIe(true)    -- 打开IE功能",
+    "key": "setIe()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置IIC的IE功能",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\npnd = iic0:getPnd()     -- 读取中断标志\nprint(pnd)",
+    "key": "getPnd()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "获取IIC中断标志",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\niic0:clrPnd()   -- 清除中断标志",
+    "key": "clrPnd()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "清除IIC的中断标志",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\niic0:setEndIe(true)     -- 打开 end ie功能",
+    "key": "setEndIe()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置IIC的end ie功能",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\nendpnd = iic0:getEndPnd()   -- 获取end pnd",
+    "key": "getEndPnd()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "获取IIC的end中断标志",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\niic0:clrEndPnd()    -- 清空end pnd",
+    "key": "clrEndPnd()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "清空IIC的end pnd",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象\niic0:close()    -- 关闭IIC0",
+    "key": "close()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "关闭IIC设备",
+    "type": "function"
+},
+{
+    "demo": "iic0 = bsp:getIICControl(DB.IIC0)    -- 创建IIC0对象",
+    "key": "getIICControl()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "创建IIC对象",
+    "type": "function"
+},
+{
+    "demo": "spi0 = bsp:getSPIControl(DB.SPI0)    -- 创建SPI0对象\nspi0:setBaud(500000)",
+    "key": "setBaud()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置SPI驱动波特率",
+    "type": "function"
+},
+{
+    "demo": "spi0 = bsp:getSPIControl(DB.SPI0)    -- 创建SPI0对象\nspi0:setIe(true)    -- 打开IE功能",
+    "key": "setIe()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置SPI的IE功能",
+    "type": "function"
+},
+{
+    "demo": "spi0 = bsp:getSPIControl(DB.SPI0)    -- 创建SPI0对象\npnd = spi0:getPnd()",
+    "key": "getPnd()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "获取SPI中断标志",
+    "type": "function"
+},
+{
+    "demo": "spi0 = bsp:getSPIControl(DB.SPI0)    -- 创建SPI0对象\nspi0:clrPnd()",
+    "key": "clrPnd()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "清除spi的中断标志",
+    "type": "function"
+},
+{
+    "demo": "spi0 = bsp:getSPIControl(DB.SPI0)    -- 创建SPI0对象\nspi0:setBitMode(0)  -- 全双工模式",
+    "key": "setBitMode()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "设置SPI的工作模式",
+    "type": "function"
+},
+{
+    "demo": "spi0 = bsp:getSPIControl(DB.SPI0)    -- 创建SPI0对象\nspi0:sendByte(0x0e)     -- 发送0x0e",
+    "key": "sendByte()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "SPI发送一个字节",
+    "type": "function"
+},
+{
+    "demo": "spi0 = bsp:getSPIControl(DB.SPI0)    -- 创建SPI0对象\ndat = spi0:readByte()   -- SPI0读取一个字节\nprint(dat)  -- 打印读取到的数据",
+    "key": "readByte()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "SPI读取一个字节数据",
+    "type": "function"
+},
+{
+    "demo": "spi0 = bsp:getSPIControl(DB.SPI0)    -- 创建SPI0对象\nspi0:close()    -- 关闭spi0",
+    "key": "close()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "关闭SPI设备",
+    "type": "function"
+},
+{
+    "demo": "spi0 = bsp:getSPIControl(DB.SPI0)    -- 创建SPI0对象\nspi0:close()    -- 关闭spi0",
+    "key": "getSPIControl()",
+    "module": "bsp",
+    "priority": 5,
+    "tip": "创建SPI对象",
+    "type": "function"
+},
+{
+    "demo": "spi0 = bsp:getSPIControl(DB.SPI0)    -- 创建SPI0对象\nspi0:close()    -- 关闭spi0",
+    "key": "getSPIControl()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "创建SPI对象",
+    "type": "function"
+},
+{
+    "demo": "status = bt:getBluetoothConnectState()\nprint(tostring(status))",
+    "key": "getBluetoothConnectState()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "获取蓝牙连接状态，无论连接手机或耳机，均采用这个接口获取状态",
+    "type": "function"
+},
+{
+    "demo": "status = bt:getCallState()\nprint(tostring(status))",
+    "key": "getCallState()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "获取手机通话状态",
+    "type": "function"
+},
+{
+    "demo": "bt:pickUpThePhone()",
+    "key": "pickUpThePhone()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "当有电话接入时，通过这个接口接听电话",
+    "type": "function"
+},
+{
+    "demo": "bt:hangUpThePhone()",
+    "key": "hangUpThePhone()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "挂断当前电话",
+    "type": "function"
+},
+{
+    "demo": "mac = bt:GetBtAddr()\nprint(mac)",
+    "key": "GetBtAddr()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "获取蓝牙的mac地址",
+    "type": "function"
+},
+{
+    "demo": "name = bt:GetBtName()\nprint(name)",
+    "key": "GetBtName()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "获取手表的蓝牙名称",
+    "type": "function"
+},
+{
+    "demo": "local bt_name = \"test\"  -- 蓝牙设备名称\nlocal bt_mac = {0x40,0xB3,0x52,0x17,0x08}   -- 蓝牙设备mac\nbt:emitterConnect(bt_name, bt_mac)  -- 连接指定蓝牙设备",
+    "key": "emitterConnect()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射连接耳机",
+    "type": "function"
+},
+{
+    "demo": "local bt_name = \"test\"  -- 蓝牙设备名称\nlocal bt_mac = {0x40,0xB3,0x52,0x17,0x08}   -- 蓝牙设备mac\nbt:emitterDisConnect(bt_name, bt_mac)  -- 断开指定设备",
+    "key": "emitterDisConnect(name,mac)",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射断开连接",
+    "type": "function"
+},
+{
+    "demo": "local bt_name = \"test\"  -- 蓝牙设备名称\nlocal bt_mac = {0x40,0xB3,0x52,0x17,0x08}   -- 蓝牙设备mac\nbt:emitterReleaseConnect(bt_name, bt_mac)   -- 解除指定设备配对",
+    "key": "emitterReleaseConnect(name,mac)",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射解除连接",
+    "type": "function"
+},
+{
+    "demo": "status = bt:emitterConnectStatus()\nprint(tostring(status))",
+    "key": "emitterConnectStatus()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射连接状态：1-连接中，2-连接成功，3-连接失败",
+    "type": "function"
+},
+{
+    "demo": "bt:emitterScanStart()",
+    "key": "emitterScanStart()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射开始搜索",
+    "type": "function"
+},
+{
+    "demo": "bt:emitterScanStop()",
+    "key": "emitterScanStop()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射停止搜索",
+    "type": "function"
+},
+{
+    "demo": "status = bt:emitterScanStatus()\nprint(tostring(status))",
+    "key": "emitterScanStatus()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射搜索状态。1-扫描中，2-扫描结束",
+    "type": "function"
+},
+{
+    "demo": "bt:emitterListClean()",
+    "key": "emitterListClean()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射搜索列表清除",
+    "type": "function"
+},
+{
+    "demo": "total = bt:emitterGetTotal()",
+    "key": "emitterGetTotal()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射搜索列表中的总数",
+    "type": "function"
+},
+{
+    "demo": "name = bt:emitterGetName(1)\nprint(name)",
+    "key": "emitterGetName()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射名字",
+    "type": "function"
+},
+{
+    "demo": "mac = bt:emitterGetMac(1)\nfor k, v in ipairs(mac) do\n    print(k, v)\nend",
+    "key": "emitterGetMac()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射地址",
+    "type": "function"
+},
+{
+    "demo": "bt_list = bt:emitterGetList()",
+    "key": "emitterGetList()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "获取蓝牙发射搜索列表，每个记录为一个元素，元素内包含名字、mac地址信息",
+    "type": "function"
+},
+{
+    "demo": "bt:emitterSaveListClean()",
+    "key": "emitterSaveListClean()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射收藏夹列表清除",
+    "type": "function"
+},
+{
+    "demo": "total = bt:emitterSaveGetTotal()",
+    "key": "emitterSaveGetTotal()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射收藏夹中的总数",
+    "type": "function"
+},
+{
+    "demo": "name = bt:emitterSaveGetName(1)",
+    "key": "emitterSaveGetName()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "获取收藏夹中的蓝牙名字",
+    "type": "function"
+},
+{
+    "demo": "mac = bt:emitterSaveGetMac(1)",
+    "key": "emitterSaveGetMac()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "获取收藏夹中的蓝牙地址",
+    "type": "function"
+},
+{
+    "demo": "save_list = bt:emitterSaveGetList()",
+    "key": "emitterSaveGetList()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "获取蓝牙发射收藏夹列表，每个记录为一个元素，元素内包含名字，mac地址，连接状态信息",
+    "type": "function"
+},
+{
+    "demo": "name = \"test\"   -- 设备名称\nmac = {0x1, 0x2, 0x3, 0x4, 0x5, 0x6}    -- 设备MAC\nconnect = 0     -- 未连接\nbt:emitterTempSet(name, mac, 0)",
+    "key": "emitterTempSet()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射临时数据保存",
+    "type": "function"
+},
+{
+    "demo": "dev = bt:emitterTempGet()\nprint(dev.name)",
+    "key": "emitterTempGet()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射临时数据获取",
+    "type": "function"
+},
+{
+    "demo": "bt:emitterTempClean()",
+    "key": "emitterTempClean()",
+    "module": "bt",
+    "priority": 5,
+    "tip": "蓝牙发射临时数据清除",
+    "type": "function"
+},
+{
+    "demo": "bt:emitterTempClean()",
+    "key": "emitterTempClean()",
+    "module": "device",
+    "priority": 5,
+    "tip": "蓝牙发射临时数据清除",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "getStepNumber()",
+    "module": "device",
+    "priority": 5,
+    "tip": "获取实时运动步数",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "getSportInfo()",
+    "module": "device",
+    "priority": 5,
+    "tip": "获取运动信息",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "setSportStatus()",
+    "module": "device",
+    "priority": 5,
+    "tip": "设置运动状态",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "getHeartRate()",
+    "module": "device",
+    "priority": 5,
+    "tip": "获取实时心率",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "getRestingHeartRate()",
+    "module": "device",
+    "priority": 5,
+    "tip": "获取静息心率",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "getBloodOxygen()",
+    "module": "device",
+    "priority": 5,
+    "tip": "获取血氧浓度",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "getPressure()",
+    "module": "device",
+    "priority": 5,
+    "tip": "获取大气压强",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "getAltitude()",
+    "module": "device",
+    "priority": 5,
+    "tip": "获取海拔高度",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "getAltitude()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "获取海拔高度",
+    "type": "function"
+},
+{
+    "demo": "gui:touchEventDefault()     -- 默认接管touch消息\ngui:touchEventDefault(false)    -- 默认不接管touch消息",
+    "key": "touchEventDefault()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "touch消息是否默认接管",
+    "type": "function"
+},
+{
+    "demo": "gui:touchEventTakeover()    -- 接管本次消息\ngui:touchEventTakeover(false)   -- 不接管本次消息",
+    "key": "touchEventTakeover()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "本次消息接管设置，只设置本次消息是否接管，一般用在touchDown，在touchDown中接管消息后，会将ui焦点聚焦到该控件",
+    "type": "function"
+},
+{
+    "demo": "watchdial = gui:getWatchHandler()   -- 获取表盘句柄\nnumber = watchdial:getWatchNum()    -- 获取表盘数量\nprint(number)   --打印表盘数量",
+    "key": "getWatchNum()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "获取内存中表盘的数量",
+    "type": "function"
+},
+{
+    "demo": "watchdial = gui:getWatchHandler()   -- 获取表盘句柄\nwatchdial:openWatchPreview(0)    -- 打开第0个表盘预览",
+    "key": "openWatchPreview()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "打开指定的表盘预览文件",
+    "type": "function"
+},
+{
+    "demo": "watchdial = gui:getWatchHandler()   -- 获取表盘句柄\nwatchdial:closeWatchPreview(0)      -- 关闭第0个表盘",
+    "key": "closeWatchPreview()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "关闭指定的表盘预览图",
+    "type": "function"
+},
+{
+    "demo": "watchdial = gui:getWatchHandler()   -- 获取表盘句柄\nwatchdial:selectWatchPreview(0)     -- 选中第0个表盘预览",
+    "key": "selectWatchPreview()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "选中指定的表盘预览图",
+    "type": "function"
+},
+{
+    "demo": "watchdial = gui:getWatchHandler()   -- 获取表盘句柄\nwatchdial:switchWatch(1)    -- 切换到索引为1的表盘",
+    "key": "switchWatch()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "切换选中表盘使用",
+    "type": "function"
+},
+{
+    "demo": "watchdial = gui:getWatchHandler()   -- 获取表盘句柄\nnumber = watchdial:getWatchBgpNum() -- 获取表盘背景图数量",
+    "key": "getWatchBgpNum()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "获取表盘背景图数量",
+    "type": "function"
+},
+{
+    "demo": "watchdial = gui:getWatchHandler()   -- 获取表盘句柄\nwatchdial:openWatchBgpPreview(0)    -- 打开第0个表盘背景预览图",
+    "key": "openWatchBgpPreview()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "打开指定表盘背景图",
+    "type": "function"
+},
+{
+    "demo": "watchdial = gui:getWatchHandler()   -- 获取表盘句柄\nwatchdial:closeWatchBgpPreview(0)   -- 关闭第0个表盘背景预览图",
+    "key": "closeWatchBgpPreview()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "关闭指定的表盘背景图",
+    "type": "function"
+},
+{
+    "demo": "watchdial = gui:getWatchHandler()   -- 获取表盘句柄\nwatchdial:selectWatchBgpPreview(0)  -- 选择第0个表盘背景图",
+    "key": "selectWatchBgpPreview()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "选中指定的表盘背景图",
+    "type": "function"
+},
+{
+    "demo": "watchdial = gui:getWatchHandler()   -- 获取表盘句柄",
+    "key": "getWatchHandler()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "获取表盘操作句柄",
+    "type": "function"
+},
+{
+    "demo": "-- 直接覆盖方式切换到PAGE1\ngui:switchPageByName(\"PAGE_1\", \"hide\")\n\n-- 从右边滑入方式切换到PAGE3\ngui:switchPageByName(\"PAGE_3\", \"right\")",
+    "key": "switchPageByName()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "按照指定的方式进行页面跳转",
+    "type": "function"
+},
+{
+    "demo": "gui:switchPageByName(\"PAGE_5\", \"left\")  -- 从左边滑入切换到第5页\ngui:backToPreviousPage(\"left\")      -- 从右边滑入返回上一页",
+    "key": "backToPreviousPage()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "返回上一级页面，必须是通过switchPageByName跳转并选择记录的页面才能返回，否则直接返回表盘页面",
+    "type": "function"
+},
+{
+    "demo": "if (gui:checkPreviousPage(\"PAGE_7\")) then\n    -- 如果上一级页面是PAGE7执行这里\nelse\n    -- 否则执行这里\nend",
+    "key": "checkPreviousPage()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "检查上一级页面是否为指定页面",
+    "type": "function"
+},
+{
+    "demo": "control_type = gui:getControlType(\"TEXT_TEST\") -- 获取名称为“TEXT_TEST”的控件类型",
+    "key": "getControlType()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "获取控件的类型名称",
+    "type": "function"
+},
+{
+    "demo": "gui:pageSlideInit()",
+    "key": "pageSlideInit()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "页面循环滑动初始化",
+    "type": "function"
+},
+{
+    "demo": "gui:pageSlideAdd(\"PAGE_5\") -- 增加PAGE5到循环滑动列表",
+    "key": "pageSlideAdd()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "增加指定页面到滑动列表",
+    "type": "function"
+},
+{
+    "demo": "gui:pageSlideDel(\"PAGE_3\")  -- 将PAGE3从循环滑动页面列表删除",
+    "key": "pageSlideDel()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "从页面滑动列表中删除指定页面",
+    "type": "function"
+},
+{
+    "demo": "gui:pageSlideFree()     --释放掉所有滑动列表的页面，关闭页面滑动功能",
+    "key": "pageSlideFree()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "释放页面滑动列表",
+    "type": "function"
+},
+{
+    "demo": "gui:pageSlideNext(\"PAGE_10\")",
+    "key": "pageSlideNext()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "从当前页面的后一页插入指定页面到滑动列表",
+    "type": "function"
+},
+{
+    "demo": "gui:pageSlidePrev(\"PAGE_7\")",
+    "key": "pageSlidePrev()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "在当前页面上一页插入指定页面到滑动列表",
+    "type": "function"
+},
+{
+    "demo": "text = gui:getComponentByName(\"TEXT_TEST\")     -- 获取控件名为TEXT_TEST的文本控件实例\ntext:setText(\"hello\")   -- 让控件TEXT_TEST显示字符串“hello”",
+    "key": "getComponentByName()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "创建控件实例（注意：所有控件都用这个方法创建实例）",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "dynamicUILoading()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "动态加载UI页面，主要用于跨工程页面的加载，入设置界面，消息界面等",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "dynamicUIRealese()",
+    "module": "gui",
+    "priority": 5,
+    "tip": "释放动态加载的页面",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "dynamicUIRealese()",
+    "module": "music",
+    "priority": 5,
+    "tip": "释放动态加载的页面",
+    "type": "function"
+},
+{
+    "demo": "-- 开始播放音乐\nmusic:controlMusicPlay(DB.MUSIC_PLAY_START)     \n\n-- 暂停播放音乐\nmusic:controlMusicPlay(DB.MUSIC_PLAY_STOP)     \n\nmusic:controlMusicPlay(DB.MUSIC_PLAY_LAST)     -- 播放上一曲\nmusic:controlMusicPlay(DB.MUSIC_PLAY_NEXT)     -- 播放下一曲\n\n-- 播放指定音乐，sclust为指定音乐的文件簇\nmusic:controlMusicPlay(DB.MUSIC_PLAY_INDEX, sclust)",
+    "key": "controlMusicPlay()",
+    "module": "music",
+    "priority": 5,
+    "tip": "控制音乐播放、暂停、上一曲、下一曲等",
+    "type": "function"
+},
+{
+    "demo": "music_list = music:loadMusicList(1, 5)  -- 扫描第1个开始，到第5个结束的MPA文件\nmusic_num = #music_list     -- 计算获取到的MP3文件数量\nfor i=1, music_num do\n    print(music_list[i].name)   -- 逐个打印音乐名称\nend",
+    "key": "loadMusicList()",
+    "module": "music",
+    "priority": 5,
+    "tip": "扫描SD卡中的MP3文件，并生成文件列表table",
+    "type": "function"
+},
+{
+    "demo": "music_list = music:loadMusicList(1, 5)  -- 扫描第1个开始，到第5个结束的MPA文件\nmusic_num = #music_list     -- 计算获取到的MP3文件数量\nfor i=1, music_num do\n    print(music_list[i].name)   -- 逐个打印音乐名称\nend\nmusic:freeMusicList(music_list) -- 释放music_list",
+    "key": "freeMusicList()",
+    "module": "music",
+    "priority": 5,
+    "tip": "释放从loadMusicList获取到的音乐列表",
+    "type": "function"
+},
+{
+    "demo": "-- 一次获取所有播放信息\nmusic_name, play_dev, play_mode, play_status = music:getMusicPlayInfo()\n\n-- 仅获取歌曲名称\nmusic_name = music:getMusicPlayInfo(DB.MUSIC_GET_NAME_BY_INFO)",
+    "key": "getMusicPlayInfo()",
+    "module": "music",
+    "priority": 5,
+    "tip": "获取播放器信息，如音乐名称、播放设备、播放模式、播放状态等",
+    "type": "function"
+},
+{
+    "demo": "-- 同时设置播放手表音乐和循环播放模式\nmusic:setMusicPlayInfo(DB.MUSIC_PLAY_MODE_FCYCLE_ONE, DB.MUSIC_PLAY_DEVICE_WATCH)\n\n-- 仅设置播放手机音乐\nmusic:setMusicPlayInfo(nil, DB.MUSIC_PLAY_DEVICE_PHONE)\n\n-- 仅设置列表循环模式播放\nmusic:setMusicPlayInfo(DB.MUSIC_PLAY_MODE_FCYCLE_ALL, nil)",
+    "key": "setMusicPlayInfo()",
+    "module": "music",
+    "priority": 5,
+    "tip": "设置播放器设备、模式等",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:setLightLevel(light_level, true) --value:档位值  update:是否把值更新到系统变量",
+    "key": "setLightLevel()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "设置屏幕亮度挡位",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:setDarkTime(dark_time_sel)",
+    "key": "setDarkTime()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "设置息屏时间挡位",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:setAutoDark(true) -- 打开自动息屏功能",
+    "key": "setAutoDark()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "自动息屏功能开关",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:setSysVolByPercent(vslider_percent)",
+    "key": "setSysVolByPercent()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "把百分比转换成系统音量",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nvoice_percent = setupHandler:getSysVolPercent()",
+    "key": "getSysVolPercent()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取系统音量百分比",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:setSysVolUp(1) --音量加1(value)",
+    "key": "setSysVolUp()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "系统音量增加",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:setSysVolDown(1) --音量减1(value)",
+    "key": "setSysVolDown()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "系统音量减小",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:setSysVoiceMute(voice_mute_sel)",
+    "key": "setSysVoiceMute()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "设置系统静音标志",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nwatch_name = setupHandler:getWatchName(0) --type:0为获取待机表盘名字，非0为获取表盘名字",
+    "key": "getWatchName()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取手表名称",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\ncard_sel_tab = setupHandler:getCardSelTab()",
+    "key": "getCardSelTab()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取已经选中的卡片组",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:setCardSelTab(card_sel_tab)",
+    "key": "setCardSelTab()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "同步已选卡片组到系统",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\ncard_tab = setupHandler:getCardTab()",
+    "key": "getCardTab()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "从系统获取可选卡片组",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:setCardTab(card_tab)",
+    "key": "setCardTab()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "设置可选卡片组给系统",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:ResetOrShutdown(1) --action:0为关机，非0为复位",
+    "key": "ResetOrShutDown()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "系统复位或关机",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nsetupHandler:sysParamVmOpt(0) --action:0为擦除，1为读，2为写",
+    "key": "sysParamVmOpt()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "系统参数VM读、写、擦除操作",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()\nShortcutKey = setupHandler:syncSetupParam(DB.ShortcutKey, 0, 1) --name:参数名   value:数值  action:false为设置，true为获取",
+    "key": "syncSetupParam()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "同步C代码系统参数",
+    "type": "function"
+},
+{
+    "demo": "setupHandler = sys:getSetupHandler()",
+    "key": "getSetupHandler()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取系统设置句柄",
+    "type": "function"
+},
+{
+    "demo": "time_tab = sys:getTime()\nfor k, v in pairs(time_tab) do\n    print(k, v)\nend",
+    "key": "getTime()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取系统时间",
+    "type": "function"
+},
+{
+    "demo": "local time_tab = {}\ntime_tab.year   = 2022\ntime_tab.month  = 1\ntime_tab.day    = 1\ntime_tab.hour   = 0\ntime_tab.minute = 0\ntime_tab.second = 0\nsys:setTime(time_tab)",
+    "key": "setTime()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "设置系统时间",
+    "type": "function"
+},
+{
+    "demo": "sys:sleep(100)  -- 延时100毫秒",
+    "key": "sleep()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "系统延时",
+    "type": "function"
+},
+{
+    "demo": "rand = sys:random(0, 100)",
+    "key": "random()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取min到max之间的随机整数，若省略min和max，则获取int范围内的随机整数",
+    "type": "function"
+},
+{
+    "demo": "local tab = {}\ntab.sw = 1\ntab.mode = 0x01\ntab.hour = 8\ntab.minute = 0\n\nalarm = sys:getAlarmHandler()\nalarm:addAlarm(tab)",
+    "key": "addAlarm()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "添加闹钟",
+    "type": "function"
+},
+{
+    "demo": "alarm = sys:getAlarmHandler()\nalarm_tab = alarm:readAlarm()\nfor k, v in pairs(alarm_tab) do\n    print(k, v)\nend",
+    "key": "readAlarm()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "读取系统闹钟",
+    "type": "function"
+},
+{
+    "demo": "alarm = sys:getAlarmHandler()\nalarm:delAlarm(1)   -- 删除索引为1的闹钟",
+    "key": "delAlarm()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "删除指定索引的闹钟",
+    "type": "function"
+},
+{
+    "demo": "alarm = sys:getAlarmHandler()\nalarm:setAlarm(1, 3, 0)     -- 关闭索引为3的闹钟",
+    "key": "setAlarm()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "闹钟设置接口，通过cmd参数区分设置内容，可以分别设置开关、时间、重复模式",
+    "type": "function"
+},
+{
+    "demo": "alarm = sys:getAlarmHandler()",
+    "key": "getAlarmHandler()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取闹钟句柄",
+    "type": "function"
+},
+{
+    "demo": "file_io = sys:getFileIoHandler()\npath = \"C:test.txt\"\nfile_io:open(path, \"r+\")",
+    "key": "open()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "打开指定文件",
+    "type": "function"
+},
+{
+    "demo": "无",
+    "key": "read()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "读取指定文件内容",
+    "type": "function"
+},
+{
+    "demo": "无",
+    "key": "write()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "将指定内容写入文件",
+    "type": "function"
+},
+{
+    "demo": "无",
+    "key": "delete()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "删除指定文件",
+    "type": "function"
+},
+{
+    "demo": "无",
+    "key": "seek()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "文件seek操作",
+    "type": "function"
+},
+{
+    "demo": "无",
+    "key": "attrs()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取文件属性",
+    "type": "function"
+},
+{
+    "demo": "无",
+    "key": "close()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "关闭指定文件",
+    "type": "function"
+},
+{
+    "demo": "无",
+    "key": "getFileIoHandler()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取文件句柄",
+    "type": "function"
+},
+{
+    "demo": "-- 定时器测试回调函数\nfunction test_timer()\n    print(\"test\")\nend\ntimer = sys:createTimer(test_timer, 500)    -- 创建500毫秒的定时器\ntimer:run()     -- 运行定时器",
+    "key": "run()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "启动定时器运行",
+    "type": "function"
+},
+{
+    "demo": "-- 定时器测试回调函数\nfunction test_timer()\n    print(\"test\")\nend\ntimer = sys:createTimer(test_timer, 500)    -- 创建500毫秒的定时器\ntimer:run()     -- 运行定时器\nsys:sleep(2000)     -- 系统延时2000ms\ntimer:stop()       -- 暂停定时器",
+    "key": "stop()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "暂停定时器运行",
+    "type": "function"
+},
+{
+    "demo": "-- 定时器测试回调函数\nfunction test_timer()\n    print(\"test\")\nend\ntimer = sys:createTimer(test_timer, 500)    -- 创建500毫秒的定时器\ntimer:run()     -- 运行定时器\n\ntimeout = sys:createTimer(test_timer, 500, DB.SYS_TIMEOUT_HANDLER)  -- 创建500毫秒的timeout定时器",
+    "key": "createTimer()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "创建定时器",
+    "type": "function"
+},
+{
+    "demo": "sys:deleteTimer(timer)",
+    "key": "deleteTimer()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "删除指定定时器。注意，所有timer和timeout都需要删除",
+    "type": "function"
+},
+{
+    "demo": "function bt_status_callback()\n    print(\"this is bt status event callback\")\nend\nsys:registerHandler(\"bt_status\", bt_status_callback)",
+    "key": "registerHandler()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "注册指定类型的系统事件回调",
+    "type": "function"
+},
+{
+    "demo": "sys:releaseHandler(\"bt_status\")",
+    "key": "releaseHandler()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "释放指定类型的事件回调",
+    "type": "function"
+},
+{
+    "demo": "sys:checkHandler(\"bt_status\")",
+    "key": "checkHandler()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "检查指定事件回调是否存在",
+    "type": "function"
+},
+{
+    "demo": "无",
+    "key": "loadMessage()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "加载微信、QQ、钉钉等通知消息",
+    "type": "function"
+},
+{
+    "demo": "无",
+    "key": "getMessageLen()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取指定消息的数据长度",
+    "type": "function"
+},
+{
+    "demo": "weatherHandler = sys:loadWeather()\nweather=weatherHandler:getWeatherHandle()",
+    "key": "getWeatherHandle()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取天气句柄",
+    "type": "function"
+},
+{
+    "demo": "weather_info = weatherHandler:getWeather(weather)",
+    "key": "getWeather()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取天气状态",
+    "type": "function"
+},
+{
+    "demo": "temp=weatherHandler:getTemperature(weather)",
+    "key": "getTemperature()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取天气的气温数据",
+    "type": "function"
+},
+{
+    "demo": "hum=weatherHandler:getHumidity(weather)",
+    "key": "getHumidity()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取天气中的湿度数据",
+    "type": "function"
+},
+{
+    "demo": "wind_dir=weatherHandler:getWindDirection(weather)",
+    "key": "getWindDirection()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取天气数据中的风向",
+    "type": "function"
+},
+{
+    "demo": "wind_power=weatherHandler:getWindPower(weather)",
+    "key": "getWindPower()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取天气数据中的风力等级",
+    "type": "function"
+},
+{
+    "demo": "uptime=weatherHandler:getUpdateTime(weather)",
+    "key": "getUpdateTime()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取天气数据的更新时间",
+    "type": "function"
+},
+{
+    "demo": "provice=weatherHandler:getProvinceData(weather)",
+    "key": "getProvinceData()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取天气数据中的省份数据",
+    "type": "function"
+},
+{
+    "demo": "city=weatherHandler:getCityData(weather)",
+    "key": "getCityData()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取天气数据中的城市",
+    "type": "function"
+},
+{
+    "demo": "weatherHandler=sys:loadWeather()",
+    "key": "loadWeather()",
+    "module": "sys",
+    "priority": 5,
+    "tip": "获取天气信息操作句柄",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "getBatteryValue()",
+    "module": "Battery",
+    "priority": 5,
+    "tip": "获取电池控件中显示的电量",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "batteryIsCharging()",
+    "module": "Battery",
+    "priority": 5,
+    "tip": "获取电池充电状态",
+    "type": "function"
+},
+{
+    "demo": "暂空",
+    "key": "setBatteryLevel()",
+    "module": "Battery",
+    "priority": 5,
+    "tip": "设置电池控件电量百分比和充电状态",
+    "type": "function"
+},
+{
+    "demo": "compass = gui:getComponentByName(\"COMPASS_TEST\")\ncompass:setCompassAngle(30, 0)",
+    "key": "setCompassAngle()",
+    "module": "Compass",
+    "priority": 5,
+    "tip": "设置指南针背景和指针角度",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"COMPASS_TEST\")\nbk_angle,indicator_angle = obj:getCompassAngle()",
+    "key": "getCompassAngle()",
+    "module": "Compass",
+    "priority": 5,
+    "tip": "获取指南针背景和指针角度",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\nvlist:initGridDynamic(3, 1, false)      -- 将静态列表初始化为3行1列的动态列表，且不立即刷新",
+    "key": "initGridDynamic()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "将静态列表初始化为动态列表，当需要用列表显示的内容较多时，可以考虑使用动态列表的方式实现，但需注意，动态列表效率不如静态列表",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\nvlist:initGridDynamic(0, 0, false)      -- 初始化为动态列表\nvlist:addGridDynamic(3, 0, true)    -- 添加3行0列项，立即刷新",
+    "key": "addGridDynamic()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "动态列表末尾添加项数。注意，仅当列表转为动态列表后接口才生效",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\nvlist:initGridDynamic(5, 1, true)   -- 初始化为动态列表\nvlist:delGridDynamic(3, 0, true)    -- 删除3行",
+    "key": "delGridDynamic()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "删除动态列表的项数，从列表末尾开始删除，删除后，列表能上下滑动的项数减少",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\nvlist:initGridDynamic(5, 1, true)\ncur_item = vlist:getGridCurItem()   -- 获取当前刷新项，仅动态列表有效",
+    "key": "getGridCurItem()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "获取动态列表当前刷新项的序号，用于动态列表子项内容刷新时，确定需显示的内容",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\nvlist:setHighLightItem(5)   -- 设置第五项为高亮，立即刷新",
+    "key": "setHighLightItem()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "设置动态列表高亮项",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\nhighlight_item = vlist:getHighLightItem()",
+    "key": "getHighLightItem()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "获取动态列表高亮项",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\ntouch_item = vlist:getTouchItem()",
+    "key": "getTouchItem()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "获取列表控件被触摸项",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\nvlist:setScrollArea(0, 0, 10000, 10000)     -- 设置全屏区域滑动，10000相对于全屏像素",
+    "key": "setScrollArea()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "设置列表控件的滑动区域。注意，此方法仅在设备端有效，模拟器端不生效",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\nvlist:setSliderDir(DB.SCROLL_DIRECTION_UP)      -- 设置垂直列表仅上下滑动",
+    "key": "setSliderDir()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "设置列表控件的滑动方向，此方法仅在设备端有效，模拟器不生效",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\nvlist:setItemNumber(15)     -- 设置静态列表项数为15项",
+    "key": "setItemNumber()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "设置静态列表项数，当UI编辑工具设计的静态列表项数较多，而实际需显示较少时使用此方法",
+    "type": "function"
+},
+{
+    "demo": "vlist = gui:getComponentByName(\"VLIST_TEST\")    -- 创建垂直列表实例\nvlist:setGridToRotate(true)     -- 设置为圆弧列表",
+    "key": "setGridToRotate()",
+    "module": "Grid",
+    "priority": 5,
+    "tip": "设置列表控件为圆弧列表",
+    "type": "function"
+},
+{
+    "demo": "pic = gui:getComponentByName(\"PIC_TEST\")\npic:showImageByIndex(1)",
+    "key": "showImageByIndex()",
+    "module": "Image",
+    "priority": 5,
+    "tip": "显示图片控件列表中第index张图片",
+    "type": "function"
+},
+{
+    "demo": "pic = gui:getComponentByName(\"PIC_TEST\")\nindex = pic:getImageIndex()",
+    "key": "getIMageIndex()",
+    "module": "Image",
+    "priority": 5,
+    "tip": "获取图片控件当前显示的图片索引",
+    "type": "function"
+},
+{
+    "demo": "pic = gui:getComponentByName(\"PIC_TEST\")\npic_number = pic:getNormalNumber()",
+    "key": "getNormalNumber()",
+    "module": "Image",
+    "priority": 5,
+    "tip": "获取图片控件的普通图片数量",
+    "type": "function"
+},
+{
+    "demo": "pic = gui:getComponentByName(\"PIC_TEST\")\nhighLight_number = pic:getHighLightNumber()",
+    "key": "getHighLightNumber()",
+    "module": "Image",
+    "priority": 5,
+    "tip": "获取图片控件中高亮图片列表的图片数量",
+    "type": "function"
+},
+{
+    "demo": "pic = gui:getComponentByName(\"PIC_TEST\")\npic:setDrawImage(\"C:test.png\")",
+    "key": "setDrawImage()",
+    "module": "Image",
+    "priority": 5,
+    "tip": "自定义图片控件显示指定图片",
+    "type": "function"
+},
+{
+    "demo": "local spot = {}\nspot.x = 10\nspot.y = 10\nspot.size = 3\nspot.color = \"red\"\nlay = gui:getComponentByName(\"LAY_TEST\")\nlay:drawSpot(spot)",
+    "key": "drawSpot()",
+    "module": "Layout",
+    "priority": 5,
+    "tip": "在布局控件上画点",
+    "type": "function"
+},
+{
+    "demo": "lay = gui:getComponentByName(\"LAY_TEST\")\nlocal line = {}\nline.x1 = 0\nline.y1 = 0\nline.x2 = 50\nline.y2 = 50\nline.size = 3\nline.color = \"green\"\nlay:drawLine(line)",
+    "key": "drawLine()",
+    "module": "Layout",
+    "priority": 5,
+    "tip": "在布局控件上画线",
+    "type": "function"
+},
+{
+    "demo": "lay = gui:getComponentByName(\"LAY_TEST\")\nlocal rect = {}\nrect.x = 10\nrect.y = 10\nrect.w = 20\nrect.h = 20\nrect.size = 1\nrect.color = \"blue\"\nlay:drawRect(rect)",
+    "key": "drawRect()",
+    "module": "Layout",
+    "priority": 5,
+    "tip": "在布局控件上画矩形",
+    "type": "function"
+},
+{
+    "demo": "lay = gui:getComponentByName(\"LAY_TEST\")\nlocal circle = {}\ncircle.x = 50\ncircle.y = 50\ncircle.r = 20\ncircle.size = 2\ncircle.color = \"red\"\nlay:drawCircle(circle)",
+    "key": "drawCircle()",
+    "module": "Layout",
+    "priority": 5,
+    "tip": "在布局控件上画圆",
+    "type": "function"
+},
+{
+    "demo": "lay = gui:getComponentByName(\"LAY_TEST\")\nlay:clearDraw()",
+    "key": "clearDraw()",
+    "module": "Layout",
+    "priority": 5,
+    "tip": "清空在布局控件上的绘图",
+    "type": "function"
+},
+{
+    "demo": "lay = gui:getComponentByName(\"LAY_TEST\")\nlay:setMovable(true)",
+    "key": "setMovable()",
+    "module": "Layout",
+    "priority": 5,
+    "tip": "设置控件为可移动",
+    "type": "function"
+},
+{
+    "demo": "lay = gui:getComponentByName(\"LAY_TEST\")\nlay:starMenuInit()",
+    "key": "starMenuInit()",
+    "module": "Layout",
+    "priority": 5,
+    "tip": "初始化为满天星布局",
+    "type": "function"
+},
+{
+    "demo": "lay = gui:getComponentByName(\"LAY_TEST\")\nlay:starMenuFree()",
+    "key": "starMenuFree()",
+    "module": "Layout",
+    "priority": 5,
+    "tip": "释放满天星布局",
+    "type": "function"
+},
+{
+    "demo": "mul_progress = gui:getComponentByName(\"MULTIPROGRESS_TEST\")\nmul_progress:setFirstPercent(50)    -- 第一个圆弧绘制50%",
+    "key": "setFirstPercent()",
+    "module": "Multiprogress",
+    "priority": 5,
+    "tip": "设置多重圆弧控件第一圆弧的百分比",
+    "type": "function"
+},
+{
+    "demo": "mul_progress = gui:getComponentByName(\"MULTIPROGRESS_TEST\")\nmul_progress:setSecondPercent(30)   -- 第二个圆弧绘制30%",
+    "key": "setSecondPercent()",
+    "module": "Multiprogress",
+    "priority": 5,
+    "tip": "设置多重圆弧第二圆弧百分比",
+    "type": "function"
+},
+{
+    "demo": "mul_progress = gui:getComponentByName(\"MULTIPROGRESS_TEST\")\nmul_progress:setThirdPercent(10)    -- 第三个圆弧绘制10%",
+    "key": "setThirdPercent()",
+    "module": "Multiprogress",
+    "priority": 5,
+    "tip": "设置第三圆弧的百分比",
+    "type": "function"
+},
+{
+    "demo": "mul_progress = gui:getComponentByName(\"MULTIPROGRESS_TEST\")\nfirst_percent = mul_progress:getFirstPercent()",
+    "key": "getFirstPercent()",
+    "module": "Multiprogress",
+    "priority": 5,
+    "tip": "获取多重圆弧的第一圆弧百分比",
+    "type": "function"
+},
+{
+    "demo": "mul_progress = gui:getComponentByName(\"MULTIPROGRESS_TEST\")\nsecond_percent = mul_progress:getSecondPercent()",
+    "key": "getSecondPercent()",
+    "module": "Multiprogress",
+    "priority": 5,
+    "tip": "获取多重圆弧的第二圆弧百分比",
+    "type": "function"
+},
+{
+    "demo": "mul_progress = gui:getComponentByName(\"MULTIPROGRESS_TEST\")\nthird_percent = mul_progress:getThirdPercent()",
+    "key": "getThirdPercent()",
+    "module": "Multiprogress",
+    "priority": 5,
+    "tip": "获取多重进度条第三进度条百分比",
+    "type": "function"
+},
+{
+    "demo": "test_number = gui:getComponentByName(\"NUMBER_TEST\")\n\n-- 显示单个数字，立即刷新\ntest_number:setNumber(10)\n\n-- 显示两个数字，不立即刷新\ntest_number:setnumber(20, 32, false)",
+    "key": "setNumber()",
+    "module": "Number",
+    "priority": 5,
+    "tip": "设置数字控件显示数字",
+    "type": "function"
+},
+{
+    "demo": "test_number = gui:getComponentByName(\"NUMBER_TEST\")\nnumber = test_number:getNumber()",
+    "key": "getNumber()",
+    "module": "Number",
+    "priority": 5,
+    "tip": "获取数字控件正在显示的数字",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj:show()",
+    "key": "show()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "显示控件",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj:hide()",
+    "key": "hide()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "隐藏控件",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nif (obj:isHide()) then\n    obj:show()\nelse\n    obj:hide()",
+    "key": "isHide()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "获取控件隐藏状态",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj:highLight()",
+    "key": "highLight()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "设置控件显示高亮属性",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj:noHighLight()",
+    "key": "noHighLight()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "取消控件高亮",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nif (obj:isHighLight()) then\n    obj:noHighLight()\nelse\n    obj:highLight()",
+    "key": "isHighLight()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "获取控件高亮状态",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj:redrawSelf()",
+    "key": "redrawSelf()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "刷新控件自身",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj:setRect(0, 0, 30, 30)",
+    "key": "setRect()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "设置控件显示的矩形区域",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj:setX(20)",
+    "key": "setX()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "设置控件的X坐标",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj:setY(10)",
+    "key": "setY()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "设置控件的Y坐标",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj:setWidth(25)",
+    "key": "setWidth()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "设置控件的宽度",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj:setHeight(30)",
+    "key": "setHeight()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "设置控件的高度",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nobj_rect = obj:getRect()",
+    "key": "getRect()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "获取控件矩形区域，包含起始X,Y坐标，宽度和高度",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nx = obj:getX()",
+    "key": "getX()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "获取控件的X坐标值",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\ny = obj:getY()",
+    "key": "getY()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "获取控件的Y坐标值",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nw = obj:getWidth()",
+    "key": "getWidth()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "获取控件的宽度",
+    "type": "function"
+},
+{
+    "demo": "obj = gui:getComponentByName(\"TEST_CONTROL\")\nh = obj:getHeight()",
+    "key": "getHeight()",
+    "module": "obj",
+    "priority": 5,
+    "tip": "获取控件的高度",
+    "type": "function"
+},
+{
+    "demo": "progress = gui:getComponentByName(\"TEST_PROGRESS\")\nprogress:setProgressPercent(50)",
+    "key": "setProgressPercent()",
+    "module": "Progress",
+    "priority": 5,
+    "tip": "设置圆弧进度条百分比",
+    "type": "function"
+},
+{
+    "demo": "progress = gui:getComponentByName(\"TEST_PROGRESS\")\npercent = progress:getProgressPercent()",
+    "key": "getProgressPercent()",
+    "module": "Progress",
+    "priority": 5,
+    "tip": "获取一重圆弧进度条百分比",
+    "type": "function"
+},
+{
+    "demo": "slider = gui:getComponentByName(\"SLIDER_TEST\")\nslider:setSliderPercent(65)",
+    "key": "setSliderPercent()",
+    "module": "Slider",
+    "priority": 5,
+    "tip": "设置进度条控件百分比",
+    "type": "function"
+},
+{
+    "demo": "slider = gui:getComponentByName(\"SLIDER_TEST\")\npercent = slider\"getSliderPercent()",
+    "key": "getSliderPercent()",
+    "module": "Slider",
+    "priority": 5,
+    "tip": "获取进度条控件百分比",
+    "type": "function"
+},
+{
+    "demo": "slider = gui:getComponentByName(\"SLIDER_TEST\")\nslider:setSliderMove(true)      -- 进度条滑块可以滑动",
+    "key": "setSliderMove()",
+    "module": "Slider",
+    "priority": 5,
+    "tip": "使能进度条控件滑动",
+    "type": "function"
+},
+{
+    "demo": "slider = gui:getComponentByName(\"SLIDER_TEST\")\nif not slider:getSliderMove() then\n    slider:setSliderMove(true)\nend",
+    "key": "getSliderMove()",
+    "module": "Slider",
+    "priority": 5,
+    "tip": "获取进度条控件可移动状态",
+    "type": "function"
+},
+{
+    "demo": "-- 设置文本控件显示内码\ntext = gui:getComponentByName(\"TEXT_TEST\")  -- 获取文本控件实例，参数为文本控件名称\ntext:setText(\"hello\")   -- 设置文本控件显示字符串“hello”，会立即刷新并显示\n\n-- 设置文本控件显示内码，并控制不立即刷新\ntext = gui:getComponentByName(\"TEXT_TEST\")  -- 获取文本控件实例，参数为文本控件名称\ntext:setText(\"hello\", false)   -- 设置文本控件显示字符串“hello”，不立即刷新并显示",
+    "key": "setText()",
+    "module": "Text",
+    "priority": 5,
+    "tip": "设置文本控件显示指定文字",
+    "type": "function"
+},
+{
+    "demo": "text = gui:getComponentByName(\"TEXT_TEST\")  -- 获取文本控件实例，参数为文本控件名称\nstr = text:getText()",
+    "key": "getText()",
+    "module": "Text",
+    "priority": 5,
+    "tip": "获取文本控件显示的文本内容",
+    "type": "function"
+},
+{
+    "demo": "text = gui:getComponentByName(\"TEXT_TEST\")\ntext:showTextByIndex(3)",
+    "key": "showTextByIndex()",
+    "module": "Text",
+    "priority": 5,
+    "tip": "设置文本控件显示文本列表指定索引的文本",
+    "type": "function"
+},
+{
+    "demo": "text = gui:getComponentByName(\"TEXT_TEST\")\nlocal text_list = {1, 2, 3}\ntext:showMultiTextByIndex(text_list, 3)     -- 显示文本列表第1、2、3共3个文本拼接",
+    "key": "showMultiTextByIndex()",
+    "module": "Text",
+    "priority": 5,
+    "tip": "设置文本控件显示多行文本",
+    "type": "function"
+},
+{
+    "demo": "text = gui:getComponentByName(\"TEXT_TEST\")\nind = text:getTextIndex()",
+    "key": "getTextIndex()",
+    "module": "Text",
+    "priority": 5,
+    "tip": "获取文本控件当前显示的文本索引",
+    "type": "function"
+},
+{
+    "demo": "text = gui:getComponentByName(\"TEXT_TEST\")\ntext_num = text:getTextNumber()",
+    "key": "getTextNumber()",
+    "module": "Text",
+    "priority": 5,
+    "tip": "获取文本控件的文本数量",
+    "type": "function"
+},
+{
+    "demo": "tim = gui:getComponentByName(\"TIME_TEST\")\ntim:setUIData(2021, 12, 31, true)   -- 设置显示日期为 2021-12-31",
+    "key": "setUIdata()",
+    "module": "Time",
+    "priority": 5,
+    "tip": "设置时间控件显示日期",
+    "type": "function"
+},
+{
+    "demo": "tim = gui:getComponentByName(\"TIME_TEST\")\ntim:setUITime(19, 23, 12)   -- 设置显示时间为 19:23:12",
+    "key": "setUITime()",
+    "module": "Time",
+    "priority": 5,
+    "tip": "设置时间控件显示时间",
+    "type": "function"
+},
+{
+    "demo": "tim = gui:getComponentByName(\"TIME_TEST\")\nY, M, D = tim:getUIData()",
+    "key": "getUIData()",
+    "module": "Time",
+    "priority": 5,
+    "tip": "获取时间控件显示的日期",
+    "type": "function"
+},
+{
+    "demo": "tim = gui:getComponentByName(\"TIME_TEST\")\nh, m, s = tim:getUITime()",
+    "key": "getUITime()",
+    "module": "Time",
+    "priority": 5,
+    "tip": "获取时间控件显示的时间",
+    "type": "function"
+},
+{
+    "demo": "watch = gui:getComponentByName(\"WATCH_TEST\")\nwatch:setWatchTime(13, 23, 25)      -- 设置表盘显示时间 13:23:25",
+    "key": "setWatchTime()",
+    "module": "Watch",
+    "priority": 5,
+    "tip": "设置表盘控件时间",
+    "type": "function"
+},
+{
+    "demo": "watch = gui:getComponentByName(\"WATCH_TEST\")\nhour, minute, second = watch:getWatchTime()",
+    "key": "getWatchTime()",
+    "module": "Watch",
+    "priority": 5,
+    "tip": "获取表盘控件的时间",
+    "type": "function"
+},
+{
+    "demo": "lua 空值：nil\nDB.LUA_NONE = nil",
+    "key": "LUA_NONE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 空值：nil\n",
+    "type": "constant"
+},
+{
+    "demo": "lua 布尔值：true\nDB.LUA_TRUE = true",
+    "key": "LUA_TRUE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 布尔值：true\n",
+    "type": "constant"
+},
+{
+    "demo": "lua 布尔值：false\nDB.LUA_FALSE = false",
+    "key": "LUA_FALSE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 布尔值：false\n",
+    "type": "constant"
+},
+{
+    "demo": "lua 数据类型：布尔型\nDB.LUA_TBOOLEAN = \"boolean\"",
+    "key": "LUA_TBOOLEAN",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 数据类型：布尔型\n",
+    "type": "constant"
+},
+{
+    "demo": "lua 数据类型：数字\nDB.LUA_TNUMBER = \"number\"",
+    "key": "LUA_TNUMBER",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 数据类型：数字\n",
+    "type": "constant"
+},
+{
+    "demo": "lua 数据类型：字符串\nDB.LUA_TSTRING = \"string\"",
+    "key": "LUA_TSTRING",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 数据类型：字符串\n",
+    "type": "constant"
+},
+{
+    "demo": "lua 数据类型：表\nDB.LUA_TTABLE = \"table\"",
+    "key": "LUA_TTABLE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 数据类型：表\n",
+    "type": "constant"
+},
+{
+    "demo": "lua 数据类型：用户类型\nDB.LUA_TUSERDATA = \"userdata\"",
+    "key": "LUA_TUSERDATA",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 数据类型：用户类型\n",
+    "type": "constant"
+},
+{
+    "demo": "lua 数据类型：函数\nDB.LUA_TFUNCTION = \"function\"",
+    "key": "LUA_TFUNCTION",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 数据类型：函数\n",
+    "type": "constant"
+},
+{
+    "demo": "lua 数据类型：线程\nDB.LUA_TTHREAD = \"thread\"",
+    "key": "LUA_TTHREAD",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 数据类型：线程\n",
+    "type": "constant"
+},
+{
+    "demo": "lua 数据类型：空值 / 无效值\nDB.LUA_TNIL = \"nil\"",
+    "key": "LUA_TNIL",
+    "module": "DB",
+    "priority": 3,
+    "tip": "lua 数据类型：空值 / 无效值\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 页面从左边切入\nDB.PAGE_SWITCH_LEFT = \"left\"",
+    "key": "PAGE_SWITCH_LEFT",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 页面从左边切入\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 页面从右边切入\nDB.PAGE_SWITCH_RIGHT = \"right\"",
+    "key": "PAGE_SWITCH_RIGHT",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 页面从右边切入\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 页面隐藏式切换\nDB.PAGE_SWITCH_HIDE = \"hide\"",
+    "key": "PAGE_SWITCH_HIDE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 页面隐藏式切换\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 列表方向：水平列表\nDB.SCROLL_DIRECTION_LR = 1",
+    "key": "SCROLL_DIRECTION_LR",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 列表方向：水平列表\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 列表方向：垂直列表\nDB.SCROLL_DIRECTION_UP = 2",
+    "key": "SCROLL_DIRECTION_UP",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 列表方向：垂直列表\n",
+    "type": "constant"
+},
+{
+    "demo": "music 音乐播放设备：手表\nDB.MUSIC_PLAY_DEVICE_WATCH = 1",
+    "key": "MUSIC_PLAY_DEVICE_WATCH",
+    "module": "DB",
+    "priority": 3,
+    "tip": "music 音乐播放设备：手表\n",
+    "type": "constant"
+},
+{
+    "demo": "music 音乐播放设备：手机\nDB.MUSIC_PLAY_DEVICE_PHONE = 2",
+    "key": "MUSIC_PLAY_DEVICE_PHONE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "music 音乐播放设备：手机\n",
+    "type": "constant"
+},
+{
+    "demo": "music 音乐播放设备：耳机\nDB.MUSIC_PLAY_DEVICE_EARPHONE = 3",
+    "key": "MUSIC_PLAY_DEVICE_EARPHONE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "music 音乐播放设备：耳机\n",
+    "type": "constant"
+},
+{
+    "demo": "开始播放音乐\nDB.MUSIC_PLAY_START = 1",
+    "key": "MUSIC_PLAY_START",
+    "module": "DB",
+    "priority": 3,
+    "tip": "开始播放音乐\n",
+    "type": "constant"
+},
+{
+    "demo": "播放指定音乐\nDB.MUSIC_PLAY_INDEX = 2",
+    "key": "MUSIC_PLAY_INDEX",
+    "module": "DB",
+    "priority": 3,
+    "tip": "播放指定音乐\n",
+    "type": "constant"
+},
+{
+    "demo": "暂停播放音乐\nDB.MUSIC_PLAY_PAUSE = 3",
+    "key": "MUSIC_PLAY_PAUSE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "暂停播放音乐\n",
+    "type": "constant"
+},
+{
+    "demo": "停止播放音乐\nDB.MUSIC_PLAY_STOP = 4",
+    "key": "MUSIC_PLAY_STOP",
+    "module": "DB",
+    "priority": 3,
+    "tip": "停止播放音乐\n",
+    "type": "constant"
+},
+{
+    "demo": "播放上一曲\nDB.MUSIC_PLAY_LAST = 5",
+    "key": "MUSIC_PLAY_LAST",
+    "module": "DB",
+    "priority": 3,
+    "tip": "播放上一曲\n",
+    "type": "constant"
+},
+{
+    "demo": "播放下一曲\nDB.MUSIC_PLAY_NEXT = 6",
+    "key": "MUSIC_PLAY_NEXT",
+    "module": "DB",
+    "priority": 3,
+    "tip": "播放下一曲\n",
+    "type": "constant"
+},
+{
+    "demo": "删除音乐\nDB.MUSIC_PLAY_DELETE = 7",
+    "key": "MUSIC_PLAY_DELETE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "删除音乐\n",
+    "type": "constant"
+},
+{
+    "demo": "通过info方法获取当前音乐名称\nDB.MUSIC_GET_NAME_BY_INFO = true",
+    "key": "MUSIC_GET_NAME_BY_INFO",
+    "module": "DB",
+    "priority": 3,
+    "tip": "通过info方法获取当前音乐名称\n",
+    "type": "constant"
+},
+{
+    "demo": "music 音乐播放状态：正在播放\nDB.MUSIC_PLAY_STATE_STARTING = 1",
+    "key": "MUSIC_PLAY_STATE_STARTING",
+    "module": "DB",
+    "priority": 3,
+    "tip": "music 音乐播放状态：正在播放\n",
+    "type": "constant"
+},
+{
+    "demo": "music 音乐播放状态：停止播放\nDB.MUSIC_PLAY_STATE_STOP = 0",
+    "key": "MUSIC_PLAY_STATE_STOP",
+    "module": "DB",
+    "priority": 3,
+    "tip": "music 音乐播放状态：停止播放\n",
+    "type": "constant"
+},
+{
+    "demo": "music 音乐播放模式：列表顺序\nDB.MUSIC_PLAY_MODE_FCYCLE_LIST = 0",
+    "key": "MUSIC_PLAY_MODE_FCYCLE_LIST",
+    "module": "DB",
+    "priority": 3,
+    "tip": "music 音乐播放模式：列表顺序\n",
+    "type": "constant"
+},
+{
+    "demo": "music 音乐播放模式：列表循环\nDB.MUSIC_PLAY_MODE_FCYCLE_ALL = 1",
+    "key": "MUSIC_PLAY_MODE_FCYCLE_ALL",
+    "module": "DB",
+    "priority": 3,
+    "tip": "music 音乐播放模式：列表循环\n",
+    "type": "constant"
+},
+{
+    "demo": "music 音乐播放模式：单曲循环\nDB.MUSIC_PLAY_MODE_FCYCLE_ONE = 2",
+    "key": "MUSIC_PLAY_MODE_FCYCLE_ONE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "music 音乐播放模式：单曲循环\n",
+    "type": "constant"
+},
+{
+    "demo": "music 音乐播放模式：随机播放\nDB.MUSIC_PLAY_MODE_FCYCLE_RANDOM = 4",
+    "key": "MUSIC_PLAY_MODE_FCYCLE_RANDOM",
+    "module": "DB",
+    "priority": 3,
+    "tip": "music 音乐播放模式：随机播放\n",
+    "type": "constant"
+},
+{
+    "demo": "音乐列表文件类型是：文件夹\nDB.DIR_TYPE_FORLDER = 0",
+    "key": "DIR_TYPE_FORLDER",
+    "module": "DB",
+    "priority": 3,
+    "tip": "音乐列表文件类型是：文件夹\n",
+    "type": "constant"
+},
+{
+    "demo": "音乐列表文件类型是：文件\nDB.DIR_TYPE_FILE = 1",
+    "key": "DIR_TYPE_FILE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "音乐列表文件类型是：文件\n",
+    "type": "constant"
+},
+{
+    "demo": "文本控件字体，获取宽度显示\nDB.FONT_GET_WIDTH = 0x01",
+    "key": "FONT_GET_WIDTH",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本控件字体，获取宽度显示\n",
+    "type": "constant"
+},
+{
+    "demo": "文本控件字体，像素显示\nDB.FONT_SHOW_PIXEL = 0x02",
+    "key": "FONT_SHOW_PIXEL",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本控件字体，像素显示\n",
+    "type": "constant"
+},
+{
+    "demo": "文本控件字体，多行显示\nDB.FONT_SHOW_MULTI_LINE = 0x04",
+    "key": "FONT_SHOW_MULTI_LINE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本控件字体，多行显示\n",
+    "type": "constant"
+},
+{
+    "demo": "文本控件字体，滚动显示\nDB.FONT_SHOW_SCROLL = 0x08",
+    "key": "FONT_SHOW_SCROLL",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本控件字体，滚动显示\n",
+    "type": "constant"
+},
+{
+    "demo": "文本控件字体，高亮滚动显示\nDB.FONT_HIGHLIGHT_SCROLL = 0x10",
+    "key": "FONT_HIGHLIGHT_SCROLL",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本控件字体，高亮滚动显示\n",
+    "type": "constant"
+},
+{
+    "demo": "文本控件字体，默认显示方式（像素显示）\nDB.FONT_DEFAULT = DB.FONT_SHOW_PIXEL",
+    "key": "FONT_DEFAULT",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本控件字体，默认显示方式（像素显示）\n",
+    "type": "constant"
+},
+{
+    "demo": "文本编码格式：内码编码\nDB.FONT_ENCODE_ANSI = 0x00",
+    "key": "FONT_ENCODE_ANSI",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本编码格式：内码编码\n",
+    "type": "constant"
+},
+{
+    "demo": "文本编码格式：unicode编码\nDB.FONT_ENCODE_UNICODE = 0x01",
+    "key": "FONT_ENCODE_UNICODE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本编码格式：unicode编码\n",
+    "type": "constant"
+},
+{
+    "demo": "文本编码格式：utf-8编码\nDB.FONT_ENCODE_UTF8 = 0x02",
+    "key": "FONT_ENCODE_UTF8",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本编码格式：utf-8编码\n",
+    "type": "constant"
+},
+{
+    "demo": "文本大小端存储：大端\nDB.FONT_ENDIAN_BIG = 0x00",
+    "key": "FONT_ENDIAN_BIG",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本大小端存储：大端\n",
+    "type": "constant"
+},
+{
+    "demo": "文本大小端存储：小端\nDB.FONT_ENDIAN_SMALL = 0x01",
+    "key": "FONT_ENDIAN_SMALL",
+    "module": "DB",
+    "priority": 3,
+    "tip": "文本大小端存储：小端\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：scan end\nDB.HCI_EVENT_INQUIRY_COMPLETE = 0x01",
+    "key": "HCI_EVENT_INQUIRY_COMPLETE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：scan end\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：connection\nDB.HCI_EVENT_CONNECTION_COMPLETE = 0x03",
+    "key": "HCI_EVENT_CONNECTION_COMPLETE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：connection\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：disconnection\nDB.HCI_EVENT_DISCONNECTION_COMPLETE = 0x05",
+    "key": "HCI_EVENT_DISCONNECTION_COMPLETE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：disconnection\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：pin\nDB.HCI_EVENT_PIN_CODE_REQUEST = 0x16",
+    "key": "HCI_EVENT_PIN_CODE_REQUEST",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：pin\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.HCI_EVENT_IO_CAPABILITY_REQUEST = 0x31",
+    "key": "HCI_EVENT_IO_CAPABILITY_REQUEST",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.HCI_EVENT_USER_CONFIRMATION_REQUEST = 0x33",
+    "key": "HCI_EVENT_USER_CONFIRMATION_REQUEST",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.HCI_EVENT_USER_PASSKEY_REQUEST = 0x34",
+    "key": "HCI_EVENT_USER_PASSKEY_REQUEST",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.HCI_EVENT_USER_PRESSKEY_NOTIFICATION = 0x3B",
+    "key": "HCI_EVENT_USER_PRESSKEY_NOTIFICATION",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.HCI_EVENT_VENDOR_NO_RECONN_ADDR = 0xF8",
+    "key": "HCI_EVENT_VENDOR_NO_RECONN_ADDR",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.HCI_EVENT_VENDOR_REMOTE_TEST = 0xFE",
+    "key": "HCI_EVENT_VENDOR_REMOTE_TEST",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.BTSTACK_EVENT_HCI_CONNECTIONS_DELETE = 0x6D",
+    "key": "BTSTACK_EVENT_HCI_CONNECTIONS_DELETE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_SUCCESS = 0x00",
+    "key": "ERROR_CODE_SUCCESS",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_PAGE_TIMEOUT = 0x04",
+    "key": "ERROR_CODE_PAGE_TIMEOUT",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_AUTHENTICATION_FAILURE = 0x05",
+    "key": "ERROR_CODE_AUTHENTICATION_FAILURE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_PIN_OR_KEY_MISSING = 0x06",
+    "key": "ERROR_CODE_PIN_OR_KEY_MISSING",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_CONNECTION_TIMEOUT = 0x08",
+    "key": "ERROR_CODE_CONNECTION_TIMEOUT",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_SYNCHRONOUS_CONNECTION_LIMIT_TO_A_DEVICE_EXCEEDED = 0x0A",
+    "key": "ERROR_CODE_SYNCHRONOUS_CONNECTION_LIMIT_TO_A_DEVICE_EXCEEDED",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_ACL_CONNECTION_ALREADY_EXISTS = 0x0B",
+    "key": "ERROR_CODE_ACL_CONNECTION_ALREADY_EXISTS",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_CONNECTION_REJECTED_DUE_TO_LIMITED_RESOURCES = 0x0D",
+    "key": "ERROR_CODE_CONNECTION_REJECTED_DUE_TO_LIMITED_RESOURCES",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_CONNECTION_REJECTED_DUE_TO_UNACCEPTABLE_BD_ADDR = 0x0F",
+    "key": "ERROR_CODE_CONNECTION_REJECTED_DUE_TO_UNACCEPTABLE_BD_ADDR",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_CONNECTION_ACCEPT_TIMEOUT_EXCEEDED = 0x10",
+    "key": "ERROR_CODE_CONNECTION_ACCEPT_TIMEOUT_EXCEEDED",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_REMOTE_USER_TERMINATED_CONNECTION = 0x13",
+    "key": "ERROR_CODE_REMOTE_USER_TERMINATED_CONNECTION",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.ERROR_CODE_CONNECTION_TERMINATED_BY_LOCAL_HOST = 0x16",
+    "key": "ERROR_CODE_CONNECTION_TERMINATED_BY_LOCAL_HOST",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.CUSTOM_BB_AUTO_CANCEL_PAGE = 0xFD",
+    "key": "CUSTOM_BB_AUTO_CANCEL_PAGE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "gui 蓝牙：\nDB.BB_CANCEL_PAGE = 0xFE",
+    "key": "BB_CANCEL_PAGE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "gui 蓝牙：\n",
+    "type": "constant"
+},
+{
+    "demo": "获取蓝牙耳机连接状态\nDB.BT_EMITTER_CONNECT_STATUS = 0x01",
+    "key": "BT_EMITTER_CONNECT_STATUS",
+    "module": "DB",
+    "priority": 3,
+    "tip": "获取蓝牙耳机连接状态\n",
+    "type": "constant"
+},
+{
+    "demo": "获取手机蓝牙连接状态\nDB.BT_PHONE_CONNECT_STATUS = 0x02",
+    "key": "BT_PHONE_CONNECT_STATUS",
+    "module": "DB",
+    "priority": 3,
+    "tip": "获取手机蓝牙连接状态\n",
+    "type": "constant"
+},
+{
+    "demo": "获取下一个数据，从指定索引开始获取，直到最后一个数据\nDB.DEVICE_GET_NEXT_DATA = 0x01",
+    "key": "DEVICE_GET_NEXT_DATA",
+    "module": "DB",
+    "priority": 3,
+    "tip": "获取下一个数据，从指定索引开始获取，直到最后一个数据\n",
+    "type": "constant"
+},
+{
+    "demo": "获取上一个数据，从指定索引开始获取，直到第一个数据\nDB.DEVICE_GET_PREV_DATA = 0x02",
+    "key": "DEVICE_GET_PREV_DATA",
+    "module": "DB",
+    "priority": 3,
+    "tip": "获取上一个数据，从指定索引开始获取，直到第一个数据\n",
+    "type": "constant"
+},
+{
+    "demo": "获取所有数据，直接获取索要获取数据的全部内容，注意内存消耗！\nDB.DEVICE_GET_ALL_DATA = 0x04",
+    "key": "DEVICE_GET_ALL_DATA",
+    "module": "DB",
+    "priority": 3,
+    "tip": "获取所有数据，直接获取索要获取数据的全部内容，注意内存消耗！\n",
+    "type": "constant"
+},
+{
+    "demo": "device 获取数据：\\n1. 获取指定索引的数据\\n2. 为获取上/下一个数据设定索引位置。\nDB.DEVICE_GET_IND_DATA = 0x08",
+    "key": "DEVICE_GET_IND_DATA",
+    "module": "DB",
+    "priority": 3,
+    "tip": "device 获取数据：\\n1. 获取指定索引的数据\\n2. 为获取上/下一个数据设定索引位置。\n",
+    "type": "constant"
+},
+{
+    "demo": "device 获取数据：获取存储的数据中的最大值\nDB.DEVICE_GET_MAX_DATA = 0x10",
+    "key": "DEVICE_GET_MAX_DATA",
+    "module": "DB",
+    "priority": 3,
+    "tip": "device 获取数据：获取存储的数据中的最大值\n",
+    "type": "constant"
+},
+{
+    "demo": "device 获取数据：获取存储的数据中的最小值\nDB.DEVICE_GET_MIN_DATA = 0x20",
+    "key": "DEVICE_GET_MIN_DATA",
+    "module": "DB",
+    "priority": 3,
+    "tip": "device 获取数据：获取存储的数据中的最小值\n",
+    "type": "constant"
+},
+{
+    "demo": "device 获取数据：获取存储的数据个数\nDB.DEVICE_GET_DATA_NUM = 0x40",
+    "key": "DEVICE_GET_DATA_NUM",
+    "module": "DB",
+    "priority": 3,
+    "tip": "device 获取数据：获取存储的数据个数\n",
+    "type": "constant"
+},
+{
+    "demo": "创建定时器，选择创建 timer 实例\nDB.SYS_TIMER_HANDLER = 0x01",
+    "key": "SYS_TIMER_HANDLER",
+    "module": "DB",
+    "priority": 3,
+    "tip": "创建定时器，选择创建 timer 实例\n",
+    "type": "constant"
+},
+{
+    "demo": "创建定时器，选择创建 timeout 实例\nDB.SYS_TIMEOUT_HANDLER = 0x02",
+    "key": "SYS_TIMEOUT_HANDLER",
+    "module": "DB",
+    "priority": 3,
+    "tip": "创建定时器，选择创建 timeout 实例\n",
+    "type": "constant"
+},
+{
+    "demo": "创建联系人操作句柄\nDB.SYS_OPERATE_CONTACTS = 0",
+    "key": "SYS_OPERATE_CONTACTS",
+    "module": "DB",
+    "priority": 3,
+    "tip": "创建联系人操作句柄\n",
+    "type": "constant"
+},
+{
+    "demo": "创建通话记录操作句柄\nDB.SYS_OPERATE_CALLLOG  = 1",
+    "key": "SYS_OPERATE_CALLLOG",
+    "module": "DB",
+    "priority": 3,
+    "tip": "创建通话记录操作句柄\n",
+    "type": "constant"
+},
+{
+    "demo": "获取联系人/通话记录列表中元素数量\nDB.SYS_VM_READ_LIST_COUNT = 0x01",
+    "key": "SYS_VM_READ_LIST_COUNT",
+    "module": "DB",
+    "priority": 3,
+    "tip": "获取联系人/通话记录列表中元素数量\n",
+    "type": "constant"
+},
+{
+    "demo": "获取指定所以的联系人/通话记录\nDB.SYS_VM_READ_LIST_INDEX = 0x02",
+    "key": "SYS_VM_READ_LIST_INDEX",
+    "module": "DB",
+    "priority": 3,
+    "tip": "获取指定所以的联系人/通话记录\n",
+    "type": "constant"
+},
+{
+    "demo": "通过号码获取名称\nDB.SYS_VM_READ_NAME_BY_NUMBER = 0x03",
+    "key": "SYS_VM_READ_NAME_BY_NUMBER",
+    "module": "DB",
+    "priority": 3,
+    "tip": "通过号码获取名称\n",
+    "type": "constant"
+},
+{
+    "demo": "保存联系人/通话记录到列表中\nDB.SYS_VM_SAVE_LIST_BOOK = 0x01",
+    "key": "SYS_VM_SAVE_LIST_BOOK",
+    "module": "DB",
+    "priority": 3,
+    "tip": "保存联系人/通话记录到列表中\n",
+    "type": "constant"
+},
+{
+    "demo": "已选中的卡片数量\nDB.CardSetNum = 0x00",
+    "key": "CardSetNum",
+    "module": "DB",
+    "priority": 3,
+    "tip": "已选中的卡片数量\n",
+    "type": "constant"
+},
+{
+    "demo": "屏幕亮度等级\nDB.LightLevel = 0x01",
+    "key": "LightLevel",
+    "module": "DB",
+    "priority": 3,
+    "tip": "屏幕亮度等级\n",
+    "type": "constant"
+},
+{
+    "demo": "屏幕熄屏时间\nDB.DarkTime = 0x02",
+    "key": "DarkTime",
+    "module": "DB",
+    "priority": 3,
+    "tip": "屏幕熄屏时间\n",
+    "type": "constant"
+},
+{
+    "demo": "快捷键选项\nDB.ShortcutKey = 0x03",
+    "key": "ShortcutKey",
+    "module": "DB",
+    "priority": 3,
+    "tip": "快捷键选项\n",
+    "type": "constant"
+},
+{
+    "demo": "上一次系统音量\nDB.LastSysVol = 0x04",
+    "key": "LastSysVol",
+    "module": "DB",
+    "priority": 3,
+    "tip": "上一次系统音量\n",
+    "type": "constant"
+},
+{
+    "demo": "屏幕常亮使能\nDB.LightAlwayEn = 0x05",
+    "key": "LightAlwayEn",
+    "module": "DB",
+    "priority": 3,
+    "tip": "屏幕常亮使能\n",
+    "type": "constant"
+},
+{
+    "demo": "屏幕常亮时间\nDB.LightTime = 0x06",
+    "key": "LightTime",
+    "module": "DB",
+    "priority": 3,
+    "tip": "屏幕常亮时间\n",
+    "type": "constant"
+},
+{
+    "demo": "系统静音标志\nDB.SysVoiceMute = 0x07",
+    "key": "SysVoiceMute",
+    "module": "DB",
+    "priority": 3,
+    "tip": "系统静音标志\n",
+    "type": "constant"
+},
+{
+    "demo": "全天勿扰使能\nDB.AllDayUndisturbEn = 0x08",
+    "key": "AllDayUndisturbEn",
+    "module": "DB",
+    "priority": 3,
+    "tip": "全天勿扰使能\n",
+    "type": "constant"
+},
+{
+    "demo": "定时勿扰使能\nDB.TimeUndisturbEn = 0x09",
+    "key": "TimeUndisturbEn",
+    "module": "DB",
+    "priority": 3,
+    "tip": "定时勿扰使能\n",
+    "type": "constant"
+},
+{
+    "demo": "定时勿扰起始时间（时）\nDB.UndisturbStimeH = 0x0A",
+    "key": "UndisturbStimeH",
+    "module": "DB",
+    "priority": 3,
+    "tip": "定时勿扰起始时间（时）\n",
+    "type": "constant"
+},
+{
+    "demo": "定时勿扰起始时间（分）\nDB.UndisturbStimeM = 0x0B",
+    "key": "UndisturbStimeM",
+    "module": "DB",
+    "priority": 3,
+    "tip": "定时勿扰起始时间（分）\n",
+    "type": "constant"
+},
+{
+    "demo": "定时勿扰结束时间（时）\nDB.UndisturbEtimeH = 0x0C",
+    "key": "UndisturbEtimeH",
+    "module": "DB",
+    "priority": 3,
+    "tip": "定时勿扰结束时间（时）\n",
+    "type": "constant"
+},
+{
+    "demo": "定时勿扰结束时间（分）\nDB.UndisturbEtimeM = 0x0D",
+    "key": "UndisturbEtimeM",
+    "module": "DB",
+    "priority": 3,
+    "tip": "定时勿扰结束时间（分）\n",
+    "type": "constant"
+},
+{
+    "demo": "训练自动识别使能\nDB.TrainAutoEn = 0x0E",
+    "key": "TrainAutoEn",
+    "module": "DB",
+    "priority": 3,
+    "tip": "训练自动识别使能\n",
+    "type": "constant"
+},
+{
+    "demo": "是否连接新手机\nDB.ConnNewPhone = 0x0F",
+    "key": "ConnNewPhone",
+    "module": "DB",
+    "priority": 3,
+    "tip": "是否连接新手机\n",
+    "type": "constant"
+},
+{
+    "demo": "语言选择\nDB.Language = 0x10",
+    "key": "Language",
+    "module": "DB",
+    "priority": 3,
+    "tip": "语言选择\n",
+    "type": "constant"
+},
+{
+    "demo": "菜单风格\nDB.MenuStyle = 0x11",
+    "key": "MenuStyle",
+    "module": "DB",
+    "priority": 3,
+    "tip": "菜单风格\n",
+    "type": "constant"
+},
+{
+    "demo": "周一打开\nDB.SYS_ALARM_MONDAY_OPEN = 0x02",
+    "key": "SYS_ALARM_MONDAY_OPEN",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周一打开\n",
+    "type": "constant"
+},
+{
+    "demo": "周一关闭\nDB.SYS_ALARM_MONDAY_CLOSE = 0xfd",
+    "key": "SYS_ALARM_MONDAY_CLOSE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周一关闭\n",
+    "type": "constant"
+},
+{
+    "demo": "周二打开\nDB.SYS_ALARM_TUESDAY_OPEN = 0x04",
+    "key": "SYS_ALARM_TUESDAY_OPEN",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周二打开\n",
+    "type": "constant"
+},
+{
+    "demo": "周二关闭\nDB.SYS_ALARM_TUESDAY_CLOSE = 0xfb",
+    "key": "SYS_ALARM_TUESDAY_CLOSE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周二关闭\n",
+    "type": "constant"
+},
+{
+    "demo": "周三打开\nDB.SYS_ALARM_WEDNESDAY_OPEN = 0x08",
+    "key": "SYS_ALARM_WEDNESDAY_OPEN",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周三打开\n",
+    "type": "constant"
+},
+{
+    "demo": "周三关闭\nDB.SYS_ALARM_WEDNESDAY_CLOSE = 0xf7",
+    "key": "SYS_ALARM_WEDNESDAY_CLOSE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周三关闭\n",
+    "type": "constant"
+},
+{
+    "demo": "周四打开\nDB.SYS_ALARM_THURSDAY_OPEN = 0x10",
+    "key": "SYS_ALARM_THURSDAY_OPEN",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周四打开\n",
+    "type": "constant"
+},
+{
+    "demo": "周四关闭\nDB.SYS_ALARM_THURSDAY_CLOSE = 0xef",
+    "key": "SYS_ALARM_THURSDAY_CLOSE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周四关闭\n",
+    "type": "constant"
+},
+{
+    "demo": "周五打开\nDB.SYS_ALARM_FRIDAY_OPEN = 0x20",
+    "key": "SYS_ALARM_FRIDAY_OPEN",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周五打开\n",
+    "type": "constant"
+},
+{
+    "demo": "周五关闭\nDB.SYS_ALARM_FRIDAY_CLOSE = 0xdf",
+    "key": "SYS_ALARM_FRIDAY_CLOSE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周五关闭\n",
+    "type": "constant"
+},
+{
+    "demo": "周六打开\nDB.SYS_ALARM_SATURDAY_OPEN = 0x40",
+    "key": "SYS_ALARM_SATURDAY_OPEN",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周六打开\n",
+    "type": "constant"
+},
+{
+    "demo": "周六关闭\nDB.SYS_ALARM_SATURDAY_CLOSE = 0xbf",
+    "key": "SYS_ALARM_SATURDAY_CLOSE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周六关闭\n",
+    "type": "constant"
+},
+{
+    "demo": "周日打开\nDB.SYS_ALARM_SUNDAY_OPEN = 0x80",
+    "key": "SYS_ALARM_SUNDAY_OPEN",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周日打开\n",
+    "type": "constant"
+},
+{
+    "demo": "周日关闭\nDB.SYS_ALARM_SUNDAY_CLOSE = 0x7f",
+    "key": "SYS_ALARM_SUNDAY_CLOSE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "周日关闭\n",
+    "type": "constant"
+},
+{
+    "demo": "最大闹钟数量\nDB.SYS_ALARM_MAX_NUMBER = 5",
+    "key": "SYS_ALARM_MAX_NUMBER",
+    "module": "DB",
+    "priority": 3,
+    "tip": "最大闹钟数量\n",
+    "type": "constant"
+},
+{
+    "demo": "设置闹钟开关\nDB.SYS_ALARM_SET_ONOFF = 0x01",
+    "key": "SYS_ALARM_SET_ONOFF",
+    "module": "DB",
+    "priority": 3,
+    "tip": "设置闹钟开关\n",
+    "type": "constant"
+},
+{
+    "demo": "设置闹钟时间\nDB.SYS_ALARM_SET_TIME = 0x02",
+    "key": "SYS_ALARM_SET_TIME",
+    "module": "DB",
+    "priority": 3,
+    "tip": "设置闹钟时间\n",
+    "type": "constant"
+},
+{
+    "demo": "设置闹钟模式\nDB.SYS_ALARM_SET_MODE = 0x04",
+    "key": "SYS_ALARM_SET_MODE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "设置闹钟模式\n",
+    "type": "constant"
+},
+{
+    "demo": "设置闹钟贪睡\nDB.SYS_ALARM_SET_SNOOZE = 0x08",
+    "key": "SYS_ALARM_SET_SNOOZE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "设置闹钟贪睡\n",
+    "type": "constant"
+},
+{
+    "demo": "设置闹钟赞数关闭\nDB.SYS_ALARM_SET_CLOSE = 0x10",
+    "key": "SYS_ALARM_SET_CLOSE",
+    "module": "DB",
+    "priority": 3,
+    "tip": "设置闹钟赞数关闭\n",
+    "type": "constant"
+},
+{
+    "demo": "",
+    "key": "do",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "else",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "elseif",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "end",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "false",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "for",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "function name()\n    ...\nend",
+    "key": "function",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "if (a&lt;10) then\n    ...\nelse\n    ...\nend",
+    "key": "if",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "in",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "local",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字，定义局部变量",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "nil",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "not",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "or",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "repeat",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "return",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "then",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "true",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "until",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "while (true)\ndo\n   print(\"...\")\nend",
+    "key": "while",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "goto",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "this",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字，一般不适用this",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "until",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "require",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字，一般不使用require导包",
+    "type": "keyword"
+},
+{
+    "demo": "",
+    "key": "table",
+    "module": "lua",
+    "priority": 1,
+    "tip": "Lua关键字",
+    "type": "keyword"
+}
+]

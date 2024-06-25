@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CodeBlocks_project_file>
+<FileVersion major="1" minor="6" />
+<Project>
+<Option title="AC701N_edr_ota2" />
+<Option compiler="pi32v2_r3_lto_compiler" />
+<Build>
+<Target title="Release">
+<Option output="cpu/br28/output/ota_loader.elf" prefix_auto="0" extension_auto="0" />
+<Option object_output="obj/Release/" />
+<Option type="1" />
+<Option compiler="pi32v2_r3_lto_compiler" />
+<Compiler>
+<Add option="-integrated-as" />
+<Add option="-fallow-pointer-null" />
+<Add option="-fno-common" />
+<Add option="-flto" />
+<Add option="-g" />
+<Add option="-Oz" />
+<Add option="-Werror=implicit-function-declaration" />
+<Add option="-Werror=macro-redefined" />
+<Add option="-Werror=return-type" />
+<Add option="-Werror=int-conversion" />
+<Add option="-D__GCC_PI32V2__" />
+<Add option="-Wno-format" />
+<Add option="-Wno-unused-value" />
+<Add option="-Wno-unused-function" />
+<Add option="-Wno-unused-comparison" />
+<Add option="-Wno-parentheses" />
+<Add option="-Wno-tautological-compare" />
+<Add option="-Wno-incompatible-library-redeclaration" />
+<Add option="-Wno-invalid-noreturn" />
+<Add option="-Wno-visibility" />
+<Add option="-Wno-integer-overflow" />
+<Add option="-fms-extensions" />
+<Add option="-Wimplicit-function-declaration" />
+<Add option="-Wno-shift-negative-value" />
+<Add option="-DCONFIG_CPU_BR28" />
+<Add option="-DOTA_LOADER_TYPE=edr_ota2" />
+<Add option="-D__PRINTF_DEBUG" />
+<Add option="-D__ST_DEBUG" />
+<Add option="-D__NOR_DEBUG" />
+<Add option="-D__JLFS_DEBUG" />
+<Add option="-D__UP_DEBUG" />
+<Add option="-DEDR_UPDATA_SUPPORT_CONNECT" />
+<Add option="-DCONFIG_BT_NAME=\&quot;BR28_EDR_UPDATE\&quot;" />
+<Add option="-DENTRY_ADDR=0x120000" />
+<Add option="-D__USE_MASK_API__" />
+<Add option="-D__MASK_LZ4" />
+<Add option="-D__USE_MASK_PRINTF" />
+<Add option="-D__HID_UART_MODE_SEL=1" />
+<Add option="-DCONFIG_NEW_BREDR_ENABLE" />
+<Add option="-DCONFIG_NEW_MODEM_ENABLE" />
+<Add directory="app" />
+<Add directory="app/inc" />
+<Add directory="app/inc/cpu/br28" />
+<Add directory="include_lib" />
+<Add directory="include_lib/common" />
+<Add directory="include_lib/drivers" />
+<Add directory="include_lib/cpu/br28" />
+<Add directory="include_lib/cpu/br28/asm/power" />
+<Add directory="include_lib/drivers/norflash" />
+<Add directory="include_lib/fs/jlfs" />
+<Add directory="include_lib/fs/lite_file_sys" />
+<Add directory="include_lib/upgrade" />
+<Add directory="include_lib/update" />
+<Add directory="include_lib/system" />
+<Add directory="include_lib/system/generic" />
+<Add directory="include_lib/drivers/sd" />
+<Add directory="include_lib/fs" />
+<Add directory="include_lib/jl_rcsp" />
+<Add directory="include_lib/lib_mutual_loader" />
+<Add directory="include_lib/btctrler/adapter/include/common" />
+<Add directory="include_lib/btctrler" />
+<Add directory="include_lib/btctrler/port/br28" />
+</Compiler>
+<Linker>
+<Add option="--gc-sections" />
+<Add option="--plugin-opt=-dont-used-symbol-list=malloc,free,sprintf,printf,puts,putchar,perror,vprintf,printi,fopen,fread,fwrite,fseek,strlen,memset,memcpy,strcpy,memmove,strcmp" />
+<Add option="-M=cpu/br28/output/map.txt" />
+<Add option="-Tcpu/br28/output/ram.ld" />
+<Add option="--plugin-opt=-inline-threshold=5" />
+<Add option="--plugin-opt=-enable-ipra=true" />
+<Add option="--plugin-opt=-pi32v2-always-use-itblock" />
+<Add option="--plugin-opt=-pi32v2-merge-max-offset=64" />
+<Add option="--plugin-opt=-global-merge-on-const" />
+<Add option="--plugin-opt=-pi32v2-enable-simd=true" />
+<Add option="--plugin-opt=-pi32v2-enable-rep-memop=true" />
+<Add option="--plugin-opt=mcpu=r3" />
+<Add option="--plugin-opt=save-temps" />
+<Add option="--start-group" />
+<Add option="--whole-archive" />
+<Add option="include_lib/liba/br28/uboot.a" />
+<Add option="--no-whole-archive" />
+<Add option="--end-group" />
+<Add option="--start-group " />
+<Add option="include_lib/liba/br28/bt_protocol.a" />
+<Add option="--end-group " />
+<Add option="include_lib/liba/br28/btctrler.a" />
+<Add library="C:\JL\pi32\pi32v2-lib\r3\libm.a" />
+</Linker>
+<ExtraCommands>
+<Add before="$compiler $options $includes -D__LD__ -E -P cpu\br28\output\ram_ld.c -o cpu\br28\output\ram.ld" />
+<Add before="$compiler $options $includes -D__LD__ -E -P cpu\br28\output\download.c -o cpu\br28\output\download.bat" />
+<Add before="tools\utils\fixbat.exe cpu\br28\output\download.bat" />
+<Mode before="always" />
+<Add after="cpu\br28\output\download.bat ota_loader" />
+<Mode after="always" />
+</ExtraCommands>
+</Target>
+</Build>
+<Unit filename="app/inc/cpu/br28/platform_config.h" />
+<Unit filename="app/inc/testbox_update.h" />
+<Unit filename="app/inc/user.h" />
+<Unit filename="app/src/common/cbuf.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="app/src/common/lbuf.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="app/src/common/msg.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="app/src/common/sys_timer.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="app/src/lib_btctrler_config.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="app/src/loader_main.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="app/src/update/testbox_edr_update.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="app/src/update/update_main.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/adc_api.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/delay.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/timer.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="cpu/br28/uart.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="include_lib/btctrler/ble/ll_config.h" />
+<Unit filename="include_lib/btctrler/btcontroller_mode.h" />
+<Unit filename="include_lib/btctrler/btcontroller_modules.h" />
+<Unit filename="include_lib/btctrler/btctrler_api_for_update.h" />
+<Unit filename="include_lib/btctrler/classic/lmp_config.h" />
+<Unit filename="include_lib/btctrler/hci_transport.h" />
+<Unit filename="include_lib/btctrler/port/br28/btcontroller_config.h" />
+<Unit filename="include_lib/btstack/bt_profile_config.h" />
+<Unit filename="include_lib/common/common.h" />
+<Unit filename="include_lib/common/dec.h" />
+<Unit filename="include_lib/common/delay.h" />
+<Unit filename="include_lib/common/device_errno.h" />
+<Unit filename="include_lib/common/jiffies.h" />
+<Unit filename="include_lib/common/msg.h" />
+<Unit filename="include_lib/common/spinlock.h" />
+<Unit filename="include_lib/cpu/br28/asm/adc_api.h" />
+<Unit filename="include_lib/cpu/br28/asm/br28.h" />
+<Unit filename="include_lib/cpu/br28/asm/clock.h" />
+<Unit filename="include_lib/cpu/br28/asm/cpu.h" />
+<Unit filename="include_lib/cpu/br28/asm/crc.h" />
+<Unit filename="include_lib/cpu/br28/asm/crc16.h" />
+<Unit filename="include_lib/cpu/br28/asm/csfr.h" />
+<Unit filename="include_lib/cpu/br28/asm/debug.h" />
+<Unit filename="include_lib/cpu/br28/asm/delay.h" />
+<Unit filename="include_lib/cpu/br28/asm/efuse.h" />
+<Unit filename="include_lib/cpu/br28/asm/gpio.h" />
+<Unit filename="include_lib/cpu/br28/asm/hwi.h" />
+<Unit filename="include_lib/cpu/br28/asm/io_imap.h" />
+<Unit filename="include_lib/cpu/br28/asm/io_omap.h" />
+<Unit filename="include_lib/cpu/br28/asm/irq.h" />
+<Unit filename="include_lib/cpu/br28/asm/power/p33.h" />
+<Unit filename="include_lib/cpu/br28/asm/power/p33_app.h" />
+<Unit filename="include_lib/cpu/br28/asm/power/power_reset.h" />
+<Unit filename="include_lib/cpu/br28/asm/setup.h" />
+<Unit filename="include_lib/cpu/br28/asm/timer.h" />
+<Unit filename="include_lib/cpu/br28/asm/uart.h" />
+<Unit filename="include_lib/cpu/br28/asm/wdt.h" />
+<Unit filename="include_lib/drivers/norflash/norflash.h" />
+<Unit filename="include_lib/fs/jlfs/jlfs.h" />
+<Unit filename="include_lib/fs/lite_file_sys/diskio.h" />
+<Unit filename="include_lib/fs/lite_file_sys/tff.h" />
+<Unit filename="include_lib/lib_include.h" />
+<Unit filename="include_lib/system/debug.h" />
+<Unit filename="include_lib/system/generic/circular_buf.h" />
+<Unit filename="include_lib/system/generic/errno-base.h" />
+<Unit filename="include_lib/system/generic/lbuf.h" />
+<Unit filename="include_lib/system/generic/list.h" />
+<Unit filename="include_lib/system/generic/log.h" />
+<Unit filename="include_lib/system/generic/printf.h" />
+<Unit filename="include_lib/system/generic/sys_timer.h" />
+<Unit filename="include_lib/system/generic/typedef.h" />
+<Unit filename="include_lib/system/init.h" />
+<Unit filename="include_lib/system/malloc.h" />
+<Unit filename="include_lib/system/os/os_cpu.h" />
+<Unit filename="include_lib/update/update_main.h" />
+<Unit filename="include_lib/upgrade/upgrade.h" />
+</Project>
+</CodeBlocks_project_file>

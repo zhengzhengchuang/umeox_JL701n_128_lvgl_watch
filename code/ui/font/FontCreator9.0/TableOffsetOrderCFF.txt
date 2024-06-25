@@ -1,0 +1,23 @@
+; These tags are case sensitive and should be four characters long.
+; If a tag has less than four characters, it will be right padded
+; with spaces.
+; Fonts are more efficient in the Windows operating system
+; when the tables are ordered. For OpenType font containing CFF
+; data this is as follows (from first to last):
+; head, hhea, maxp, OS/2, name, cmap, post, CFF
+head
+hhea
+maxp
+OS/2
+name
+cmap
+post
+CFF
+hmtx
+LTSH
+VDMX
+hdmx
+kern
+gasp
+PCLT
+DSIG

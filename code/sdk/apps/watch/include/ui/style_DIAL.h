@@ -1,0 +1,11 @@
+#ifndef UI_TOOL_ENAME_DIAL
+#define UI_TOOL_ENAME_DIAL
+
+#define DIAL_PAGE_0 0X20020000
+#define DIAL_WATCH 0X20184435
+#define DIAL_BASEFORM_2 0X20043C22 //表盘图层id
+
+#define STYLE_DIAL_ID(x) DIAL_##x
+
+#endif //UI_TOOL_ENAME_DIAL_H
+

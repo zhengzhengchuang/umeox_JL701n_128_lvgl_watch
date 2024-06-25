@@ -1,0 +1,772 @@
+Archive member included to satisfy reference by file (symbol)
+
+include_lib/liba/br28/uboot.a(dec.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(lz4.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(printf.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(efuse.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(cache.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(wdt.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(setup.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(clock.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(usb.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(sd.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(sfc_spi.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(crc.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(p33.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(debug.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(irq.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(spi.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(gpio.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(sfc_boot.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(psram.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(power_reset.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(power_sfc.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(norflash.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(usb_phy.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(jlfs.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(tff.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(ff_api.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(upgrade.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(misc.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(update_area_info_list.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(otp_cfg_update.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(bt_cfg_update_new.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(ex_api_code.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(fs_v2_update.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(reserved_zone_update.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(startup.o)
+                              (--whole-archive)
+include_lib/liba/br28/uboot.a(version.z.o)
+                              (--whole-archive)
+include_lib/liba/br28/bt_protocol.a(btstack_task.o)
+                              obj/Release/app/src/update/app_update/app_update.o (symbol from plugin) (init_soft_interrupt)
+include_lib/liba/br28/bt_protocol.a(hci_vendor.o)
+                              btstack_task.o (symbol from plugin) (hci_event_handler)
+include_lib/liba/br28/bt_protocol.a(btstack_memory.o)
+                              hci_vendor.o (symbol from plugin) (btstack_memory_le_hci_connection_get)
+include_lib/liba/br28/bt_protocol.a(btstack_linked_list.o)
+                              hci_vendor.o (symbol from plugin) (btstack_linked_list_add)
+include_lib/liba/br28/bt_protocol.a(utils.o)
+                              obj/Release/app/src/le_module/le_server_moudle.o (symbol from plugin) (little_endian_read_16)
+include_lib/liba/br28/bt_protocol.a(run_loop.o)
+                              btstack_task.o (symbol from plugin) (bt_profile_loop)
+include_lib/liba/br28/bt_protocol.a(l2cap.o)
+                              obj/Release/app/src/le_module/le_server_moudle.o (symbol from plugin) (le_l2cap_register_packet_handler)
+include_lib/liba/br28/bt_protocol.a(user_interface.o)
+                              hci_vendor.o (symbol from plugin) (bt_event_update_to_user)
+include_lib/liba/br28/bt_protocol.a(le_device_db_memory.o)
+                              obj/Release/app/src/le_module/le_server_moudle.o (symbol from plugin) (le_device_db_init)
+include_lib/liba/br28/bt_protocol.a(l2cap_signaling.o)
+                              l2cap.o (symbol from plugin) (l2cap_outgoing_acl_len)
+include_lib/liba/br28/bt_protocol.a(bt_configs.o)
+                              hci_vendor.o (symbol from plugin) (l2cap_debug_enable)
+include_lib/liba/br28/bt_protocol.a(btstack_main.o)
+                              obj/Release/app/src/lib_btctrler_config.o (symbol from plugin) (get_le_pool_len)
+include_lib/liba/br28/bt_protocol.a(avctp_user.o)
+                              btstack_main.o (symbol from plugin) (b_create_bt_new_conn)
+include_lib/liba/br28/bt_protocol.a(JL_rcsp_api.o)
+                              obj/Release/app/src/common/rcsp/rcsp_control.o (symbol from plugin) (JL_rcsp_auth_recieve)
+include_lib/liba/br28/bt_protocol.a(JL_rcsp_packet.o)
+                              obj/Release/app/src/common/rcsp/rcsp_control.o (symbol from plugin) (JL_packet_get_rx_max_mtu)
+include_lib/liba/br28/bt_protocol.a(JL_rcsp_protocol.o)
+                              obj/Release/app/src/common/rcsp/rcsp_control.o (symbol from plugin) (rcsp_protocol_need_buf_size)
+include_lib/liba/br28/bt_protocol.a(att_send.o)
+                              obj/Release/app/src/le_module/le_server_moudle.o (symbol from plugin) (att_set_ccc_config)
+include_lib/liba/br28/bt_protocol.a(att_server.o)
+                              obj/Release/app/src/le_module/le_server_moudle.o (symbol from plugin) (att_server_init)
+include_lib/liba/br28/bt_protocol.a(sm.o)
+                              att_server.o (symbol from plugin) (sm_add_event_handler)
+include_lib/liba/br28/bt_protocol.a(btstack_sys_timer.o)
+                              avctp_user.o (symbol from plugin) (btstack_set_timer)
+include_lib/liba/br28/bt_protocol.a(rfcomm.o)
+                              btstack_main.o (symbol from plugin) (rfcomm_init)
+include_lib/liba/br28/bt_protocol.a(att_db.o)
+                              att_server.o (symbol from plugin) (att_set_db)
+include_lib/liba/br28/bt_protocol.a(att_dispatch.o)
+                              att_server.o (symbol from plugin) (att_global_info_init)
+include_lib/liba/br28/btctrler.a(thread.o)
+                              btstack_task.o (symbol from plugin) (thread_owner_init)
+include_lib/liba/br28/btctrler.a(RF.o)
+                              btstack_task.o (symbol from plugin) (bt_max_pwr_set)
+include_lib/liba/br28/btctrler.a(btcontroller_heap.o)
+                              btstack_task.o (symbol from plugin) (btctler_nv_memory_apply)
+include_lib/liba/br28/btctrler.a(link_bulk.o)
+                              btstack_task.o (symbol from plugin) (link_bulk_init)
+include_lib/liba/br28/btctrler.a(lmp.o)
+                              JL_rcsp_api.o (symbol from plugin) (make_rand_num)
+include_lib/liba/br28/btctrler.a(lmp_hci.o)
+                              lmp.o (symbol from plugin) (lmp_hci_send_event)
+include_lib/liba/br28/btctrler.a(bredr_frame.o)
+                              lmp_hci.o (symbol from plugin) (__read_reg_clkoffset)
+include_lib/liba/br28/btctrler.a(bredr_link.o)
+                              lmp.o (symbol from plugin) (bredr_link_close)
+include_lib/liba/br28/btctrler.a(bredr_slot_timer.o)
+                              bredr_frame.o (symbol from plugin) (slot_timer_init)
+include_lib/liba/br28/btctrler.a(btctrler_task.o)
+                              lmp_hci.o (symbol from plugin) (lmp_hci_cmd_to_conn_for_addr)
+include_lib/liba/br28/btctrler.a(hci_device_manager.o)
+                              hci_vendor.o (symbol from plugin) (dev_hci_set_event_mask)
+include_lib/liba/br28/btctrler.a(device_manager.o)
+                              RF.o (symbol from plugin) (set_bt_version)
+include_lib/liba/br28/btctrler.a(hci_controller.o)
+                              hci_vendor.o (symbol from plugin) (le_hci_send_acl_packet)
+include_lib/liba/br28/btctrler.a(link_task.o)
+                              lmp.o (symbol from plugin) (link_task_close_all)
+include_lib/liba/br28/btctrler.a(h4_controller_interface.o)
+                              btstack_task.o (symbol from plugin) (hci_transport_h4_controller_instance)
+include_lib/liba/br28/btctrler.a(vendor_manager.o)
+                              hci_controller.o (symbol from plugin) (hci_vendor_cmd_handler)
+include_lib/liba/br28/btctrler.a(hci_ll.o)
+                              btstack_task.o (symbol from plugin) (ll_hci_init)
+include_lib/liba/br28/btctrler.a(hci_ll_cmds.o)
+                              hci_controller.o (symbol from plugin) (ll_push_acl_data)
+include_lib/liba/br28/btctrler.a(link_layer.o)
+                              device_manager.o (symbol from plugin) (ll_link_for_handle)
+include_lib/liba/br28/btctrler.a(ll_adv.o)
+                              link_layer.o (symbol from plugin) (adv_rx_post_handler)
+include_lib/liba/br28/btctrler.a(ll_data_extension.o)
+                              hci_ll_cmds.o (symbol from plugin) (ll_read_maximum_data_length)
+include_lib/liba/br28/btctrler.a(ll_events.o)
+                              link_layer.o (symbol from plugin) (le_connection_update_complete_event)
+include_lib/liba/br28/btctrler.a(ll_init.o)
+                              link_layer.o (symbol from plugin) (init_rx_post_handler)
+include_lib/liba/br28/btctrler.a(ll_keys.o)
+                              hci_ll_cmds.o (symbol from plugin) (ll_read_local_p256_public_key)
+include_lib/liba/br28/btctrler.a(ll_scan.o)
+                              ll_events.o (symbol from plugin) (le_scan_filter_duplicates)
+include_lib/liba/br28/btctrler.a(ll_resolve_list.o)
+                              ll_adv.o (symbol from plugin) (ll_resolve_list_IRK_verify)
+include_lib/liba/br28/btctrler.a(ll_slave.o)
+                              ll_adv.o (symbol from plugin) (slave_rx_conn_post_handler)
+include_lib/liba/br28/btctrler.a(ll_white_list.o)
+                              ll_adv.o (symbol from plugin) (ll_white_list_match)
+include_lib/liba/br28/btctrler.a(authentication.o)
+                              JL_rcsp_api.o (symbol from plugin) (function_E1)
+include_lib/liba/br28/btctrler.a(ll_multiple_phys.o)
+                              link_layer.o (symbol from plugin) (__slave_ll_phy_update_done)
+include_lib/liba/br28/btctrler.a(misc_hw.o)
+                              thread.o (symbol from plugin) (crc_get_32bit)
+include_lib/liba/br28/btctrler.a(RF_ble5_only_phy.o)
+                              ll_multiple_phys.o (symbol from plugin) (__ble5_ops)
+include_lib/liba/br28/btctrler.a(RF_ble.o)
+                              RF_ble5_only_phy.o (symbol from plugin) (__set_winsize)
+include_lib/liba/br28/btctrler.a(analog_ble.o)
+                              RF_ble.o (symbol from plugin) (ble_agc_normal_set)
+include_lib/liba/br28/btctrler.a(le_low_power.o)
+                              RF_ble.o (symbol from plugin) (__get_clkn)
+include_lib/liba/br28/btctrler.a(hw_bt_api.o)
+                              lmp.o (symbol from plugin) (get_jl_chip_id)
+include_lib/liba/br28/btctrler.a(vsprintf.o)
+                              link_layer.o (symbol from plugin) (__vsprintf_len)
+include_lib/liba/br28/btctrler.a(lbuf.o)
+                              btcontroller_heap.o (symbol from plugin) (lbuf_init_btctrler)
+include_lib/liba/br28/btctrler.a(btcontroller_util.o)
+                              lmp.o (symbol from plugin) (btctler_little_endian_read_16)
+include_lib/liba/br28/btctrler.a(hw_dma.o)
+                              RF_ble.o (symbol from plugin) (hw_dma_init)
+include_lib/liba/br28/btctrler.a(aes128.o)
+                              hci_ll.o (symbol from plugin) (aes128_start)
+include_lib/liba/br28/btctrler.a(lmp_utils.o)
+                              lmp.o (symbol from plugin) (endian_change)
+include_lib/liba/br28/btctrler.a(bredr_utils.o)
+                              bredr_frame.o (symbol from plugin) (bredr_clkn_after)
+include_lib/liba/br28/btctrler.a(lmp_hci_cmd_parser.o)
+                              hci_controller.o (symbol from plugin) (hci_lmp_link_control_cmd_handler)
+include_lib/liba/br28/btctrler.a(hci_ll_5_cmds.o)
+                              ll_multiple_phys.o (symbol from plugin) (ext_le_param)
+C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-memcmp.o)
+                              obj/Release/app/src/common/rcsp/rcsp_control.o (symbol from plugin) (memcmp)
+C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-strcmp.o)
+                              dec.o (symbol from plugin) (strcmp)
+C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-strlen.o)
+                              obj/Release/app/src/common/rcsp/rcsp_control.o (symbol from plugin) (strlen)
+C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-strncmp.o)
+                              gpio.o (symbol from plugin) (strncmp)
+C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-memcpy.o)
+                              cpu\br28\output\ota_loader.elf.o (memcpy)
+C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-memset.o)
+                              cpu\br28\output\ota_loader.elf.o (memset)
+
+Discarded input sections
+
+ .text          0x00000000        0x0 obj/Release/app/src/common/cbuf.o (symbol from plugin)
+ .stack_magic   0x00000000       0x10 cpu\br28\output\ota_loader.elf.o
+ .stack_magic0  0x00000000       0x10 cpu\br28\output\ota_loader.elf.o
+ .bt_sleep      0x00000000        0xc cpu\br28\output\ota_loader.elf.o
+ .tws_func_stub
+                0x00000000        0x8 cpu\br28\output\ota_loader.elf.o
+ .text          0x00000000        0x0 obj/Release/app/src/common/custom_cfg.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/app/src/common/lbuf.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/app/src/common/msg.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/app/src/common/rcsp/rcsp_auth.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/app/src/common/rcsp/rcsp_control.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/app/src/common/sys_timer.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/app/src/le_module/le_server_moudle.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/app/src/lib_btctrler_config.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/app/src/loader_main.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/app/src/update/app_update/app_update.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/app/src/update/update_main.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/cpu/br28/adc_api.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/cpu/br28/delay.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/cpu/br28/timer.o (symbol from plugin)
+ .text          0x00000000        0x0 obj/Release/cpu/br28/uart.o (symbol from plugin)
+ .text          0x00000000        0x0 dec.o (symbol from plugin)
+ .text          0x00000000        0x0 lz4.o (symbol from plugin)
+ .text          0x00000000        0x0 printf.o (symbol from plugin)
+ .text          0x00000000        0x0 efuse.o (symbol from plugin)
+ .text          0x00000000        0x0 cache.o (symbol from plugin)
+ .text          0x00000000        0x0 wdt.o (symbol from plugin)
+ .text          0x00000000        0x0 setup.o (symbol from plugin)
+ .text          0x00000000        0x0 clock.o (symbol from plugin)
+ .text          0x00000000        0x0 usb.o (symbol from plugin)
+ .text          0x00000000        0x0 sd.o (symbol from plugin)
+ .text          0x00000000        0x0 sfc_spi.o (symbol from plugin)
+ .text          0x00000000        0x0 crc.o (symbol from plugin)
+ .text          0x00000000        0x0 p33.o (symbol from plugin)
+ .text          0x00000000        0x0 debug.o (symbol from plugin)
+ .text          0x00000000        0x0 irq.o (symbol from plugin)
+ .text          0x00000000        0x0 spi.o (symbol from plugin)
+ .text          0x00000000        0x0 gpio.o (symbol from plugin)
+ .text          0x00000000        0x0 sfc_boot.o (symbol from plugin)
+ .text          0x00000000        0x0 psram.o (symbol from plugin)
+ .text          0x00000000        0x0 power_reset.o (symbol from plugin)
+ .text          0x00000000        0x0 power_sfc.o (symbol from plugin)
+ .text          0x00000000        0x0 norflash.o (symbol from plugin)
+ .text          0x00000000        0x0 usb_phy.o (symbol from plugin)
+ .text          0x00000000        0x0 jlfs.o (symbol from plugin)
+ .text          0x00000000        0x0 tff.o (symbol from plugin)
+ .text          0x00000000        0x0 ff_api.o (symbol from plugin)
+ .text          0x00000000        0x0 upgrade.o (symbol from plugin)
+ .text          0x00000000        0x0 misc.o (symbol from plugin)
+ .text          0x00000000        0x0 update_area_info_list.o (symbol from plugin)
+ .text          0x00000000        0x0 otp_cfg_update.o (symbol from plugin)
+ .text          0x00000000        0x0 bt_cfg_update_new.o (symbol from plugin)
+ .text          0x00000000        0x0 ex_api_code.o (symbol from plugin)
+ .text          0x00000000        0x0 fs_v2_update.o (symbol from plugin)
+ .text          0x00000000        0x0 reserved_zone_update.o (symbol from plugin)
+ .text          0x00000000        0x0 include_lib/liba/br28/uboot.a(startup.o)
+ .stack         0x00000000      0x800 include_lib/liba/br28/uboot.a(startup.o)
+ .text          0x00000000        0x0 include_lib/liba/br28/uboot.a(version.z.o)
+ .text          0x00000000        0x0 btstack_task.o (symbol from plugin)
+ .text          0x00000000        0x0 hci_vendor.o (symbol from plugin)
+ .text          0x00000000        0x0 btstack_memory.o (symbol from plugin)
+ .text          0x00000000        0x0 btstack_linked_list.o (symbol from plugin)
+ .text          0x00000000        0x0 utils.o (symbol from plugin)
+ .text          0x00000000        0x0 run_loop.o (symbol from plugin)
+ .text          0x00000000        0x0 l2cap.o (symbol from plugin)
+ .text          0x00000000        0x0 user_interface.o (symbol from plugin)
+ .text          0x00000000        0x0 le_device_db_memory.o (symbol from plugin)
+ .text          0x00000000        0x0 l2cap_signaling.o (symbol from plugin)
+ .text          0x00000000        0x0 bt_configs.o (symbol from plugin)
+ .text          0x00000000        0x0 btstack_main.o (symbol from plugin)
+ .text          0x00000000        0x0 avctp_user.o (symbol from plugin)
+ .text          0x00000000        0x0 JL_rcsp_api.o (symbol from plugin)
+ .text          0x00000000        0x0 JL_rcsp_packet.o (symbol from plugin)
+ .text          0x00000000        0x0 JL_rcsp_protocol.o (symbol from plugin)
+ .text          0x00000000        0x0 att_send.o (symbol from plugin)
+ .text          0x00000000        0x0 att_server.o (symbol from plugin)
+ .text          0x00000000        0x0 sm.o (symbol from plugin)
+ .text          0x00000000        0x0 btstack_sys_timer.o (symbol from plugin)
+ .text          0x00000000        0x0 rfcomm.o (symbol from plugin)
+ .text          0x00000000        0x0 att_db.o (symbol from plugin)
+ .text          0x00000000        0x0 att_dispatch.o (symbol from plugin)
+ .text          0x00000000        0x0 thread.o (symbol from plugin)
+ .text          0x00000000        0x0 RF.o (symbol from plugin)
+ .text          0x00000000        0x0 btcontroller_heap.o (symbol from plugin)
+ .text          0x00000000        0x0 link_bulk.o (symbol from plugin)
+ .text          0x00000000        0x0 lmp.o (symbol from plugin)
+ .text          0x00000000        0x0 lmp_hci.o (symbol from plugin)
+ .text          0x00000000        0x0 bredr_frame.o (symbol from plugin)
+ .text          0x00000000        0x0 bredr_link.o (symbol from plugin)
+ .text          0x00000000        0x0 bredr_slot_timer.o (symbol from plugin)
+ .text          0x00000000        0x0 btctrler_task.o (symbol from plugin)
+ .text          0x00000000        0x0 hci_device_manager.o (symbol from plugin)
+ .text          0x00000000        0x0 device_manager.o (symbol from plugin)
+ .text          0x00000000        0x0 hci_controller.o (symbol from plugin)
+ .text          0x00000000        0x0 link_task.o (symbol from plugin)
+ .text          0x00000000        0x0 h4_controller_interface.o (symbol from plugin)
+ .text          0x00000000        0x0 vendor_manager.o (symbol from plugin)
+ .text          0x00000000        0x0 hci_ll.o (symbol from plugin)
+ .text          0x00000000        0x0 hci_ll_cmds.o (symbol from plugin)
+ .text          0x00000000        0x0 link_layer.o (symbol from plugin)
+ .text          0x00000000        0x0 ll_adv.o (symbol from plugin)
+ .text          0x00000000        0x0 ll_data_extension.o (symbol from plugin)
+ .text          0x00000000        0x0 ll_events.o (symbol from plugin)
+ .text          0x00000000        0x0 ll_init.o (symbol from plugin)
+ .text          0x00000000        0x0 ll_keys.o (symbol from plugin)
+ .text          0x00000000        0x0 ll_scan.o (symbol from plugin)
+ .text          0x00000000        0x0 ll_resolve_list.o (symbol from plugin)
+ .text          0x00000000        0x0 ll_slave.o (symbol from plugin)
+ .text          0x00000000        0x0 ll_white_list.o (symbol from plugin)
+ .text          0x00000000        0x0 authentication.o (symbol from plugin)
+ .text          0x00000000        0x0 ll_multiple_phys.o (symbol from plugin)
+ .text          0x00000000        0x0 misc_hw.o (symbol from plugin)
+ .text          0x00000000        0x0 RF_ble5_only_phy.o (symbol from plugin)
+ .text          0x00000000        0x0 RF_ble.o (symbol from plugin)
+ .text          0x00000000        0x0 analog_ble.o (symbol from plugin)
+ .text          0x00000000        0x0 le_low_power.o (symbol from plugin)
+ .text          0x00000000        0x0 hw_bt_api.o (symbol from plugin)
+ .text          0x00000000        0x0 vsprintf.o (symbol from plugin)
+ .text          0x00000000        0x0 lbuf.o (symbol from plugin)
+ .text          0x00000000        0x0 btcontroller_util.o (symbol from plugin)
+ .text          0x00000000        0x0 hw_dma.o (symbol from plugin)
+ .text          0x00000000        0x0 aes128.o (symbol from plugin)
+ .text          0x00000000        0x0 lmp_utils.o (symbol from plugin)
+ .text          0x00000000        0x0 bredr_utils.o (symbol from plugin)
+ .text          0x00000000        0x0 lmp_hci_cmd_parser.o (symbol from plugin)
+ .text          0x00000000        0x0 hci_ll_5_cmds.o (symbol from plugin)
+ .text          0x00000000       0x38 C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-memcmp.o)
+ .text          0x00000000       0xa0 C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-strcmp.o)
+ .text          0x00000000        0xc C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-strlen.o)
+ .text          0x00000000       0x1a C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-strncmp.o)
+ .text          0x00000000       0xc2 C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-memcpy.o)
+ .text          0x00000000       0x2c C:\JL\pi32\pi32v2-lib\r3\libc.a(lib_a-memset.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text_ram         0x00177000         0x00028800
+bt_ram           0x001a0000         0x000010c0
+ex_code          0x00104000         0x00073000
+reserved         0x00000000         0x00000100
+version_ram      0x08000000         0x00000080
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD obj/Release/app/src/common/cbuf.o
+LOAD cpu\br28\output\ota_loader.elf.o
+LOAD obj/Release/app/src/common/custom_cfg.o
+LOAD obj/Release/app/src/common/lbuf.o
+LOAD obj/Release/app/src/common/msg.o
+LOAD obj/Release/app/src/common/rcsp/rcsp_auth.o
+LOAD obj/Release/app/src/common/rcsp/rcsp_control.o
+LOAD obj/Release/app/src/common/sys_timer.o
+LOAD obj/Release/app/src/le_module/le_server_moudle.o
+LOAD obj/Release/app/src/lib_btctrler_config.o
+LOAD obj/Release/app/src/loader_main.o
+LOAD obj/Release/app/src/update/app_update/app_update.o
+LOAD obj/Release/app/src/update/update_main.o
+LOAD obj/Release/cpu/br28/adc_api.o
+LOAD obj/Release/cpu/br28/delay.o
+LOAD obj/Release/cpu/br28/timer.o
+LOAD obj/Release/cpu/br28/uart.o
+                0x0001fd6c                lp_signature_set = 0x1fd6c
+                0x0001fd70                memmem = 0x1fd70
+                0x0001fd74                memcpy = 0x1fd74
+                0x0001fd78                memmove = 0x1fd78
+                0x0001fd7c                memcmp = 0x1fd7c
+                0x0001fd80                memset = 0x1fd80
+                0x0001fd84                strcmp = 0x1fd84
+                0x0001fd88                strcpy = 0x1fd88
+                0x0001fd8c                strlen = 0x1fd8c
+                0x0001fd90                strncmp = 0x1fd90
+                0x0001fd94                strstr = 0x1fd94
+                0x0001fd98                strchr = 0x1fd98
+                0x0001fd9c                __divdi3 = 0x1fd9c
+                0x0001fda0                __udivmoddi4 = 0x1fda0
+                0x0001fda4                __adddf3 = 0x1fda4
+                0x0001fda8                __fixdfsi = 0x1fda8
+                0x0001fdac                flush_dcache = 0x1fdac
+                0x0001fdb0                flushinv_dcache = 0x1fdb0
+                0x0001fdb4                IcuWaitIdle = 0x1fdb4
+                0x0001fdb8                DcuWaitIdle = 0x1fdb8
+                0x0001fdbc                IcuInitial = 0x1fdbc
+                0x0001fdc0                DcuInitial = 0x1fdc0
+                0x0001fdc4                sfc_suspend = 0x1fdc4
+                0x0001fdc8                sfc_resume = 0x1fdc8
+                0x0001fdcc                sfc_drop_cache = 0x1fdcc
+                0x0001fdd0                chip_crc16 = 0x1fdd0
+                0x0001fdd4                CrcDecode = 0x1fdd4
+                0x0001fdd8                get_flash_file_key = 0x1fdd8
+                0x0001fddc                dec_isd_cfg_ini = 0x1fddc
+                0x0001fde0                _jlfs_mount = 0x1fde0
+                0x0001fde4                sfc_boot = 0x1fde4
+                0x0001fde8                mask_init = 0x1fde8
+                0x0001fdec                wdt_clr = 0x1fdec
+                0x0001fdf0                nvram_set_boot_state = 0x1fdf0
+                0x0001fdf4                chip_reset = 0x1fdf4
+                0x0001fdf8                the_debug_isr = 0x1fdf8
+                0x0001fdfc                print = 0x1fdfc
+                0x0001fe00                sprintf = 0x1fe00
+                0x0001fe04                printf = 0x1fe04
+                0x0001fe08                puts = 0x1fe08
+                0x0001fe0c                doe = 0x1fe0c
+                0x0001fe14                _pll_init = 0x1fe14
+                0x0001fe18                flash_poweron = 0x1fe18
+                0x0001fe1c                spi_unmount = 0x1fe1c
+                0x0001fe20                spi_port_io_init = 0x1fe20
+                0x0001fe24                usb_slave_mode = 0x1fe24
+                0x0001fe28                LZ4_setStreamDecode = 0x1fe28
+                0x0001fe2c                LZ4_decompress_safe_continue = 0x1fe2c
+                0x0001fe30                LZ4_decompress_generic = 0x1fe30
+                0x0001fe34                _sdk_mkey_lock = 0x1fe34
+                0x0001fe38                g_hash_function = 0x1fe38
+                0x0001fe3c                f1_hash_function = 0x1fe3c
+                0x0001fe40                f2_hash_function = 0x1fe40
+                0x0001fe44                f3_hash_function = 0x1fe44
+                0x0001fe48                h2_hash_function = 0x1fe48
+                0x0001fe4c                h3_hash_function = 0x1fe4c
+                0x0001fe50                h4_hash_function = 0x1fe50
+                0x0001fe54                h5_hash_function = 0x1fe54
+                0x0001fe58                g_function = 0x1fe58
+                0x0001fe5c                f1_function = 0x1fe5c
+                0x0001fe60                f2_function = 0x1fe60
+                0x0001fe64                f3_function = 0x1fe64
+                0x0001fe68                sha256Compute = 0x1fe68
+                0x0001fe6c                uECC_compute_public_key = 0x1fe6c
+                0x0001fe70                uECC_shared_secret = 0x1fe70
+                0x0001fe74                bi_initialize = 0x1fe74
+                0x0001fe78                bi_read_from_byte = 0x1fe78
+                0x0001fe7c                bi_poly_mod2 = 0x1fe7c
+                0x0001fe80                bi_poly_mul = 0x1fe80
+                0x0001fe84                trim = 0x1fe84
+                0x0001fe88                bi_wirte_to_byte = 0x1fe88
+                0x0001fe8c                bi_free = 0x1fe8c
+                0x0001fe90                bi_terminate = 0x1fe90
+                0x0001fe94                get_cvsd_codec_ops = 0x1fe94
+                0x00018590                wtgv2_silk_NLSF_CB_NB_MB = 0x18590
+                0x0001848c                wtgv2_LSFCosTab_FIX_Q12 = 0x1848c
+                0x00018a88                icdf_global_table = 0x18a88
+                0x0001fe98                get_wtgv2dec_ops = 0x1fe98
+                0x0001fe9c                wtgv2_silk_Decode = 0x1fe9c
+                0x0001fea0                wtgv2_silk_decode_frame = 0x1fea0
+                0x0001fea4                wtgv2_silk_decoder_set_fs = 0x1fea4
+                0x0001fea8                wtgv2_silk_decode_indices = 0x1fea8
+                0x0001feac                wtgv2_silk_decode_pulses = 0x1feac
+                0x0001feb0                wtgv2_silk_decode_parameters = 0x1feb0
+                0x0001feb4                wtgv2_silk_decode_core = 0x1feb4
+                0x0001feb8                logAprx_CORDIC_float = 0x1feb8
+                0x0001febc                expAprx_CORDIC_float = 0x1febc
+                0x0001fec0                magnAprx_float = 0x1fec0
+                0x0001fec4                MatrixCopy_float_c_c = 0x1fec4
+                0x0001fec8                MatrixCopy_float_f_f = 0x1fec8
+                0x0001fecc                MatrixEwMulAndSumOneDim_float_c_c_c_s0 = 0x1fecc
+                0x0001fed0                MatrixEwMulAndSumOneDim_float_c_c_c_s1 = 0x1fed0
+                0x0001fed4                MatrixEwMulAndSumOneDim_float_f_f_f_s0 = 0x1fed4
+                0x0001fed8                MatrixEwMulAndSumOneDim_float_f_f_f_s1 = 0x1fed8
+                0x0001fedc                MatrixEwConjMulAndSumOneDim_float_c_c_c_s0 = 0x1fedc
+                0x0001fee0                MatrixEwConjMulAndSumOneDim_float_c_c_c_s1 = 0x1fee0
+                0x0001fee4                VecMeanSq_s16_f32 = 0x1fee4
+                0x0001fee8                VecOverShift_s16_f32 = 0x1fee8
+                0x0001feec                VecMinus_s16_f32_f32 = 0x1feec
+                0x0001fef0                VectorCopy_f32_s16 = 0x1fef0
+                0x0001fef4                VecEleMul_s16_s16_f32 = 0x1fef4
+                0x0001fef8                VecEleMul_f32_s16_f32 = 0x1fef8
+                0x0001fefc                VecMeanSq_float_f_f = 0x1fefc
+                0x0001ff00                VectorSet_float_f_f = 0x1ff00
+                0x0001ff04                VecMagRecAve_float_c_f_f = 0x1ff04
+                0x0001ff08                VecMulScalar_float_c_f_c = 0x1ff08
+                0x0001ff0c                VecConjEleMul_float_c_c_c = 0x1ff0c
+                0x0001ff10                VecPlus_float_f_f_f = 0x1ff10
+                0x0001ff14                VecDivide_float_c_f_c_f = 0x1ff14
+                0x0001ff18                VecPlus_float_c_c_c = 0x1ff18
+                0x0001ff1c                VecConjMulRecAve_float_c_c_c_f = 0x1ff1c
+                0x0001ff20                VecGetMag_float_c_f = 0x1ff20
+                0x0001ff24                VecMax_float_f_f = 0x1ff24
+                0x0001ff28                VecRecAve_float_f_f_f = 0x1ff28
+                0x0001ff2c                VecEleMul_float_f_f_f = 0x1ff2c
+                0x0001ff30                VecMagAndDiv_float_c_f_f_f = 0x1ff30
+                0x0001ff34                VecMin_float_f_f = 0x1ff34
+                0x0001ff38                VecMinus_float_f_f_f = 0x1ff38
+                0x0001ff3c                VecMean_float_f_f = 0x1ff3c
+                0x0001ff40                VecEleMul_float_c_f_c = 0x1ff40
+                0x0001ff44                VecMeanSqu_float_c_f = 0x1ff44
+                0x0001ff48                VecCopy_float_f_f = 0x1ff48
+                0x0001ff4c                VecMin_float_f_f_f = 0x1ff4c
+                0x0001ff50                VecDivide_float_f_f_f_f = 0x1ff50
+                0x0001ff54                VecCompBT_float_f_f_f = 0x1ff54
+                0x0001ff58                VecCondCopy_float_f_f_f = 0x1ff58
+                0x0001ff5c                VecMulScalar_float_f_f_f = 0x1ff5c
+                0x0001ff60                VecPlusScalar_float_f_f_f = 0x1ff60
+                0x0001ff64                VecMinScalar_float_f_f_f = 0x1ff64
+                0x0001ff68                VecOpposite_float_f_f = 0x1ff68
+                0x0001ff6c                VecEleMla_float_f_f_f = 0x1ff6c
+                0x0001ff70                VecEleMla_float_c_c_c = 0x1ff70
+                0x0001ff74                VecMinus_float_c_c_c = 0x1ff74
+                0x0001ff78                VecDotProduct_float_f_f_f = 0x1ff78
+                0x0001ff7c                VecDotProduct_float_c_c_c = 0x1ff7c
+                0x0001ff80                VecDotProduct_float_c_f_c = 0x1ff80
+                0x0001ff84                VecCopy_float_c_c = 0x1ff84
+                0x0001ff88                VecCopy_float_f_c = 0x1ff88
+                0x0001ff8c                VecConjDotProduct_float_c_c_c = 0x1ff8c
+                0x0001ff90                VecNormalize_float_c_c_f = 0x1ff90
+                0x0001ff94                VecRecAve_float_c_c_f = 0x1ff94
+                0x0001ff98                VecOverlapShift_float_f_f_i = 0x1ff98
+                0x0001ff9c                VecMax_float_f_f_f = 0x1ff9c
+                0x0001ffa0                VecConjEwMulAndDiv_float_c_c_f_f_c = 0x1ffa0
+                0x0001ffa4                VecPlusMulScalar_float_c_c_f_c = 0x1ffa4
+                0x0001ffa8                VecCondCopy_float_c_i_c = 0x1ffa8
+                0x0001ffac                VecEleMulAndDiv_float_f_f_f_f_f = 0x1ffac
+                0x0001ffb0                VectorSet_float_f_c = 0x1ffb0
+                0x0001ffb4                VecDivScalar_float_f_f_f = 0x1ffb4
+                0x0001ffb8                VecDivScalar_float_c_f_c = 0x1ffb8
+                0x0001ffbc                VecPlusScalar_float_c_f_c = 0x1ffbc
+                0x0001ffc0                VecMinScalar_float_c_f_c = 0x1ffc0
+                0x00019000                mdct_tab_256 = 0x19000
+                0x00019200                mdct_tab_2048 = 0x19200
+                0x0001a200                sine_long_1024 = 0x1a200
+                0x0001b200                sine_short_128 = 0x1b200
+                0x0001b400                kbd_long_1024 = 0x1b400
+                0x0001c400                kbd_short_128 = 0x1c400
+                0x0001c634                Huffmancb_SCL = 0x1c634
+                0x0001c844                num_swb_960_window = 0x1c844
+                0x0001c850                num_swb_1024_window = 0x1c850
+                0x0001c85c                num_swb_128_window = 0x1c85c
+                0x0001c868                swb_offset_1024_96 = 0x1c868
+                0x0001c8bc                swb_offset_128_96 = 0x1c8bc
+                0x0001c8d6                swb_offset_1024_64 = 0x1c8d6
+                0x0001c936                swb_offset_128_64 = 0x1c936
+                0x0001c950                swb_offset_1024_48 = 0x1c950
+                0x0001c9b4                swb_offset_128_48 = 0x1c9b4
+                0x0001c9d2                swb_offset_1024_32 = 0x1c9d2
+                0x0001ca3a                swb_offset_1024_24 = 0x1ca3a
+                0x0001ca9a                swb_offset_128_24 = 0x1ca9a
+                0x0001caba                swb_offset_1024_16 = 0x1caba
+                0x0001cb12                swb_offset_128_16 = 0x1cb12
+                0x0001cb32                swb_offset_1024_8 = 0x1cb32
+                0x0001cb84                swb_offset_128_8 = 0x1cb84
+                0x0001cba4                swb_offset_1024_window = 0x1cba4
+                0x0001cbd4                swb_offset_128_window = 0x1cbd4
+                0x0001cc04                iq_table = 0x1cc04
+                0x0001d008                tns_coef_0_3 = 0x1d008
+                0x0001d048                tns_coef_0_4 = 0x1d048
+                0x0001d088                tns_coef_1_3 = 0x1d088
+                0x0001d0c8                tns_coef_1_4 = 0x1d0c8
+                0x0001d108                pow05_table = 0x1d108
+                0x0001d124                sample_rates = 0x1d124
+                0x0001d154                pred_sfb_max = 0x1d154
+                0x0001d160                tns_sbf_max = 0x1d160
+                0x0001d1a0                Huffmancb_1 = 0x1d1a0
+                0x0001d338                Huffmancb_2 = 0x1d338
+                0x0001d470                Huffmancb_3 = 0x1d470
+                0x0001d5a8                Huffmancb_4 = 0x1d5a8
+                0x0001d6d8                Huffmancb_5 = 0x1d6d8
+                0x0001d820                Huffmancb_6 = 0x1d820
+                0x0001d960                Huffmancb_7 = 0x1d960
+                0x0001da58                Huffmancb_8 = 0x1da58
+                0x0001db50                Huffmancb_9 = 0x1db50
+                0x0001ddf0                Huffmancb_10 = 0x1ddf0
+                0x0001e080                Huffmancb_11 = 0x1e080
+                0x0001e540                AACcodeBookDTable = 0x1e540
+                0x0001c83c                AAC_SFHUFF_TAB = 0x1c83c
+                0x0001ffc4                get_aac_ops = 0x1ffc4
+                0x0001e5b8                silk_NLSF_CB_WB = 0x1e5b8
+                0x0001ea5c                silk_LTP_vq_ptrs_Q7 = 0x1ea5c
+                0x0001ffc8                get_opus_enc_ops = 0x1ffc8
+                0x0001ffcc                opus_encode = 0x1ffcc
+                0x0001ffd0                silk_Encode = 0x1ffd0
+                0x0001ffd4                silk_encode_do_VAD_FIX = 0x1ffd4
+                0x0001ffd8                silk_encode_frame_FIX = 0x1ffd8
+                0x0001ffdc                silk_find_pitch_lags_FIX = 0x1ffdc
+                0x0001ffe0                silk_noise_shape_analysis_FIX = 0x1ffe0
+                0x0001ffe4                silk_find_pred_coefs_FIX = 0x1ffe4
+                0x0001ffe8                silk_process_gains_FIX = 0x1ffe8
+                0x0001ffec                silk_prefilter_FIX = 0x1ffec
+                0x0001fff0                silk_NSQ_del_dec_c = 0x1fff0
+                0x0001fff4                silk_encode_indices = 0x1fff4
+                0x0001fff8                silk_encode_pulses = 0x1fff8
+                0x0001fffc                silk_ana_filt_bank_1 = 0x1fffc
+                0x00003804                STFT_Win_FixHalf_M512_D160 = 0x3804
+                0x00003c04                STFT_Win_FixHalf_M256_D160 = 0x3c04
+                0x00003e04                STFT_Win_FixHalf_M256_D80 = 0x3e04
+                0x00004004                STFT_Win_FixHalf_M128_D80 = 0x4004
+                0x00000004                WOLAAnalysisFilter_Float_M64_m4_r1 = 0x4
+                0x00000404                WOLASynthesisFilter_Float_M64_m4_r1 = 0x404
+                0x00000804                WOLAAnalysisFilter_Float_M128_m4_r1 = 0x804
+                0x00001004                WOLASynthesisFilter_Float_M128_m4_r1 = 0x1004
+                0x00001804                WOLAAnalysisFilter_Float_M256_m4_r1 = 0x1804
+                0x00002804                WOLASynthesisFilter_Float_M256_m4_r1 = 0x2804
+                0x00009914                quantize_intervals_LF = 0x9914
+                0x00009a18                invert_quantize_dither_factors_LF = 0x9a18
+                0x00009b1c                quantize_dither_factors_LF = 0x9b1c
+                0x00009c20                quantize_factor_select_offset_LF = 0x9c20
+                0x00009ca4                hd_quantize_intervals_LF = 0x9ca4
+                0x0019fc28                boot_arg_list = 0x19fc28
+                0x0019fe00                _IRQ_MEM_ADDR = 0x19fe00
+                0x0019fc00                _MASK_MEM_BEGIN = 0x19fc00
+                0x000001a4                _MASK_MEM_SIZE = 0x1a4
+                0x0019fe00                ISR_BASE = _IRQ_MEM_ADDR
+                0x00000080                UPDATA_SIZE = 0x80
+                0x0019fb80                UPDATE_BEG = (_MASK_MEM_BEGIN - UPDATA_SIZE)
+                0x001a0000                UPDATA_BREDR_BASE_BEG = 0x1a0000
+                0x00177000                OTA_CODE_BEGIN = 0x177000
+                0x00028800                OTA_CODE_SIZE = 0x28800
+                0x00104000                EX_CODE_BEGIN = 0x104000
+                0x00073000                EX_CODE_SIZE = 0x73000
+                0x00177000                . = ORIGIN (text_ram)
+
+.text           0x00177000    0x17b60
+ *(.start*)
+ .start         0x00177000       0xba include_lib/liba/br28/uboot.a(startup.o)
+                0x00177000                _start
+                0x00177030                __BT_UPDATA_JUMP
+                0x001770a8                exception_irq_handler
+ *(.text*)
+ .text          0x001770ba    0x11d6a cpu\br28\output\ota_loader.elf.o
+                0x0017aa74                main
+                0x0017ef90                exception_analyze
+ *(.data*)
+ *fill*         0x00188e24        0xc 
+ .data          0x00188e30      0x1d0 cpu\br28\output\ota_loader.elf.o
+ *(.rodata*)
+ .rodata.str1.1
+                0x00189000      0xc91 cpu\br28\output\ota_loader.elf.o
+                                0xc9f (size before relaxing)
+ *fill*         0x00189c91        0xf 
+ .rodata.str1.16
+                0x00189ca0      0xfa0 cpu\br28\output\ota_loader.elf.o
+                                0xf93 (size before relaxing)
+ .rodata        0x0018ac40     0x3b90 cpu\br28\output\ota_loader.elf.o
+ *(.bredr_irq_code)
+ *(.frame_irq_code)
+ .frame_irq_code
+                0x0018e7d0       0xa4 cpu\br28\output\ota_loader.elf.o
+ *(.classic_irq_code)
+ .classic_irq_code
+                0x0018e874      0x2ea cpu\br28\output\ota_loader.elf.o
+ *(.classic_irq_const)
+                0x0018eb60                . = ALIGN (0x20)
+ *fill*         0x0018eb5e        0x2 
+
+.bss            0x0018eb60     0xc400
+ *(.stack*)
+ *(.bss)
+ .bss           0x0018eb60     0x93e4 cpu\br28\output\ota_loader.elf.o
+ *(.usb_ep0)
+ *(.usb_config_var)
+ *(.update_buf)
+ .update_buf    0x00197f44     0x2000 cpu\br28\output\ota_loader.elf.o
+ *(.bredr_rxtx_bulk)
+ .bredr_rxtx_bulk
+                0x00199f44     0x1000 cpu\br28\output\ota_loader.elf.o
+                0x0019af60                . = ALIGN (0x20)
+ *fill*         0x0019af44       0x1c 
+
+.bss_noinit     0x0019af60        0x0
+ *(.bss_noinit)
+                0x0019af60                . = ALIGN (0x20)
+                0x001a0000                . = ORIGIN (bt_ram)
+
+.bt_bss         0x001a0000        0x0
+ *(.bd_base)
+ *(.comm_rf_para)
+ *(.bd_base1)
+                0x00104000                . = ORIGIN (ex_code)
+
+.ex_code        0x00104000    0x73000
+                0x00073000                . = LENGTH (ex_code)
+ *fill*         0x00104000    0x73000 
+                0x00000000                . = ORIGIN (reserved)
+
+.ver_tag        0x00000000        0x0
+ *(.version_tag1)
+ *(.version_tag2)
+ *(.version_tag3)
+                0x00000000                . = ALIGN (0x4)
+                0x08000000                . = ORIGIN (version_ram)
+
+.version        0x08000000       0x40
+ *(.ota_loader.version)
+ .ota_loader.version
+                0x08000000       0x29 include_lib/liba/br28/uboot.a(version.z.o)
+                0x08000000                lib_ota_loader_version
+                0x08000040                . = ALIGN (0x20)
+ *fill*         0x08000029       0x17 
+                0x00177000                text_begin = ADDR (.text)
+                0x00017b60                text_size = SIZEOF (.text)
+                0x0018eb60                text_end = (text_begin + text_size)
+                0x001a0000                bt_ram_begin = ADDR (.bt_bss)
+                0x00000000                bt_ram_size = SIZEOF (.bt_bss)
+                0x0018eb60                bss_begin = ADDR (.bss)
+                0x0000c400                bss_size = SIZEOF (.bss)
+START GROUP
+LOAD include_lib/liba/br28/uboot.a
+END GROUP
+START GROUP
+LOAD include_lib/liba/br28/bt_protocol.a
+END GROUP
+LOAD include_lib/liba/br28/btctrler.a
+LOAD C:\JL\pi32\pi32v2-lib\r3\libm.a
+LOAD C:\JL\pi32\pi32v2-lib\r3\libc.a
+LOAD C:\JL\pi32\pi32v2-lib\r3\libm.a
+LOAD C:\JL\pi32\pi32v2-lib\r3\libcompiler-rt.a
+OUTPUT(cpu\br28\output\ota_loader.elf elf32-pi32v2)
+
+.debug_str      0x00000000    0x1b62a
+ .debug_str     0x00000000    0x1b62a cpu\br28\output\ota_loader.elf.o
+                              0x1d6a8 (size before relaxing)
+
+.debug_loc      0x00000000     0xc9e6
+ .debug_loc     0x00000000     0xc9e6 cpu\br28\output\ota_loader.elf.o
+
+.debug_abbrev   0x00000000      0xdef
+ .debug_abbrev  0x00000000      0xdc7 cpu\br28\output\ota_loader.elf.o
+ .debug_abbrev  0x00000dc7       0x28 include_lib/liba/br28/uboot.a(startup.o)
+
+.debug_info     0x00000000    0x3ada2
+ .debug_info    0x00000000    0x3aca5 cpu\br28\output\ota_loader.elf.o
+ .debug_info    0x0003aca5       0xfd include_lib/liba/br28/uboot.a(startup.o)
+
+.debug_ranges   0x00000000     0x2368
+ .debug_ranges  0x00000000     0x2368 cpu\br28\output\ota_loader.elf.o
+
+.debug_macinfo  0x00000000        0x1
+ .debug_macinfo
+                0x00000000        0x1 cpu\br28\output\ota_loader.elf.o
+
+.debug_pubnames
+                0x00000000     0xa433
+ .debug_pubnames
+                0x00000000     0xa433 cpu\br28\output\ota_loader.elf.o
+
+.debug_pubtypes
+                0x00000000     0x5a11
+ .debug_pubtypes
+                0x00000000     0x5a11 cpu\br28\output\ota_loader.elf.o
+
+.debug_frame    0x00000000     0x3290
+ .debug_frame   0x00000000     0x3290 cpu\br28\output\ota_loader.elf.o
+
+.debug_line     0x00000000    0x17c7a
+ .debug_line    0x00000000    0x17bc5 cpu\br28\output\ota_loader.elf.o
+ .debug_line    0x00017bc5       0x89 include_lib/liba/br28/uboot.a(startup.o)
+ .debug_line    0x00017c4e       0x2c include_lib/liba/br28/uboot.a(version.z.o)
+
+.debug_aranges  0x00000000       0x20
+ .debug_aranges
+                0x00000000       0x20 include_lib/liba/br28/uboot.a(startup.o)

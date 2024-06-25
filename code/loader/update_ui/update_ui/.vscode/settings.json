@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "includes.h": "c",
+        "clock_cfg.h": "c",
+        "app_config.h": "c",
+        "lcd_drive.h": "c",
+        "ui_mask.h": "c",
+        "update_status.h": "c",
+        "ui_math.h": "c"
+    }
+}

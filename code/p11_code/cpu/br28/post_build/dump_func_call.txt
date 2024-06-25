@@ -1,0 +1,252 @@
+text_begin:
+_user_mode:
+	timer_pool
+exception_irq_handler:
+	exception_analyze
+m2p_pvdd_level_sleep_t:
+delay_50us:
+pvdd_bk:
+call_deep_sleep:
+	m2p_message
+	m2p_pvdd_level_sleep_t
+	m2p_pvdd_level_sleep_t
+delay:
+timer2_dly_lrc:
+pvdd_protect:
+	pvdd_bk
+	m2p_pvdd_level_sleep_t
+pvdd_protect_release:
+	m2p_pvdd_level_sleep_t
+	pvdd_bk
+ram0_enter_sleep:
+ram0_exit_sleep:
+deepsleep_r:
+	ram0_enter_sleep
+	pvdd_protect_release
+	pvdd_protect
+	ram0_exit_sleep
+usr_jiffies:
+lrc_feq:
+lrc_feq.174:
+local_irq_disable:
+	user_test_flag
+local_irq_enable:
+	user_test_flag
+HWI_Install:
+	local_irq_disable
+	local_irq_enable
+debug_init:
+	exception_irq_handler
+usr_timer_init:
+	user_test_flag
+	lptmr3_int
+bit_set_ie:
+	local_irq_disable
+power_init:
+	p11_heap_begin
+	p2m_message
+	tmr0_int
+	HWI_Install
+	m2p_int
+	HWI_Install
+	soft_int_test_isr.195
+	HWI_Install
+	p33_wkup_int
+	HWI_Install
+	bit_set_ie
+iovdd2_bypass_iovdd:
+irq_disable_core:
+	user_test_flag
+irq_enable_core:
+	user_test_flag
+__get_min_precesion:
+	user_test_flag
+	usr_jiffies
+lptmr3_run:
+	lrc_feq
+	user_test_flag
+usr_timer_del:
+	local_irq_disable
+	user_test_flag
+charge_disable:
+	irq_disable_core
+	user_test_flag
+p11_power_hw_manage:
+	local_irq_disable
+	irq_disable_core
+	user_test_flag
+	irq_enable_core
+	local_irq_disable
+	local_irq_disable
+	timer_pool
+	local_irq_enable
+	usr_timer_del
+	local_irq_enable
+	lvcmp_filter
+	usr_jiffies
+	__get_min_precesion
+	lptmr3_run
+	local_irq_enable
+	usr_jiffies
+	usr_jiffies
+	irq_disable_core
+	local_irq_disable
+	charge_disable
+	usr_timer_del
+	local_irq_enable
+	call_deep_sleep
+	irq_enable_core
+main:
+	local_irq_disable
+	debug_init
+	usr_timer_init
+	power_init
+	iovdd2_bypass_iovdd
+	local_irq_enable
+	usr_lp_timer1_int
+	HWI_Install
+	p11_power_hw_manage
+usr_lp_timer1_int:
+	user_test_flag
+exception_analyze:
+lptmr3_int:
+	local_irq_disable
+	user_test_flag
+	usr_jiffies
+	local_irq_disable
+	local_irq_enable
+	__get_min_precesion
+	lptmr3_run
+	local_irq_enable
+ram_pdown_poff_exit:
+	delay
+	m2p_message
+	delay
+	delay
+	delay
+analog_pdown_exit0:
+	m2p_message
+	timer2_dly_lrc
+	user_test_flag
+	timer2_dly_lrc
+	timer2_dly_lrc
+	timer2_dly_lrc
+analog_pdown_exit1:
+	user_test_flag
+	m2p_message
+	timer2_dly_lrc
+power_off_exit:
+	user_test_flag
+	m2p_message
+	timer2_dly_lrc
+__power_recover:
+	local_irq_disable
+	user_test_flag
+tmr0_int:
+	__power_recover
+p33_wkup_int:
+	user_test_flag
+ram_pdown_poff_enter:
+	m2p_message
+	delay
+	delay
+analog_pdown_poff_enter:
+	m2p_message
+	user_test_flag
+	timer2_dly_lrc
+	timer2_dly_lrc
+user_m2p11_irq:
+	m2p_message
+m2p_int:
+	user_test_flag
+	m2p_message
+	local_irq_disable
+	delay
+	ram_pdown_poff_enter
+	local_irq_enable
+	local_irq_disable
+	delay
+	ram_pdown_poff_enter
+	analog_pdown_poff_enter
+	local_irq_enable
+	local_irq_disable
+	delay
+	ram_pdown_poff_enter
+	analog_pdown_poff_enter
+	local_irq_enable
+	local_irq_disable
+	bit_set_ie
+	delay
+	local_irq_enable
+	user_m2p11_irq
+lvcmp_filter:
+	irq_disable_core
+	user_test_flag
+soft_int_test_isr.195:
+	irq_disable_core
+	wkup_buf
+	memset
+	irq_enable_core
+	p2m_message
+	__power_recover
+sqrt:
+__ieee754_sqrt:
+	__muldf3
+	__adddf3
+	__subdf3
+	__divdf3
+memcmp:
+memmove:
+memset:
+strlen:
+__adddf3:
+	normalize
+	normalize
+	__lshrdi3
+	__ashldi3
+	rep_clz
+	__ashldi3
+	__lshrdi3
+	__ashldi3
+normalize:
+	rep_clz
+	__ashldi3
+rep_clz:
+__ashldi3:
+__divdf3:
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	normalize
+	normalize
+normalize:
+	__ashldi3
+__lshrdi3:
+__muldf3:
+	__muldi3
+	__muldi3
+	__muldi3
+	__muldi3
+	__ashldi3
+	__lshrdi3
+	__ashldi3
+	__lshrdi3
+	normalize
+	normalize
+normalize:
+	__ashldi3
+__muldi3:
+__subdf3:

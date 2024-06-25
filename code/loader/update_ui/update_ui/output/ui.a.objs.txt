@@ -1,0 +1,1 @@
+obj/Release/lib/ui/ui_basic.o obj/Release/lib/ui/ui_draw_arc.o obj/Release/lib/ui/ui_mask.o obj/Release/lib/ui/ui_math.o

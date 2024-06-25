@@ -1,0 +1,149 @@
+/*
+  WebFont Demo StyleSheet
+  
+  (C) 2013 High-Logic B.V.
+  
+  http://www.high-logic.com
+*/
+
+* {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  font-family: Tahoma, Helvetica, Sans-Serif;
+  font-size: 10pt;
+  line-height: 13pt;
+  text-decoration : none;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #444;
+}
+
+ul {
+  margin-left: 20px;
+}
+
+ul li {
+  color: #FFF;
+}
+
+input, select, textarea {
+  border: 1px solid #777;
+  padding: 2px;
+}
+
+a {
+  color: #FF0;
+}
+
+a:hover {
+  color: #FFF;
+}
+
+#container {
+  left : 50%;
+  margin-left : -600px;
+  width : 1200px; 
+  position : absolute;
+  height : auto !important;
+  height : 100%;
+  min-height : 100%;
+  background: #666;
+  padding: 0px;
+}
+
+#header h1 {
+  text-align: center;
+  text-shadow: 0px 0px 10px #CCF;
+  font-size: 23pt;
+  line-height: 28pt;
+  color: #FFF;
+}
+
+hr {
+  border: 0px solid #AAA;
+  height: 2px;
+  background: #AAA;
+  margin: 2px 0px;
+}
+
+fieldset, fieldset legend {
+  background: #888;
+  border: 2px solid #CCC;
+  border-radius: 6px;
+  color: #FFF;
+}
+
+fieldset {
+  margin: 20px 10px 5px 10px;
+  padding: 8px;
+}
+
+fieldset legend {
+  color: #FFF;
+  font-weight: bold;
+  padding: 1px 5px;
+  font-size: 11pt;
+  margin-left: 5px;
+}
+
+#errors fieldset, #errors fieldset legend {
+  border-color: #C33;
+  background: #633;
+}
+
+#preview {
+  background: #FFF;
+  font: 32pt/32pt WebFont;
+  padding: 5px 5px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+#previewtext {
+  width: 200px;
+}
+
+#input {
+  width: 100%;
+  height: 300px;
+  border-radius: 3px;
+}
+
+#fontsize {
+  width: 60px;
+}
+
+#alternate {
+  width: 50px;
+}
+
+#direction {
+  width: 50px;
+}
+
+#color {
+  width: 60px;
+}
+
+#inputfieldset {
+  float: left;
+  width: 900px;
+}
+
+#otfeaturesfieldset {
+  float: right;
+  width: 230px;
+  margin-left: 0px;
+}
+
+h5 {
+  font-weight: normal;
+  font-size: 7pt;
+  line-height: 9pt;
+}

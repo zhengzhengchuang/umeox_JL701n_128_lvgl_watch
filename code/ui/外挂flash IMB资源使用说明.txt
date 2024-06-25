@@ -1,0 +1,27 @@
+
+资源索引方式2种
+
+#通过文件系统的方式：（0-6M）
+
+文件系统索引方式有通过ID或名字2个方式，IMB资源文件系统通过letter盘符自定义区分
+可以根据自己的需求自定义选择索引的方法：
+
+DEMO的分配（这边'0'-'9'以及A~B盘获取信息及解码会预先分别被decoder_info()和lv_draw_jl_dma2d_img()接管，不会跑到LVGL默认解码上的）
+
+A盘-imb文件系统资源（code索引表查找）	
+	生成关联资源	ui.res、ui_pic_index.h、usr_pic_index.c、usr_pic_index.h
+	代码设置		{.letter = 'A',     .mode = IN_CODE_TABLE_WITH_NAME,    .imbres = RES_PATH"ui/ui.res",     .imbindex = my_fid, },
+	代码索引		lv_img_set_src(img_obj, "A:name.png");
+
+
+
+B盘-imb文件系统资源（ID查找）
+	生成关联资源	ui.res、ID_TABLE.txt（每个图片的ID）
+	代码挂载		{.letter = 'B',     .mode = IN_RES_WITH_ID,             .imbres = RES_PATH"ui/ui.res",  },
+	代码索引		lv_img_set_src(img_obj, "B:123");  或 lv_img_set_src(img_obj, "B:"SMARTWEAR_UI_ARROW);
+
+F盘-普通文件
+
+#通过绝对地址方式：（6-16M-128K）
+
+具体查看LVGL资源的readme.txt

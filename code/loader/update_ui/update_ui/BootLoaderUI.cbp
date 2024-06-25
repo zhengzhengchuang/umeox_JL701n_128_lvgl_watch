@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="BootLoaderUI" />
+		<Option compiler="pi32v2_r3_lto_compiler" />
+		<Build>
+			<Target title="Release">
+				<Option output="cpu/br28/tools/sdk.elf" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="pi32v2_r3_large_lto_compiler" />
+				<Compiler>
+					<Add option="-flto" />
+					<Add option="-g" />
+					<Add option="-Wuninitialized" />
+					<Add option="-Wno-invalid-noreturn" />
+					<Add option="-fno-common" />
+					<Add option="-integrated-as" />
+					<Add option="-Oz" />
+					<Add option="-c" />
+					<Add option="-fallow-pointer-null" />
+					<Add option="-fprefer-gnu-section" />
+					<Add option="-Wno-shift-negative-value" />
+					<Add option="-DSUPPORT_MS_EXTENSIONS" />
+					<Add option="-DCONFIG_RELEASE_ENABLE" />
+					<Add option="-DCONFIG_CPU_BR28" />
+					<Add option="-DCONFIG_USB_SUPPORT_MRX_TX" />
+					<Add option="-DCONFIG_PRINT_IN_MASK" />
+					<Add option="-DCONFIG_NEW_BREDR_ENABLE" />
+					<Add option="-DCONFIG_NEW_MODEM_ENABLE" />
+					<Add option="-DCONFIG_UCOS_ENABLE" />
+					<Add option="-DCONFIG_EQ_SUPPORT_ASYNC" />
+					<Add option="-DEQ_CORE_V1" />
+					<Add option="-DCONFIG_AAC_CODEC_FFT_USE_MUTEX" />
+					<Add option="-DCONFIG_DNS_ENABLE" />
+					<Add option="-DCONFIG_DMS_MALLOC" />
+					<Add option="-DCONFIG_MMU_ENABLE" />
+					<Add option="-DCONFIG_SBC_CODEC_HW" />
+					<Add option="-DCONFIG_MSBC_CODEC_HW" />
+					<Add option="-DCONFIG_AEC_M=256" />
+					<Add option="-DCONFIG_AUDIO_ONCHIP" />
+					<Add option="-DCONFIG_MEDIA_DEVELOP_ENABLE" />
+					<Add option="-DCONFIG_MIXER_CYCLIC" />
+					<Add option="-DCONFIG_SOUND_PLATFORM_ENABLE=1" />
+					<Add option="-DCONFIG_SUPPORT_EX_TWS_ADJUST" />
+					<Add option="-D__GCC_PI32V2__" />
+					<Add option="-DSUPPORT_BLUETOOTH_PROFILE_RELEASE" />
+					<Add option="-DCONFIG_SOUNDBOX" />
+					<Add option="-DAPP_USE_SOFT_SPI_ACCESS_VM" />
+					<Add option="-DEVENT_HANDLER_NUM_CONFIG=2" />
+					<Add option="-DEVENT_TOUCH_ENABLE_CONFIG=0" />
+					<Add option="-DEVENT_POOL_SIZE_CONFIG=256" />
+					<Add option="-DCONFIG_EVENT_KEY_MAP_ENABLE=0" />
+					<Add option="-DTIMER_POOL_NUM_CONFIG=15" />
+					<Add option="-DAPP_ASYNC_POOL_NUM_CONFIG=0" />
+					<Add option="-DVFS_ENABLE=1" />
+					<Add option="-DUSE_SDFILE_NEW=1" />
+					<Add option="-DSDFILE_STORAGE=1" />
+					<Add option="-DVFS_FILE_POOL_NUM_CONFIG=1" />
+					<Add option="-DFS_VERSION=0x020001" />
+					<Add option="-DFATFS_VERSION=0x020101" />
+					<Add option="-DSDFILE_VERSION=0x020000" />
+					<Add option="-DVM_MAX_SIZE_CONFIG=64*1024" />
+					<Add option="-DVM_ITEM_MAX_NUM=256" />
+					<Add option="-DCONFIG_TWS_ENABLE" />
+					<Add option="-DCONFIG_WATCH_CASE_ENABLE=1" />
+					<Add option="-DCONFIG_LITE_AEC_ENABLE=0" />
+					<Add option="-DAUDIO_REC_POOL_NUM=1" />
+					<Add option="-DAUDIO_DEC_POOL_NUM=3" />
+					<Add option="-DAUDIO_LINEIN_ENABLE" />
+					<Add option="-DCONFIG_LMP_CONN_SUSPEND_ENABLE" />
+					<Add option="-DCONFIG_BTCTRLER_TASK_DEL_ENABLE" />
+					<Add option="-DCONFIG_LINK_DISTURB_SCAN_ENABLE=0" />
+					<Add option="-DCONFIG_UPDATA_ENABLE" />
+					<Add option="-DCONFIG_OTA_UPDATA_ENABLE" />
+					<Add option="-DCONFIG_ITEM_FORMAT_VM" />
+					<Add option="-DLV_LVGL_H_INCLUDE_SIMPLE" />
+					<Add option="-DLV_EX_CONF_INCLUDE_SIMPLE" />
+					<Add option="-DLV_DEMO_CONF_INCLUDE_SIMPLE" />
+					<Add option="-D__LD__" />
+					<Add directory="include_lib" />
+					<Add directory="include_lib/driver" />
+					<Add directory="include_lib/driver/device" />
+					<Add directory="include_lib/driver/cpu/br28" />
+					<Add directory="include_lib/system" />
+					<Add directory="include_lib/system/generic" />
+					<Add directory="include_lib/system/device" />
+					<Add directory="include_lib/system/fs" />
+					<Add directory="include_lib/system/ui_new" />
+					<Add directory="include_lib/system/ui_new/ui/cpu/br28" />
+					<Add directory="include" />
+					<Add directory="cpu/br28" />
+					<Add directory="./" />
+					<Add directory="include_lib/system/os" />
+					<Add directory="apps/watch/board/br28" />
+					<Add directory="include_lib/system/math/cpu/br28" />
+				</Compiler>
+				<Linker>
+					<Add option="-flto" />
+					<Add option="--plugin-opt=-pi32v2-always-use-itblock=false" />
+					<Add option="--plugin-opt=-enable-ipra=true" />
+					<Add option="--plugin-opt=-pi32v2-merge-max-offset=4096" />
+					<Add option="--plugin-opt=-pi32v2-enable-simd=true" />
+					<Add option="--plugin-opt=mcpu=r3" />
+					<Add option="--plugin-opt=-global-merge-on-const" />
+					<Add option="--plugin-opt=-inline-threshold=5" />
+					<Add option="--plugin-opt=-inline-max-allocated-size=32" />
+					<Add option="--plugin-opt=-inline-normal-into-special-section=true" />
+					<Add option="--plugin-opt=-dont-used-symbol-list=malloc,free,sprintf,printf,puts,putchar" />
+					<Add option="--plugin-opt=save-temps" />
+					<Add option="--plugin-opt=-pi32v2-enable-rep-memop" />
+					<Add option="--plugin-opt=-warn-stack-size=256" />
+					<Add option="--sort-common" />
+					<Add option="--plugin-opt=-pi32v2-large-program=true" />
+					<Add option="--gc-sections" />
+					<Add option="--start-group" />
+					<Add option="--end-group" />
+					<Add option="-Tcpu/br28/sdk.ld" />
+					<Add option="-M=cpu/br28/tools/sdk.map" />
+					<Add library="C:/JL/pi32/pi32v2-lib/r3/libm.a" />
+					<Add library="include_lib/liba/br28/cpu.a" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="cpu\br28\tools\download.bat sdk" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Unit filename="apps/watch/log_config/lib_system_config.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cpu/br28/sdk.ld" />
+		<Unit filename="cpu/br28/ui_driver/lcd_drive/lcd_drive.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cpu/br28/ui_driver/lcd_drive/lcd_spi/lcd_qspi_ST77903_400x400_v2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cpu/br28/ui_driver/lcd_drive/lcd_spi/lcd_qspi_ft2308_368x448.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cpu/br28/ui_driver/lcd_drive/lcd_spi/lcd_qspi_st77903_400x400.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cpu/br28/ui_driver/lcd_drive/lcd_spi/lcd_qspi_st77903_400x400_v1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cpu/br28/ui_driver/lcd_drive/lcd_spi/lcd_spi_sh8601a_454x454.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cpu/br28/ui_entry.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="include/app_config.h" />
+		<Unit filename="include/ui/lcd_spi/lcd_drive.h" />
+		<Unit filename="include_lib/system/fs/fs.h" />
+		<Unit filename="include_lib/system/ui/includes.h" />
+		<Unit filename="include_lib/system/ui/ui/cpu/br28/asm/imd.h" />
+		<Unit filename="lib/ui/ui_basic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/ui/ui_draw_arc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/ui/ui_draw_image.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/ui/ui_draw_text.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/ui/ui_mask.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/ui/ui_math.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

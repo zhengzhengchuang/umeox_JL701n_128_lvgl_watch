@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>WOFF test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="wofftest.css"/>
+    <script type="text/javascript" src="wofftest.js"></script>
+    
+    <style type="text/css">
+      @font-face {
+        font-family: WebFont;
+        src: url('%FILENAME%') format('woff');
+      }    
+    </style>
+    <script type="text/javascript">
+      /* Generated based on features present in font */
+      var otf = Array(%OTFEATURES%);
+      var fctrial = %FCTRIAL%;
+      var symbolfont = %SYMBOLFONT%;
+	    var colorfont = %COLORFONT%;
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1>Web 字体 "%FONTNAME%"</h1>
+        <hr />
+      </div>
+      <div id="errors">
+        <fieldset>
+          <legend>消息</legend>
+          <ul id="errorlist">
+            <li id="nojserror"><noscript><div style="display: inline">此测试页必须激活 JavaScript 脚本功能.</div></noscript></li>
+          </ul>
+        </fieldset>
+      </div>
+      <div>
+        <fieldset id="inputfieldset">
+          <legend>输入</legend>
+          <div id="toolbar">
+            大小: 
+            <select id="fontsize" onchange="UpdateFontSize(this);">
+              <option value="4">4像素</option>
+              <option value="6">6像素</option>
+              <option value="8">8像素</option>
+              <option value="10">10像素</option>
+              <option value="12">12像素</option>
+              <option value="14">14像素</option>
+              <option value="16">16像素</option>
+              <option value="18">18像素</option>
+              <option value="20">20像素</option>
+              <option value="24">24像素</option>
+              <option value="28">28像素</option>
+              <option value="32" selected="selected">32像素</option>
+              <option value="36">36像素</option>
+              <option value="42">42像素</option>
+              <option value="48">48像素</option>
+              <option value="64">64像素</option>
+              <option value="72">72像素</option>
+              <option value="96">96像素</option>
+            </select>
+            快速选取: 
+            <select id="previewtext" onchange="UpdatePreviewQuickPick(this);">
+              <option value="0">FontCreator 预览文本</option>
+              <option value="1">字母 + 数字</option>
+              <option value="2">Lorum Ipsum</option>
+            </select>
+            背景: # 
+            <input id="color" type="text" maxlength="6" onkeyup="UpdateFontColorBG(this);" value="FFFFFF" />
+            前景: # 
+            <input id="color" type="text" maxlength="6" onkeyup="UpdateFontColorFG(this);" value="000000" />
+            方向: 
+            <select id="direction" onchange="UpdateDirection(this);">
+              <option value="ltr" selected="selected">LTR</option>
+              <option value="rtl">RTL</option>
+            </select>
+          </div>
+          <textarea id="input" rows="20" cols="100" onkeyup="UpdatePreviewText(this);">%SAMPLETEXT%</textarea>
+        </fieldset>
+        <fieldset id="otfeaturesfieldset">
+          <legend>OpenType Features</legend>
+            交替: 
+            <select id="alternate" onchange="UpdateAlternate(this);">
+              <option value="1" selected="selected">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          <div id="otfeatures"></div><hr/>
+          <h5>注意: 不是所有的网页浏览器都支持完整的 OpenType Features 并仅 Features 当前的字体显示.</h5>
+        </fieldset>
+      </div>
+      <div style="clear: both">
+        <fieldset >
+          <legend>预览</legend>
+          <div id="preview"></div>
+        </fieldset>
+      </div>      
+      <div>
+        <fieldset>
+          <legend>疑难解答</legend>
+          <ul>
+            <li><a href="http://forum.high-logic.com/viewtopic.php?f=4&amp;t=4309" target="_blank">字体没有显示?</a></li>
+            <li><a href="http://forum.high-logic.com/viewtopic.php?f=4amp;t=4310" target="_blank">OpenType features 不工作?</a></li>
+            <li><a href="http://www.webfonts.com" target="_blank">想查看更多关于 webfonts 的信息?</a></li>
+          </ul>          
+        </fieldset>
+      </div>
+      <div>
+        <fieldset>
+          <legend>关于</legend>
+          页面生成于 %DATE% 由程序 <a href="http://www.high-logic.com/font-editor/fontcreator.html" target="_blank">High-Logic FontCreator %VERMAJOR%.%VERMINOR%</a><br/>
+        </fieldset>
+      </div>
+    </div>
+    <script type="text/javascript">Initialize();</script>    
+  </body>
+</html>

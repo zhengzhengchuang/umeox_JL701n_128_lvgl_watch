@@ -1,0 +1,3359 @@
+
+
+
+
+
+
+
+
+
+
+
+typedef struct {
+    volatile unsigned int WREN;
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int MSG0;
+    volatile unsigned int MSG1;
+    volatile unsigned int MSG2;
+    volatile unsigned int MSG3;
+    volatile const unsigned int ID;
+} JL_HEMU_TypeDef;
+
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int BAUD;
+    volatile unsigned int REDU_BAUD;
+    volatile unsigned int CODE;
+    volatile unsigned int BASE_ADR;
+    volatile unsigned int QUCNT;
+    volatile unsigned int ENC_CON;
+    volatile unsigned int ENC_KEY;
+    volatile unsigned int UNENC_ADRH;
+    volatile unsigned int UNENC_ADRL;
+} JL_SFC_TypeDef;
+typedef struct {
+    volatile unsigned int PSRAM_CON0;
+    volatile unsigned int PSRAM_CON1;
+    volatile unsigned int PSRAM_CON2;
+    volatile unsigned int PSRAM_CFG0;
+    volatile unsigned int PSRAM_CFG1;
+    volatile unsigned int PSRAM_CMD;
+    volatile unsigned int PSRAM_DBG_CON;
+    volatile unsigned int PSRAM_DBG_START;
+    volatile unsigned int PSRAM_DBG_END;
+    volatile unsigned int PSRAM_DBG_ADR;
+    volatile unsigned int PSRAM_DBG_INFO;
+} JL_PSRAM_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int SYS;
+    volatile unsigned int LEN;
+    volatile unsigned int ADR;
+    volatile unsigned int MCTL;
+    volatile unsigned int MDAT;
+    volatile unsigned int SYS_RESERVE0;
+    volatile unsigned int SYS_RESERVE1;
+    volatile unsigned int SYS_RESERVE2;
+    volatile unsigned int ANC_CON0;
+    volatile unsigned int ANC_CON1;
+    volatile unsigned int ANC_CON2;
+    volatile unsigned int ANC_CON3;
+    volatile unsigned int ANC_CON4;
+    volatile unsigned int ANC_CON5;
+    volatile unsigned int ANC_CON6;
+    volatile unsigned int ANC_CON7;
+    volatile unsigned int ANC_CON8;
+    volatile unsigned int ANC_CON9;
+    volatile unsigned int ANC_CON10;
+    volatile unsigned int ANC_CON11;
+    volatile unsigned int ANC_CON12;
+    volatile unsigned int ANC_CON13;
+    volatile unsigned int ANC_CON14;
+    volatile unsigned int ANC_CON15;
+    volatile unsigned int CORE_CON0;
+    volatile unsigned int CORE_CON1;
+    volatile unsigned int CORE_CON2;
+    volatile unsigned int CORE_CON3;
+    volatile unsigned int CORE_CON4;
+    volatile unsigned int CORE_CON5;
+    volatile unsigned int CORE_CON6;
+    volatile unsigned int CORE_CON7;
+    volatile unsigned int CORE_CON8;
+    volatile unsigned int CORE_CON9;
+    volatile unsigned int CORE_CON10;
+    volatile unsigned int CORE_CON11;
+    volatile unsigned int CORE_CON12;
+    volatile unsigned int CORE_CON13;
+    volatile unsigned int CORE_CON14;
+    volatile unsigned int CORE_CON15;
+    volatile unsigned int CORE_CON16;
+    volatile unsigned int CORE_CON17;
+    volatile unsigned int CORE_CON18;
+    volatile unsigned int CORE_CON19;
+    volatile unsigned int CORE_CON20;
+    volatile unsigned int CORE_CON21;
+    volatile unsigned int CORE_CON22;
+    volatile unsigned int CORE_CON23;
+    volatile unsigned int CORE_CON24;
+    volatile unsigned int CORE_CON25;
+    volatile unsigned int CORE_CON26;
+    volatile unsigned int CORE_CON27;
+    volatile unsigned int CORE_CON28;
+    volatile unsigned int CORE_CON29;
+    volatile unsigned int CORE_CON30;
+    volatile unsigned int CORE_CON31;
+    volatile unsigned int CORE_CON32;
+    volatile unsigned int CORE_CON33;
+    volatile unsigned int CORE_CON34;
+    volatile unsigned int CORE_CON35;
+    volatile unsigned int CORE_CON36;
+    volatile unsigned int CORE_PND0;
+    volatile unsigned int CORE_PND1;
+} JL_ANC_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int(DAC_CON);
+    volatile unsigned int(DAC_ADR);
+    volatile unsigned int(DAC_LEN);
+    volatile unsigned int(DAC_PNS);
+    volatile unsigned int(DAC_HRP);
+    volatile unsigned int(DAC_SWP);
+    volatile unsigned int(DAC_SWN);
+    volatile unsigned int(DAC_VL0);
+    volatile const unsigned int RESERVED8;
+    volatile unsigned int(DAC_TM0);
+    volatile unsigned int(DAC_TM1);
+    volatile unsigned int(DAC_DB0);
+    volatile unsigned int(DAC_DB1);
+    volatile unsigned int(DAC_COP);
+    volatile unsigned int(ADC_CON);
+    volatile unsigned int(ADC_ADR);
+    volatile unsigned int(ADC_LEN);
+    volatile unsigned int(ADC_PNS);
+    volatile unsigned int(ADC_HWP);
+    volatile unsigned int(ADC_SRP);
+    volatile unsigned int(ADC_SRN);
+    volatile unsigned int(MBG_CON);
+    volatile unsigned int(AUD_CON);
+    volatile unsigned int(ADC_CON1);
+    volatile unsigned int(DCC_CON0);
+    volatile unsigned int(DCC_CON1);
+    volatile const unsigned int(DCC_CON2);
+    volatile const unsigned int(DCC_CON3);
+} JL_AUDIO_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int ADR0;
+    volatile unsigned int ADR1;
+    volatile unsigned int ADR2;
+    volatile unsigned int ADR3;
+    volatile unsigned int LEN;
+    volatile unsigned int PNS;
+    volatile unsigned int HWPTR0;
+    volatile unsigned int HWPTR1;
+    volatile unsigned int HWPTR2;
+    volatile unsigned int HWPTR3;
+    volatile unsigned int SWPTR0;
+    volatile unsigned int SWPTR1;
+    volatile unsigned int SWPTR2;
+    volatile unsigned int SWPTR3;
+    volatile unsigned int SHN0;
+    volatile unsigned int SHN1;
+    volatile unsigned int SHN2;
+    volatile unsigned int SHN3;
+} JL_ALNK_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int SMR;
+    volatile unsigned int ADR;
+    volatile unsigned int LEN;
+    volatile unsigned int DOR;
+    volatile unsigned int CON1;
+
+} JL_PLNK_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int(VAD_CON0);
+    volatile unsigned int(VAD_CON1);
+    volatile unsigned int(VAD_CON2);
+    volatile unsigned int(VAD_CON3);
+    volatile unsigned int(VAD_CON4);
+    volatile unsigned int(VAD_CON5);
+    volatile unsigned int(VAD_CON6);
+    volatile unsigned int(VAD_CON7);
+    volatile unsigned int(VAD_CON8);
+    volatile unsigned int(VAD_SIL_BADR);
+    volatile unsigned int(VAD_VOICE_BADR);
+    volatile const unsigned int(VAD_VOICE_SADR);
+    volatile unsigned int(DSF1_CON0);
+    volatile unsigned int(DSF1_DCC);
+    volatile unsigned int(AEC_CON0);
+    volatile unsigned int(AEC_CON1);
+    volatile unsigned int(AEC_CON2);
+    volatile unsigned int(AEC_CON3);
+    volatile unsigned int(AEC_CON4);
+    volatile unsigned int(AEC_CON5);
+    volatile unsigned int(AEC_CON6);
+    volatile unsigned int(AEC_CON7);
+    volatile unsigned int(AEC_CON8);
+    volatile unsigned int(AEC_CON9);
+    volatile unsigned int(AEC_CON10);
+    volatile unsigned int(AEC_CON11);
+    volatile unsigned int(AEC_CON12);
+    volatile unsigned int(CLK_CON);
+    volatile unsigned int(MIC_CON);
+} JL_VAD_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CLK_CON;
+    volatile unsigned int MIC_CTL0;
+    volatile unsigned int MIC_CTL1;
+} JL_ASS_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int DAA_CON0;
+    volatile unsigned int DAA_CON1;
+    volatile unsigned int DAA_CON2;
+    volatile unsigned int DAA_CON3;
+    volatile unsigned int DAA_CON4;
+    volatile const unsigned int RESERVED5;
+    volatile const unsigned int RESERVED6;
+    volatile const unsigned int DAA_CON7;
+    volatile unsigned int ADA_CON0;
+    volatile unsigned int ADA_CON1;
+    volatile unsigned int ADA_CON2;
+    volatile unsigned int ADA_CON3;
+    volatile unsigned int ADA_CON4;
+    volatile unsigned int ADA_CON5;
+    volatile unsigned int ADA_CON6;
+    volatile unsigned int ADA_CON7;
+    volatile unsigned int ADA_CON8;
+    volatile unsigned int ADA_CON9;
+    volatile unsigned int ADDA_CON0;
+    volatile unsigned int ADDA_CON1;
+} JL_ADDA_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int SEL;
+    volatile unsigned int DP;
+    volatile unsigned int DAT_VLD0;
+    volatile unsigned int DAT_VLD1;
+    volatile unsigned int DAT_VLD2;
+    volatile unsigned int DAT_VLD3;
+} JL_ASS_MBIST_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int ADR;
+} JL_DCP_TypeDef;
+
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int DATAI_ADR;
+    volatile unsigned int DATAO_ADR;
+    volatile unsigned int DATA_LEN;
+    volatile unsigned int FLT_ADR;
+
+} JL_EQ_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int IDAT_ADR;
+    volatile unsigned int IDAT_LEN;
+    volatile unsigned int ODAT_ADR;
+    volatile unsigned int ODAT_LEN;
+    volatile unsigned int FLTB_ADR;
+    volatile unsigned int ODAT_ADR_START;
+    volatile unsigned int ODAT_ADR_END;
+    volatile unsigned int STOP_FLAG;
+    volatile unsigned int INSR;
+    volatile unsigned int OUTSR;
+    volatile unsigned int PHASE;
+    volatile unsigned int COEF;
+
+} JL_SRC_TypeDef;
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int WIDTH;
+    volatile unsigned int YADR;
+    volatile unsigned int UADR;
+    volatile unsigned int VADR;
+    volatile unsigned int BADDR;
+    volatile unsigned int BCNT;
+    volatile unsigned int MCUCNT;
+    volatile unsigned int HQTBLADR;
+    volatile unsigned int HQTBLDAT;
+    volatile unsigned int PIXEL_NUM;
+
+} JL_JPG_TypeDef;
+
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON3;
+    volatile unsigned int LOFC_CON;
+    volatile unsigned int LOFC_RES;
+    volatile unsigned int DBG_CON;
+} JL_WL_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+} JL_WL_AUD_TypeDef;
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int DABUF;
+    volatile const unsigned int DASPACE;
+    volatile const unsigned int OFFEND;
+    volatile const unsigned int OFFSUM;
+    volatile const unsigned int PCMNUM;
+    volatile const unsigned int BTTIME;
+    volatile unsigned int CON1 ;
+    volatile unsigned int CON2 ;
+    volatile unsigned int BT_OFFSET;
+    volatile unsigned int MIN_SLOT;
+    volatile unsigned int OUTSR;
+    volatile unsigned int INSR;
+} JL_SYNC_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int IDAT_ADR;
+    volatile unsigned int IDAT_LEN;
+    volatile unsigned int ODAT_ADR;
+    volatile unsigned int ODAT_LEN;
+    volatile unsigned int FLTB_ADR;
+    volatile unsigned int ODAT_ADR_START;
+    volatile unsigned int ODAT_ADR_END;
+    volatile unsigned int STOP_FLAG;
+    volatile unsigned int INSR;
+    volatile unsigned int OUTSR;
+    volatile unsigned int PHASE;
+    volatile unsigned int COEF;
+
+} JL_SRC_SYNC_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int CON4;
+    volatile unsigned int CON5;
+    volatile unsigned int CON6;
+    volatile unsigned int CON7;
+} JL_IMG_CP_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int IMB_CON0;
+    volatile unsigned int IMB_CON1;
+    volatile unsigned int IMB_CON2;
+    volatile unsigned int IMB_CON3;
+    volatile unsigned int IMB_CON4;
+    volatile unsigned int IMB_CON5;
+    volatile unsigned int IMB_CON6;
+    volatile unsigned int IMB_CON7;
+    volatile unsigned int IMB_CON8;
+    volatile unsigned int IMB_CON9;
+    volatile unsigned int IMB_CON10;
+    volatile unsigned int IMB_CON11;
+    volatile unsigned int IMB_CON12;
+    volatile unsigned int IMB_CON13;
+    volatile unsigned int IMB_CON14;
+    volatile unsigned int IMB_CON15;
+    volatile unsigned int IMB_CON16;
+} JL_IMB_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int SEL;
+    volatile unsigned int DP;
+    volatile unsigned int DAT_VLD0;
+    volatile unsigned int DAT_VLD1;
+    volatile unsigned int DAT_VLD2;
+    volatile unsigned int DAT_VLD3;
+} JL_HMBIST_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int SEL;
+    volatile unsigned int DP;
+    volatile unsigned int DAT_VLD0;
+    volatile unsigned int DAT_VLD1;
+    volatile unsigned int DAT_VLD2;
+    volatile unsigned int DAT_VLD3;
+} JL_WL_MBIST_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int SEL;
+    volatile unsigned int DP;
+    volatile unsigned int DAT_VLD0;
+    volatile unsigned int DAT_VLD1;
+    volatile unsigned int DAT_VLD2;
+    volatile unsigned int DAT_VLD3;
+} JL_JPG_MBIST_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int SEL;
+    volatile unsigned int DP;
+    volatile unsigned int DAT_VLD0;
+    volatile unsigned int DAT_VLD1;
+    volatile unsigned int DAT_VLD2;
+    volatile unsigned int DAT_VLD3;
+} JL_IMB_MBIST_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int IMD_CON0;
+    volatile unsigned int IMD_CON1;
+    volatile unsigned int IMD_CON2;
+    volatile unsigned int IMD_CON3;
+    volatile unsigned int IMD_LD_START_ADR;
+    volatile unsigned int IMD_DEBUG_PIXEL;
+    volatile unsigned int IMD_IO_CFG;
+    volatile unsigned int IMD_BAUD;
+    volatile unsigned int IMDSPI_CON0;
+    volatile unsigned int IMDSPI_BUF;
+    volatile unsigned int IMDPAP_CON0;
+    volatile unsigned int IMDPAP_PRD;
+    volatile unsigned int IMDPAP_BUF;
+    volatile unsigned int IMDRGB_CON0;
+    volatile unsigned int IMDRGB_HPRD;
+    volatile unsigned int IMDRGB_VPRD;
+} JL_IMD_TypeDef;
+typedef struct {
+    volatile unsigned int RST_SRC;
+} JL_RST_TypeDef;
+
+
+
+
+typedef struct {
+    volatile unsigned int PWR_CON;
+
+    volatile unsigned int DCCK_CON0;
+    volatile unsigned int DCCK_CON1;
+    volatile unsigned int DCCK_CON2;
+    volatile unsigned int SYS_DIV;
+    volatile unsigned int CLK_CON0;
+    volatile unsigned int CLK_CON1;
+    volatile unsigned int CLK_CON2;
+    volatile unsigned int CLK_CON3;
+} JL_CLOCK_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int MODE_CON;
+} JL_MODE_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CHIP_ID;
+} JL_SYSTEM_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int WREN;
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int MSG0;
+    volatile unsigned int MSG1;
+    volatile unsigned int MSG2;
+    volatile unsigned int MSG3;
+    volatile const unsigned int ID;
+} JL_LEMU_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int CNT;
+    volatile unsigned int PRD;
+    volatile unsigned int PWM;
+} JL_TIMER_TypeDef;
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int VAL;
+} JL_PCNT_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile const unsigned int NUM;
+} JL_GPCNT_TypeDef;
+
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CPTR;
+    volatile unsigned int DPTR;
+    volatile unsigned int CTU_CON;
+    volatile unsigned int CTU_CNT;
+} JL_SD_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int EP0_CNT;
+    volatile unsigned int EP1_CNT;
+    volatile unsigned int EP2_CNT;
+    volatile unsigned int EP3_CNT;
+    volatile unsigned int EP4_CNT;
+    volatile unsigned int EP0_ADR;
+    volatile unsigned int EP1_TADR;
+    volatile unsigned int EP1_RADR;
+    volatile unsigned int EP2_TADR;
+    volatile unsigned int EP2_RADR;
+    volatile unsigned int EP3_TADR;
+    volatile unsigned int EP3_RADR;
+    volatile unsigned int EP4_TADR;
+    volatile unsigned int EP4_RADR;
+    volatile unsigned int TXDLY_CON;
+    volatile unsigned int EP1_RLEN;
+    volatile unsigned int EP2_RLEN;
+    volatile unsigned int EP3_RLEN;
+    volatile unsigned int EP4_RLEN;
+    volatile unsigned int EP1_MTX_PRD;
+    volatile unsigned int EP1_MRX_PRD;
+    volatile const unsigned int EP1_MTX_NUM;
+    volatile const unsigned int EP1_MRX_NUM;
+} JL_USB_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int WLA_CON0 ;
+    volatile unsigned int WLA_CON1 ;
+    volatile unsigned int WLA_CON2 ;
+    volatile unsigned int WLA_CON3 ;
+    volatile unsigned int WLA_CON4 ;
+    volatile unsigned int WLA_CON5 ;
+    volatile unsigned int WLA_CON6 ;
+    volatile unsigned int WLA_CON7 ;
+    volatile unsigned int WLA_CON8 ;
+    volatile unsigned int WLA_CON9 ;
+    volatile unsigned int WLA_CON10;
+    volatile unsigned int WLA_CON11;
+    volatile unsigned int WLA_CON12;
+    volatile unsigned int WLA_CON13;
+    volatile unsigned int WLA_CON14;
+    volatile unsigned int WLA_CON15;
+    volatile unsigned int WLA_CON16;
+    volatile unsigned int WLA_CON17;
+    volatile unsigned int WLA_CON18;
+    volatile unsigned int WLA_CON19;
+    volatile unsigned int WLA_CON20;
+    volatile unsigned int WLA_CON21;
+    volatile unsigned int WLA_CON22;
+    volatile unsigned int WLA_CON23;
+    volatile unsigned int WLA_CON24;
+    volatile unsigned int WLA_CON25;
+    volatile unsigned int WLA_CON26;
+    volatile unsigned int WLA_CON27;
+    volatile unsigned int WLA_CON28;
+    volatile unsigned int WLA_CON29;
+    volatile const unsigned int WLA_CON30;
+    volatile const unsigned int WLA_CON31;
+    volatile const unsigned int WLA_CON32;
+    volatile const unsigned int WLA_CON33;
+    volatile const unsigned int WLA_CON34;
+    volatile const unsigned int WLA_CON35;
+    volatile const unsigned int WLA_CON36;
+    volatile const unsigned int WLA_CON37;
+    volatile const unsigned int WLA_CON38;
+    volatile const unsigned int WLA_CON39;
+} JL_WLA_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int BAUD;
+    volatile unsigned int BUF;
+    volatile unsigned int ADR;
+    volatile unsigned int CNT;
+    volatile unsigned int CON1;
+} JL_SPI_TypeDef;
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int BAUD;
+    volatile unsigned int BUF;
+    volatile unsigned int OTCNT;
+    volatile unsigned int TXADR;
+    volatile unsigned int TXCNT;
+    volatile unsigned int RXSADR;
+    volatile unsigned int RXEADR;
+    volatile unsigned int RXCNT;
+    volatile const unsigned int HRXCNT;
+    volatile unsigned int CON2;
+} JL_UART_TypeDef;
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int BAUD;
+    volatile unsigned int BUF;
+} JL_IIC_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int WCLK_DUTY;
+    volatile unsigned int WCLK_PRD;
+    volatile unsigned int DMA_BASE_ADR;
+    volatile unsigned int DMA_BUF_LEN;
+    volatile unsigned int SLOT_EN;
+
+} JL_TDM_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int TMR0_CON;
+    volatile unsigned int TMR0_CNT;
+    volatile unsigned int TMR0_PR;
+    volatile unsigned int TMR1_CON;
+    volatile unsigned int TMR1_CNT;
+    volatile unsigned int TMR1_PR;
+    volatile unsigned int TMR2_CON;
+    volatile unsigned int TMR2_CNT;
+    volatile unsigned int TMR2_PR;
+    volatile unsigned int TMR3_CON;
+    volatile unsigned int TMR3_CNT;
+    volatile unsigned int TMR3_PR;
+    volatile unsigned int TMR4_CON;
+    volatile unsigned int TMR4_CNT;
+    volatile unsigned int TMR4_PR;
+    volatile unsigned int TMR5_CON;
+    volatile unsigned int TMR5_CNT;
+    volatile unsigned int TMR5_PR;
+    volatile unsigned int TMR6_CON;
+    volatile unsigned int TMR6_CNT;
+    volatile unsigned int TMR6_PR;
+    volatile unsigned int TMR7_CON;
+    volatile unsigned int TMR7_CNT;
+    volatile unsigned int TMR7_PR;
+    volatile unsigned int FPIN_CON;
+    volatile unsigned int CH0_CON0;
+    volatile unsigned int CH0_CON1;
+    volatile unsigned int CH0_CMPH;
+    volatile unsigned int CH0_CMPL;
+    volatile unsigned int CH1_CON0;
+    volatile unsigned int CH1_CON1;
+    volatile unsigned int CH1_CMPH;
+    volatile unsigned int CH1_CMPL;
+    volatile unsigned int CH2_CON0;
+    volatile unsigned int CH2_CON1;
+    volatile unsigned int CH2_CMPH;
+    volatile unsigned int CH2_CMPL;
+    volatile unsigned int CH3_CON0;
+    volatile unsigned int CH3_CON1;
+    volatile unsigned int CH3_CMPH;
+    volatile unsigned int CH3_CMPL;
+    volatile unsigned int CH4_CON0;
+    volatile unsigned int CH4_CON1;
+    volatile unsigned int CH4_CMPH;
+    volatile unsigned int CH4_CMPL;
+    volatile unsigned int CH5_CON0;
+    volatile unsigned int CH5_CON1;
+    volatile unsigned int CH5_CMPH;
+    volatile unsigned int CH5_CMPL;
+    volatile unsigned int CH6_CON0;
+    volatile unsigned int CH6_CON1;
+    volatile unsigned int CH6_CMPH;
+    volatile unsigned int CH6_CMPL;
+    volatile unsigned int CH7_CON0;
+    volatile unsigned int CH7_CON1;
+    volatile unsigned int CH7_CMPH;
+    volatile unsigned int CH7_CMPL;
+    volatile unsigned int MCPWM_CON0;
+} JL_MCPWM_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int DAT;
+    volatile unsigned int SMP;
+} JL_RDEC_TypeDef;
+typedef struct {
+    volatile unsigned int CON;
+    volatile const unsigned int RES;
+} JL_ADC_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int RFLT_CON;
+} JL_IR_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+} JL_OSA_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int FIFO;
+    volatile unsigned int REG;
+} JL_CRC_TypeDef;
+
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int NUM;
+} JL_LRCT_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile const unsigned int R64L;
+    volatile const unsigned int R64H;
+} JL_RAND_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int PMU_CON;
+    volatile unsigned int PMU_STA;
+} JL_PMU_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int BASE;
+    volatile unsigned int ADC_CON;
+    volatile unsigned int ADC_CON1;
+    volatile unsigned int HF_CON0;
+    volatile unsigned int HF_CON1;
+    volatile unsigned int HF_CRAM;
+    volatile unsigned int HF_CRAM2;
+    volatile unsigned int HF_DRAM;
+    volatile unsigned int LF_CON;
+    volatile unsigned int LF_RES;
+    volatile unsigned int FMRX_CON4;
+    volatile unsigned int FMRX_CON5;
+
+    volatile unsigned int TX_CON0;
+    volatile unsigned int TX_CON1;
+    volatile unsigned int TX_PILOT;
+    volatile unsigned int TX_SYN_GAIN;
+    volatile unsigned int TX_MUL;
+    volatile unsigned int TX_ADR;
+    volatile unsigned int TX_LEN;
+    volatile unsigned int TX_FREQ;
+    volatile unsigned int TX_BASE_ADR;
+} JL_FM_TypeDef;
+
+
+
+
+
+
+typedef struct {
+    volatile unsigned int ENCCON ;
+    volatile unsigned int ENCKEY ;
+    volatile unsigned int ENCADR ;
+} JL_PERIENC_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int DEC_SRC_ADR;
+    volatile unsigned int DEC_DST_ADR;
+    volatile unsigned int DEC_PCM_WCNT;
+    volatile unsigned int DEC_INBUF_LEN;
+    volatile unsigned int ENC_SRC_ADR;
+    volatile unsigned int ENC_DST_ADR;
+    volatile const unsigned int DEC_DST_BASE;
+    volatile unsigned int DEC_WEIGHT_BASE;
+    volatile unsigned int DEC_WEIGHT_ADD;
+
+} JL_SBC_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int DATIN;
+    volatile unsigned int KEY;
+    volatile unsigned int ENCRES0;
+    volatile unsigned int ENCRES1;
+    volatile unsigned int ENCRES2;
+    volatile unsigned int ENCRES3;
+    volatile unsigned int NONCE;
+    volatile unsigned int HEADER;
+    volatile unsigned int SRCADR;
+    volatile unsigned int DSTADR;
+    volatile unsigned int CTCNT;
+    volatile unsigned int TAGLEN;
+    volatile const unsigned int TAGRES0;
+    volatile const unsigned int TAGRES1;
+    volatile const unsigned int TAGRES2;
+    volatile const unsigned int TAGRES3;
+} JL_AES_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int CON4;
+    volatile unsigned int INTF0;
+    volatile unsigned int INTF1;
+} JL_PLL0_TypeDef;
+
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int CON4;
+    volatile unsigned int INTF0;
+    volatile unsigned int INTF1;
+} JL_PLL1_TypeDef;
+
+
+
+
+
+
+typedef struct {
+    volatile unsigned int FADDR;
+    volatile unsigned int POWER;
+    volatile const unsigned int INTRTX1;
+    volatile const unsigned int INTRTX2;
+    volatile const unsigned int INTRRX1;
+    volatile const unsigned int INTRRX2;
+    volatile const unsigned int INTRUSB;
+    volatile unsigned int INTRTX1E;
+    volatile unsigned int INTRTX2E;
+    volatile unsigned int INTRRX1E;
+    volatile unsigned int INTRRX2E;
+    volatile unsigned int INTRUSBE;
+    volatile const unsigned int FRAME1;
+    volatile const unsigned int FRAME2;
+    volatile const unsigned int RESERVED14;
+    volatile unsigned int DEVCTL;
+    volatile const unsigned int RESERVED10_0x16[0x16 - 0x10 + 1];
+
+} JL_USB_SIE_TypeDef;
+
+
+
+
+typedef struct {
+    volatile const unsigned int RESERVED0;
+    volatile unsigned int CSR0;
+    volatile const unsigned int RESERVED2_5[5 - 1];
+    volatile const unsigned int COUNT0;
+
+} JL_USB_EP0_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int TXMAXP;
+    volatile unsigned int TXCSR1;
+    volatile unsigned int TXCSR2;
+    volatile unsigned int RXMAXP;
+    volatile unsigned int RXCSR1;
+    volatile unsigned int RXCSR2;
+    volatile const unsigned int RXCOUNT1;
+    volatile const unsigned int RXCOUNT2;
+    volatile unsigned int TXTYPE;
+    volatile const unsigned int TXINTERVAL;
+    volatile unsigned int RXTYPE;
+    volatile const unsigned int RXINTERVAL;
+
+} JL_USB_EP_TypeDef;
+typedef struct {
+    volatile unsigned int OUT;
+    volatile const unsigned int IN;
+    volatile unsigned int DIR;
+    volatile unsigned int DIE;
+    volatile unsigned int PU;
+    volatile unsigned int PD;
+    volatile unsigned int HD0;
+    volatile unsigned int HD;
+    volatile unsigned int DIEH;
+} JL_PORT_FLASH_TypeDef;
+typedef struct {
+    volatile unsigned int CON0;
+} JL_USB_IO_TypeDef;
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+} JL_WAKEUP_TypeDef;
+
+
+
+
+typedef struct {
+
+    volatile unsigned int CON0;
+    volatile unsigned int OCH_CON0;
+    volatile unsigned int OCH_CON1;
+    volatile unsigned int OCH_CON2;
+    volatile unsigned int ICH_CON0;
+    volatile unsigned int ICH_CON1;
+    volatile unsigned int ICH_CON2;
+    volatile unsigned int ICH_CON3;
+} JL_IOMC_TypeDef;
+
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int BRI_PRDL;
+    volatile unsigned int BRI_PRDH;
+    volatile unsigned int BRI_DUTY0L;
+    volatile unsigned int BRI_DUTY0H;
+    volatile unsigned int BRI_DUTY1L;
+    volatile unsigned int BRI_DUTY1H;
+    volatile unsigned int PRD_DIVL;
+    volatile unsigned int DUTY0;
+    volatile unsigned int DUTY1;
+    volatile unsigned int DUTY2;
+    volatile unsigned int DUTY3;
+    volatile const unsigned int CNT_RD;
+    volatile unsigned int CON4;
+    volatile unsigned int CNT_SYNC;
+    volatile unsigned int CNT_DEC;
+} JL_PLED_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int PA0_OUT;
+    volatile unsigned int PA1_OUT;
+    volatile unsigned int PA2_OUT;
+    volatile unsigned int PA3_OUT;
+    volatile unsigned int PA4_OUT;
+    volatile unsigned int PA5_OUT;
+    volatile unsigned int PA6_OUT;
+    volatile unsigned int PA7_OUT;
+    volatile unsigned int PA8_OUT;
+    volatile unsigned int PA9_OUT;
+    volatile unsigned int PA10_OUT;
+    volatile unsigned int PA11_OUT;
+    volatile unsigned int PA12_OUT;
+    volatile unsigned int PA13_OUT;
+    volatile unsigned int PA14_OUT;
+    volatile unsigned int PA15_OUT;
+    volatile unsigned int PB0_OUT;
+    volatile unsigned int PB1_OUT;
+    volatile unsigned int PB2_OUT;
+    volatile unsigned int PB3_OUT;
+    volatile unsigned int PB4_OUT;
+    volatile unsigned int PB5_OUT;
+    volatile unsigned int PB6_OUT;
+    volatile unsigned int PB7_OUT;
+    volatile unsigned int PB8_OUT;
+    volatile unsigned int PB9_OUT;
+    volatile unsigned int PB10_OUT;
+    volatile unsigned int PB11_OUT;
+    volatile unsigned int PC0_OUT;
+    volatile unsigned int PC1_OUT;
+    volatile unsigned int PC2_OUT;
+    volatile unsigned int PC3_OUT;
+    volatile unsigned int PC4_OUT;
+    volatile unsigned int PC5_OUT;
+    volatile unsigned int PC6_OUT;
+    volatile unsigned int PC7_OUT;
+    volatile unsigned int PC8_OUT;
+    volatile unsigned int PG0_OUT;
+    volatile unsigned int PG1_OUT;
+    volatile unsigned int PG2_OUT;
+    volatile unsigned int PG3_OUT;
+    volatile unsigned int PG4_OUT;
+    volatile unsigned int PG5_OUT;
+    volatile unsigned int PG6_OUT;
+    volatile unsigned int PG7_OUT;
+    volatile unsigned int PG8_OUT;
+    volatile unsigned int USBDP_OUT;
+    volatile unsigned int USBDM_OUT;
+    volatile unsigned int PP0_OUT;
+} JL_OMAP_TypeDef;
+
+typedef struct {
+    volatile unsigned int FI_GP_ICH0;
+    volatile unsigned int FI_GP_ICH1;
+    volatile unsigned int FI_GP_ICH2;
+    volatile unsigned int FI_GP_ICH3;
+    volatile unsigned int FI_GP_ICH4;
+    volatile unsigned int FI_GP_ICH5;
+    volatile unsigned int FI_GP_ICH6;
+    volatile unsigned int FI_GP_ICH7;
+    volatile unsigned int FI_GP_ICH8;
+    volatile unsigned int FI_GP_ICH9;
+    volatile unsigned int FI_GP_ICH10;
+    volatile unsigned int FI_GP_ICH11;
+    volatile unsigned int FI_GP_ICH12;
+    volatile unsigned int FI_GP_ICH13;
+    volatile unsigned int FI_SPI0_CLK;
+    volatile unsigned int FI_SPI0_DA0;
+    volatile unsigned int FI_SPI0_DA1;
+    volatile unsigned int FI_SPI0_DA2;
+    volatile unsigned int FI_SPI0_DA3;
+    volatile unsigned int FI_SPI1_CLK;
+    volatile unsigned int FI_SPI1_DA0;
+    volatile unsigned int FI_SPI1_DA1;
+    volatile unsigned int FI_SPI1_DA2;
+    volatile unsigned int FI_SPI1_DA3;
+    volatile unsigned int FI_SPI2_CLK;
+    volatile unsigned int FI_SPI2_DA0;
+    volatile unsigned int FI_SPI2_DA1;
+    volatile unsigned int FI_SPI2_DA2;
+    volatile unsigned int FI_SPI2_DA3;
+    volatile unsigned int FI_SD0_CMD;
+    volatile unsigned int FI_SD0_DA0;
+    volatile unsigned int FI_SD0_DA1;
+    volatile unsigned int FI_SD0_DA2;
+    volatile unsigned int FI_SD0_DA3;
+    volatile unsigned int FI_IIC_SCL;
+    volatile unsigned int FI_IIC_SDA;
+    volatile unsigned int FI_UART0_RX;
+    volatile unsigned int FI_UART1_RX;
+    volatile unsigned int FI_UART1_CTS;
+    volatile unsigned int FI_UART2_RX;
+    volatile unsigned int FI_TDM_S_WCK;
+    volatile unsigned int FI_TDM_S_BCK;
+    volatile unsigned int FI_TDM_M_DA;
+    volatile unsigned int FI_RDEC0_DAT0;
+    volatile unsigned int FI_RDEC0_DAT1;
+    volatile unsigned int FI_RDEC1_DAT0;
+    volatile unsigned int FI_RDEC1_DAT1;
+    volatile unsigned int FI_RDEC2_DAT0;
+    volatile unsigned int FI_RDEC2_DAT1;
+    volatile unsigned int FI_ALNK0_MCLK;
+    volatile unsigned int FI_ALNK0_LRCK;
+    volatile unsigned int FI_ALNK0_SCLK;
+    volatile unsigned int FI_ALNK0_DAT0;
+    volatile unsigned int FI_ALNK0_DAT1;
+    volatile unsigned int FI_ALNK0_DAT2;
+    volatile unsigned int FI_ALNK0_DAT3;
+    volatile unsigned int FI_PLNK_DAT0;
+    volatile unsigned int FI_PLNK_DAT1;
+    volatile unsigned int FI_CHAIN_IN0;
+    volatile unsigned int FI_CHAIN_IN1;
+    volatile unsigned int FI_CHAIN_IN2;
+    volatile unsigned int FI_CHAIN_IN3;
+    volatile unsigned int FI_CHAIN_RST;
+    volatile unsigned int FI_TOTAL;
+} JL_IMAP_TypeDef;
+
+typedef struct {
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+} JL_CMNG_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int KEY;
+} JL_SDTAP_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int WREN;
+    volatile unsigned int CON0;
+    volatile unsigned int CON1;
+    volatile unsigned int CON2;
+    volatile unsigned int CON3;
+    volatile unsigned int MSG0;
+    volatile unsigned int MSG1;
+    volatile unsigned int MSG2;
+    volatile unsigned int MSG3;
+    volatile const unsigned int ID;
+} JL_CEMU_TypeDef;
+typedef struct {
+    volatile unsigned int CON[15];
+    volatile const unsigned int REV0;
+    volatile unsigned int CID[15];
+    volatile const unsigned int REV1;
+    volatile unsigned int BEG[15];
+    volatile const unsigned int REV2;
+    volatile unsigned int END[15];
+    volatile unsigned int WREN;
+} JL_MPU_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int TLB1_BEG;
+    volatile unsigned int TLB1_END;
+} JL_MMU_TypeDef;
+
+
+
+
+typedef struct {
+    short page: 15;
+    short vld: 1;
+} JL_MMU_TLB1_TypeDef;
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int SEL;
+    volatile unsigned int DP;
+    volatile unsigned int DAT_VLD0;
+    volatile unsigned int DAT_VLD1;
+    volatile unsigned int DAT_VLD2;
+    volatile unsigned int DAT_VLD3;
+    volatile unsigned int ROM_CRC;
+} JL_MBIST_TypeDef;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int CADR;
+    volatile unsigned int ACC0L;
+    volatile unsigned int ACC0H;
+    volatile unsigned int ACC1L;
+    volatile unsigned int ACC1H;
+    volatile unsigned int CONST;
+    volatile unsigned int TEST1;
+} JL_FFT_TypeDef;
+typedef struct {
+              volatile const unsigned int DR00;
+              volatile const unsigned int DR01;
+              volatile const unsigned int DR02;
+              volatile const unsigned int DR03;
+              volatile const unsigned int DR04;
+              volatile const unsigned int DR05;
+              volatile const unsigned int DR06;
+              volatile const unsigned int DR07;
+              volatile const unsigned int DR08;
+              volatile const unsigned int DR09;
+              volatile const unsigned int DR10;
+              volatile const unsigned int DR11;
+              volatile const unsigned int DR12;
+              volatile const unsigned int DR13;
+              volatile const unsigned int DR14;
+              volatile const unsigned int DR15;
+
+              volatile const unsigned int RETI;
+              volatile const unsigned int RETE;
+              volatile const unsigned int RETX;
+              volatile const unsigned int RETS;
+              volatile const unsigned int SR04;
+              volatile const unsigned int PSR;
+              volatile const unsigned int CNUM;
+              volatile const unsigned int SR07;
+              volatile const unsigned int SR08;
+              volatile const unsigned int SR09;
+              volatile const unsigned int SR10;
+              volatile const unsigned int ICFG;
+              volatile const unsigned int USP;
+              volatile const unsigned int SSP;
+              volatile const unsigned int SP;
+              volatile const unsigned int PCRS;
+
+              volatile unsigned int BPCON;
+              volatile unsigned int BSP;
+              volatile unsigned int BP0;
+              volatile unsigned int BP1;
+              volatile unsigned int BP2;
+              volatile unsigned int BP3;
+              volatile unsigned int CMD_PAUSE;
+              volatile unsigned int BP4;
+              volatile unsigned int BP5;
+              volatile unsigned int BP6;
+              volatile unsigned int BP7;
+              volatile const unsigned int REV2a[0x30 - 0x2a - 1];
+
+              volatile unsigned int PMU_CON0;
+              volatile unsigned int PMU_CON1;
+              volatile const unsigned int REV30[0x3b - 0x31 - 1];
+              volatile unsigned int TTMR_CON;
+              volatile unsigned int TTMR_CNT;
+              volatile unsigned int TTMR_PRD;
+              volatile unsigned int BANK_CON;
+              volatile unsigned int BANK_NUM;
+
+              volatile unsigned int ICFG00;
+              volatile unsigned int ICFG01;
+              volatile unsigned int ICFG02;
+              volatile unsigned int ICFG03;
+              volatile unsigned int ICFG04;
+              volatile unsigned int ICFG05;
+              volatile unsigned int ICFG06;
+              volatile unsigned int ICFG07;
+              volatile unsigned int ICFG08;
+              volatile unsigned int ICFG09;
+              volatile unsigned int ICFG10;
+              volatile unsigned int ICFG11;
+              volatile unsigned int ICFG12;
+              volatile unsigned int ICFG13;
+              volatile unsigned int ICFG14;
+              volatile unsigned int ICFG15;
+
+              volatile unsigned int ICFG16;
+              volatile unsigned int ICFG17;
+              volatile unsigned int ICFG18;
+              volatile unsigned int ICFG19;
+              volatile unsigned int ICFG20;
+              volatile unsigned int ICFG21;
+              volatile unsigned int ICFG22;
+              volatile unsigned int ICFG23;
+              volatile unsigned int ICFG24;
+              volatile unsigned int ICFG25;
+              volatile unsigned int ICFG26;
+              volatile unsigned int ICFG27;
+              volatile unsigned int ICFG28;
+              volatile unsigned int ICFG29;
+              volatile unsigned int ICFG30;
+              volatile unsigned int ICFG31;
+
+              volatile const unsigned int IPND0;
+              volatile const unsigned int IPND1;
+              volatile const unsigned int IPND2;
+              volatile const unsigned int IPND3;
+              volatile const unsigned int IPND4;
+              volatile const unsigned int IPND5;
+              volatile const unsigned int IPND6;
+              volatile const unsigned int IPND7;
+              volatile unsigned int ILAT_SET;
+              volatile unsigned int ILAT_CLR;
+              volatile unsigned int IPMASK;
+              volatile unsigned int GIEMASK;
+              volatile unsigned int IWKUP_NUM;
+              volatile const unsigned int REV6a[0x70 - 0x6c - 1];
+
+              volatile unsigned int ETM_CON;
+              volatile const unsigned int ETM_PC0;
+              volatile const unsigned int ETM_PC1;
+              volatile const unsigned int ETM_PC2;
+              volatile const unsigned int ETM_PC3;
+              volatile unsigned int WP0_ADRH;
+              volatile unsigned int WP0_ADRL;
+              volatile unsigned int WP0_DATH;
+              volatile unsigned int WP0_DATL;
+              volatile unsigned int WP0_PC;
+              volatile const unsigned int REV79[0x80 - 0x79 - 1];
+
+              volatile unsigned int EMU_CON;
+              volatile unsigned int EMU_MSG;
+              volatile unsigned int EMU_SSP_H;
+              volatile unsigned int EMU_SSP_L;
+              volatile unsigned int EMU_USP_H;
+              volatile unsigned int EMU_USP_L;
+              volatile unsigned int LIM_PC0_H;
+              volatile unsigned int LIM_PC0_L;
+              volatile unsigned int LIM_PC1_H;
+              volatile unsigned int LIM_PC1_L;
+              volatile unsigned int LIM_PC2_H;
+              volatile unsigned int LIM_PC2_L;
+              volatile const unsigned int REV8b[0x90 - 0x8b - 1];
+
+              volatile unsigned int ESU_CON;
+              volatile const unsigned int CNT_CHIT;
+              volatile const unsigned int CNT_CMIS;
+              volatile const unsigned int CNT_FILL;
+              volatile const unsigned int CNT_IHIT;
+              volatile const unsigned int CNT_IMIS;
+              volatile const unsigned int CNT_RHIT;
+              volatile const unsigned int CNT_RMIS;
+              volatile const unsigned int CNT_WHIT;
+              volatile const unsigned int CNT_WMIS;
+} JL_TypeDef_q32DSP;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int EMU_CON;
+    volatile unsigned int EMU_MSG;
+    volatile unsigned int EMU_ID;
+    volatile unsigned int CMD_CON;
+    volatile unsigned int CMD_BEG;
+    volatile unsigned int CMD_END;
+    volatile unsigned int CNT_RACK;
+    volatile unsigned int CNT_RNAK;
+    volatile unsigned int MBIST_CON;
+} JL_TypeDef_q32DSP_ICU;
+
+
+
+
+
+typedef struct {
+    volatile unsigned int CON;
+    volatile unsigned int EMU_CON;
+    volatile unsigned int EMU_MSG;
+    volatile unsigned int EMU_ID;
+    volatile unsigned int CNT_RACK;
+    volatile unsigned int CNT_RNAK;
+    volatile unsigned int CNT_WACK;
+    volatile unsigned int CNT_WNAK;
+    volatile unsigned int MBIST_CON;
+    volatile const unsigned int REV0[0x10 - 0x8 - 1];
+    volatile unsigned int CMD_CON[4];
+    volatile unsigned int CMD_BEG[4];
+    volatile unsigned int CMD_END[4];
+    volatile const unsigned int REV1[0x20 - 0x1b - 1];
+    volatile unsigned int CMO[32];
+} JL_TypeDef_q32DSP_DCU;
+
+typedef struct _CPU_REGS {
+    unsigned int reti;
+    unsigned int rets;
+    unsigned int psr;
+    unsigned int r0;
+    unsigned int r1;
+    unsigned int r2;
+    unsigned int r3;
+    unsigned int r4;
+    unsigned int r5;
+    unsigned int r6;
+    unsigned int r7;
+    unsigned int r8;
+    unsigned int r9;
+    unsigned int r10;
+    unsigned int r11;
+    unsigned int r12;
+    unsigned int r13;
+    unsigned int r14;
+    unsigned int r15;
+} CPU_REGS;
+
+void flush_dcache(void *ptr, int len);
+void flushinv_dcache(void *ptr, int len);
+void IcuEnable(void);
+void DcuEnable(void);
+void IcuWaitIdle(void);
+void DcuWaitIdle(void);
+void IcuDisable(void);
+void DcuDisable(void);
+void IcuFlushinvAll(void);
+void IcuUnlockAll(void);
+void IcuFlushinvRegion(int *beg, int len);
+void IcuUnlockRegion(int *beg, int len);
+void IcuLockRegion(int *beg, int len);
+void IcuPfetchRegion(int *beg, int len);
+void DcuFlushinvAll(void);
+void DcuFlushinvRegion(int *beg, int len);
+void DcuPfetchRegion(int *beg, int len);
+void IcuInitial(void);
+void DcuInitial(void);
+
+
+
+typedef unsigned char u8, bool, BOOL;
+typedef char s8;
+typedef unsigned short u16;
+typedef signed short s16;
+typedef unsigned int u32;
+typedef signed int s32;
+typedef unsigned long long u64;
+typedef u32 FOURCC;
+typedef long long s64;
+typedef unsigned long long u64;
+__attribute__((always_inline))
+static int current_cpu_id()
+{
+    unsigned id;
+    asm volatile("%0 = cnum" : "=r"(id) ::);
+    return id ;
+}
+
+__attribute__((always_inline))
+static int core_num(void)
+{
+    u32 num;
+    asm volatile("%0 = cnum" : "=r"(num) :);
+    return num;
+}
+static inline int cpu_in_irq()
+{
+    int flag;
+    __asm__ volatile("%0 = icfg" : "=r"(flag));
+    return flag & 0xff;
+}
+
+static inline int cpu_irq_disabled()
+{
+    int flag;
+    __asm__ volatile("%0 = icfg" : "=r"(flag));
+    return (flag & 0x300) != 0x300;
+}
+static inline int data_sat_s16(int ind)
+{
+    __asm__ volatile(
+        " %0 = sat16(%0)(s)  \t\n"
+        : "=&r"(ind)
+        : "0"(ind)
+        :);
+    return ind;
+}
+
+
+
+static inline u32 reverse_u32(u32 data32)
+{
+
+
+
+
+    __asm__ volatile("%0 = rev8(%0) \t\n" : "=&r"(data32) : "0"(data32) :);
+
+    return data32;
+}
+
+static inline u32 reverse_u16(u16 data16)
+{
+    u32 retv;
+
+
+
+
+    retv = ((u32)data16) << 16;
+    __asm__ volatile("%0 = rev8(%0) \t\n" : "=&r"(retv) : "0"(retv) :);
+
+    return retv;
+}
+
+static inline u32 rand32()
+{
+    return ((JL_RAND_TypeDef *)(0xfd0000 + ((64 * 0x3b + 0x00) * 4)))->R64L;
+}
+void p33_soft_reset(void);
+static inline void cpu_reset(void)
+{
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void interrupt_init();
+void request_irq(u8 index, u8 priority, void (*handler)(void), u8 cpu_id);
+
+void unrequest_irq(u8 index);
+
+void reg_set_ip(unsigned char index, unsigned char priority, u8 cpu_id);
+void irq_unmask_set(u8 index, u8 cpu_id);
+
+void bit_clr_ie(unsigned char index);
+void bit_set_ie(unsigned char index);
+bool irq_read(u32 index);
+
+
+
+
+
+
+
+__attribute__((always_inline))
+static void lp_waiting(int *ptr, int pnd, int cpd, char inum)
+{
+    ((JL_TypeDef_q32DSP *)((0xff0000 + 0xe000) + 0x000800*core_num()))->IWKUP_NUM = inum;
+    while (!(*ptr & pnd)) {
+        asm volatile("idle");
+    }
+    *ptr |= cpd;
+}
+
+
+
+
+
+static inline int int_cli(void)
+{
+    int msg;
+    asm volatile("cli %0" : "=r"(msg) :);
+    return msg;
+}
+
+static inline void int_sti(int msg)
+{
+    asm volatile("sti %0" :: "r"(msg));
+}
+
+
+
+
+typedef __builtin_va_list va_list;
+typedef __builtin_va_list __gnuc_va_list;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wundef"
+
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wundef"
+
+
+
+
+
+#pragma GCC diagnostic pop
+typedef long int ptrdiff_t;
+typedef long unsigned int size_t;
+typedef int wchar_t;
+typedef struct {
+  long long __clang_max_align_nonce1
+      __attribute__((__aligned__(__alignof__(long long))));
+  long double __clang_max_align_nonce2
+      __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+
+
+
+
+
+
+typedef signed char __int8_t;
+
+typedef unsigned char __uint8_t;
+typedef short __int16_t;
+
+typedef unsigned short __uint16_t;
+typedef int __int32_t;
+
+typedef unsigned int __uint32_t;
+typedef long long int __int64_t;
+
+typedef long long unsigned int __uint64_t;
+typedef signed char __int_least8_t;
+
+typedef unsigned char __uint_least8_t;
+typedef short __int_least16_t;
+
+typedef unsigned short __uint_least16_t;
+typedef int __int_least32_t;
+
+typedef unsigned int __uint_least32_t;
+typedef long long int __int_least64_t;
+
+typedef long long unsigned int __uint_least64_t;
+typedef long int __intptr_t;
+
+typedef long unsigned int __uintptr_t;
+
+
+
+
+
+typedef int _LOCK_T;
+typedef int _LOCK_RECURSIVE_T;
+
+
+typedef long _off_t;
+
+
+
+typedef short __dev_t;
+
+
+
+typedef unsigned short __uid_t;
+
+
+typedef unsigned short __gid_t;
+
+
+
+__extension__ typedef long long _off64_t;
+
+
+
+
+
+
+
+typedef long _fpos_t;
+typedef long signed int _ssize_t;
+typedef int wint_t;
+
+
+
+typedef struct
+{
+  int __count;
+  union
+  {
+    wint_t __wch;
+    unsigned char __wchb[4];
+  } __value;
+} _mbstate_t;
+
+
+
+typedef _LOCK_RECURSIVE_T _flock_t;
+
+
+
+
+typedef void *_iconv_t;
+
+
+
+
+
+
+typedef unsigned long __ULong;
+struct _reent;
+
+
+
+
+
+
+struct _Bigint
+{
+  struct _Bigint *_next;
+  int _k, _maxwds, _sign, _wds;
+  __ULong _x[1];
+};
+
+
+struct __tm
+{
+  int __tm_sec;
+  int __tm_min;
+  int __tm_hour;
+  int __tm_mday;
+  int __tm_mon;
+  int __tm_year;
+  int __tm_wday;
+  int __tm_yday;
+  int __tm_isdst;
+};
+
+
+
+
+
+
+
+struct _on_exit_args {
+ void * _fnargs[32];
+ void * _dso_handle[32];
+
+ __ULong _fntypes;
+
+
+ __ULong _is_cxa;
+};
+struct _atexit {
+ struct _atexit *_next;
+ int _ind;
+
+ void (*_fns[32])(void);
+        struct _on_exit_args _on_exit_args;
+};
+struct __sbuf {
+ unsigned char *_base;
+ int _size;
+};
+struct __sFILE {
+  unsigned char *_p;
+  int _r;
+  int _w;
+  short _flags;
+  short _file;
+  struct __sbuf _bf;
+  int _lbfsize;
+
+
+
+
+
+
+  void * _cookie;
+
+  int (* _read) (struct _reent *, void *, char *, int);
+
+  int (* _write) (struct _reent *, void *, const char *, int);
+
+
+  _fpos_t (* _seek) (struct _reent *, void *, _fpos_t, int);
+  int (* _close) (struct _reent *, void *);
+
+
+  struct __sbuf _ub;
+  unsigned char *_up;
+  int _ur;
+
+
+  unsigned char _ubuf[3];
+  unsigned char _nbuf[1];
+
+
+  struct __sbuf _lb;
+
+
+  int _blksize;
+  _off_t _offset;
+
+
+
+
+
+
+  _flock_t _lock;
+
+  _mbstate_t _mbstate;
+  int _flags2;
+};
+typedef struct __sFILE __FILE;
+
+
+
+struct _glue
+{
+  struct _glue *_next;
+  int _niobs;
+  __FILE *_iobs;
+};
+struct _rand48 {
+  unsigned short _seed[3];
+  unsigned short _mult[3];
+  unsigned short _add;
+
+
+
+
+};
+struct _reent
+{
+  int _errno;
+
+
+
+
+  __FILE *_stdin, *_stdout, *_stderr;
+
+  int _inc;
+  char _emergency[25];
+
+  int _current_category;
+  const char *_current_locale;
+
+  int __sdidinit;
+
+  void (* __cleanup) (struct _reent *);
+
+
+  struct _Bigint *_result;
+  int _result_k;
+  struct _Bigint *_p5s;
+  struct _Bigint **_freelist;
+
+
+  int _cvtlen;
+  char *_cvtbuf;
+
+  union
+    {
+      struct
+        {
+          unsigned int _unused_rand;
+          char * _strtok_last;
+          char _asctime_buf[26];
+          struct __tm _localtime_buf;
+          int _gamma_signgam;
+          __extension__ unsigned long long _rand_next;
+          struct _rand48 _r48;
+          _mbstate_t _mblen_state;
+          _mbstate_t _mbtowc_state;
+          _mbstate_t _wctomb_state;
+          char _l64a_buf[8];
+          char _signal_buf[24];
+          int _getdate_err;
+          _mbstate_t _mbrlen_state;
+          _mbstate_t _mbrtowc_state;
+          _mbstate_t _mbsrtowcs_state;
+          _mbstate_t _wcrtomb_state;
+          _mbstate_t _wcsrtombs_state;
+   int _h_errno;
+        } _reent;
+
+
+
+      struct
+        {
+
+          unsigned char * _nextf[30];
+          unsigned int _nmalloc[30];
+        } _unused;
+    } _new;
+
+
+
+  struct _atexit *_atexit;
+  struct _atexit _atexit0;
+
+
+
+  void (**(_sig_func))(int);
+
+
+
+
+  struct _glue __sglue;
+  __FILE __sf[3];
+};
+extern struct _reent *_impure_ptr ;
+extern struct _reent *const _global_impure_ptr ;
+
+void _reclaim_reent (struct _reent *);
+
+
+
+
+
+
+
+void * memchr (const void *, int, size_t);
+int memcmp (const void *, const void *, size_t);
+void * memcpy (void * restrict, const void * restrict, size_t);
+void * memmove (void *, const void *, size_t);
+void * memset (void *, int, size_t);
+char *strcat (char *restrict, const char *restrict);
+char *strchr (const char *, int);
+int strcmp (const char *, const char *);
+int strcoll (const char *, const char *);
+char *strcpy (char *restrict, const char *restrict);
+size_t strcspn (const char *, const char *);
+char *strerror (int);
+size_t strlen (const char *);
+char *strncat (char *restrict, const char *restrict, size_t);
+int strncmp (const char *, const char *, size_t);
+char *strncpy (char *restrict, const char *restrict, size_t);
+char *strpbrk (const char *, const char *);
+char *strrchr (const char *, int);
+size_t strspn (const char *, const char *);
+char *strstr (const char *, const char *);
+
+char *strtok (char *restrict, const char *restrict);
+
+size_t strxfrm (char *restrict, const char *restrict, size_t);
+
+
+char *strtok_r (char *restrict, const char *restrict, char **restrict);
+
+
+int bcmp (const void *, const void *, size_t);
+void bcopy (const void *, void *, size_t);
+void bzero (void *, size_t);
+int ffs (int);
+char *index (const char *, int);
+
+
+void * memccpy (void * restrict, const void * restrict, int, size_t);
+
+
+
+
+
+void * memrchr (const void *, int, size_t);
+
+
+
+
+char *rindex (const char *, int);
+
+char *stpcpy (char *restrict, const char *restrict);
+char *stpncpy (char *restrict, const char *restrict, size_t);
+
+int strcasecmp (const char *, const char *);
+
+
+
+
+
+
+char *strdup (const char *);
+
+
+char *_strdup_r (struct _reent *, const char *);
+
+
+char *strndup (const char *, size_t);
+
+
+
+char *_strndup_r (struct _reent *, const char *, size_t);
+int strerror_r (int, char *, size_t)
+
+             __asm__ ("" "__xpg_strerror_r")
+
+  ;
+
+
+
+
+
+
+
+char * _strerror_r (struct _reent *, int, int, int *);
+
+
+size_t strlcat (char *, const char *, size_t);
+size_t strlcpy (char *, const char *, size_t);
+
+
+int strncasecmp (const char *, const char *, size_t);
+
+
+
+size_t strnlen (const char *, size_t);
+
+
+char *strsep (char **, const char *);
+
+
+
+
+
+
+
+char *strlwr (char *);
+char *strupr (char *);
+
+
+
+char *strsignal (int __signo);
+
+
+
+#pragma GCC diagnostic pop
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wundef"
+
+
+
+
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wundef"
+typedef __int8_t int8_t ;
+typedef __uint8_t uint8_t ;
+
+
+
+
+typedef __int16_t int16_t ;
+typedef __uint16_t uint16_t ;
+
+
+
+
+typedef __int32_t int32_t ;
+typedef __uint32_t uint32_t ;
+
+
+
+
+typedef __int64_t int64_t ;
+typedef __uint64_t uint64_t ;
+
+
+
+typedef __intptr_t intptr_t;
+typedef __uintptr_t uintptr_t;
+
+
+
+
+
+
+
+typedef long int __off_t;
+typedef int __pid_t;
+
+__extension__ typedef long long int __loff_t;
+
+
+
+
+
+typedef long __suseconds_t;
+typedef unsigned char u_char;
+
+
+
+typedef unsigned short u_short;
+
+
+
+typedef unsigned int u_int;
+
+
+
+typedef unsigned long u_long;
+
+
+
+
+
+typedef unsigned short ushort;
+typedef unsigned int uint;
+typedef unsigned long ulong;
+
+
+
+typedef unsigned long clock_t;
+
+
+
+
+typedef long time_t;
+
+
+
+
+typedef long daddr_t;
+
+
+
+typedef char * caddr_t;
+typedef unsigned short ino_t;
+typedef _off_t off_t;
+typedef __dev_t dev_t;
+typedef __uid_t uid_t;
+typedef __gid_t gid_t;
+
+
+
+
+
+typedef int pid_t;
+
+
+
+
+
+
+
+typedef long key_t;
+
+typedef _ssize_t ssize_t;
+typedef unsigned int mode_t __attribute__ ((__mode__ (__SI__)));
+
+
+
+
+typedef unsigned short nlink_t;
+typedef long fd_mask;
+
+
+
+
+
+
+
+typedef struct _types_fd_set {
+ fd_mask fds_bits[(((64)+(((sizeof (fd_mask) * 8))-1))/((sizeof (fd_mask) * 8)))];
+} _types_fd_set;
+typedef unsigned long clockid_t;
+
+
+
+
+typedef unsigned long timer_t;
+
+
+
+typedef unsigned long useconds_t;
+
+
+typedef __suseconds_t suseconds_t;
+
+
+
+typedef __int64_t sbintime_t;
+#pragma GCC diagnostic pop
+
+
+
+
+
+
+
+
+int bcmp (const void *, const void *, size_t);
+void bcopy (const void *, void *, size_t);
+void bzero (void *, size_t);
+char *index (const char *, int);
+char *rindex (const char *, int);
+
+
+int ffs (int);
+int strcasecmp (const char *, const char *);
+int strncasecmp (const char *, const char *, size_t);
+
+
+
+#pragma GCC diagnostic pop
+void delay(unsigned int);
+
+void delay_us(unsigned int);
+
+
+extern int putchar(int a);
+extern int puts(const char *out);
+
+
+
+
+void put_buf(const u8 *buf, int len);
+int printf(const char *format, ...);
+int assert_printf(const char *format, ...);
+int sprintf(char *out, const char *format, ...);
+int vprintf(const char *fmt, __builtin_va_list va);
+int vsnprintf(char *, unsigned long, const char *, __builtin_va_list);
+int snprintf(char *buf, unsigned long size, const char *fmt, ...);
+int print(char **out, char *end, const char *format, va_list args);
+
+
+int sscanf(const char *buf, const char *fmt, ...);
+
+struct logbuf {
+    u16 len;
+    u16 buf_len;
+    char buf[0];
+};
+int log_output_lock();
+
+void log_output_unlock();
+
+void log_print_time();
+
+void log_early_init(int buf_size);
+
+void log_level(int level);
+
+void log_print(int level, const char *tag, const char *format, ...);
+
+void log_dump(const u8 *buf, int len);
+
+struct logbuf *log_output_start(int len);
+
+void log_output_end(struct logbuf *);
+
+void log_putchar(struct logbuf *lb, char c);
+
+void log_put_u8hex(struct logbuf *lb, unsigned char dat);
+
+void log_putbyte(char);
+
+
+
+void log_flush();
+extern void __local_irq_disable() ;
+
+extern void __local_irq_enable() ;
+
+extern void local_irq_disable();
+extern void local_irq_enable();
+static inline void q32DSP_testset(u8 volatile *ptr)
+{
+    asm volatile(
+        " 1:            \n\t "
+        " testset b[%0] \n\t "
+        " ifeq goto 1b  \n\t "
+        :
+        : "p"(ptr)
+        : "memory"
+    );
+}
+
+static inline void q32DSP_testclr(u8 volatile *ptr)
+{
+    asm volatile(
+        " b[%0] = %1    \n\t "
+        :
+        : "p"(ptr), "r"(0)
+        : "memory"
+    );
+}
+extern volatile int cpu_lock_cnt[];
+extern volatile int irq_lock_cnt[];
+extern void cpu_assert_debug();
+extern const int config_asser;
+
+
+
+
+
+
+
+
+
+u16 CRC16(const void *ptr, u32 len);
+
+
+u16 CRC16_with_initval(const void *ptr, u32 len, u16 i_val);
+
+u16 CRC16_with_code(const void *ptr, u32 len, u16 code);
+
+void spi_crc16_set(u16 crc);
+u16 spi_crc16_get(void);
+
+void CrcDecode(void *buf, u16 len);
+
+u16 get_page_efuse(u32 page, u32 delay_cnt);
+void init_enc_key(u8 cmd);
+u32 get_sfc_enc_key(void);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+enum {
+    RCH_EN_250K = 0,
+    RCH_EN_16M,
+};
+
+
+
+enum {
+    OSC_CLOCK_IN_BT_OSC = 0,
+    OSC_CLOCK_IN_BT_OSC_X2,
+    OSC_CLOCK_IN_STD_24M,
+    OSC_CLOCK_IN_RTC_OSC,
+    OSC_CLOCK_IN_LRC_CLK,
+    OSC_CLOCK_IN_PAT,
+};
+
+
+
+enum {
+    PLL_96M_SEL_NULL = 0,
+
+    PLL_96M_SEL_7DIV2,
+    PLL_96M_SEL_5DIV2,
+    PLL_96M_SEL_4DIV2,
+    PLL_96M_SEL_3DIV2,
+    PLL_96M_SEL_1DIV1,
+
+
+
+    PLL1_96M_SEL_7DIV2,
+    PLL1_96M_SEL_5DIV2,
+    PLL1_96M_SEL_4DIV2,
+    PLL1_96M_SEL_3DIV2,
+    PLL1_96M_SEL_1DIV1,
+
+};
+
+
+
+enum {
+    PLL_48M_SEL_DIV2 = 0,
+    PLL_48M_SEL_DIV1,
+};
+enum {
+    PLL_SYS_SEL_NULL = 0,
+    PLL_SYS_SEL_7DIV2,
+    PLL_SYS_SEL_5DIV2,
+    PLL_SYS_SEL_4DIV2,
+    PLL_SYS_SEL_3DIV2,
+    PLL_SYS_SEL_1DIV1,
+
+
+    PLL1_SYS_SEL_7DIV2,
+    PLL1_SYS_SEL_5DIV2,
+    PLL1_SYS_SEL_4DIV2,
+    PLL1_SYS_SEL_3DIV2,
+    PLL1_SYS_SEL_1DIV1,
+
+};
+
+
+
+enum {
+    PLL_SYS_DIV1 = 0,
+    PLL_SYS_DIV3,
+    PLL_SYS_DIV5,
+    PLL_SYS_DIV7,
+
+    PLL_SYS_DIV1X2 = 4,
+    PLL_SYS_DIV3X2,
+    PLL_SYS_DIV5X2,
+    PLL_SYS_DIV7X2,
+
+    PLL_SYS_DIV1X4 = 8,
+    PLL_SYS_DIV3X4,
+    PLL_SYS_DIV5X4,
+    PLL_SYS_DIV7X4,
+
+    PLL_SYS_DIV1X8 = 12,
+    PLL_SYS_DIV3X8,
+    PLL_SYS_DIV5X8,
+    PLL_SYS_DIV7X8,
+};
+
+
+
+
+enum {
+    MAIN_CLOCK_IN_RC_250K = 0,
+    MAIN_CLOCK_IN_PAT,
+    MAIN_CLOCK_IN_RTC_OSC,
+    MAIN_CLOCK_IN_RC,
+    MAIN_CLOCK_IN_BTOSC,
+    MAIN_CLOCK_IN_BTOSC_X2,
+    MAIN_CLOCK_IN_PLL,
+    MAIN_CLOCK_IN_RTOSC_L,
+};
+
+
+
+enum {
+    SFR_CLOCK_IDLE = 0,
+    SFR_CLOCK_ALWAYS_ON,
+};
+
+
+
+
+enum {
+    BT_CLOCK_IN_PLL48M = 0,
+    BT_CLOCK_IN_HSB,
+    BT_CLOCK_IN_LSB,
+    BT_CLOCK_IN_DISABLE,
+};
+
+
+
+
+
+
+
+enum {
+    PLL_ALNK_192M_DIV17 = 0,
+    PLL_ALNK_480M_DIV39,
+};
+
+
+
+enum {
+    USB_CLOCK_IN_PLL48M = 0,
+    USB_CLOCK_IN_OSC,
+    USB_CLOCK_IN_LSB,
+    USB_CLOCK_IN_DISABLE,
+};
+
+
+
+enum {
+    UART_CLOCK_IN_PLL24M = 0,
+    UART_CLOCK_IN_OSC,
+    UART_CLOCK_IN_LSB,
+    UART_CLOCK_IN_DISABLE,
+};
+
+
+
+enum {
+    PLL_APC_SEL_PLL192M = 0,
+    PLL_APC_SEL_PLL137M,
+    PLL_APC_SEL_PLL107M,
+    PLL_APC_SEL_DISABLE,
+};
+
+
+
+enum {
+    PLL_FM_DIV1 = 0,
+    PLL_FM_DIV3,
+    PLL_FM_DIV5,
+    PLL_FM_DIV7,
+
+    PLL_FM_DIV1X2 = 4,
+    PLL_FM_DIV3X2,
+    PLL_FM_DIV5X2,
+    PLL_FM_DIV7X2,
+
+    PLL_FM_DIV1X4 = 8,
+    PLL_FM_DIV3X4,
+    PLL_FM_DIV5X4,
+    PLL_FM_DIV7X4,
+
+    PLL_FM_DIV1X8 = 12,
+    PLL_FM_DIV3X8,
+    PLL_FM_DIV5X8,
+    PLL_FM_DIV7X8,
+};
+
+
+enum {
+    GPCNT_CLOCK_IN_NULL = 0,
+    GPCNT_CLOCK_IN_SRC,
+    GPCNT_CLOCK_IN_ORG,
+    GPCNT_CLOCK_IN_HSB,
+    GPCNT_CLOCK_IN_XOSC_FSCK,
+    GPCNT_CLOCK_IN_BTOSC_48M,
+    GPCNT_CLOCK_IN_WL,
+    GPCNT_CLOCK_IN_USB,
+    GPCNT_CLOCK_IN_PMU_ANA,
+    GPCNT_CLOCK_IN_VAD_VCON0,
+    GPCNT_CLOCK_IN_VAD_VCOP0,
+    GPCNT_CLOCK_IN_RC_16M,
+    GPCNT_CLOCK_IN_P33_RC_250k,
+    GPCNT_CLOCK_IN_LRC,
+    GPCNT_CLOCK_IN_DPLL_OUT,
+    GPCNT_CLOCK_IN_RTC_OSC,
+};
+enum {
+    PLL_RSEL_RCLK = 0,
+    PLL_RSEL_RCH,
+    PLL_RSEL_DPLL_CLK,
+    PLL_RSEL_PAT_CLK,
+};
+
+
+
+enum {
+    PLL_REF_SEL_BTOSC_DIFF = 0,
+    PLL_REF_SEL_RCLK,
+};
+
+
+
+
+enum {
+    PLL_DIVn_EN_X2 = 0,
+    PLL_DIVn_DIS_DIV1,
+    PLL_DIVn_EN_DIVn,
+};
+enum {
+    GPCNT_CSS_LSB = 0,
+    GPCNT_CSS_OSC,
+    GPCNT_CSS_INPUT_CH2,
+    GPCNT_CSS_INPUT_CH3,
+    GPCNT_CSS_CLOCK_IN,
+    GPCNT_CSS_RING,
+    GPCNT_CSS_PLL,
+    GPCNT_CSS_INTPUT_CH1,
+};
+
+
+
+
+
+
+enum {
+    GPCNT_GSS_LSB = 0,
+    GPCNT_GSS_OSC,
+    GPCNT_GSS_INPUT_CH14,
+    GPCNT_GSS_INPUT_CH15,
+    GPCNT_GSS_CLOCK_IN,
+    GPCNT_GSS_RING,
+    GPCNT_GSS_PLL,
+    GPCNT_GSS_INPUT_CH13,
+};
+
+
+typedef int SYS_CLOCK_INPUT;
+
+typedef enum {
+    SYS_ICLOCK_INPUT_BTOSC,
+    SYS_ICLOCK_INPUT_RTOSCH,
+    SYS_ICLOCK_INPUT_RTOSCL,
+    SYS_ICLOCK_INPUT_PAT,
+} SYS_ICLOCK_INPUT;
+
+typedef enum {
+    ALINK_CLOCK_12M288K,
+    ALINK_CLOCK_11M2896K,
+} ALINK_INPUT_CLK_TYPE;
+
+typedef enum {
+    TDM_CLOCK_12M288K,
+    TDM_CLOCK_11M2896K,
+} TDM_INPUT_CLK_TYPE;
+
+
+
+
+
+struct clock_critical_handler {
+    void (*enter)();
+    void (*exit)();
+};
+
+
+
+
+
+extern struct clock_critical_handler clock_critical_handler_begin[];
+extern struct clock_critical_handler clock_critical_handler_end[];
+
+
+
+
+
+int clk_early_init(u8 sys_in, u32 input_freq, u32 out_freq);
+
+int clk_get(const char *name);
+
+int clk_set(const char *name, int clk);
+
+int clk_set_sys_lock(int clk, int lock_en);
+
+enum CLK_OUT_SOURCE {
+    LRC_CLK_OUT,
+    P33_RCLK_CLK_OUT,
+    RC16M_CLK_OUT,
+    RTC_OSC_CLK_OUT,
+    BTOSC_24M_CLK_OUT,
+    BTOSC_48M_CLK_OUT,
+    STD_12M_CLK_OUT,
+    STD_24M_CLK_OUT,
+    STD_48M_CLK_OUT,
+    HSB_CLK_OUT,
+    LSB_CLK_OUT,
+    PLL_96M_CLK_OUT,
+    XXX_CLK_OUT_0,
+    XXX_CLK_OUT_1,
+    XXX_CLK_OUT_2,
+    XXX_CLK_OUT_3,
+};
+
+enum XXX_CLK_OUT_0_1_SOURCE {
+    SRC_CLK_OUT = 12,
+    IMD_CLK_OUT,
+    PSRAM_CLK_OUT,
+    XOSC_CLK_OUT,
+};
+
+enum XXX_CLK_OUT_2_3_SOURCE {
+    PLL_ALNK0_CLK_OUT = 12,
+    RF_CLKO75M_CLK_OUT,
+    DCDC_CLK_OUT,
+    DPLL_CLK_OUT,
+};
+
+void clk_out(u8 gpio, enum CLK_OUT_SOURCE clk);
+
+void clock_dump(void);
+
+
+enum sys_clk {
+    SYS_24M = 24 * (1000000L),
+    SYS_32M = 32 * (1000000L),
+    SYS_48M = 48 * (1000000L),
+    SYS_64M = 64 * (1000000L),
+    SYS_76M = 76800000,
+    SYS_80M = 80 * (1000000L),
+    SYS_96M = 96 * (1000000L),
+    SYS_120M = 120 * (1000000L),
+    SYS_128M = 128 * (1000000L),
+    SYS_160M = 160 * (1000000L),
+};
+
+enum clk_mode {
+    CLOCK_MODE_ADAPTIVE = 0,
+    CLOCK_MODE_USR,
+};
+
+
+void sys_clk_set(enum sys_clk clk);
+
+void clk_voltage_init(u8 mode, u8 sys_dvdd);
+
+
+void clk_set_osc_cap(u8 sel_l, u8 sel_r);
+
+u32 clk_get_osc_cap();
+
+void audio_link_clock_sel(ALINK_INPUT_CLK_TYPE type);
+
+void tdm_clock_sel(TDM_INPUT_CLK_TYPE type);
+void clock_set_sfc_max_freq(u32 dual_max_freq, u32 quad_max_freq);
+
+
+
+
+
+void clock_set_lowest_voltage(u32 dvdd_lev);
+
+
+
+
+
+
+
+void clock_set_pll_target_frequency(u32 freq);
+
+u32 clock_get_pll_target_frequency();
+int clock_get_sfc_baud(void);
+
+
+
+enum {
+    INPUT_CH0,
+    INPUT_CH1,
+    INPUT_CH2,
+    INPUT_CH3,
+};
+
+enum {
+    LOW_POWER_FREE = 0,
+    LOW_POWER_KEEP = 1,
+};
+enum gpio_op_mode {
+    GPIO_SET = 1,
+    GPIO_AND,
+    GPIO_OR,
+    GPIO_XOR,
+};
+enum gpio_direction {
+    GPIO_OUT = 0,
+    GPIO_IN = 1,
+};
+struct gpio_reg {
+    volatile unsigned int out;
+    volatile unsigned int in;
+    volatile unsigned int dir;
+    volatile unsigned int die;
+    volatile unsigned int pu;
+    volatile unsigned int pd;
+    volatile unsigned int hd0;
+    volatile unsigned int hd;
+    volatile unsigned int dieh;
+};
+
+struct gpio_platform_data {
+    unsigned int gpio;
+};
+void usb_iomode(u32 enable);
+int gpio_set_direction(u32 gpio, u32 dir);
+int gpio_set_output_value(u32 gpio, u32 dir);
+u32 gpio_dir(u32 gpio, u32 start, u32 len, u32 dat, enum gpio_op_mode op);
+int gpio_direction_output(u32 gpio, int value);
+u32 gpio_out(u32 gpio, u32 start, u32 len, u32 dat);
+int gpio_set_pull_up(u32 gpio, int value);
+u32 gpio_set_pu(u32 gpio, u32 start, u32 len, u32 dat, enum gpio_op_mode op);
+int gpio_set_pull_down(u32 gpio, int value);
+u32 gpio_set_pd(u32 gpio, u32 start, u32 len, u32 dat, enum gpio_op_mode op);
+u32 gpio_set_hd0(u32 gpio, u32 value);
+int gpio_set_hd(u32 gpio, int value);
+int gpio_set_die(u32 gpio, int value);
+u32 gpio_set_dieh(u32 gpio, u32 value);
+u32 gpio_die(u32 gpio, u32 start, u32 len, u32 dat, enum gpio_op_mode op);
+u32 gpio_dieh(u32 gpio, u32 start, u32 len, u32 dat, enum gpio_op_mode op);
+u32 gpio_output_channle(u32 gpio, u32 clk);
+int gpio_read(u32 gpio);
+u32 gpio_in(u32 gpio);
+u32 gpio_write(u32 gpio, u32 value);
+u32 gpio_wakeup0(u32 gpio);
+u32 gpio_irflt_in(u32 gpio);
+u32 gpio_cap_mux(u32 gpio);
+u32 gpio_uart_rx_input(u32 gpio, u32 ut, u32 ch);
+
+
+
+
+
+
+u32 gpio_close_uart0(void);
+
+
+
+
+
+
+u32 gpio_close_uart1(void);
+
+
+
+
+
+
+u32 gpio_close_uart2(void);
+u32 gpio_set_uart0(u32 ch);
+u32 gpio_set_uart1(u32 ch);
+u32 gpio_set_uart2(u32 ch);
+
+enum {
+    IRFLT_LSB,
+    IRFLT_RC,
+    IRFLT_OSC,
+    IRFLT_PLL48M,
+};
+enum {
+    IRFLT_DIV1,
+    IRFLT_DIV2,
+    IRFLT_DIV4,
+    IRFLT_DIV8,
+    IRFLT_DIV16,
+    IRFLT_DIV32,
+    IRFLT_DIV64,
+    IRFLT_DIV128,
+    IRFLT_DIV256,
+    IRFLT_DIV512,
+    IRFLT_DIV1024,
+    IRFLT_DIV2048,
+    IRFLT_DIV4096,
+    IRFLT_DIV8192,
+    IRFLT_DIV16384,
+    IRFLT_DIV32768,
+};
+u32 gpio_irflt_to_timer(u32 t);
+
+
+u32 get_gpio(const char *p);
+
+
+
+
+
+enum PFI_TABLE {
+    PFI_GP_ICH0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH0))),
+    PFI_GP_ICH1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH1))),
+    PFI_GP_ICH2 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH2))),
+    PFI_GP_ICH3 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH3))),
+    PFI_GP_ICH4 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH4))),
+    PFI_GP_ICH5 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH5))),
+    PFI_GP_ICH6 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH6))),
+    PFI_GP_ICH7 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH7))),
+    PFI_GP_ICH8 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH8))),
+    PFI_GP_ICH9 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH9))),
+    PFI_GP_ICH10 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH10))),
+    PFI_GP_ICH11 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH11))),
+    PFI_GP_ICH12 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH12))),
+    PFI_GP_ICH13 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_GP_ICH13))),
+    PFI_SPI0_CLK = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI0_CLK))),
+    PFI_SPI0_DA0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI0_DA0))),
+    PFI_SPI0_DA1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI0_DA1))),
+    PFI_SPI0_DA2 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI0_DA2))),
+    PFI_SPI0_DA3 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI0_DA3))),
+    PFI_SPI1_CLK = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI1_CLK))),
+    PFI_SPI1_DA0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI1_DA0))),
+    PFI_SPI1_DA1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI1_DA1))),
+    PFI_SPI1_DA2 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI1_DA2))),
+    PFI_SPI1_DA3 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI1_DA3))),
+    PFI_SPI2_CLK = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI2_CLK))),
+    PFI_SPI2_DA0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI2_DA0))),
+    PFI_SPI2_DA1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI2_DA1))),
+    PFI_SPI2_DA2 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI2_DA2))),
+    PFI_SPI2_DA3 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SPI2_DA3))),
+    PFI_SD0_CMD = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SD0_CMD))),
+    PFI_SD0_DA0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SD0_DA0))),
+    PFI_SD0_DA1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SD0_DA1))),
+    PFI_SD0_DA2 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SD0_DA2))),
+    PFI_SD0_DA3 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_SD0_DA3))),
+    PFI_IIC_SCL = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_IIC_SCL))),
+    PFI_IIC_SDA = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_IIC_SDA))),
+    PFI_UART0_RX = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_UART0_RX))),
+    PFI_UART1_RX = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_UART1_RX))),
+    PFI_UART1_CTS = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_UART1_CTS))),
+    PFI_UART2_RX = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_UART2_RX))),
+    PFI_TDM_S_WCK = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_TDM_S_WCK))),
+    PFI_TDM_S_BCK = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_TDM_S_BCK))),
+    PFI_TDM_M_DA = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_TDM_M_DA))),
+    PFI_RDEC0_DAT0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_RDEC0_DAT0))),
+    PFI_RDEC0_DAT1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_RDEC0_DAT1))),
+    PFI_RDEC1_DAT0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_RDEC1_DAT0))),
+    PFI_RDEC1_DAT1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_RDEC1_DAT1))),
+    PFI_RDEC2_DAT0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_RDEC2_DAT0))),
+    PFI_RDEC2_DAT1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_RDEC2_DAT1))),
+    PFI_ALNK0_MCLK = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_ALNK0_MCLK))),
+    PFI_ALNK0_LRCK = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_ALNK0_LRCK))),
+    PFI_ALNK0_SCLK = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_ALNK0_SCLK))),
+    PFI_ALNK0_DAT0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_ALNK0_DAT0))),
+    PFI_ALNK0_DAT1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_ALNK0_DAT1))),
+    PFI_ALNK0_DAT2 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_ALNK0_DAT2))),
+    PFI_ALNK0_DAT3 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_ALNK0_DAT3))),
+    PFI_PLNK_DAT0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_PLNK_DAT0))),
+    PFI_PLNK_DAT1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_PLNK_DAT1))),
+    PFI_CHAIN_IN0 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_CHAIN_IN0))),
+    PFI_CHAIN_IN1 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_CHAIN_IN1))),
+    PFI_CHAIN_IN2 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_CHAIN_IN2))),
+    PFI_CHAIN_IN3 = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_CHAIN_IN3))),
+    PFI_CHAIN_RST = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_CHAIN_RST))),
+    PFI_TOTAl = ((u32)(&(((JL_IMAP_TypeDef *)(0xfd0000 + ((64 * 0x5c + 0x00) * 4)))->FI_TOTAL))),
+};
+
+enum OUTPUT_CH_SIGNAL {
+    OUTPUT_CH_SIGNAL_MC_PWM0_H = 0,
+    OUTPUT_CH_SIGNAL_MC_PWM0_L,
+    OUTPUT_CH_SIGNAL_MC_PWM1_H,
+    OUTPUT_CH_SIGNAL_MC_PWM1_L,
+    OUTPUT_CH_SIGNAL_MC_PWM2_H,
+    OUTPUT_CH_SIGNAL_MC_PWM2_L,
+    OUTPUT_CH_SIGNAL_MC_PWM3_H,
+    OUTPUT_CH_SIGNAL_MC_PWM3_L,
+    OUTPUT_CH_SIGNAL_TIMER0_PWM,
+    OUTPUT_CH_SIGNAL_TIMER1_PWM,
+    OUTPUT_CH_SIGNAL_TIMER2_PWM,
+    OUTPUT_CH_SIGNAL_TIMER3_PWM,
+    OUTPUT_CH_SIGNAL_TIMER4_PWM,
+    OUTPUT_CH_SIGNAL_TIMER5_PWM,
+    OUTPUT_CH_SIGNAL_CLOCK_OUT0,
+    OUTPUT_CH_SIGNAL_CLOCK_OUT1,
+    OUTPUT_CH_SIGNAL_CLOCK_OUT2,
+    OUTPUT_CH_SIGNAL_CLOCK_OUT3,
+};
+
+enum INPUT_CH_TYPE {
+    INPUT_CH_TYPE_GP_ICH = 0,
+    INPUT_CH_TYPE_TIME0_PWM = 14,
+    INPUT_CH_TYPE_TIME1_PWM,
+};
+
+enum INPUT_CH_SIGNAL {
+
+    INPUT_CH_SIGNAL_TIMER0_CIN = 0,
+    INPUT_CH_SIGNAL_TIMER0_CAPTURE,
+    INPUT_CH_SIGNAL_TIMER1_CIN,
+    INPUT_CH_SIGNAL_TIMER1_CAPTURE,
+    INPUT_CH_SIGNAL_TIMER2_CIN,
+    INPUT_CH_SIGNAL_TIMER2_CAPTURE,
+    INPUT_CH_SIGNAL_TIMER3_CIN,
+    INPUT_CH_SIGNAL_TIMER3_CAPTURE,
+
+
+    INPUT_CH_SIGNAL_TIMER4_CIN,
+    INPUT_CH_SIGNAL_TIMER4_CAPTURE,
+    INPUT_CH_SIGNAL_TIMER5_CIN,
+    INPUT_CH_SIGNAL_TIMER5_CAPTURE,
+    INPUT_CH_SIGNAL_WAKEUP,
+    INPUT_CH_SIGNAL_IRFLT,
+    INPUT_CH_SIGNAL_CAP,
+    INPUT_CH_SIGNAL_CLK_PIN,
+
+
+    INPUT_CH_SIGNAL_WLC_EXT_ACT,
+    INPUT_CH_SIGNAL_LCD_TE,
+    INPUT_CH_SIGNAL_MC_CKPIN0,
+    INPUT_CH_SIGNAL_MC_CKPIN1,
+    INPUT_CH_SIGNAL_MC_CKPIN2,
+    INPUT_CH_SIGNAL_MC_CKPIN3,
+    INPUT_CH_SIGNAL_MC_FPIN0,
+    INPUT_CH_SIGNAL_MC_FPIN1,
+
+
+    INPUT_CH_SIGNAL_MC_FPIN2,
+    INPUT_CH_SIGNAL_MC_FPIN3,
+    INPUT_CH_SIGNAL_RESERVE0,
+    INPUT_CH_SIGNAL_RESERVE1,
+    INPUT_CH_SIGNAL_RESERVE2,
+    INPUT_CH_SIGNAL_RESERVE3,
+    INPUT_CH_SIGNAL_RESERVE4,
+    INPUT_CH_SIGNAL_RESERVE5,
+};
+u32 *gpio2crossbar_outreg(u32 gpio);
+u32 gpio2crossbar_inport(u32 gpio);
+int gpio_set_fun_output_port(u32 gpio, u32 fun_index, u8 dir_ctl, u8 data_ctl, u8 low_power_mode);
+
+u32 gpio_get_ompap_low_power_mode(u32 offset);
+int gpio_disable_fun_output_port(u32 gpio);
+int gpio_set_fun_input_port(u32 gpio, enum PFI_TABLE pfun, u32 low_power_mode);
+u32 gpio_get_impap_low_power_mode(u32 offset);
+int gpio_disable_fun_input_port(enum PFI_TABLE pfun);
+int gpio_och_sel_output_signal(u32 gpio, enum OUTPUT_CH_SIGNAL signal);
+int gpio_och_disable_output_signal(u32 gpio, enum OUTPUT_CH_SIGNAL signal);
+int gpio_ich_sel_iutput_signal(u32 gpio, enum INPUT_CH_SIGNAL signal, enum INPUT_CH_TYPE type);
+int gpio_ich_disable_iutput_signal(u32 gpio, enum INPUT_CH_SIGNAL signal, enum INPUT_CH_TYPE type);
+void gpio_reset_pin0_init(u32 pin, u32 level, u32 time);
+
+
+
+
+
+u32 get_sfc_port(void);
+
+
+
+
+
+
+
+
+void efuse_init();
+u16 get_chip_id();
+u16 get_vbat_trim();
+u16 get_vbat_trim_435();
+u16 get_vbg_trim();
+u8 get_sysdvdd_trim();
+u32 get_chip_version();
+
+
+
+
+
+
+
+u16 get_lrc_ws_inc();
+u16 get_lrc_ws_init();
+u16 get_btosc_ws_inc();
+u16 get_btosc_ws_init();
+u8 get_lrc_change_mode();
+u8 get_wvdd_level_trim();
+u8 get_imd_level();
+
+u32 get_boot_flag();
+void set_boot_flag(u32 flag);
+
+void wdt_init(u8 time);
+void wdt_close(void);
+void wdt_clear(void);
+
+void wdt_enable(void);
+void wdt_disable(void);
+
+u32 wdt_get_time(void);
+
+void debug_init();
+void exception_analyze();
+
+
+
+u32 get_dev_id(char *name);
+void mpu_set(int idx, u32 begin, u32 end, u32 inv, const char *format, ...);
+void mpu_disable_by_index(u8 idx);
+
+
+
+
+
+
+
+void mpu_diasble(void);
+
+
+
+
+
+
+
+void flash_pc_limit_disable();
+
+
+
+
+
+
+void flash_pc_limit_enable();
+
+u8 p33_buf(u8 buf);
+enum {
+    VDC13_VOL_SEL_100V = 0,
+    VDC13_VOL_SEL_105V,
+    VDC13_VOL_SEL_1075V,
+    VDC13_VOL_SEL_110V,
+    VDC13_VOL_SEL_1125V,
+    VDC13_VOL_SEL_115V,
+    VDC13_VOL_SEL_1175V,
+    VDC13_VOL_SEL_120V,
+    VDC13_VOL_SEL_1225V,
+    VDC13_VOL_SEL_125V,
+    VDC13_VOL_SEL_1275V,
+    VDC13_VOL_SEL_130V,
+    VDC13_VOL_SEL_1325V,
+    VDC13_VOL_SEL_135V,
+    VDC13_VOL_SEL_1375V,
+    VDC13_VOL_SEL_140V,
+};
+enum {
+    BTDCDC_OSC_SEL0520KHz = 0,
+    BTDCDC_OSC_SEL0762KHz,
+    BTDCDC_OSC_SEL0997KHz,
+    BTDCDC_OSC_SEL1220KHz,
+    BTDCDC_OSC_SEL1640KHz,
+    BTDCDC_OSC_SEL1840KHz,
+    BTDCDC_OSC_SEL2040KHz,
+    BTDCDC_OSC_SEL2220MHz,
+};
+enum {
+    SYSVDD_VOL_SEL_081V = 0,
+    SYSVDD_VOL_SEL_084V,
+    SYSVDD_VOL_SEL_087V,
+    SYSVDD_VOL_SEL_090V,
+    SYSVDD_VOL_SEL_093V,
+    SYSVDD_VOL_SEL_096V,
+    SYSVDD_VOL_SEL_099V,
+    SYSVDD_VOL_SEL_102V,
+    SYSVDD_VOL_SEL_105V,
+    SYSVDD_VOL_SEL_108V,
+    SYSVDD_VOL_SEL_111V,
+    SYSVDD_VOL_SEL_114V,
+    SYSVDD_VOL_SEL_117V,
+    SYSVDD_VOL_SEL_120V,
+    SYSVDD_VOL_SEL_123V,
+    SYSVDD_VOL_SEL_126V,
+};
+enum {
+    RVDD_VOL_SEL_081V = 0,
+    RVDD_VOL_SEL_084V,
+    RVDD_VOL_SEL_087V,
+    RVDD_VOL_SEL_090V,
+    RVDD_VOL_SEL_093V,
+    RVDD_VOL_SEL_096V,
+    RVDD_VOL_SEL_099V,
+    RVDD_VOL_SEL_102V,
+    RVDD_VOL_SEL_105V,
+    RVDD_VOL_SEL_108V,
+    RVDD_VOL_SEL_111V,
+    RVDD_VOL_SEL_114V,
+    RVDD_VOL_SEL_117V,
+    RVDD_VOL_SEL_120V,
+    RVDD_VOL_SEL_123V,
+    RVDD_VOL_SEL_126V,
+};
+enum {
+    WVDD_VOL_SEL_050V = 0,
+    WVDD_VOL_SEL_055V,
+    WVDD_VOL_SEL_060V,
+    WVDD_VOL_SEL_065V,
+    WVDD_VOL_SEL_070V,
+    WVDD_VOL_SEL_075V,
+    WVDD_VOL_SEL_080V,
+    WVDD_VOL_SEL_085V,
+    WVDD_VOL_SEL_090V,
+    WVDD_VOL_SEL_095V,
+    WVDD_VOL_SEL_100V,
+    WVDD_VOL_SEL_105V,
+    WVDD_VOL_SEL_110V,
+    WVDD_VOL_SEL_115V,
+    WVDD_VOL_SEL_120V,
+    WVDD_VOL_SEL_125V,
+};
+enum {
+    EVD_VOL_SEL_100V = 0,
+    EVD_VOL_SEL_105V,
+    EVD_VOL_SEL_110V,
+    EVD_VOL_SEL_115V,
+};
+enum {
+    CHARGE_DET_VOL_365V,
+    CHARGE_DET_VOL_375V,
+    CHARGE_DET_VOL_385V,
+    CHARGE_DET_VOL_395V,
+};
+enum {
+    VLVD_SEL_18V = 0,
+    VLVD_SEL_19V,
+    VLVD_SEL_20V,
+    VLVD_SEL_21V,
+    VLVD_SEL_22V,
+    VLVD_SEL_23V,
+    VLVD_SEL_24V,
+    VLVD_SEL_25V,
+};
+enum {
+    CLK_SEL_32K = 1,
+    CLK_SEL_12M,
+    CLK_SEL_24M,
+    CLK_SEL_LRC,
+};
+
+
+
+
+
+
+void udelay(u32 us);
+void mdelay(u32 us);
+void delay_2ms(int cnt);
+u32 timer_get_sec(void);
+u32 timer_get_ms(void);
+
+
+
+
+
+
+
+
+
+
+
+
+struct sys_time {
+    u16 year;
+    u8 month;
+    u8 day;
+    u8 hour;
+    u8 min;
+    u8 sec;
+};
+
+
+struct rtc_dev_platform_data {
+    const struct sys_time *default_sys_time;
+    const struct sys_time *default_alarm;
+    void (*cbfun)(u8);
+    u8 clk_sel;
+    u8 x32xs;
+};
+extern const struct device_operations rtc_dev_ops;
+
+int rtc_init(const struct rtc_dev_platform_data *arg);
+int rtc_ioctl(u32 cmd, u32 arg);
+void set_alarm_ctrl(u8 set_alarm);
+void write_sys_time(struct sys_time *curr_time);
+void read_sys_time(struct sys_time *curr_time);
+void write_alarm(struct sys_time *alarm_time);
+void read_alarm(struct sys_time *alarm_time);
+
+u16 month_to_day(u16 year, u8 month);
+void day_to_ymd(u16 day, struct sys_time *sys_time);
+u16 ymd_to_day(struct sys_time *time);
+u8 caculate_weekday_by_time(struct sys_time *r_time);
+typedef struct _ex_api_t {
+
+    int (*printf)(const char *format, ...);
+    void (*put_buf)(u8 *buf, u32 len);
+    u16(*sys_timer_add)(void *priv, void (*func)(void *priv), u32 msec);
+    u16(*sys_timeout_add)(void *priv, void (*func)(void *priv), u32 msec);
+    void (*sys_timer_del)(u16 t);
+} ex_api_t;
+
+
+
+extern ex_api_t *p_ex_api;
+sdfile_vfs_ops
+sbc_decoder
+
+
+
+msbc_decoder
+
+
+
+sbc_hwaccel
+
+
+
+cvsd_decoder
+
+
+
+pcm_decoder

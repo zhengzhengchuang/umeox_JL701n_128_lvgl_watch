@@ -1,0 +1,9 @@
+#include "imb_demo.h"
+#include "../../../ui/jl_images/file_index.h"
+#include "../../../../../../cpu/br28/ui_driver/lvgl/lvgl_main.h"
+
+int cpuaddr = 0x4000000 + RES_BASE_ADDR;
+
+lv_open_font(cpuaddr + font_common_32_address + offset, size);
+
+return get_g_font_buf()
