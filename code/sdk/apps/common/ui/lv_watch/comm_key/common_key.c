@@ -39,6 +39,7 @@ static void enable_te_timeout_cb(void *priv)
     if(lcd->backlight_ctrl)
         lcd->backlight_ctrl((uint8_t)lcd_backlight);
 
+    /*TODO:亮屏包括：事件、抬腕亮屏*/
     ui_menu_load_info_t *menu_load_info = \
         &p_ui_info_cache->exit_menu_load_info;
     if(menu_load_info->disable_te)
@@ -87,7 +88,7 @@ void common_key_msg_handle(int key_value, int key_event)
             common_menu_lock_timer_del();
 
             if(!enable_te_timer_id)
-                enable_te_timer_id = sys_timeout_add(NULL, enable_te_timeout_cb, 40);
+                enable_te_timer_id = sys_timeout_add(NULL, enable_te_timeout_cb, 50);
         }
     }else
     {

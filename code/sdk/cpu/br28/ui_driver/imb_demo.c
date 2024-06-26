@@ -5085,8 +5085,6 @@ struct ui_res_info *ui_res_init()
 }
 
 void imb_large_image_scale_optimize_test(struct ui_res_info *info);
-s8 open_res(int n);
-
 
 void lvgl_disp_init(void *arg, void **buf1, void **buf2, int *lcd_w,int *lcd_h, int *colums, int *lines){
     printf("lvgl_task.\n");
@@ -6502,10 +6500,6 @@ static lv_res_t lv_draw_jl_imb_img(struct _lv_draw_ctx_t * draw_buf, const lv_dr
 //  判断是否为IMB头
     uint8_t * raw_imb_data = (uint8_t *)img_dsc->data;
 
-    // uint8_t dsc_buf[4] = {0};
-    // memcpy(dsc_buf, raw_imb_data, 4);
-    // printf("+++++++++%s:%s\n", __func__, dsc_buf);
-
     //put_buf(raw_imb_data,16);
     const uint32_t raw_imb_data_size = img_dsc->data_size;
     const uint8_t *imb_signature = "IMB";
@@ -7192,14 +7186,21 @@ void lv_draw_imb_img_decoded(struct _lv_draw_ctx_t * draw_ctx, const lv_draw_img
     int ph = coords->y2-coords->y1+1;  //图片绝对区域h
 
     //  支持的
-#if 1
-    if(((LV_IMG_CF_TRUE_COLOR == cf || LV_IMG_CF_TRUE_COLOR_ALPHA == cf) && (src_buf >= PSRAM_CACHE_ADDR)) /* 解压图片 */
+#if 0
+    if(((LV_IMG_CF_TRUE_COLOR == cf || LV_IMG_CF_TRUE_COLOR_ALPHA == cf) && (src_buf >= PSRAM_CACHE_ADDR))
         || LV_IMG_CF_RAW == cf) /* 压缩图片 */
     {
 
     }else 
     {
         lv_draw_sw_img_decoded(draw_ctx, draw_dsc,coords, src_buf, cf);
+        return;        
+    }
+#else 
+    if(LV_IMG_CF_RAW != cf) /* 压缩图片 */ 
+    {
+        lv_draw_sw_img_decoded(draw_ctx, draw_dsc,coords, src_buf, cf);
+
         return;        
     }
 #endif
@@ -7807,6 +7808,7 @@ int flash_tab_info_get(struct flash_file_info *file_info, u32 file_base_addr, u3
     return 0;
 }
 
+#if 0
 s8 open_res(int n){
     if(ui_res_gropu[n].resfile == NULL && ui_res_gropu[n].imbres){
         g_printf("打开分组资源");
@@ -7824,7 +7826,6 @@ s8 open_res(int n){
     }
 }
 
-
 int A2I(char* str) {
     int result = 0;
     int i = 0;
@@ -7837,7 +7838,6 @@ int A2I(char* str) {
 
     return result;
 }
-
 
 //  IMB资源获取文件信息
 int get_jl_img_info_by_group_incache(const void *src, struct image_file *file, lv_img_header_t * header)
@@ -7910,7 +7910,7 @@ int get_jl_img_info_by_group_incache(const void *src, struct image_file *file, l
 
     return -1;
 }
-
+#endif
 
 static u8 *usr_jpg_dec_stream_input(void *__fat_info, u32 *len, u32 offset_4k)
 {
@@ -7957,7 +7957,8 @@ static lv_res_t decoder_info(lv_img_decoder_t * decoder, const void * src, lv_im
     // put_buf(src,16);
     lv_img_src_t src_type = lv_img_src_get_type(src);          /*Get the source type*/
     lv_res_t ret = LV_RES_OK;
-    if(src_type == LV_IMG_SRC_VARIABLE) {
+    if(src_type == LV_IMG_SRC_VARIABLE) 
+    {
         const lv_img_dsc_t * img_dsc = src;
         uint8_t * raw_jpeg_data = (uint8_t *)img_dsc->data;
         const uint32_t raw_jpeg_data_size = img_dsc->data_size;
@@ -7974,10 +7975,11 @@ static lv_res_t decoder_info(lv_img_decoder_t * decoder, const void * src, lv_im
             header->w = img_dsc->header.w;
             return LV_RES_OK;
         }
+
         return LV_RES_INV;
     }
 
-
+#if 0
     //userdata  路径    图片尺寸
 
     //判断是否是文件名
@@ -7997,6 +7999,8 @@ static lv_res_t decoder_info(lv_img_decoder_t * decoder, const void * src, lv_im
     }
 
     printf("ui_group_n ==-1");
+#endif
+
     return LV_RES_INV;
 // printf("ui_group_n == %d", ui_group_n);
     // if(imgfile.len != 0){
@@ -8048,7 +8052,7 @@ static lv_res_t decoder_info(lv_img_decoder_t * decoder, const void * src, lv_im
     // }
     
 
-    return LV_RES_INV;
+    //return LV_RES_INV;
 }
 
 void jl_imb_init(void)
@@ -8902,65 +8906,50 @@ void close_fd(void)
 //  3.预先拷贝到PSRAM
 
 //  分区句柄，分区所在的物理地址，bin文件在分区的偏移，图片在bin文件中的地址长度，
-void lv_open_res(void *fd, int phyaddr, int offset, \
-    struct file_index_t res, lv_img_dsc_t*img_dst)
+//#include "../../../apps/common/include/norflash_sfc.h"
+void lv_open_res(void *fd, int phyaddr, int offset, struct file_index_t res, lv_img_dsc_t *img_dst)
 {
-    if(!fd) return;
+#if TCFG_VIRFAT_INSERT_FLASH_ENABLE
+    if(!img_dst) return;
 
-    //lv_close_res(img_dst);
     memset(img_dst, 0, sizeof(lv_img_dsc_t));
 
+    u32 cpuaddr = sdfile_flash_addr2cpu_addr(phyaddr + res.addr);
+    u8 *img_header = (u8 *)cpuaddr;
+    
+    memcpy(&(img_dst->header), img_header, sizeof(lv_img_header_t));
+    
 #if 0
-    u8 test[16];
-    dev_bulk_read(fd, test, 0, 16);
-    printf("BEGIN 16");
-    put_buf(test, 16);
+    // int cpuaddr = sdfile_flash_addr2cpu_addr(phyaddr);
+
+    // u8 *img_addr = cpuaddr + offset + res.addr;
+
+    // u8 buf[5] = {0};
+    // memcpy(buf, img_addr, 4);
+    // for(u8 i = 0; i < 4; i++)
+    //     printf("buf[%d] = %x\n", i, buf[i]);
+
+    memcpy(&(img_dst->header), img_addr, sizeof(lv_img_header_t));
+
+    
 #endif
 
-    //printf("file addr:%x", offset + res.addr);
+    img_dst->data = img_header + sizeof(lv_img_header_t);
+    img_dst->data_size = res.len - sizeof(lv_img_header_t);
+#else
+    if(!fd || !img_dst) return;
+
+    memset(img_dst, 0, sizeof(lv_img_dsc_t));
+
     dev_bulk_read(fd, &(img_dst->header), phyaddr + offset + res.addr, sizeof(lv_img_header_t));
-    // u8 *img_header = 0x4000000 + phyaddr + offset + res.addr;
-    // memcpy(img_dst, img_header, sizeof(lv_img_header_t));
-#if 0
-    lv_img_header_t tp;
-    dev_bulk_read(fd, &(tp), offset + res.addr, sizeof(lv_img_header_t));
-    put_buf(&tp, sizeof(lv_img_header_t));
-#endif
 
-#if TCFG_VIRFAT_INSERT_FLASH_ENABLE //内置FLASH资源
-    int cpuaddr = sdfile_flash_addr2cpu_addr(phyaddr);
-#else   //外挂FLASH资源
+    printf("%s:cf = %d, w = %d, h = %d\n", __func__, \
+        img_dst->header.cf, img_dst->header.w, img_dst->header.h);
+
     int cpuaddr = 0x4000000 + phyaddr;
-#endif
-    //printf("%s:res.addr = %d\n", __func__, res.addr);
-
+ 
     img_dst->data = cpuaddr + offset + res.addr + sizeof(lv_img_header_t);
     img_dst->data_size = res.len - sizeof(lv_img_header_t);
-#if 0
-    printf("zero %d, cf %d, h %d, re %d, w %d, addr %x, size %d",
-        img_dst->header.always_zero,
-        img_dst->header.cf,
-        img_dst->header.h,
-        img_dst->header.reserved,
-        img_dst->header.w,
-        img_dst->data,
-        img_dst->data_size
-    );
-#endif
-
-#if 0
-    printf("reserved = %d\n", img_dst->header.reserved);
-    if(img_dst->header.reserved == 0x1 && 1)//把资源copy到RAM
-    {    
-        img_dst->data = malloc(res.len);
-        if(img_dst->data == NULL){
-            printf("malloc fail %d", res.len);
-            return;
-        }
-        printf("malloc  %d", res.len);
-        dev_bulk_read(fd, img_dst->data, offset + res.addr + 4, res.len);
-        img_dst->header.reserved |= 0x2;
-    }
 #endif
 }
 
@@ -8980,15 +8969,13 @@ void lv_close_res(lv_img_dsc_t*img_dst)
 }
 #endif
 
-#if 1
-#define FONT_BUF_LEN (512)
-static u8 g_font_buf[FONT_BUF_LEN] ={0};
+#define FONT_LEN (512)
+static u8 g_font_buf[FONT_LEN];
 void lv_open_font(int offset, int len)
 {
-    if(len > FONT_BUF_LEN)
-        len = FONT_BUF_LEN;
+    if(len > FONT_LEN) len = FONT_LEN;
 
-    uint8_t *font_src_addr = (uint8_t *)offset;
+    u8 *font_src_addr = (u8 *)offset;
 
     memcpy(g_font_buf, font_src_addr, len);
 
@@ -8999,7 +8986,6 @@ u8 *get_g_font_buf(void)
 {
     return g_font_buf;
 }
-#endif
 
 #if 0
 // static void get_sys_time(struct sys_time *time)

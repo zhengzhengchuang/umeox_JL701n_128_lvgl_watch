@@ -46,9 +46,8 @@ static int norflash_f_open(u32 file_len)
     int ret = 0;
 
     if (__this) {
-        //__this->dev_hdl = dev_open("res_nor", NULL);
-        __this->dev_hdl = dev_open("usr_nor", NULL);
-        //__this->dev_hdl_noenc = dev_open("update_noenc", NULL);
+        __this->dev_hdl = dev_open("res_nor", NULL);
+        __this->dev_hdl_noenc = dev_open("update_noenc", NULL);
         if (__this->dev_hdl /*&& __this->dev_hdl_noenc*/) {
             log_info("open dev succ 0x%x, 0x%x\n", __this->dev_hdl, __this->dev_hdl_noenc);
         } else {

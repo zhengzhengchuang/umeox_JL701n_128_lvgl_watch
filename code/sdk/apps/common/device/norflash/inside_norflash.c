@@ -159,8 +159,6 @@ static int norflash_sfc_fs_dev_close(struct device *device)
     return 0;//_norflash_close();
 }
 
-
-
 static int norflash_sfc_fs_dev_read(struct device *device, void *buf, u32 len, u32 offset)
 {
     u32 rets;//, reti;
@@ -172,10 +170,13 @@ static int norflash_sfc_fs_dev_read(struct device *device, void *buf, u32 len, u
         log_error("norflash partition invalid\n");
         return -EFAULT;
     }
+
+    // printf("part->size = %d\n", part->size);
     if (offset + len > part->size) {
         log_error("__func__ %s %x %x %x\n", __func__, rets, offset, len);
         ASSERT(0);
     }
+    // printf("start_addr = %d\n", part->start_addr);
     offset += part->start_addr;
     norflash_mutex_enter();
     u32 cpu_addr = sdfile_flash_addr2cpu_addr(offset);

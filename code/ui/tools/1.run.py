@@ -3,6 +3,7 @@ import struct
 
 #自定义头名字
 head_name = 'file'
+font_name = 'font'
 
 # 打开文件并读取内容
 # file_path = "H-name.txt"  # 将文件路径替换为你的文件路径
@@ -212,6 +213,19 @@ extern const struct file_index_t file_index[];
 '''
 # print(define_text)
 
+font_text = f'#ifndef __USER_FONT_H__ \n'
+font_text += f'#define __USER_FONT_H__ \n'
+font_text += '''
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+'''
+# print(font_text)
+
+out_font_bin = b""
+font_address = 0x00000000
+
 current_address = 0x00000000
 output_bin = b""
 
@@ -224,15 +238,18 @@ for font in os.listdir(font_folder):
 for i in range(len(font_list)):
     file_name = os.path.join(font_folder, font_list[i])
     with open(file_name, mode="rb") as font_bin:
-        output_bin += font_bin.read()
+        out_font_bin += font_bin.read()
 
-    fontname_without_extension = os.path.splitext(font_list[i])[0] + "_address"
+    fontname_without_extension = os.path.splitext(font_list[i])[0] + "_addr"
     #print(fontname_without_extension)
-    define_text += f"#define {fontname_without_extension} (0x{current_address:08X})\n\n"
+    font_text += f"#define {fontname_without_extension} (0x{font_address:08X})\n\n"
 
     file_size = os.path.getsize(file_name)
     # print(file_size)
-    current_address += file_size
+    font_address += file_size
+
+with open(f"./bin_out/{font_name}.bin", "wb") as o_file:
+    o_file.write(out_font_bin)
 
 for index, filename in enumerate(bin_files):
     # print(index, filename)
@@ -266,7 +283,6 @@ for index, filename in enumerate(bin_files):
         padding = b"\x00" * (4 - (len(output_bin) % 4))
         output_bin += padding
         current_address += (len(padding) + len(file_data))
-        
 
 with open(f"./bin_out/{head_name}.bin", "wb") as o_file:
     o_file.write(output_bin)
@@ -285,7 +301,16 @@ define_text += f'#endif'
 # print(define_text)
 with open(f"./bin_out/{head_name}_index.h", "w") as define_file:
     define_file.write(define_text)
-    # print(define_text[:-1])
+
+font_text += '''
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
+'''
+font_text += f'#endif'
+# print(font_text)
+with open(f"./bin_out/{font_name}.h", "w") as define_file:
+    define_file.write(font_text)
 
 # 加入暂停
 #input("按回车键继续执行...")

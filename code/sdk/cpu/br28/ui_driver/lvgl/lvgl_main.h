@@ -8,7 +8,8 @@ extern "C" {
 #define UI_TASK_NAME "ui"
 
 /*自定义UI资源起始地址*/
-#define RES_BASE_ADDR (0x100000)
+#define RES_BASE_ADDR (0x4FE000)
+#define EX_RES_BASE_ADDR (0x000000)
 
 enum
 {

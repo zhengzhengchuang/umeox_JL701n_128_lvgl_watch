@@ -69,6 +69,4 @@ copy .\effect_file\music_base.bin eq_cfg_hw.bin
 
 
 
-
-
-call download/watch/download.bat
+call download/watch/download_insert.bat

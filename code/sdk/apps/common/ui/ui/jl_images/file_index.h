@@ -13,30 +13,6 @@ struct file_index_t {
 
 extern const struct file_index_t file_index[];
 
-#define font_common_24_no_ch_address (0x00000000)
-
-#define font_common_30_no_ch_address (0x0005C6F7)
-
-#define font_common_32_address (0x000C7291)
-
-#define font_common_num_12_address (0x002BD570)
-
-#define font_common_num_18_address (0x002C5AB3)
-
-#define font_common_num_24_address (0x002CE0EB)
-
-#define font_common_num_32_address (0x002D6960)
-
-#define font_common_num_36_address (0x002DF4C7)
-
-#define font_common_num_42_address (0x002E7FDF)
-
-#define font_common_num_52_address (0x002F0DA8)
-
-#define font_common_num_64_address (0x002FA04C)
-
-#define font_common_num_78_address (0x00303AF6)
-
 #define about_00_index (0x00000000)
 #define about_02_index (0x00000001)
 #define al_name_99_icon_00_index (0x00000002)

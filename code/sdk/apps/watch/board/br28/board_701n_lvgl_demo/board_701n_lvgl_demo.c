@@ -607,11 +607,11 @@ SFC_SPI_PLATFORM_DATA_BEGIN(sfc_spi_data)
     .unencry_size  = CONFIG_EXTERN_FLASH_SIZE,//FLASH_SIZE_8M+FLASH_SIZE_2M,//CONFIG_EXTERN_FLASH_SIZE/2,
 SFC_SPI_PLATFORM_DATA_END()
 
-NORFLASH_SFC_DEV_PLATFORM_DATA_BEGIN(norflash_sfc_dev_data)
-    .sfc_spi_pdata     = &sfc_spi_data,
-    .start_addr     = 0,
-    .size           = 0,//FLASH_SIZE_4M+FLASH_SIZE_2M,//CONFIG_EXTERN_FLASH_SIZE/2,// - CONFIG_EXTERN_USER_VM_FLASH_SIZE,
-NORFLASH_SFC_DEV_PLATFORM_DATA_END()
+// NORFLASH_SFC_DEV_PLATFORM_DATA_BEGIN(norflash_sfc_dev_data)
+//     .sfc_spi_pdata     = &sfc_spi_data,
+//     .start_addr     = 0,
+//     .size           = 0,//FLASH_SIZE_4M+FLASH_SIZE_2M,//CONFIG_EXTERN_FLASH_SIZE/2,// - CONFIG_EXTERN_USER_VM_FLASH_SIZE,
+// NORFLASH_SFC_DEV_PLATFORM_DATA_END()
 
 NORFLASH_SFC_DEV_PLATFORM_DATA_BEGIN(norflash_usr_dev_data)
     .sfc_spi_pdata = &sfc_spi_data,
@@ -657,8 +657,8 @@ NORFLASH_SFC_DEV_PLATFORM_DATA_END()
 #define UI_VM_ROOT_PATH       	SDFILE_MOUNT_PATH"/app/"UI_VM_IN_FLASH_NAME  //分区
 NORFLASH_SFC_DEV_PLATFORM_DATA_BEGIN(norflash_norfs_inside_vm_dev_data)
     .path                 = UI_VM_ROOT_PATH,
-    .start_addr     = TCFG_VIRFAT_INSERT_FLASH_BASE + TCFG_VIRFAT_INSERT_FLASH_SIZE,
-    .size           = CONFIG_EXTERN_USER_VM_FLASH_SIZE,
+    .start_addr     = TCFG_UI_VM_INSERT_FLASH_BASE,
+    .size           = TCFG_UI_VM_INSERT_FLASH_SIZE,
 NORFLASH_SFC_DEV_PLATFORM_DATA_END()
 #endif
 
@@ -851,12 +851,12 @@ REGISTER_DEVICES(device_table) = {
 	{ "virfat_flash", 	&virfat_flash_dev_ops, 	(void *)"res_nor"},
     //res_nor 是物理设备入口
 #if TCFG_NORFLASH_SFC_DEV_ENABLE
-	{ "res_nor",   &norflash_sfc_fs_dev_ops, (void *)&norflash_sfc_dev_data},
+	//{ "res_nor",   &norflash_sfc_fs_dev_ops, (void *)&norflash_sfc_dev_data},
 	//{ "update_noenc",   &norflash_sfc_fs_dev_ops, (void *)&norflash_norfs_unenc_dev_data}, // “update_noenc”的设备在初始化时，不会对该区域检查是否与其他区域重叠
 #endif /*TCFG_NORFLASH_SFC_DEV_ENABLE*/
 #if TCFG_VIRFAT_INSERT_FLASH_ENABLE
     //使用内置flash  跑ui
-    { "res_nor",   &inside_norflash_fs_dev_ops, (void *)&norflash_norfs_inside_dev_data},
+    {"res_nor",   &inside_norflash_fs_dev_ops, (void *)&norflash_norfs_inside_dev_data},
 #endif
 #endif
 
@@ -901,7 +901,7 @@ REGISTER_DEVICES(device_table) = {
 
 #if TCFG_NORFLASH_SFC_DEV_ENABLE
 #if TCFG_NOR_VM
-    {"ui_vm",   &norflash_sfc_fs_dev_ops , (void *)&norflash_norfs_vm_dev_data},
+    {"nor_ui_vm",   &norflash_sfc_fs_dev_ops , (void *)&norflash_norfs_vm_dev_data},
 #endif
 #endif//TCFG_NORFLASH_SFC_DEV_ENABLE
 

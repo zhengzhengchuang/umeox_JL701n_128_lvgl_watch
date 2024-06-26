@@ -106,8 +106,9 @@ static void lvgl_task(void *p)
 
     ui_menu_jump(act_id);
 
+    /*延迟开背光，防止闪屏*/
     if(!bl_timer)
-        sys_timeout_add(NULL, bl_timer_cb, 50);
+        sys_timeout_add(NULL, bl_timer_cb, 100);
 #if 0
 
 #if LV_USE_DEMO_WIDGETS

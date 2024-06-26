@@ -427,7 +427,9 @@
         "quran_main.h": "c",
         "quran_volume.h": "c",
         "music_player.h": "c",
-        "key_event_deal.h": "c"
+        "key_event_deal.h": "c",
+        "norflash_sfc.h": "c",
+        "user_font.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

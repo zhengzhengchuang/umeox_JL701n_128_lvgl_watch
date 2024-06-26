@@ -77,10 +77,8 @@ lv_obj_t *common_widget_img_create(common_widget_img_para_t *img_para, \
     if(!(img_dst_gather[img_dst_cnt].data) && \
         img_para->file_img_dat != File_Img_Dat_None)
     {
-        open_fd("usr_nor");
         lv_open_res(get_res_fd(), RES_BASE_ADDR, 0, file_index[img_para->file_img_dat], \
             &img_dst_gather[img_dst_cnt]);
-        close_fd();
     }
     
     lv_obj_t *common_widget_img = lv_img_create(img_para->img_parent);
@@ -110,10 +108,8 @@ lv_img_dsc_t *common_widget_img_open_res(uint32_t file_img_dat)
 {
     static lv_img_dsc_t widget_img_dst;
 
-    open_fd("usr_nor");
     lv_open_res(get_res_fd(), RES_BASE_ADDR, 0, file_index[file_img_dat], \
         &widget_img_dst);
-    close_fd();
 
     return (&widget_img_dst);
 }
@@ -131,10 +127,8 @@ void common_widget_img_replace_src(lv_obj_t *obj, uint32_t file_img_dat, \
     if(img_dsc_idx >= img_dst_cnt)
         return;
 
-    open_fd("usr_nor");
     lv_open_res(get_res_fd(), RES_BASE_ADDR, 0, file_index[file_img_dat], \
         &img_dst_gather[img_dsc_idx]);
-    close_fd();
 
     lv_img_set_src(obj, &img_dst_gather[img_dsc_idx]);
 

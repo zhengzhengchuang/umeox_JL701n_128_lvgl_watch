@@ -84,7 +84,7 @@ del upgrade.zip
 ::move font res.ori\font
 
 ::..\..\packres.exe -n res -o res.bin new_res.bin 0 fat.img 0x640000 -normal
-..\..\packres.exe -n res -o res.bin file.bin 0x100000 -normal
+..\..\packres.exe -n res -o res.bin file.bin 0x000000 -normal
 ::..\..\packres.exe -n res -o res.bin new_res.bin 0x000000 file.bin 0x20000 -normal
 
 ::����flash�������ļ���ʾ��Ϊ����0xb00000��ַ����Ҫ������nor_up.ufw

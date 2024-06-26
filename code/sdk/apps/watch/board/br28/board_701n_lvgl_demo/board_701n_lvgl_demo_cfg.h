@@ -104,7 +104,7 @@
 //*********************************************************************************//
 //                                 FLASH 配置                                      //
 //*********************************************************************************//
-#define TCFG_NOR_FS                  		ENABLE_THIS_MOUDLE
+#define TCFG_NOR_FS                  		DISABLE_THIS_MOUDLE//ENABLE_THIS_MOUDLE
 #define TCFG_NOR_FAT                  		DISABLE_THIS_MOUDLE
 #define TCFG_NOR_VM                  		ENABLE_THIS_MOUDLE
 #define TCFG_NOR_REC                  		DISABLE_THIS_MOUDLE
@@ -116,10 +116,10 @@
 #define TCFG_FLASH_DEV_SPI_CS_PORT	    	IO_PORTB_07
 
 #define TCFG_VIRFAT_FLASH_ENABLE  			ENABLE	// FLASH虚拟文件系统
-#define TCFG_VIRFAT_INSERT_FLASH_ENABLE  	DISABLE	// 内置FLASH虚拟文件系统
-#define TCFG_VIRFAT_INSERT_FLASH_SIZE	  	0x300000 // 内置FLASH虚拟文件系统空间大小
-#define TCFG_SFC_VM                         ENABLE	// 内置FLASH自定义存储管理
-#define TCFG_SFC_VM_SIZE                    0x8000	// 内置FLASH自定义存储管理空间大小
+#define TCFG_VIRFAT_INSERT_FLASH_ENABLE  	ENABLE//DISABLE	// 内置FLASH虚拟文件系统
+
+// #define TCFG_SFC_VM                         ENABLE	// 内置FLASH自定义存储管理
+// #define TCFG_SFC_VM_SIZE                    0x8000	// 内置FLASH自定义存储管理空间大小
 
 #define TCFG_EX_FLASH_POWER_IO				IO_PORTC_08 // 外置flash电源脚
 #define CONFIG_EX_FLASH_POWER_IO			PC08 // NULL // 外置flash电源脚。不接IO时填NULL或者屏蔽掉该宏定义
@@ -129,6 +129,18 @@
 #define FLASH_PROTECT_OPT_BEFORE_UPDATE		1 // 写保护
 
 
+#define TCFG_VIRFAT_INSERT_FLASH_BASE       0x4FE000 //5m - 8k
+#define TCFG_VIRFAT_INSERT_FLASH_SIZE       0xAE0000 //11m - 128k    	  	
+
+//用户ui vm信息存储位置开始
+#define TCFG_UI_VM_INSERT_FLASH_BASE	  	(TCFG_VIRFAT_INSERT_FLASH_BASE+TCFG_VIRFAT_INSERT_FLASH_SIZE)
+#define TCFG_UI_VM_INSERT_FLASH_SIZE	  	(0x20000)
+
+//ini 工具文件使用 工具只能识别立即数 要和上面数据对上
+#define CONFIG_RULE_INSERT_FLASH_BASE	  	0x4FE000
+#define CONFIG_RULE_INSERT_FLASH_SIZE	  	0xAE0000
+#define CONFIG_RULE_INSERT_UI_VM_BASE	  	0xFDE000
+#define CONFIG_RULE_INSERT_UI_VM_SIZE	  	0x20000
 
 //*********************************************************************************//
 //                                  SD 配置                                        //
@@ -888,7 +900,7 @@ DAC硬件上的连接方式,可选的配置：
 //*********************************************************************************//
 #define TCFG_AUTO_SHUT_DOWN_TIME		          0   //没有蓝牙连接自动关机时间
 #define TCFG_SYS_LVD_EN						      1   //电量检测使能
-#define TCFG_POWER_ON_NEED_KEY				      1	  //是否需要按按键开机配置
+#define TCFG_POWER_ON_NEED_KEY				      0	  //是否需要按按键开机配置
 #define TWFG_APP_POWERON_IGNORE_DEV         	  0//上电忽略挂载设备，0时不忽略，非0则n毫秒忽略
 
 #if TCFG_IOKEY_ENABLE

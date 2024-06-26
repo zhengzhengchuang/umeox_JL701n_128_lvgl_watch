@@ -34,7 +34,7 @@ void nor_flash_vm_init(void)
         
         ASSERT(!(p->vm_offset & 4095));
 
-        flash_common_init(&nor_vm_file[p->type], "ui_vm", \
+        flash_common_init(&nor_vm_file[p->type], "nor_ui_vm", \
             p->type, p->vm_num_max, p->vm_offset, p->vm_offset + p->vm_size);
     }
 
@@ -56,7 +56,7 @@ void nor_flash_vm_clear(void)
         
         ASSERT(!(p->vm_offset & 4095));
 
-        flash_common_reset(&nor_vm_file[p->type], "ui_vm", \
+        flash_common_reset(&nor_vm_file[p->type], "nor_ui_vm", \
             p->type, p->vm_num_max, p->vm_offset, p->vm_offset + p->vm_size);
     }
 

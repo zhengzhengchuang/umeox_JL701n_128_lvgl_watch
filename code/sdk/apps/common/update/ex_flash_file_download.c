@@ -59,8 +59,7 @@ static int norflash_f_open(u32 file_len)
     g_ex_update_timeout = EX_UPDATE_SEMAPHORE_WAIT_TIME;
 
     if (__this) {
-        //__this->dev_hdl = dev_open("res_nor", NULL);
-        __this->dev_hdl = dev_open("usr_nor", NULL);
+        __this->dev_hdl = dev_open("res_nor", NULL);
 #if EX_FLASH_MUTIL_FILE_UPDATE
         __this->dev_hdl_noenc = dev_open("update_noenc", NULL);
         if (__this->dev_hdl && __this->dev_hdl_noenc) {

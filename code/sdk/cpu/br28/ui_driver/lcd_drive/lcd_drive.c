@@ -1730,7 +1730,10 @@ int lcd_sleep_ctrl(u8 enter)
     {
         clock_add_set(DEC_UI_CLK);
 
+#if TCFG_NORFLASH_SFC_DEV_ENABLE
         norflash_flash_power_check();
+#endif
+
 #if LCD_POWER_DOWN_EN || TP_POWER_DOWN_EN
         os_sem_create(&__lcd->init_sem, 0);
 #endif

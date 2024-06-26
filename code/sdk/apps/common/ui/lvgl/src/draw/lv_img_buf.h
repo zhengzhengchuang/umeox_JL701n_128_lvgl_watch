@@ -124,7 +124,6 @@ typedef struct {
 } lv_img_header_t;
 #else
 typedef struct {
-
     uint32_t cf : 5;          /*Color format: See `lv_img_color_format_t`*/
     uint32_t always_zero : 3; /*It the upper bits of the first byte. Always zero to look like a
                                  non-printable character*/

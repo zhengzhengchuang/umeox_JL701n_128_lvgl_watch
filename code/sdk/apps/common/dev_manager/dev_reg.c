@@ -125,6 +125,7 @@ const struct __dev_reg dev_reg[] =
         /*fs_type*/			"nor_sdfile",
     },
 #endif
+
 #if TCFG_NOR_REC
     ///外挂录音分区
     {
@@ -135,6 +136,7 @@ const struct __dev_reg dev_reg[] =
         /*fs_type*/			"rec_fs",
     },
 #endif
+
 #if 0
     {
         /*logo*/			"nor_ui",
@@ -144,6 +146,7 @@ const struct __dev_reg dev_reg[] =
         /*fs_type*/			"nor_sdfile",
     },
 #endif
+
 #if TCFG_VIR_UDISK_ENABLE
     // 虚拟U盘
     {
@@ -154,6 +157,7 @@ const struct __dev_reg dev_reg[] =
         /*fs_type*/			"fat",
     },
 #endif
+
 #if TCFG_VIRFAT_FLASH_ENABLE
     //flash 虚拟fat
     {

@@ -77,8 +77,7 @@ static u16 norflash_ufw_update_f_open(void)
 {
     printf("%s", __func__);
 
-    //dev_ptr = dev_open("res_nor", NULL);
-    dev_ptr = dev_open("usr_nor", NULL);
+    dev_ptr = dev_open("res_nor", NULL);
     if (dev_ptr) {
         printf("open dev succ 0x%x", (int)dev_ptr);
     } else {

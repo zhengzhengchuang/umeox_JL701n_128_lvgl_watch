@@ -34,7 +34,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_img_para.img_click_attr = false;
     widget_img_para.event_cb = NULL;
     common_widget_img_create(&widget_img_para, NULL);
-  
+
     widget_time_para.time_x = 132;
     widget_time_para.time_y = 132;
     widget_time_para.num_inv = 0;

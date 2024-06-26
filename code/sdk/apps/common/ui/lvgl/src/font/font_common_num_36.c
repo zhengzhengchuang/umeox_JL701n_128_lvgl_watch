@@ -10,7 +10,7 @@
 
 
 #include "imb_demo.h"
-#include "../../../ui/jl_images/file_index.h"
+#include "../../../ui/fonts/user_font.h"
 #include "../../../../../../cpu/br28/ui_driver/lvgl/lvgl_main.h"
 
 
@@ -46,9 +46,9 @@ static x_header_t __g_xbf_hd = {
 static uint8_t *__user_font_getdata(int offset, int size){
     //如字模保存在SPI FLASH, SPIFLASH_Read(__g_font_buf,offset,size);
     //如字模已加载到SDRAM,直接返回偏移地址即可如:return (uint8_t*)(sdram_fontddr+offset);
-    int cpuaddr = 0x4000000 + RES_BASE_ADDR;
+    int cpuaddr = 0x4000000 + EX_RES_BASE_ADDR;
 
-    lv_open_font(cpuaddr + font_common_num_36_address + offset, size);
+    lv_open_font(cpuaddr + font_common_num_36_addr + offset, size);
 
     return get_g_font_buf();
 }

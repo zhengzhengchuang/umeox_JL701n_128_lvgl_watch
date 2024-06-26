@@ -135,8 +135,7 @@ void vm_store_para_init(void)
 #if Vm_Debug_En
     if(1)
 #else
-    if(ret != op_vm_len || \
-        p_vm_para_cache->vm_mask != Vm_Mask)
+    if(ret != op_vm_len || p_vm_para_cache->vm_mask != Vm_Mask)
 #endif
     {
         vm_para_cache_reset();

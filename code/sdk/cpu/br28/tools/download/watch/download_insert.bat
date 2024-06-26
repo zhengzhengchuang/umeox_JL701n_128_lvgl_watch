@@ -25,8 +25,9 @@ copy ..\..\default.key .
 copy ..\..\json.txt .
 copy ..\..\eq_cfg_hw.bin .
 
+::ä¿®æ”¹
 cd ..\..\ui_resource
-copy *.* ..\download\watch
+::copy *.* ..\download\watch
 
 cd %~dp0
 
@@ -39,16 +40,19 @@ cd %~dp0
 ..\..\md5sum.exe app.bin md5.bin
 set /p "themd5=" < "md5.bin"
 
-..\..\packres.exe -keep-suffix-case JL.sty JL.res JL.str -n res -o JL
-..\..\packres.exe -keep-suffix-case sidebar.sty sidebar.res sidebar.str sidebar.tab -n res -o sidebar
-..\..\packres.exe -keep-suffix-case watch.sty watch.res watch.str watch.view watch.json -n res -o watch
-..\..\packres.exe -keep-suffix-case watch1.sty watch1.res watch1.str watch1.view watch1.json -n res -o watch1
-..\..\packres.exe -keep-suffix-case watch2.sty watch2.res watch2.str watch2.view watch2.json -n res -o watch2
-..\..\packres.exe -keep-suffix-case watch3.sty watch3.res watch3.str watch3.view watch3.json -n res -o watch3
-..\..\packres.exe -keep-suffix-case watch4.sty watch4.res watch4.str watch4.view watch4.json -n res -o watch4
-..\..\packres.exe -keep-suffix-case watch5.sty watch5.res watch5.str watch5.view watch5.json -n res -o watch5
-..\..\packres.exe -keep-suffix-case F_ASCII.PIX F_GB2312.PIX F_GB2312.TAB ascii.res -n res -o font
+::ä¿®æ”¹
+::..\..\packres.exe -keep-suffix-case JL.sty JL.res JL.str -n res -o JL
+::..\..\packres.exe -keep-suffix-case sidebar.sty sidebar.res sidebar.str sidebar.tab -n res -o sidebar
+::..\..\packres.exe -keep-suffix-case watch.sty watch.res watch.str watch.view watch.json -n res -o watch
+::..\..\packres.exe -keep-suffix-case watch1.sty watch1.res watch1.str watch1.view watch1.json -n res -o watch1
+::..\..\packres.exe -keep-suffix-case watch2.sty watch2.res watch2.str watch2.view watch2.json -n res -o watch2
+::..\..\packres.exe -keep-suffix-case watch3.sty watch3.res watch3.str watch3.view watch3.json -n res -o watch3
+::..\..\packres.exe -keep-suffix-case watch4.sty watch4.res watch4.str watch4.view watch4.json -n res -o watch4
+::..\..\packres.exe -keep-suffix-case watch5.sty watch5.res watch5.str watch5.view watch5.json -n res -o watch5
+::..\..\packres.exe -keep-suffix-case F_ASCII.PIX F_GB2312.PIX F_GB2312.TAB ascii.res -n res -o font
 
+::å¢žåŠ 
+::..\..\packres.exe -keep-suffix-case file.bin -n res -o lvimg
 ::echo %1
 
 set CHIPKEY=default.key
@@ -56,7 +60,8 @@ set CHIPKEY=default.key
 :: 8MBytes
 :: ..\..\fat_comm.exe -pad-backup2 -force-align-fat -out new_res.bin -image-size 8 -filelist  JL sidebar watch watch1 watch2 watch3 watch4 watch5 font  -remove-empty -remove-bpb -mark-bad-after 0x660000 -address 0
 :: 16MBytes
-..\..\fat_comm.exe -pad-backup2 -force-align-fat -out new_res.bin -image-size 16 -filelist  JL sidebar watch watch1 watch2 watch3 watch4 watch5 font  -remove-empty -remove-bpb -mark-bad-after 0xe60000 -address 0
+::..\..\fat_comm.exe -pad-backup2 -force-align-fat -out new_res.bin -image-size 16 -filelist  JL sidebar watch watch1 watch2 watch3 watch4 watch5 font  -remove-empty -remove-bpb -mark-bad-after 0xe60000 -address 0
+::..\..\fat_comm.exe -pad-backup2 -force-align-fat -out new_res.bin -image-size 16 -filelist -remove-empty -remove-bpb -mark-bad-after 0xAE0000 -address 0
 
 IF %ERRORLEVEL% NEQ 0 goto exit_point
 
@@ -66,12 +71,14 @@ move JL res.ori\JL
 move watch? res.ori\
 move font res.ori\font
 
-..\..\packres.exe -n res -o res.bin new_res.bin 0 -normal
-::ÍâÖÃflash·ÅÉý¼¶ÎÄ¼þ£¬Ê¾ÀýÎª·ÅÔÚ0xb00000µØÖ·£¬ÐèÒªÏÈÉú³Énor_up.ufw
+::..\..\packres.exe -n res -o res.bin new_res.bin 0x4FE000 -normal
+
+::..\..\packres.exe -n res -o new_res.bin file.bin 0x000000 -normal
+..\..\packres.exe -n res -o res.bin font.bin 0x000000 -normal
+::ï¿½ï¿½ï¿½ï¿½flashï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½0xb00000ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nor_up.ufw
 ::..\..\packres.exe -n res -o res.bin new_res.bin 0 nor_up.ufw 0xb00000 -normal
 
-
-..\..\isd_download.exe -tonorflash -dev br28 -boot 0x120000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -res ui_upgrade p11_code.bin config.dat tone.cfg eq_cfg_hw.bin -uboot_compress -key %CHIPKEY% -ex_api_bin user_api.bin 
+..\..\isd_download.exe -tonorflash -dev br28 -boot 0x120000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -res ui_upgrade p11_code.bin config.dat tone.cfg eq_cfg_hw.bin -uboot_compress -key %CHIPKEY% -ex_flash res.bin -ex_api_bin user_api.bin
 ::..\..\isd_download.exe -tonorflash -dev br28 -boot 0x120000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -res p11_code.bin config.dat -uboot_compress -key %CHIPKEY% -ex_flash res.bin -ex_api_bin user_api.bin 
 ::-format all
 ::-ex_flash res.bin
@@ -84,7 +91,7 @@ move font res.ori\font
 ::-reboot 100
 
 
-@rem É¾³ýÁÙÊ±ÎÄ¼þ-format all
+@rem É¾ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ä¼ï¿½-format all
 if exist *.mp3 del *.mp3 
 if exist *.PIX del *.PIX
 if exist *.TAB del *.TAB
@@ -96,11 +103,11 @@ if exist *.view del *.view
 if exist *.json del *.json
 
 
-::Èç¹ûÊ¹ÓÃÍâÖÃflash·ÅÉý¼¶ÎÄ¼þ´¦Àí·½Ê½£¬ÏÂÃæ²Ù×÷Éú³ÉµÄupdate.ufwÖÐ²»Ö»°üº¬ÊÖ±í×ÊÔ´ÎÄ¼þ£¬»¹ÓÐnor_up.ufwÎÄ¼þÄÚÈÝ¡£
+::ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½flashï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½update.ufwï¿½Ð²ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Ô´ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nor_up.ufwï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
 
-@rem Éú³É¹Ì¼þÉý¼¶ÎÄ¼þ
+@rem ï¿½ï¿½ï¿½É¹Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 ..\..\fw_add.exe -noenc -fw jl_isd.fw  -add ota.bin -type 100 -out jl_isd.fw
-@rem Ìí¼ÓÅäÖÃ½Å±¾µÄ°æ±¾ÐÅÏ¢µ½ FW ÎÄ¼þÖÐ
+@rem ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½Å±ï¿½ï¿½Ä°æ±¾ï¿½ï¿½Ï¢ï¿½ï¿½ FW ï¿½Ä¼ï¿½ï¿½ï¿½
 ..\..\fw_add.exe -noenc -fw jl_isd.fw -add script.ver -out jl_isd.fw
 
 
@@ -111,16 +118,16 @@ del jl_isd.ufw
 ::..\..\zip.exe -r upgrade.zip res.ori update.ufw
 ..\..\zip.exe -r upgrade.zip update.ufw
 
-@REM Éú³ÉÅäÖÃÎÄ¼þÉý¼¶ÎÄ¼þ
+@REM ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 ::ufw_maker.exe -chip AC800X %ADD_KEY% -output config.ufw -res bt_cfg.cfg
 
 ::IF EXIST jl_693x.bin del jl_693x.bin 
 
 
-@rem ³£ÓÃÃüÁîËµÃ÷
-@rem -format vm        //²Á³ýVM ÇøÓò
-@rem -format cfg       //²Á³ýBT CFG ÇøÓò
-@rem -format 0x3f0-2   //±íÊ¾´ÓµÚ 0x3f0 ¸ö sector ¿ªÊ¼Á¬Ðø²Á³ý 2 ¸ö sector(µÚÒ»¸ö²ÎÊýÎª16½øÖÆ»ò10½øÖÆ¶¼¿É£¬µÚ¶þ¸ö²ÎÊý±ØÐëÊÇ10½øÖÆ)
+@rem ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+@rem -format vm        //ï¿½ï¿½ï¿½ï¿½VM ï¿½ï¿½ï¿½ï¿½
+@rem -format cfg       //ï¿½ï¿½ï¿½ï¿½BT CFG ï¿½ï¿½ï¿½ï¿½
+@rem -format 0x3f0-2   //ï¿½ï¿½Ê¾ï¿½Óµï¿½ 0x3f0 ï¿½ï¿½ sector ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2 ï¿½ï¿½ sector(ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª16ï¿½ï¿½ï¿½Æ»ï¿½10ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½É£ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½10ï¿½ï¿½ï¿½ï¿½)
 
 :exit_point
 
