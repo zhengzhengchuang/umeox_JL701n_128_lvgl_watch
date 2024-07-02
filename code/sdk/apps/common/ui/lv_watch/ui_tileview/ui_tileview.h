@@ -29,7 +29,7 @@ typedef struct
     /*可视化菜单容器*/
     ui_act_id_t tileview_id_cache[Tileview_Dir_Num];
     lv_point_t tileview_dir_points[Tileview_Dir_Num];
-    lv_obj_t *tileview_side_menu_cache[Tileview_Dir_Num-1];//tileview四边容器 上、下、左、右
+    lv_obj_t *tileview_side_menu_cache[Tileview_Dir_Num];//tileview四边容器 上、下、左、右
     ui_menu_load_info_t *tileview_menu_load[Tileview_Dir_Num]; 
 }ui_tileview_info_t;
 

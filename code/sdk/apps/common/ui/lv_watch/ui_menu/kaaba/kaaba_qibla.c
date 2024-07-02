@@ -45,8 +45,7 @@ static void menu_refresh_cb(lv_obj_t *obj)
         GetSensorGmCaliSucc();
     if(cali_succ == false)
     {
-        ui_menu_jump_handle(\
-            ui_act_id_gm_cali);
+        ui_menu_jump(ui_act_id_gm_cali);
 
         return;
     }

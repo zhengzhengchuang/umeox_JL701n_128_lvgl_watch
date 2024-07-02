@@ -34,6 +34,7 @@ typedef uint8_t ui_mode_t;
 typedef struct
 {
     ui_mode_t ui_mode;
+    ui_mode_t prev_ui_mode;
 
     ui_act_id_t cur_act_id;
     ui_act_id_t prev_act_id[\

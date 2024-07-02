@@ -2304,6 +2304,7 @@ void bt_hci_event_inquiry(struct bt_event *bt)
     {
         extern void emitter_search_stop(u8 result);
         emitter_search_stop(bt->value);
+        SetTwsScanComplete(true);
     }
 #endif
 }
@@ -2337,6 +2338,8 @@ void bt_hci_event_connection(struct bt_event *bt)
     user_send_cmd_prepare(USER_CTRL_WRITE_SCAN_DISABLE, 0, NULL);
     user_send_cmd_prepare(USER_CTRL_WRITE_CONN_DISABLE, 0, NULL);
 #endif
+
+    SetTwsConnComplete(true);
 }
 
 /*----------------------------------------------------------------------------*/

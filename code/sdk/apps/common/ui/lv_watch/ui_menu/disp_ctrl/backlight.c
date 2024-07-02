@@ -201,12 +201,12 @@ static void menu_rdec_cb(lv_obj_t *obj, int state)
     {
         if(s_val >= max_val)
             return;
-        e_val = s_val + 7;
+        e_val = s_val + TCFG_BACKLIGHT_STEPS_VAL;
     }else if(state == Rdec_Backward)
     {
         if(s_val <= min_val)
             return;
-        e_val = s_val - 7;
+        e_val = s_val - TCFG_BACKLIGHT_STEPS_VAL;
     }else
         return;
 

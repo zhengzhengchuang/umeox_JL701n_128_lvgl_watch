@@ -7,6 +7,8 @@ void ui_mode_handle(ui_act_id_t act_id)
 {
     ui_mode_t *ui_mode = \
         &(p_ui_info_cache->ui_mode);
+    ui_mode_t *prev_ui_mode = \
+        &(p_ui_info_cache->prev_ui_mode);
 
     if(act_id == ui_act_id_watchface)
         *ui_mode = ui_mode_watchface;
@@ -14,6 +16,12 @@ void ui_mode_handle(ui_act_id_t act_id)
         *ui_mode = ui_mode_menu_list;
     else if(act_id == ui_act_id_tool_box)
         *ui_mode = ui_mode_tool_box;
+
+    if(*ui_mode != *prev_ui_mode)
+    {
+        *prev_ui_mode = *ui_mode;
+        clear_menu_return_level();
+    } 
 
     return;
 }
@@ -159,14 +167,11 @@ void ui_menu_exit_prepare(ui_act_id_t act_id)
 
     ui_menu_destory_func_cb destory_func_cb = \
         p_ui_info_cache->menu_load_info.destory_func_cb;
-    if(destory_func_cb)
-        destory_func_cb(NULL);
+    if(destory_func_cb) destory_func_cb(NULL);
 
     if(p_ui_info_cache->ui_menu_container)
-    {
         lv_obj_del(p_ui_info_cache->ui_menu_container);
-        p_ui_info_cache->ui_menu_container = NULL;
-    }
+    p_ui_info_cache->ui_menu_container = NULL;
 
 #if UI_USE_COVER
     cover_info_clear();
@@ -192,8 +197,8 @@ void ui_menu_exit_prepare(ui_act_id_t act_id)
     if(ui_act_id_validity(act_id))
     {
         //回到主表盘,清空返回级数列表
-        if(act_id == ui_act_id_watchface)
-            clear_menu_return_level();
+        // if(act_id == ui_act_id_watchface)
+        //     clear_menu_return_level();
 
         lcd_is_sleep = false;
     }else
@@ -201,8 +206,7 @@ void ui_menu_exit_prepare(ui_act_id_t act_id)
         lcd_is_sleep = true;
     }
         
-    memset(&p_ui_info_cache->menu_load_info, 0, \
-        sizeof(ui_menu_load_info_t));
+    memset(&p_ui_info_cache->menu_load_info, 0, sizeof(ui_menu_load_info_t));
 
     return;
 }
@@ -263,6 +267,12 @@ void ui_menu_jump_handle(ui_act_id_t act_id)
 
         return;
     }
+
+    bool disable_te = menu_load_info->disable_te;
+    if(disable_te == true)
+        SetUsrWaitTe(0);
+    else
+        SetUsrWaitTe(1);
    
     ui_menu_container_create();
 

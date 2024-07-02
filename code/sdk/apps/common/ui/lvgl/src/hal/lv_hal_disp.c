@@ -132,7 +132,6 @@ void lv_disp_drv_init(lv_disp_drv_t * driver)
     driver->draw_ctx_deinit = lv_draw_sw_init_ctx;
     driver->draw_ctx_size = sizeof(lv_draw_sw_ctx_t);
 #endif
-
 }
 
 /**

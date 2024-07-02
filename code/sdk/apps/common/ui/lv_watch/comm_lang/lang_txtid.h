@@ -53,8 +53,8 @@ enum
     lang_txtid_bluetooth_mac,//蓝牙 MAC
     lang_txtid_version,//版本
     lang_txtid_QR_code,//二维码
-    lang_txtid_factory_reset,//恢复出厂设置
-    lang_txtid_factory_reset_tip,//恢复出厂设置将清除手表数据。
+    lang_txtid_reset,//恢复出厂设置
+    lang_txtid_reset_tips,//恢复出厂设置将清除手表数据。
     lang_txtid_today,//今天
     lang_txtid_tomorrow,//明天
     lang_txtid_sunny,//晴
@@ -186,6 +186,12 @@ enum
     lang_txtid_Fav_list,//收藏列表
     lang_txtid_Mor_remembrance,//早上祈祷词
     lang_txtid_Eve_remembrance,//晚上祈祷词
+    lang_txtid_add_new_devices,//添加新的无线音频设备
+    lang_txtid_searching,//搜索中...
+    lang_txtid_tws_not_found,//未找到无线音频设备，请重试。
+    lang_txtid_paired_tws,//配对设备
+    lang_txtid_unpaired_tws,//取消配对音频设备？
+    lang_txtid_disc_tws,//断开音频设备？
    
     lang_txtid_max,
 };

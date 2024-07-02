@@ -204,6 +204,14 @@ enum
     ui_act_id_quran_main,
     ui_act_id_quran_volume,
 
+    /*****tws相关页面*****/
+    ui_act_id_tws_main,
+    ui_act_id_tws_disc,
+    ui_act_id_tws_list,
+    ui_act_id_tws_unpair,
+    ui_act_id_tws_search,
+    ui_act_id_tws_not_found,
+
     /*****工厂测试相关页面*****/
     ui_act_id_factory,
 

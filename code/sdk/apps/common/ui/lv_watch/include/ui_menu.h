@@ -29,7 +29,7 @@ typedef struct
     void *menu_arg;
     bool lock_flag;//当前页面是否上锁。
     bool return_flag;  //当前页面是否返回上一级的机制。
-    bool disable_te; //关掉te
+    bool disable_te; //关掉te(提高帧率)
     ui_act_id_t menu_id; 
     uint32_t user_offscreen_time;//0系统设置熄屏时间，>0用户自定义熄屏时间，Always_OnScreen常亮
     uint32_t user_refresh_time_inv;  //0默认刷新时间间隔，>0用户自定义刷新时间间隔

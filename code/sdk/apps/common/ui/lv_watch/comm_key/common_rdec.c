@@ -22,7 +22,7 @@ void common_rdec_msg_handle(int state)
             id++;
             id = (id + ui_watchface_id_num)%ui_watchface_id_num;
             SetVmParaCacheByLabel(vm_label_watchface_sel, id);
-            ui_menu_jump_handle(ui_act_id_watchface);
+            ui_menu_jump(ui_act_id_watchface);
 
             return;
         }
@@ -37,7 +37,7 @@ void common_rdec_msg_handle(int state)
             id--;
             id = (id + ui_watchface_id_num)%ui_watchface_id_num;
             SetVmParaCacheByLabel(vm_label_watchface_sel, id);
-            ui_menu_jump_handle(ui_act_id_watchface);
+            ui_menu_jump(ui_act_id_watchface);
 
             return;
         }

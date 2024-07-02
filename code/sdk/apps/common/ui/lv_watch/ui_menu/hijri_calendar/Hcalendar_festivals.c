@@ -35,7 +35,7 @@ static void enable_cb(lv_event_t *e)
     return;
 }
 
-static void enable_create(lv_obj_t *obj, menu_align_t menu_align)
+static void enable_create(lv_obj_t *obj, uint8_t menu_align)
 {
     bool FesRemindersFlag = \
         HcalendarInfo.FesRemindersFlag;
@@ -146,7 +146,7 @@ static void list_ctx_container_create(lv_obj_t *obj)
     return;
 }
 
-static void elem_ctx_create(menu_align_t menu_align)
+static void elem_ctx_create(uint8_t menu_align)
 {
     int16_t ctx_w = \
         LCD_WIDTH;
@@ -405,8 +405,7 @@ static void menu_display_cb(lv_obj_t *obj)
     menu_align_t menu_align = \
         menu_align_left;
     if(lang_txt_is_arabic())
-        menu_align = \
-            menu_align_right;
+        menu_align = menu_align_right;
 
     enable_create(obj, menu_align);
 
@@ -463,6 +462,7 @@ register_ui_menu_load_info(\
     .return_flag = true,
     .menu_id = \
         ui_act_id_Hcalendar_festivals,
+    .disable_te = true,
     .user_offscreen_time = 0,
     .user_refresh_time_inv = 0,
     .key_func_cb = menu_key_cb,

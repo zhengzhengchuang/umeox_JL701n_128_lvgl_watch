@@ -17,6 +17,7 @@ extern "C" {
 #include "./comm_func/hr_func.h"
 #include "./comm_func/bo_func.h"
 #include "./include/ui_act_id.h"
+#include "./comm_func/tws_func.h"
 #include "./comm_parse/le_task.h"
 #include "./comm_func/dnd_func.h"
 #include "./comm_func/find_func.h"

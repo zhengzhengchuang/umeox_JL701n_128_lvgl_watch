@@ -6,8 +6,8 @@ static void start_cb(lv_event_t *e)
 
     UserStopwatchCreate();
 
-    ui_menu_jump_handle(\
-        ui_act_id_stopwatch_state);
+    /*秒表比较追求页面刷新，直接跳转，不发线程任务*/
+    ui_menu_jump_handle(ui_act_id_stopwatch_state);
 
     return;
 }

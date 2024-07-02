@@ -143,10 +143,10 @@ static void UserCountdownOverIsOn(void)
     if(!MenuSupportPopup())
         return;
 
-    //震动、播放
+    //震动
+    motor_run(1, def_motor_duty);
 
-    ui_menu_jump(\
-        ui_act_id_countdown_over);
+    ui_menu_jump(ui_act_id_countdown_over);
 
     return;
 }

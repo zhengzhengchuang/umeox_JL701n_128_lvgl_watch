@@ -78,7 +78,10 @@ move font res.ori\font
 ::����flash�������ļ���ʾ��Ϊ����0xb00000��ַ����Ҫ������nor_up.ufw
 ::..\..\packres.exe -n res -o res.bin new_res.bin 0 nor_up.ufw 0xb00000 -normal
 
+::下载外部字库
 ..\..\isd_download.exe -tonorflash -dev br28 -boot 0x120000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -res ui_upgrade p11_code.bin config.dat tone.cfg eq_cfg_hw.bin -uboot_compress -key %CHIPKEY% -ex_flash res.bin -ex_api_bin user_api.bin
+::不下载外部字库
+::..\..\isd_download.exe -tonorflash -dev br28 -boot 0x120000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -res ui_upgrade p11_code.bin config.dat tone.cfg eq_cfg_hw.bin -uboot_compress -key %CHIPKEY% -ex_api_bin user_api.bin
 ::..\..\isd_download.exe -tonorflash -dev br28 -boot 0x120000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -res p11_code.bin config.dat -uboot_compress -key %CHIPKEY% -ex_flash res.bin -ex_api_bin user_api.bin 
 ::-format all
 ::-ex_flash res.bin

@@ -168,26 +168,38 @@ void AppSetSysBacklight(int val)
 /*********************************************************************************
                     控制屏幕进入休眠(0:退出休眠 1:进入休眠)                                   
 *********************************************************************************/
+static uint16_t dlybl_timer = 0;
 extern int lcd_sleep_ctrl(u8 enter);
+
+static void dlybl_cb(void *priv)
+{
+    if(dlybl_timer)
+        sys_timeout_del(dlybl_timer);
+    dlybl_timer = 0;
+
+    struct lcd_interface *lcd = lcd_get_hdl();
+    int lcd_backlight = \
+        GetVmParaCacheByLabel(vm_label_backlight);
+    if(lcd->backlight_ctrl)
+        lcd->backlight_ctrl((uint8_t)lcd_backlight);
+
+    return;
+}
+
 void AppCtrlLcdEnterSleep(bool sleep)
 {
-    if(lcd_sleep_status() == \
-        sleep)
+    if(lcd_sleep_status() == sleep)
         return;
 
     lcd_sleep_ctrl(sleep);
  
-    struct lcd_interface *lcd = \
-        lcd_get_hdl();
-    if(lcd->power_ctrl)
-        lcd->power_ctrl(!sleep);
+    struct lcd_interface *lcd = lcd_get_hdl();
+    if(lcd->power_ctrl) lcd->power_ctrl(!sleep);
 
     if(!sleep)
     {
-        int bl_val = \
-            GetVmParaCacheByLabel(vm_label_backlight);
-         if(lcd->backlight_ctrl)
-            lcd->backlight_ctrl((uint8_t)bl_val);
+        if(!dlybl_timer)
+            dlybl_timer = sys_timeout_add(NULL, dlybl_cb, 50);
     }
 
     return;
@@ -248,8 +260,7 @@ char *GetQRCodeLinkStrBuf(void)
         }
         memcpy(&p[45], ble_mac_str, 17);
 
-        const char *ble_name_str = \
-            GetDevBleName();
+        const char *ble_name_str = GetDevBleName();
         memcpy(&p[66], ble_name_str, LOCAL_NAME_LEN);
 
         InitLinkFlag = true;

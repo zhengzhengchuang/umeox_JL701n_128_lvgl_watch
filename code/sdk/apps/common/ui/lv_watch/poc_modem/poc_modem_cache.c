@@ -15,6 +15,8 @@ void ui_info_cache_init(ui_act_id_t act_id)
         sizeof(ui_info_cache_t));
 
     p_ui_info_cache->cur_act_id = act_id;
+    p_ui_info_cache->ui_mode = ui_mode_watchface;
+    p_ui_info_cache->prev_ui_mode = p_ui_info_cache->ui_mode;
 
     return;
 }

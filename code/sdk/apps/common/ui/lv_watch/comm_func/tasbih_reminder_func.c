@@ -4,7 +4,7 @@
 
 TasbihRInfoPara_t TasbihR_info;
 
-static const TasbihRInfoPara_t InitInfo = { 
+static const TasbihRInfoPara_t Init = { 
     .TasbihR_Days = 0x00, \
     .TasbihR_Enable = false, \
     .TasbihR_STimestamp = 8*3600, \
@@ -48,7 +48,7 @@ void TasbihRInfoParaReset(void)
     int vm_op_len = \
         sizeof(TasbihRInfoPara_t);
 
-    memcpy(&TasbihR_info, &InitInfo, vm_op_len);
+    memcpy(&TasbihR_info, &Init, vm_op_len);
 
     TasbihR_info.vm_mask = VM_MASK;
 

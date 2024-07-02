@@ -59,30 +59,19 @@ static void list_ctx_container_create(lv_obj_t *obj)
 {
     widget_obj_para.obj_parent = obj;
     widget_obj_para.obj_x = 0;
-    widget_obj_para.obj_y = \
-        LCD_UI_Y_OFFSET;
-    widget_obj_para.obj_width = \
-        LCD_WIDTH;
-    widget_obj_para.obj_height = \
-        LCD_HEIGHT - LCD_UI_Y_OFFSET;
-    widget_obj_para.obj_bg_opax = \
-        LV_OPA_0;
-    widget_obj_para.obj_bg_color = \
-        lv_color_hex(0x000000);
-    widget_obj_para.obj_border_opax = \
-        LV_OPA_0;
+    widget_obj_para.obj_y = LCD_UI_Y_OFFSET;
+    widget_obj_para.obj_width = LCD_WIDTH;
+    widget_obj_para.obj_height = LCD_HEIGHT - LCD_UI_Y_OFFSET;
+    widget_obj_para.obj_bg_opax = LV_OPA_0;
+    widget_obj_para.obj_bg_color = lv_color_hex(0x000000);
+    widget_obj_para.obj_border_opax = LV_OPA_0;
     widget_obj_para.obj_border_width = 0;
-    widget_obj_para.obj_border_color = \
-        lv_color_hex(0x000000);
+    widget_obj_para.obj_border_color = lv_color_hex(0x000000);
     widget_obj_para.obj_radius = 0;
-    widget_obj_para.obj_is_scrollable = \
-        true;
-    list_ctx_container = \
-        common_widget_obj_create(&widget_obj_para);
-    lv_obj_set_style_pad_bottom(list_ctx_container, \
-        25, LV_PART_MAIN);
-    lv_obj_add_event_cb(list_ctx_container, \
-        scroll_cb, LV_EVENT_SCROLL, NULL);
+    widget_obj_para.obj_is_scrollable = true;
+    list_ctx_container = common_widget_obj_create(&widget_obj_para);
+    lv_obj_set_style_pad_bottom(list_ctx_container, 25, LV_PART_MAIN);
+    lv_obj_add_event_cb(list_ctx_container, scroll_cb, LV_EVENT_SCROLL, NULL);
 
     return;
 }

@@ -374,7 +374,7 @@ static void about_reset_button_elem_create(void)
     widget_label_para.label_parent = \
         reset_button;
     widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_factory_reset);
+        get_lang_txt_with_id(lang_txtid_reset);
     lv_obj_t *reset_label = \
         common_widget_label_create(&widget_label_para);
     lv_obj_center(reset_label);

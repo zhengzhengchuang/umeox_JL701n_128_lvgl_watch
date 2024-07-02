@@ -60,10 +60,6 @@ void SedInfoParaReset(void)
 
 void SedInfoParaUpdate(void)
 {
-    // printf("%d, 0x%x\n", Sed_Info.enable, Sed_Info.repeat);
-    // printf("%d, %d\n", Sed_Info.start_hour, Sed_Info.end_hour);
-    // printf("%d, %d\n", Sed_Info.start_minute, Sed_Info.end_minute);
-
     SedInfoParaWrite();
 
     return;

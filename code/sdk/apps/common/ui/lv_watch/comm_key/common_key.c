@@ -5,10 +5,6 @@
 #include "../../../../../include_lib/btstack/le/le_user.h"
 #include "../../../../watch/include/ui/lcd_spi/lcd_drive.h"
 
-/************使能TE定时器id************/
-static uint16_t enable_te_timer_id = 0;
-
-/************页面定时锁定标志************/
 static bool menu_timer_lock_flag = false;
 
 bool get_menu_timer_lock_flag(void)
@@ -19,33 +15,6 @@ bool get_menu_timer_lock_flag(void)
 void set_menu_timer_lock_flag(bool flag)
 {
     menu_timer_lock_flag = flag;
-
-    return;
-}
-
-static void enable_te_timeout_cb(void *priv)
-{
-    if(enable_te_timer_id)
-        sys_timeout_del(enable_te_timer_id);
-    enable_te_timer_id = 0;
-
-    struct lcd_interface *lcd = lcd_get_hdl();
-    if(lcd->power_ctrl)
-        lcd->power_ctrl(true);
-
-    int lcd_backlight = \
-        GetVmParaCacheByLabel(vm_label_backlight);
-
-    if(lcd->backlight_ctrl)
-        lcd->backlight_ctrl((uint8_t)lcd_backlight);
-
-    /*TODO:亮屏包括：事件、抬腕亮屏*/
-    ui_menu_load_info_t *menu_load_info = \
-        &p_ui_info_cache->exit_menu_load_info;
-    if(menu_load_info->disable_te)
-        SetUsrWaitTe(0);
-    else
-        SetUsrWaitTe(1);
 
     return;
 }
@@ -67,8 +36,6 @@ void common_key_msg_handle(int key_value, int key_event)
 
         if(key_event == KEY_EVENT_CLICK)
         {
-            lcd_sleep_ctrl(false);
-
             /************按键亮屏显示页************/
             ui_act_id_t act_id = ui_act_id_watchface;
             ui_menu_load_info_t *menu_load_info = \
@@ -86,9 +53,6 @@ void common_key_msg_handle(int key_value, int key_event)
             ui_menu_jump(act_id);
 
             common_menu_lock_timer_del();
-
-            if(!enable_te_timer_id)
-                enable_te_timer_id = sys_timeout_add(NULL, enable_te_timeout_cb, 50);
         }
     }else
     {
@@ -103,9 +67,8 @@ void common_key_msg_handle(int key_value, int key_event)
         ui_act_id_t cur_act_id = \
             p_ui_info_cache->cur_act_id;
 
-        if(key_value == Common_Key_Val_1)
+        if(key_value == Common_Key_Val_1)//电源键
         {
-            //电源键
             if(key_event == KEY_EVENT_CLICK)
             {
                 common_offscreen_handle();
@@ -118,21 +81,21 @@ void common_key_msg_handle(int key_value, int key_event)
                 else
                     DevOpMenuPopUp();
             }
-        }else if(key_value == Common_Key_Val_0)
+        }else if(key_value == Common_Key_Val_0)//Home键
         {
             if(key_event == KEY_EVENT_CLICK)
             {
                 if(cur_act_id == ui_act_id_watchface)
                 {
                     /*在表盘页面下，菜单键点击进入菜单列表*/
-                    ui_menu_jump_handle(ui_act_id_menu);
+                    ui_menu_jump(ui_act_id_menu);
                     return;
                 }
 
                 if(menu_lock == false)
                 {
                     /*如果当前页面没有锁定，直接home到表盘*/
-                    ui_menu_jump_handle(ui_act_id_watchface);
+                    ui_menu_jump(ui_act_id_watchface);
                     return;
                 }
             }else if(key_event == KEY_EVENT_DOUBLE_CLICK)
@@ -152,13 +115,16 @@ void common_key_msg_handle(int key_value, int key_event)
                     cur_menu++;
                     cur_menu %= ui_menu_view_num;
                     SetVmParaCacheByLabel(vm_label_menu_view, cur_menu);
-                    ui_menu_jump_handle(ui_act_id_menu);
+                    ui_menu_jump(ui_act_id_menu);
                     return;
-                }else if(cur_act_id == ui_act_id_about)
+                }
+#if 0               
+                else if(cur_act_id == ui_act_id_about)
                 {
                     //测试用
                     ui_menu_jump(ui_act_id_factory);
                 }
+#endif
 #endif
             }else if(key_event == KEY_EVENT_FIRTH_CLICK)
             {

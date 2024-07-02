@@ -95,9 +95,6 @@ enum
     /*******久坐步数*******/
     vm_label_sedentary_steps,
 
-    /*******耳机状态*******/
-    vm_label_earphone_state,
-
     /*******计量单位*******/
     vm_label_unit_distance,
     vm_label_unit_temperature,

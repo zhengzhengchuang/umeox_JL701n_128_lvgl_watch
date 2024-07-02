@@ -53,9 +53,6 @@ void GalgoInfoParaReset(void)
 
 void GalgoInfoParaUpdate(void)
 {
-    // for(u8 i = 0; i < GalgoKeyLen; i++)
-    //     printf("key[%d] = %c\n", i, Galgo_info.algo_key[i]);
-
     GalgoInfoParaWrite();
 
     return;

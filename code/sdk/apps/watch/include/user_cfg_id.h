@@ -153,6 +153,7 @@
 #define     CFG_MSG_NOTIFY_PARA_INFO	202//存储消息通知参数信息
 #define     CFG_SEDENTARY_PARA_INFO	    203//存储久坐提醒参数
 #define     CFG_QPUSER_PARA_INFO	    204//古兰经播放参数
+#define     CFG_TWS_PARA_INFO	        205//tws参数
 #if 0
 #define     VM_WATCH_EX_BEGIN            191//拓展表盘信息
 #define     VM_WATCH_EX0                      VM_WATCH_EX_BEGIN//拓展表盘信息

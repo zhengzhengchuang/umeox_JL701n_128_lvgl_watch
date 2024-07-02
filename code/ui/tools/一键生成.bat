@@ -20,4 +20,12 @@ call 1.run.py
 
 call 2.copy_sdk.bat
 
+call clean_all.bat
+
+cd ..
+
+cd .\pic\pic_tool
+
+call 1.clean.bat
+
 pause

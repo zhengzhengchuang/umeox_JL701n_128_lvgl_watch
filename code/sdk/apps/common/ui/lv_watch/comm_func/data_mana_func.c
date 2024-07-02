@@ -5,6 +5,7 @@ void ResetAllVmData(void)
     LLInfoParaReset();
     SedInfoParaReset();
     DndInfoParaReset();
+    TwsInfoParaReset();
     UserInfoParaReset();
     PTimeCfgParaReset();
     GalgoInfoParaReset();

@@ -58,9 +58,6 @@ static const vm_ctx_t vm_def[Vm_Num] = {
     /*******久坐步数*******/
     {.label = vm_label_sedentary_steps, .val = 0},
 
-    /*******耳机状态*******/
-    {.label = vm_label_earphone_state, .val = earphone_state_disc},
-
     /*******计量单位*******/
     {.label = vm_label_unit_distance, .val = unit_distance_kilometre},
     {.label = vm_label_unit_temperature, .val = unit_temperature_C},
@@ -148,6 +145,7 @@ void vm_store_para_init(void)
     HcalendarInfoParaRead();
     AlarmInfoParaRead();
     DndInfoParaRead();
+    TwsInfoParaRead();
     UserInfoParaRead();
     GalgoInfoParaRead();
     BondCodeInfoParaRead();

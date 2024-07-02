@@ -5,6 +5,7 @@
 #include "system/timer.h"
 #include "le_smartbox_module.h"
 #include "smartbox_rcsp_manage.h"
+#include "../../../common/ui/lv_watch/comm_func/tws_func.h"
 
 #if (SMART_BOX_EN)
 
@@ -20,6 +21,7 @@ void smartbox_command_send_bt_scan_result(char *name, u8 name_len, u8 *addr, u32
     memcpy(send_buf + sizeof(dev_class) + 6, &rssi, 1);
     memcpy(send_buf + sizeof(dev_class) + 6 + sizeof(rssi), &name_len, 1);
     memcpy(send_buf + sizeof(dev_class) + 6 + sizeof(rssi) + sizeof(name_len), name, name_len);
+    TwsBtScanResultParse(send_buf, send_len);
     JL_CMD_send(JL_OPCODE_SYS_UPDATE_BT_STATUS, send_buf, send_len, JL_NOT_NEED_RESPOND);
     free(send_buf);
     printf("bt name = %s\n", name);

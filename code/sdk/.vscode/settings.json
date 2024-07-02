@@ -429,7 +429,13 @@
         "music_player.h": "c",
         "key_event_deal.h": "c",
         "norflash_sfc.h": "c",
-        "user_font.h": "c"
+        "user_font.h": "c",
+        "tws_func.h": "c",
+        "tws_search.h": "c",
+        "tws_not_found.h": "c",
+        "tws_disc.h": "c",
+        "tws_unpair.h": "c",
+        "tws_list.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

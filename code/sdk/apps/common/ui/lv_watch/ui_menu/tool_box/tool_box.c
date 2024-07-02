@@ -158,16 +158,16 @@ static void backlight_event_cb(lv_event_t *e)
 {
     if(!e) return;
 
-    ui_menu_jump(\
-        ui_act_id_backlight);
+    ui_menu_jump(ui_act_id_backlight);
 
     return;
 }
 
-static void earphone_event_cb(lv_event_t *e)
+static void tws_event_cb(lv_event_t *e)
 {
     if(!e) return;
 
+    ui_menu_jump(ui_act_id_tws_main);
 
     return;
 }
@@ -286,16 +286,12 @@ static void menu_display_cb(lv_obj_t *obj)
             &dnd_state_icon_dsc);
     lv_obj_align(dnd_state_icon, LV_ALIGN_BOTTOM_LEFT, 0, 0);
 
-    int earphone_state = \
-        GetVmParaCacheByLabel(vm_label_earphone_state);
-    widget_img_para.file_img_dat = \
-        tool_box_ear_00_index + earphone_state;
-    widget_img_para.event_cb = \
-        earphone_event_cb;
-    lv_obj_t *earphone_state_icon = 
+    widget_img_para.file_img_dat = tool_box_tws_00_index;
+    widget_img_para.event_cb = tws_event_cb;
+    lv_obj_t *tws_icon = 
         common_widget_img_create(&widget_img_para, NULL);
-    lv_obj_align(earphone_state_icon, LV_ALIGN_BOTTOM_MID, 0, 0);
-
+    lv_obj_align(tws_icon, LV_ALIGN_BOTTOM_MID, 0, 0);
+    
     widget_img_para.file_img_dat = \
         tool_box_setting_00_index;
     widget_img_para.event_cb = \

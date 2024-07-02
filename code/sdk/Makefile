@@ -994,6 +994,7 @@ c_SRC_FILES := \
 	apps/common/ui/lv_watch/comm_func/data_mana_func.c \
 	apps/common/ui/lv_watch/comm_func/quran_play_func.c \
 	apps/common/ui/lv_watch/comm_func/azkar_prayer_func.c \
+	apps/common/ui/lv_watch/comm_func/tws_func.c \
 	apps/common/ui/lv_watch/comm_task/comm_task.c \
 	apps/common/ui/lv_watch/comm_task/utc_time_task.c \
 	apps/common/ui/lv_watch/comm_sensor/sensor_hr_task.c \
@@ -1099,6 +1100,12 @@ c_SRC_FILES := \
 	apps/common/ui/lv_watch/ui_menu/factory/factory.c \
 	apps/common/ui/lv_watch/ui_menu/azkar/azkar_list.c \
 	apps/common/ui/lv_watch/ui_menu/azkar/azkar_sec.c \
+	apps/common/ui/lv_watch/ui_menu/tws/tws_main.c \
+	apps/common/ui/lv_watch/ui_menu/tws/tws_disc.c \
+	apps/common/ui/lv_watch/ui_menu/tws/tws_list.c \
+	apps/common/ui/lv_watch/ui_menu/tws/tws_unpair.c \
+	apps/common/ui/lv_watch/ui_menu/tws/tws_search.c \
+	apps/common/ui/lv_watch/ui_menu/tws/tws_not_found.c \
 	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_main.c \
 	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_contacts.c \
 	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_weather.c \

@@ -39,13 +39,11 @@ FS_DIR_INFO *QpGetFsDirInfo(void)
 
 int QpIsRunning(void)
 {
-    if(app_get_curr_task() == APP_MUSIC_TASK) 
-    {
+    if(app_get_curr_task() == APP_MUSIC_TASK){
         int status = music_player_get_play_status();
         if(status == FILE_DEC_STATUS_PLAY)
             return true;
-    }else
-    {
+    }else{
         if(bt_media_is_running())
             return true;
     }
@@ -97,12 +95,10 @@ void QpSetCycleMode(u8 mode)
 
 void QpPPHandle(void)
 {
-    if(app_get_curr_task() != APP_MUSIC_TASK) 
-    {
+    if(app_get_curr_task() != APP_MUSIC_TASK){
         music_set_start_auto_play(1);
         app_task_switch_to(APP_MUSIC_TASK);
-    }else 
-    {
+    }else{
         app_task_put_key_msg(KEY_MUSIC_PP, 0);
     }
 
@@ -145,18 +141,15 @@ void QpOpenFile(void)
     QpCloseFile();
 
     __this = zalloc(__this_size); 
-    if(!__this)
-        return;
+    if(!__this) return;
 
     __this->dir_buf = zalloc(__dir_size);
-    if(!__this->dir_buf)
-        return;
+    if(!__this->dir_buf) return;
 
     fset_ext_type(__this_path, "MP3");
 
     fopen_dir_info(__this_path, &__this->file, NULL);
-    if(!__this->file)
-        return;
+    if(!__this->file) return;
 
     __this->total_num = fenter_dir_info(__this->file, __this->dir_buf);
 
@@ -191,17 +184,13 @@ void QpFileRead(u8 idx)
 
     if(!__this) return;
 
-    if(!__this->file)
-        return;
+    if(!__this->file) return;
 
-    if(!__this->dir_buf)
-        return;
+    if(!__this->dir_buf) return;
 
-    if(!__this->total_num)
-        return;
+    if(!__this->total_num) return;
 
-    if(idx > __this->total_num)
-        return;
+    if(idx > __this->total_num) return;
 
     fget_dir_info(__this->file, idx, 1, __this->dir_buf);
 

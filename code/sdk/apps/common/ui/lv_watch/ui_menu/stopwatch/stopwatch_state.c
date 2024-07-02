@@ -11,8 +11,7 @@ static void reset_cb(lv_event_t *e)
 
     UserStopwatchReset();
 
-    ui_menu_jump(\
-        ui_act_id_more_menu);
+    ui_menu_jump(ui_act_id_more_menu);
 
     return;
 }

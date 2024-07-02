@@ -42,6 +42,8 @@ void common_menu_lock_timer_del(void)
 
 void common_menu_lock_timer_add(void)
 {
+    /* 灭屏页面锁定 */
+    
     set_menu_timer_lock_flag(true);
 
     if(!menu_lock_timer_id)

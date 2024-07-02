@@ -4,7 +4,7 @@
 
 UserInfoPara_t User_Info;
 
-static const UserInfoPara_t InitInfo = {
+static const UserInfoPara_t Init = {
     .age = 25,
     .gender = Gender_Male,
     .height = 170,
@@ -45,7 +45,7 @@ void UserInfoParaReset(void)
     int vm_op_len = \
         sizeof(UserInfoPara_t);
 
-    memcpy(&User_Info, &InitInfo, vm_op_len);
+    memcpy(&User_Info, &Init, vm_op_len);
 
     User_Info.vm_mask = VM_MASK;
 
