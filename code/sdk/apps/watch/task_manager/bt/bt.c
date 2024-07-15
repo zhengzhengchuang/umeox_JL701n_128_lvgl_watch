@@ -94,6 +94,7 @@
 
 #include "message_vm_cfg.h"
 #include "watch_common.h"
+#include "../../../common/ui/lv_watch/lv_watch.h"
 
 #if TCFG_UI_ENABLE_MOTO
 #include "ui/ui_sys_param.h"
@@ -241,7 +242,7 @@ void bt_function_select_init()
 #if (TCFG_SPI_LCD_ENABLE)
 #if TCFG_USER_EMITTER_ENABLE//带有屏幕的方案根据UI选项连接
     ////设置开机回链的设备个数
-    __set_auto_conn_device_num(10);//彩屏方案支持10个设备的连接
+    __set_auto_conn_device_num(0);//彩屏方案支持10个设备的连接
 #endif
 #endif
 
@@ -431,6 +432,8 @@ static int bt_connction_status_event_handler(struct bt_event *bt)
         case BT_STATUS_START_CONNECTED:
             log_info(" BT_STATUS_START_CONNECTED\n");
 #if TCFG_USER_EMITTER_ENABLE
+            TwsScan.state = TWS_SCAN_STOP;
+            TwsConn.state == TWS_CONNECTING;
             user_send_cmd_prepare(USER_CTRL_INQUIRY_CANCEL, 0, NULL);
 #endif
             break;
@@ -691,6 +694,9 @@ static int bt_connction_status_event_handler(struct bt_event *bt)
 
         case  BT_STATUS_RECONN_OR_CONN:
             log_info("  BT_STATUS_RECONN_OR_CONN \n");
+            printf("+++++++++++value = %d\n", bt->value);
+            if(bt->value == 1)
+                TwsConnCompleteHandle(bt->args);
 #if USER_SUPPORT_PROFILE_PBAP_LIST
             user_send_cmd_prepare(USER_CTRL_PBAP_CONNECT, 0, NULL);
 #endif
@@ -724,7 +730,7 @@ static int bt_update_hci_event_handler(struct bt_event *bt)
         clock_add_set(BT_CONN_CLK);
         break;
     case HCI_EVENT_USER_CONFIRMATION_REQUEST:
-        log_info(" HCI_EVENT_USER_CONFIRMATION_REQUEST \n");
+        printf(" HCI_EVENT_USER_CONFIRMATION_REQUEST\n");
         ///<可通过按键来确认是否配对 1：配对   0：取消
         bt_send_pair(1);
         clock_remove_set(BT_CONN_CLK);
@@ -741,7 +747,7 @@ static int bt_update_hci_event_handler(struct bt_event *bt)
         log_info(" HCI_EVENT_USER_PRESSKEY_NOTIFICATION %x\n", bt->value);
         break;
     case HCI_EVENT_PIN_CODE_REQUEST :
-        log_info("HCI_EVENT_PIN_CODE_REQUEST  \n");
+        printf("HCI_EVENT_PIN_CODE_REQUEST  \n");
         bt_send_pair(1);
         break;
     case HCI_EVENT_VENDOR_NO_RECONN_ADDR :
@@ -865,7 +871,7 @@ static int bt_hci_event_handler(struct bt_event *bt)
             break;
 
         case HCI_EVENT_USER_CONFIRMATION_REQUEST:
-            log_info(" HCI_EVENT_USER_CONFIRMATION_REQUEST \n");
+            printf(" HCI_EVENT_USER_CONFIRMATION_REQUEST \n");
             ///<可通过按键来确认是否配对 1：配对   0：取消
             bt_send_pair(1);
             clock_remove_set(BT_CONN_CLK);
@@ -882,7 +888,7 @@ static int bt_hci_event_handler(struct bt_event *bt)
             break;
 
         case HCI_EVENT_PIN_CODE_REQUEST :
-            log_info("HCI_EVENT_PIN_CODE_REQUEST  \n");
+            printf("HCI_EVENT_PIN_CODE_REQUEST  \n");
             bt_send_pair(1);
             break;
 
@@ -917,7 +923,7 @@ static int bt_hci_event_handler(struct bt_event *bt)
                 case ERROR_CODE_CONNECTION_REJECTED_DUE_TO_LIMITED_RESOURCES:
                 case ERROR_CODE_CONNECTION_REJECTED_DUE_TO_UNACCEPTABLE_BD_ADDR:
                 case ERROR_CODE_CONNECTION_ACCEPT_TIMEOUT_EXCEEDED  :
-                case ERROR_CODE_REMOTE_USER_TERMINATED_CONNECTION   :
+                //case ERROR_CODE_REMOTE_USER_TERMINATED_CONNECTION   :
                 case ERROR_CODE_CONNECTION_TERMINATED_BY_LOCAL_HOST :
                 case ERROR_CODE_AUTHENTICATION_FAILURE :
                     bt_hci_event_disconnect(bt) ;

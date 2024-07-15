@@ -354,7 +354,7 @@ int bt_wait_connect_and_phone_connect_switch(void *p)
             return 0;
         }
     }
-    /* log_info(">>>phone_connect_switch=%d\n",bt_user_priv_var.auto_connection_counter ); */
+    log_info(">>>phone_connect_switch=%d\n",bt_user_priv_var.auto_connection_counter);
     if ((int)p == 0) {  //// 根据地址回链
         if (bt_user_priv_var.auto_connection_counter) {
             timeout = 6000;     ////设置回链6s
@@ -562,6 +562,10 @@ void bt_read_remote_name(u8 status, u8 *addr, u8 *name)
 #if TCFG_USER_EMITTER_ENABLE
     emitter_search_noname(status, addr, name);
 #endif
+
+    //TwsConn.state = TWS_CONNECTING;
+    memcpy(TwsConn.Conn.mac, addr, 6);
+    memcpy(TwsConn.Conn.name, name, Tws_Name_Len + 1);
 }
 
 
@@ -1249,7 +1253,7 @@ void bt_status_init_ok_background(struct bt_event *bt)
 /*----------------------------------------------------------------------------*/
 void bt_status_connect(struct bt_event *bt)
 {
-    printf("*******%s\n", __func__);
+    printf("*******bt_status_connect\n");
 
     sys_auto_sniff_controle(1, NULL);
     sys_auto_shut_down_disable();
@@ -1262,11 +1266,11 @@ void bt_status_connect(struct bt_event *bt)
     }
 #endif
 
-    static u8 mac_addr[6];
-    memcpy(mac_addr, bt->args, 6);
-    for(uint8_t i = 0; i < 6; i++)
-        printf("%s:mac_addr[%d] = %x\n", \
-            __func__, i, mac_addr[i]);
+    // static u8 mac_addr[6];
+    // memcpy(mac_addr, bt->args, 6);
+    // for(uint8_t i = 0; i < 6; i++)
+    //     printf("%s:mac_addr[%d] = %x\n", \
+    //         __func__, i, mac_addr[i]);
  
 #if TCFG_USER_EMITTER_ENABLE
 #if TCFG_UI_ENABLE && TCFG_SPI_LCD_ENABLE
@@ -1342,6 +1346,9 @@ void bt_status_connect(struct bt_event *bt)
     if (get_call_status() == BT_CALL_HANGUP) {
         bt_tone_play_index(IDEX_TONE_BT_CONN, 1, NULL);
     }
+
+    // if(bt_user_priv_var.emitter_or_receiver == BT_EMITTER_EN)
+    //     TwsConnCompleteHandle(bt->args);
 }
 
 void bt_status_connect_background(struct bt_event *bt)
@@ -1832,7 +1839,7 @@ void bt_status_phone_name(struct bt_event *bt)
     memcpy(phone_name_text, phone_name, phone_name_len);
     /* r_printf(">>%s\n", phone_name); */
     /* r_printf(">>%s\n", phone_name_text); */
-    UI_MSG_POST("phone_name:status=%4", 1);
+    //UI_MSG_POST("phone_name:status=%4", 1);
 }
 /*----------------------------------------------------------------------------*/
 /**@brief  蓝牙status 手机来电铃声
@@ -2125,7 +2132,8 @@ void bt_status_conn_a2dp_ch(struct bt_event *bt)
         if (bt_get_music_device_style() != SET_MUSIC_IN_WATCH) {
             return;
         }
-        if (bt->value & A2DP_SRC_CH) {
+
+        if (bt->value & A2DP_SRC_CH){
             if (music_player_get_play_status() == FILE_DEC_STATUS_PLAY) {
                 emitter_open(1);
             }
@@ -2304,7 +2312,11 @@ void bt_hci_event_inquiry(struct bt_event *bt)
     {
         extern void emitter_search_stop(u8 result);
         emitter_search_stop(bt->value);
-        SetTwsScanComplete(true);
+
+        if(TwsScan.state == TWS_SCANNING)
+            TwsScan.state = TWS_SCAN_TIMEOUT;
+
+        printf("__%s__\n", __func__);
     }
 #endif
 }
@@ -2338,8 +2350,6 @@ void bt_hci_event_connection(struct bt_event *bt)
     user_send_cmd_prepare(USER_CTRL_WRITE_SCAN_DISABLE, 0, NULL);
     user_send_cmd_prepare(USER_CTRL_WRITE_CONN_DISABLE, 0, NULL);
 #endif
-
-    SetTwsConnComplete(true);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -2410,6 +2420,7 @@ void bt_hci_event_disconnect(struct bt_event *bt)
 #else
     if (bt_user_priv_var.emitter_or_receiver != BT_EMITTER_EN) {
         bt_wait_phone_connect_control(1);
+        //printf("______!=BT_EMITTER_EN\n");
     } else {
 #if 0//(TCFG_SPI_LCD_ENABLE)
         //彩屏方案又ui 控制
@@ -2429,15 +2440,21 @@ void bt_hci_event_disconnect(struct bt_event *bt)
         user_send_cmd_prepare(USER_CTRL_WRITE_CONN_ENABLE, 0, NULL);
 #else
         if (bt->value !=  ERROR_CODE_CONNECTION_TIMEOUT) {
+            //printf("______==BT_EMITTER_EN\n");
             extern u8 *get_cur_connect_phone_mac_addr(void);
             if (!get_cur_connect_phone_mac_addr()) {
+                //printf("************not conn\n");
                 user_send_cmd_prepare(USER_CTRL_WRITE_SCAN_ENABLE, 0, NULL);
-                user_send_cmd_prepare(USER_CTRL_WRITE_CONN_ENABLE, 0, NULL);
+                user_send_cmd_prepare(USER_CTRL_WRITE_CONN_ENABLE, 0, NULL); 
             }
         }
 #endif
+
+        TwsDisConnCompleteHandle(bt->args);
     }
 #endif
+
+    
 }
 
 /*----------------------------------------------------------------------------*/
@@ -2504,7 +2521,7 @@ void bt_hci_event_page_timeout(struct bt_event *bt)
 /*----------------------------------------------------------------------------*/
 void bt_hci_event_connection_timeout(struct bt_event *bt)
 {
-    UI_MSG_POST("bt_connection_timeout");
+    printf("_____bt_connection_timeout\n");
     if (!get_remote_test_flag() && !get_esco_busy_flag()) {
         bt_user_priv_var.auto_connection_counter = (TIMEOUT_CONN_TIME * 1000);
         memcpy(bt_user_priv_var.auto_connection_addr, bt->args, 6);
@@ -2528,6 +2545,7 @@ void bt_hci_event_connection_timeout(struct bt_event *bt)
 #endif
     }
 
+    TwsConn.state = TWS_CONNECT_TIMEOUT;
 }
 
 /*----------------------------------------------------------------------------*/

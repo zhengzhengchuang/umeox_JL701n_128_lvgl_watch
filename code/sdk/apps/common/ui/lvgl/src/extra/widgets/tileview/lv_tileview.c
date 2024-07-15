@@ -141,7 +141,7 @@ static void lv_tileview_tile_constructor(const lv_obj_class_t * class_p, lv_obj_
     lv_obj_set_size(obj, LV_PCT(100), LV_PCT(100));
     lv_obj_update_layout(obj);  /*Be sure the size is correct*/
     lv_obj_set_pos(obj, create_col_id * lv_obj_get_content_width(parent),
-                   create_row_id * lv_obj_get_content_height(parent));
+        create_row_id * lv_obj_get_content_height(parent));
 
     lv_tileview_tile_t * tile = (lv_tileview_tile_t *)obj;
     tile->dir = create_dir;
@@ -182,7 +182,7 @@ static void tileview_event_cb(lv_event_t * e)
         lv_coord_t left = scroll_end.x;
         lv_coord_t top = scroll_end.y;
 
-        //printf("%s:left = %d, top = %d\n", __func__, left, top);
+        printf("%s:left = %d, top = %d\n", __func__, left, top);
 
         lv_coord_t tx = ((left + (w / 2)) / w) * w;
         lv_coord_t ty = ((top + (h / 2)) / h) * h;

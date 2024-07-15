@@ -99,8 +99,6 @@ lv_obj_t *common_widget_img_create(common_widget_img_para_t *img_para, \
 
     user_img_dsc.img_dst_cnt++;
 
-    //printf("%d\n", user_img_dsc.img_dst_cnt);
-
     return common_widget_img;
 }
 
@@ -133,6 +131,59 @@ void common_widget_img_replace_src(lv_obj_t *obj, uint32_t file_img_dat, \
     lv_img_set_src(obj, &img_dst_gather[img_dsc_idx]);
 
     return;
+}
+
+lv_obj_t *common_widget_ex_img_create(common_widget_img_para_t *img_para, \
+    uint16_t *img_dsc_idx)
+{
+    if(!img_para)
+        return NULL;
+
+    uint8_t img_dst_cnt = \
+        user_img_dsc.img_dst_cnt;
+    lv_img_dsc_t *img_dst_gather = \
+        user_img_dsc.img_dst_gather;
+
+    if(img_dst_cnt >= Img_Dsc_Max)
+    {
+        printf("error!!!!!!!!!!!! Img_Dsc_Max\n");
+        return NULL;
+    }
+
+    if(!(img_dst_gather[img_dst_cnt].data) && img_para->file_img_dat != File_Img_Dat_None)
+    {
+        lv_open_ex_res(EX_RES_BASE_ADDR, ex_file_index[img_para->file_img_dat], &img_dst_gather[img_dst_cnt]);
+    }
+    
+    lv_obj_t *common_widget_img = lv_img_create(img_para->img_parent);
+    lv_img_set_src(common_widget_img, &img_dst_gather[img_dst_cnt]);
+    lv_obj_set_pos(common_widget_img, img_para->img_x, img_para->img_y);
+
+    if(img_para->img_click_attr)
+        lv_obj_add_flag(common_widget_img, LV_OBJ_FLAG_CLICKABLE);
+    else
+        lv_obj_clear_flag(common_widget_img, LV_OBJ_FLAG_CLICKABLE);
+    
+    if(img_para->event_cb)
+        lv_obj_add_event_cb(common_widget_img, img_para->event_cb, \
+            LV_EVENT_SHORT_CLICKED, img_para->user_data);
+
+    if(img_dsc_idx)
+        *img_dsc_idx = img_dst_cnt;
+
+    user_img_dsc.img_dst_cnt++;
+
+    return common_widget_img;
+}
+
+lv_img_dsc_t *common_widget_img_open_ex_res(uint32_t file_img_dat)
+{
+    static lv_img_dsc_t ex_img;
+
+    lv_open_ex_res(EX_RES_BASE_ADDR, ex_file_index[file_img_dat], \
+        &ex_img);
+
+    return (&ex_img);
 }
 
 /*********************************************************************************

@@ -435,7 +435,16 @@
         "tws_not_found.h": "c",
         "tws_disc.h": "c",
         "tws_unpair.h": "c",
-        "tws_list.h": "c"
+        "tws_list.h": "c",
+        "lv_area.h": "c",
+        "not_connected.h": "c",
+        "not_conn.h": "c",
+        "find.h": "c",
+        "find_phone.h": "c",
+        "scan_timeout.h": "c",
+        "azkar_sec_comm.h": "c",
+        "azkar_sec_ar.h": "c",
+        "ex_file_index.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

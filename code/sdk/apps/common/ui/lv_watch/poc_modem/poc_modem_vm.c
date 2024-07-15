@@ -55,6 +55,13 @@ static const vm_ctx_t vm_def[Vm_Num] = {
     /*******勿扰状态*******/
     {.label = vm_label_dnd_state, .val = dnd_state_disable},
 
+    /*******抬腕亮屏*******/
+    {.label = vm_label_raise, .val = 1},
+
+    /*******备份音量*******/
+    {.label = vm_label_call_vol_b, .val = 0},
+    {.label = vm_label_media_vol_b, .val = 0},
+
     /*******久坐步数*******/
     {.label = vm_label_sedentary_steps, .val = 0},
 

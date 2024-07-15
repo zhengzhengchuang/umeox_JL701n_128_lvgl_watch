@@ -537,16 +537,15 @@ u16 get_vbat_value(void)
 
 u8 get_vbat_percent(void)
 {
-   printf("%s,bat_val %d\n",__func__,bat_val);
+   printf("get_vbat_percent,bat_val %d\n" ,bat_val);
    
-    #if TCFG_BATTERY_POWER_MANAGE_ENABLE   
+#if TCFG_BATTERY_POWER_MANAGE_ENABLE   
     if (bat_val <= app_var.poweroff_tone_v)
     {
         return 0;
     }
-	//printf("%s,get_vbat_averge_percent =%d\n",__func__,get_vbat_averge_percent());
     return get_vbat_averge_percent();
-    #endif
+#endif
 
     u16 tmp_bat_val;
     u16 bat_val = avr_bat_val;//get_vbat_level();
@@ -656,7 +655,8 @@ void vbat_check_init(void)
 #if TCFG_BATTERY_POWER_MANAGE_ENABLE   
     read_vm_vbat_value();
 
-	if(!get_charge_online_flag()) {
+	if(!get_charge_online_flag()) 
+    {
 		current_soc = (float)vm_vbat_value/100.0;
 		float current_vbat;
 		// 空载状态下，直接根据 SOC-OCV 反向函数计算 SOC
@@ -670,13 +670,18 @@ void vbat_check_init(void)
     }
 	
 	printf("vm_vbat_value = %d ",vm_vbat_value);
-    if((is_reset_source(P33_VDDIO_LVD_RST) | is_reset_source(P33_VDDIO_POR_RST)) || (vm_vbat_value == 0)){
-        if(get_charge_online_flag()) {
+
+    if((is_reset_source(P33_VDDIO_LVD_RST) | is_reset_source(P33_VDDIO_POR_RST)) || (vm_vbat_value == 0))
+    {
+        if(get_charge_online_flag()) 
+        {
             memset(vbat_voltage_array, 0x0, sizeof(vbat_voltage_array));//清除adc数组里面的异常值
             sys_timeout_add(NULL, get_real_vbat, 1000);//电池进入保护状态或者第一次使用电池时,等待1s,电池激活后再获取电压值
         } else {
             get_real_vbat();
         }
+
+        printf("____vbat_check_init____\n");
     } else {
         current_soc = (float)vm_vbat_value/100.0;
         //log_sylon("current_soc = %.2f ",current_soc);
@@ -698,8 +703,8 @@ void vbat_check_init(void)
     }
 #endif
 
-
-    if (vbat_fast_timer == 0) {
+    if(vbat_fast_timer == 0) 
+    {
         vbat_fast_timer = usr_timer_add(NULL, vbat_check, 10, 1);
     }
 }
@@ -834,16 +839,19 @@ void check_power_on_voltage(void)
         val = get_vbat_level();
         printf("vbat: %d\n", val);
         //printf("poweroff_tone_v: %d\n", app_var.poweroff_tone_v);//3.3v
-        if ((val < app_var.poweroff_tone_v) || adc_check_vbat_lowpower()) {
+        if((val < app_var.poweroff_tone_v) || adc_check_vbat_lowpower()) 
+        {
             low_power_cnt++;
             normal_power_cnt = 0;
-            if (low_power_cnt > 10) {
-                ui_update_status(STATUS_POWERON_LOWPOWER);
-                log_info("power on low power , enter softpoweroff!\n");
+            if(low_power_cnt > 10) 
+            {
+                //ui_update_status(STATUS_POWERON_LOWPOWER);
+                printf("power on low power , enter softpoweroff!\n");
 
                 power_set_soft_poweroff();
             }
-        } else {
+        }else 
+        {
             normal_power_cnt++;
             low_power_cnt = 0;
             if (normal_power_cnt > 10) {

@@ -267,7 +267,7 @@ LV_FONT_DECLARE(font_common_num_64);
 LV_FONT_DECLARE(font_common_num_78);
 LV_FONT_DECLARE(font_common_24_no_ch);
 //LV_FONT_DECLARE(font_common_28_no_ch);
-LV_FONT_DECLARE(font_common_30_no_ch);
+//LV_FONT_DECLARE(font_common_30_no_ch);
 
 #ifdef __cplusplus
 } /*extern "C"*/

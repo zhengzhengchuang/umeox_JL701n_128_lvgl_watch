@@ -4,6 +4,8 @@ static void confirm_cb(lv_event_t *e)
 {
     if(!e) return;
 
+    u8 dev = get_unpair_dev();
+    TwsBtUserUnpair(dev);
     ui_menu_jump(ui_act_id_tws_main);
 
     return;

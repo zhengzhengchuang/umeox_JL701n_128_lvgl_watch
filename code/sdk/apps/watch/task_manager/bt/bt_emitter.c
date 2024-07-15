@@ -278,10 +278,10 @@ void bt_emitter_start_search_device()
     if (is_bredr_close() == 1) {
         bredr_search_device();
     } else {
-        /* user_send_cmd_prepare(USER_CTRL_PAGE_CANCEL, 0, NULL); */
+        //user_send_cmd_prepare(USER_CTRL_PAGE_CANCEL, 0, NULL);
         /* ////关闭可发现可链接 */
         user_send_cmd_prepare(USER_CTRL_WRITE_SCAN_DISABLE, 0, NULL);
-        /* user_send_cmd_prepare(USER_CTRL_WRITE_CONN_DISABLE, 0, NULL); */
+        // user_send_cmd_prepare(USER_CTRL_WRITE_CONN_DISABLE, 0, NULL);
         ////切换样机状态
         bt_search_device();
     }

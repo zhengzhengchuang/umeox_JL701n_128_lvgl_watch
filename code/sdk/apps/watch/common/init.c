@@ -138,7 +138,7 @@ static void app_init()
 
     app_var.play_poweron_tone = 1;
 
-    if (!get_charge_online_flag()) 
+    if(!get_charge_online_flag()) 
     {
         check_power_on_voltage();
 

@@ -4,6 +4,7 @@ static void confirm_cb(lv_event_t *e)
 {
     if(!e) return;
 
+    TwsBtUserDiscHandle();
     ui_menu_jump(ui_act_id_tws_main);
 
     return;

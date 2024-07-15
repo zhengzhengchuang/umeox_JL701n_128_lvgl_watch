@@ -51,8 +51,6 @@ void common_key_msg_handle(int key_value, int key_event)
             }
             
             ui_menu_jump(act_id);
-
-            common_menu_lock_timer_del();
         }
     }else
     {

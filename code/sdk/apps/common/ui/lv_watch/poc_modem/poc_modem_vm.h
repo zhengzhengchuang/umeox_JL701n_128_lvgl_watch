@@ -92,6 +92,13 @@ enum
     /*******勿扰状态*******/
     vm_label_dnd_state,
 
+    /*******抬腕亮屏*******/
+    vm_label_raise,
+
+    /*******备份音量*******/
+    vm_label_call_vol_b,
+    vm_label_media_vol_b,
+
     /*******久坐步数*******/
     vm_label_sedentary_steps,
 

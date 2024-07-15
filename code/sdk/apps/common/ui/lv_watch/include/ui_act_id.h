@@ -114,6 +114,8 @@ enum
     
     /*****工具盒子相关页面*****/
     ui_act_id_tool_box,
+    ui_act_id_not_conn,
+    ui_act_id_find_phone,
     
     /*****礼拜时间相关页面*****/
     ui_act_id_worship_time,
@@ -173,7 +175,8 @@ enum
 
     /*****祈祷祠相关页面*****/
     ui_act_id_azkar_list,
-    ui_act_id_azkar_sec,
+    ui_act_id_azkar_sec_ar,
+    ui_act_id_azkar_sec_comm,
 
     /*****赞念提醒相关页面*****/
     ui_act_id_tasbih_main,
@@ -209,8 +212,7 @@ enum
     ui_act_id_tws_disc,
     ui_act_id_tws_list,
     ui_act_id_tws_unpair,
-    ui_act_id_tws_search,
-    ui_act_id_tws_not_found,
+    ui_act_id_scan_timeout,
 
     /*****工厂测试相关页面*****/
     ui_act_id_factory,

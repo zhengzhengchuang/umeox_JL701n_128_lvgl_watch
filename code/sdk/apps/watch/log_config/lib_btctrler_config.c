@@ -95,7 +95,7 @@ const int CONFIG_LMP_MASTER_ESCO_ENABLE  =  1;
 const int CONFIG_WIFI_DETECT_ENABLE = 0;
 const int ESCO_FORWARD_ENABLE = 0;
 
-const int config_bt_function  =  BT_ENCTRY_TASK  ;
+const int config_bt_function  =  BT_ENCTRY_TASK;
 
 ///bredr 强制 做 maseter
 const int config_btctler_bredr_master = 0;

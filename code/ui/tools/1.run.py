@@ -3,7 +3,7 @@ import struct
 
 #自定义头名字
 head_name = 'file'
-font_name = 'font'
+# font_name = 'font'
 
 # 打开文件并读取内容
 # file_path = "H-name.txt"  # 将文件路径替换为你的文件路径
@@ -213,43 +213,43 @@ extern const struct file_index_t file_index[];
 '''
 # print(define_text)
 
-font_text = f'#ifndef __USER_FONT_H__ \n'
-font_text += f'#define __USER_FONT_H__ \n'
-font_text += '''
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-'''
+# font_text = f'#ifndef __USER_FONT_H__ \n'
+# font_text += f'#define __USER_FONT_H__ \n'
+# font_text += '''
+# #ifdef __cplusplus
+# extern "C" {
+# #endif
+#
+# '''
 # print(font_text)
 
-out_font_bin = b""
-font_address = 0x00000000
+# out_font_bin = b""
+# font_address = 0x00000000
 
 current_address = 0x00000000
 output_bin = b""
 
 # 添加字库
-font_folder = "./font/"
-font_list = []
-for font in os.listdir(font_folder):
-    font_list.append(font)
-
-for i in range(len(font_list)):
-    file_name = os.path.join(font_folder, font_list[i])
-    with open(file_name, mode="rb") as font_bin:
-        out_font_bin += font_bin.read()
-
-    fontname_without_extension = os.path.splitext(font_list[i])[0] + "_addr"
-    #print(fontname_without_extension)
-    font_text += f"#define {fontname_without_extension} (0x{font_address:08X})\n\n"
-
-    file_size = os.path.getsize(file_name)
-    # print(file_size)
-    font_address += file_size
-
-with open(f"./bin_out/{font_name}.bin", "wb") as o_file:
-    o_file.write(out_font_bin)
+# font_folder = "./font/"
+# font_list = []
+# for font in os.listdir(font_folder):
+#     font_list.append(font)
+#
+# for i in range(len(font_list)):
+#     file_name = os.path.join(font_folder, font_list[i])
+#     with open(file_name, mode="rb") as font_bin:
+#         out_font_bin += font_bin.read()
+#
+#     fontname_without_extension = os.path.splitext(font_list[i])[0] + "_addr"
+#     #print(fontname_without_extension)
+#     font_text += f"#define {fontname_without_extension} (0x{font_address:08X})\n\n"
+#
+#     file_size = os.path.getsize(file_name)
+#     # print(file_size)
+#     font_address += file_size
+#
+# with open(f"./bin_out/{font_name}.bin", "wb") as o_file:
+#     o_file.write(out_font_bin)
 
 for index, filename in enumerate(bin_files):
     # print(index, filename)
@@ -302,15 +302,15 @@ define_text += f'#endif'
 with open(f"./bin_out/{head_name}_index.h", "w") as define_file:
     define_file.write(define_text)
 
-font_text += '''
-#ifdef __cplusplus
-} /* extern "C" */
-#endif
-'''
-font_text += f'#endif'
-# print(font_text)
-with open(f"./bin_out/{font_name}.h", "w") as define_file:
-    define_file.write(font_text)
+# font_text += '''
+# #ifdef __cplusplus
+# } /* extern "C" */
+# #endif
+# '''
+# font_text += f'#endif'
+# # print(font_text)
+# with open(f"./bin_out/{font_name}.h", "w") as define_file:
+#     define_file.write(font_text)
 
 # 加入暂停
 #input("按回车键继续执行...")

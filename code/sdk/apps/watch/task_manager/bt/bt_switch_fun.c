@@ -1175,10 +1175,10 @@ static int bredr_search_device_do(int priv)
     }
     bt_init_bredr_do(priv);
 #if TCFG_USER_EMITTER_ENABLE
-    /* user_send_cmd_prepare(USER_CTRL_PAGE_CANCEL, 0, NULL); */
+    // user_send_cmd_prepare(USER_CTRL_PAGE_CANCEL, 0, NULL);
     /* ////关闭可发现可链接 */
     user_send_cmd_prepare(USER_CTRL_WRITE_SCAN_DISABLE, 0, NULL);
-    /* user_send_cmd_prepare(USER_CTRL_WRITE_CONN_DISABLE, 0, NULL); */
+    // user_send_cmd_prepare(USER_CTRL_WRITE_CONN_DISABLE, 0, NULL); 
     bt_search_device();
 #endif /* #if TCFG_USER_EMITTER_ENABLE */
     return 0;
@@ -1338,7 +1338,7 @@ void bredr_search_device()
 /*----------------------------------------------------------------------------*/
 u8 is_bredr_close(void)
 {
-    printf("%s,__this->bt_close_bredr=%d", __func__, __this->bt_close_bredr);
+    //printf("%s,__this->bt_close_bredr=%d", __func__, __this->bt_close_bredr);
     return (u8)__this->bt_close_bredr;
 }
 /*----------------------------------------------------------------------------*/

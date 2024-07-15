@@ -182,6 +182,7 @@ static void tileview_menu_create(lv_obj_t *obj)
         tileview_dir_point.y = p_ui_info_cache->ui_tileview_info.tileview_dir_points[i].y;
         menu_load_container = lv_tileview_add_tile(tileview_menu, tileview_dir_point.x, \
             tileview_dir_point.y, tileview_valid_dir);
+        lv_obj_set_style_pad_all(menu_load_container, 0, LV_PART_MAIN);
         if(menu_load_info)
         {
             if(menu_load_info->display_func_cb)

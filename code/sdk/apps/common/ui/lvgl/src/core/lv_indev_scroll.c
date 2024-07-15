@@ -409,6 +409,7 @@ static void init_scroll_limits(_lv_indev_proc_t * proc)
     /*With STOP limit the scrolling to the perv and next snap point*/
     else 
     {
+        //printf("snap_y = %d\n", lv_obj_get_scroll_snap_y(obj));//3
         switch(lv_obj_get_scroll_snap_y(obj)) 
         {
             case LV_SCROLL_SNAP_START:
@@ -431,6 +432,7 @@ static void init_scroll_limits(_lv_indev_proc_t * proc)
                 break;
         }
 
+        //printf("snap_x = %d\n", lv_obj_get_scroll_snap_x(obj));//3
         switch(lv_obj_get_scroll_snap_x(obj)) 
         {
             case LV_SCROLL_SNAP_START:
@@ -445,8 +447,8 @@ static void init_scroll_limits(_lv_indev_proc_t * proc)
                     lv_coord_t x_mid = obj->coords.x1 + lv_area_get_width(&obj->coords) / 2;
                     proc->types.pointer.scroll_area.x1 = find_snap_point_x(obj, x_mid + 1, LV_COORD_MAX, 0);
                     proc->types.pointer.scroll_area.x2 = find_snap_point_x(obj, LV_COORD_MIN, x_mid - 1, 0);
-                    // printf("%s:x1 = %d, x2 = %d\n", __func__, proc->types.pointer.scroll_area.x1, \
-                    //     proc->types.pointer.scroll_area.x2);
+                    printf("%s:x1 = %d, x2 = %d\n", __func__, proc->types.pointer.scroll_area.x1, \
+                        proc->types.pointer.scroll_area.x2);
                     break;
                 }
             default:
@@ -484,6 +486,8 @@ static lv_coord_t find_snap_point_x(const lv_obj_t * obj, lv_coord_t min, lv_coo
     lv_coord_t pad_left = lv_obj_get_style_pad_left(obj, LV_PART_MAIN);
     lv_coord_t pad_right = lv_obj_get_style_pad_right(obj, LV_PART_MAIN);
 
+    //printf("min = %d, max = %d\n", min, max);
+
     uint32_t i;
     uint32_t child_cnt = lv_obj_get_child_cnt(obj);
     for(i = 0; i < child_cnt; i++) 
@@ -509,6 +513,7 @@ static lv_coord_t find_snap_point_x(const lv_obj_t * obj, lv_coord_t min, lv_coo
                 case LV_SCROLL_SNAP_CENTER:
                     x_child = child->coords.x1 + lv_area_get_width(&child->coords) / 2;
                     x_parent = obj->coords.x1 + pad_left + (lv_area_get_width(&obj->coords) - pad_left - pad_right) / 2;
+                    //printf("i = %d:x_child = %d, x_parent = %d\n", i, x_child, x_parent);
                     break;
                 default:
                     continue;

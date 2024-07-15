@@ -72,13 +72,8 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_mode_t ui_mode = \
-        p_ui_info_cache->ui_mode;
     ui_act_id_t prev_act_id = \
-        ui_act_id_set_main;
-    if(ui_mode == ui_mode_tool_box)
-        prev_act_id = \
-            ui_act_id_tool_box;
+        read_menu_return_level_id();
     ui_act_id_t scr_slp_act_id = \
         ui_act_id_screen_sleep;
     if(!lang_txt_is_arabic())

@@ -10,7 +10,7 @@
 
 
 #include "imb_demo.h"
-#include "../../../ui/fonts/user_font.h"
+#include "../../../ui/jl_images/ex_file_index.h"
 #include "../../../../../../cpu/br28/ui_driver/lvgl/lvgl_main.h"
 
 
@@ -36,11 +36,11 @@ typedef struct{
 static x_header_t __g_xbf_hd = {
     .min = 0x000a,
     .max = 0xff1f,
-    .bpp = 4,
+    .bpp = 2,
 };
 
 
-//static uint8_t __g_font_buf[792];//如bin文件存在SPI FLASH可使用此buff
+//static uint8_t __g_font_buf[396];//如bin文件存在SPI FLASH可使用此buff
 
 
 static uint8_t *__user_font_getdata(int offset, int size){

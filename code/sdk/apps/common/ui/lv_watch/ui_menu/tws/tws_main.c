@@ -6,6 +6,9 @@ static int16_t scroll_bottom_y;
 static lv_obj_t *list_ctx_container;
 static lv_obj_t *elem_container[Elem_Num];
 
+//static uint8_t DevNum;
+static uint8_t ConnState;
+
 static const uint8_t ec_idx[Elem_Num] = {
     0, 1, 2, 3, 4, 
 };
@@ -14,7 +17,9 @@ static void add_cb(lv_event_t *e)
 {
     if(!e) return;
 
-    ui_menu_jump(ui_act_id_tws_search);
+    TwsBtEmitterStart();
+
+    ui_menu_jump(ui_act_id_tws_list);
 
     return;
 }
@@ -96,11 +101,40 @@ static void elem_container_cb(lv_event_t *e)
 {
     if(!e) return;
 
+    uint8_t idx = *(uint8_t *)lv_event_get_user_data(e);
+    if(idx == TwsConn.dev)
+    {
+        ui_menu_jump(ui_act_id_tws_disc);
+        goto __end;
+    }
+
+    u8 *mac = TwsPara.Paired[idx].mac;
+    TwsBtEmitterConnByMac(mac);
+
+__end:
+    return;
+}
+
+/* 长按回调 */
+static void elem_container_long_cb(lv_event_t *e)
+{
+    if(!e) return;
+
+    uint8_t idx = *(uint8_t *)lv_event_get_user_data(e);
+    uint8_t num = TwsPara.num;
+    if(idx >= num) return;
+
+    set_unpair_dev(idx);
+    ui_menu_jump(ui_act_id_tws_unpair);
+
+__end:
     return;
 }
 
 static void elem_container_create(void)
 {
+    uint8_t num = TwsPara.num;
+
     widget_obj_para.obj_parent = list_ctx_container;
     widget_obj_para.obj_width = LCD_WIDTH;
     widget_obj_para.obj_height = 80;
@@ -112,12 +146,13 @@ static void elem_container_create(void)
     widget_obj_para.obj_radius = 0;
     widget_obj_para.obj_is_scrollable = false;
 
-    for(uint8_t idx = 0; idx < TwsPara.num; idx++)
+    for(uint8_t idx = 0; idx < num; idx++)
     {
         widget_obj_para.obj_x = 0;
         widget_obj_para.obj_y = 64 + idx*80;
         elem_container[idx] = common_widget_obj_create(&widget_obj_para);
         lv_obj_add_event_cb(elem_container[idx], elem_container_cb, LV_EVENT_SHORT_CLICKED, (void *)&ec_idx[idx]);
+        lv_obj_add_event_cb(elem_container[idx], elem_container_long_cb, LV_EVENT_LONG_PRESSED, (void *)&ec_idx[idx]);
     }
 
     return;
@@ -125,8 +160,9 @@ static void elem_container_create(void)
 
 static void elem_ctx_create(uint8_t menu_align)
 {
-    if(TwsPara.num == 0)
-        return;
+    uint8_t num = TwsPara.num;
+
+    if(num == 0) return;
 
     widget_label_para.label_parent = list_ctx_container;
     widget_label_para.label_w = 300;
@@ -142,7 +178,7 @@ static void elem_ctx_create(uint8_t menu_align)
 
     elem_container_create();
 
-    for(uint8_t i = 0; i < TwsPara.num; i++)
+    for(int8_t i = num - 1; i >= 0; i--)
     {
         widget_img_para.img_parent = elem_container[i];
         widget_img_para.file_img_dat = tws_01_index;
@@ -155,22 +191,25 @@ static void elem_ctx_create(uint8_t menu_align)
             lv_obj_align(tws_icon, LV_ALIGN_LEFT_MID, 20, 0);
 
         widget_label_para.label_parent = elem_container[i];
-        widget_label_para.label_w = 240;
+        widget_label_para.label_w = 260;
         widget_label_para.label_h = Label_Line_Height;
         widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
         if(menu_align == menu_align_right)
             widget_label_para.text_align = LV_TEXT_ALIGN_RIGHT;
         else
             widget_label_para.text_align = LV_TEXT_ALIGN_LEFT;
-        widget_label_para.label_text_color = lv_color_hex(0xffffff);
+        if(i == TwsConn.dev)
+            widget_label_para.label_text_color = lv_color_hex(0xffffff);
+        else
+            widget_label_para.label_text_color = lv_color_hex(0x666666);
         widget_label_para.label_ver_center = false;
         widget_label_para.user_text_font = NULL;
         widget_label_para.label_text = TwsPara.Paired[i].name;
         lv_obj_t *name_label = common_widget_label_create(&widget_label_para);
         if(menu_align == menu_align_right)
-            lv_obj_align(name_label, LV_ALIGN_RIGHT_MID, -96, 0);
+            lv_obj_align(name_label, LV_ALIGN_RIGHT_MID, -86, 0);
         else
-            lv_obj_align(name_label, LV_ALIGN_LEFT_MID, 96, 0); 
+            lv_obj_align(name_label, LV_ALIGN_LEFT_MID, 86, 0);
     }
 
     return;
@@ -201,12 +240,32 @@ static void menu_refresh_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
+    ui_act_id_t act_id = \
+        p_ui_info_cache->cur_act_id;
+
+    bool NewDev = GetNewPairedDevFlag();
+    if(NewDev == true)
+    {
+        ui_menu_jump(act_id);
+        goto __end;
+    }
+
+    if(ConnState != TwsConn.state)
+    {
+        ui_menu_jump(act_id);
+        goto __end;
+    }
+
+__end:
     return;
 }
 
 static void menu_display_cb(lv_obj_t *obj)
 {
     if(!obj) return;
+
+    ConnState = TwsConn.state;
+    SetNewPairedDevFlag(false);
 
     menu_align_t menu_align = \
         menu_align_left;
@@ -270,9 +329,8 @@ register_ui_menu_load_info(\
     .return_flag = true,
     .menu_id = \
         ui_act_id_tws_main,
-    .disable_te = true,
     .user_offscreen_time = 0,
-    .user_refresh_time_inv = 0,
+    .user_refresh_time_inv = 200,
     .key_func_cb = menu_key_cb,
     .rdec_func_cb = menu_rdec_cb,
     .create_func_cb = menu_create_cb,

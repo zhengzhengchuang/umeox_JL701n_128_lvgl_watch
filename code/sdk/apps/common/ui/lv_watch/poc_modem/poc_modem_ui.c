@@ -40,7 +40,7 @@ void clear_menu_return_level(void)
     for(uint8_t i = 0; i < Menu_Return_Level; i++)
         prev_act_id[i] = ui_act_id_null;
     
-    printf("%s\n", __func__);
+    //printf("%s\n", __func__);
 
     return;
 }
@@ -74,7 +74,7 @@ ui_act_id_t read_menu_return_level_id(void)
         break;
     }
 
-    printf("new_prev_act_id = %d\n", new_prev_act_id);
+    //printf("new_prev_act_id = %d\n", new_prev_act_id);
 
     return new_prev_act_id;  
 }
@@ -97,11 +97,11 @@ void push_menu_return_level(ui_act_id_t act_id)
         act_id;
     (*menu_return_level) += 1;
 
-    for(uint8_t i = 0; i < *menu_return_level; i++)
-        printf("%s:act_id %d\n", __func__, \
-            prev_act_id[i]);
-    printf("%s:level deep %d\n", __func__, \
-        *menu_return_level);
+    // for(uint8_t i = 0; i < *menu_return_level; i++)
+    //     printf("%s:act_id %d\n", __func__, \
+    //         prev_act_id[i]);
+    // printf("%s:level deep %d\n", __func__, \
+    //     *menu_return_level);
 
     return;
 }
@@ -137,11 +137,11 @@ bool menu_return_level_exist_handle(ui_act_id_t act_id)
         *menu_return_level = i + 1;
     }
 
-    for(i = 0; i < *menu_return_level; i++)
-        printf("%s:act_id %d\n", __func__, \
-            prev_act_id[i]);
-    printf("%s:level deep %d\n", __func__, \
-        *menu_return_level);
+    // for(i = 0; i < *menu_return_level; i++)
+    //     printf("%s:act_id %d\n", __func__, \
+    //         prev_act_id[i]);
+    // printf("%s:level deep %d\n", __func__, \
+    //     *menu_return_level);
 
     return act_id_exist;
 }
@@ -259,7 +259,7 @@ void ui_menu_jump_handle(ui_act_id_t act_id)
             p_ui_info_cache->ui_mode;
         bool return_flag = \
             p_ui_info_cache->menu_load_info.return_flag;
-        if(return_flag/* && ui_mode != ui_mode_watchface*/)
+        if(return_flag)
             push_menu_return_level(act_id);
     }else
     {

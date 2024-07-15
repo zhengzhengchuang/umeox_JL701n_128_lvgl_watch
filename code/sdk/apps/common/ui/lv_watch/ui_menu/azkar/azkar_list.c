@@ -1,5 +1,4 @@
 #include "azkar_list.h"
-#include "azkar_sec.h"
 
 static int16_t scroll_y;
 static int16_t scroll_top_y;
@@ -11,7 +10,7 @@ static lv_obj_t *list_ctx_container;
 static lv_obj_t *elem_container[Elem_Num];
 
 static const uint8_t ec_idx[Elem_Num] = {
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 
 };
 
 static void title_container_create(lv_obj_t *obj)
@@ -112,17 +111,25 @@ static void elem_container_cb(lv_event_t *e)
         *(uint8_t *)lv_event_get_user_data(e);
 
     SetAzkarType(idx);
-    //SetAzkarSecIdx(0);
-    ClearScrollPara();
-    int language = \
-        GetVmParaCacheByLabel(vm_label_sys_language);
+    int language = GetVmParaCacheByLabel(vm_label_sys_language);
     if(language == lang_id_arabic)
-        SetAzkarTxtLang(AzkarTxtLangAr);
+        SetAzkarLang(AzkarLangAr);
+    else if(language == lang_id_french)
+        SetAzkarLang(AzkarLangFr);
     else
-        SetAzkarTxtLang(AzkarTxtLangEn);
+        SetAzkarLang(AzkarLangEn);
 
-    ui_menu_jump(ui_act_id_azkar_sec);
-
+    u8 sec_num = GetAzkarSecNum();
+    if(GetAzkarLang() == AzkarLangAr)
+    {
+        SetAzkarSecIdx(sec_num - 1);
+        ui_menu_jump(ui_act_id_azkar_sec_ar);
+    }else
+    {
+        SetAzkarSecIdx(0);
+        ui_menu_jump(ui_act_id_azkar_sec_comm);
+    }
+        
     return;
 }
 
@@ -217,7 +224,7 @@ static void elem_ctx_label_create(menu_align_t menu_align)
         widget_label_para.label_parent = \
             elem_container[idx];
         widget_label_para.label_text = \
-            get_lang_txt_with_id(lang_txtid_MRem + idx);
+            get_lang_txt_with_id(lang_txtid_MR + idx);
         lv_obj_t *elem_ctx_label = \
             common_widget_label_create(&widget_label_para);
 

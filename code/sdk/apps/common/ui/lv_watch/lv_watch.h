@@ -29,11 +29,11 @@ extern "C" {
 #include "./comm_func/alarm_func.h"
 #include "./comm_func/sleep_func.h"
 #include "./comm_lang/lang_txtid.h"
+#include "./comm_func/azkar_func.h"
 #include "./comm_lang/quran_table.h"
 #include "./comm_func/camera_func.h"
 #include "./comm_nor_vm/nor_vm_hr.h"
 #include "./comm_nor_vm/nor_vm_bo.h"
-#include "./comm_lang/azkar_table.h"
 #include "./comm_widget/widget_bo.h"
 #include "./comm_widget/widget_hr.h"
 #include "./comm_parse/common_cmd.h"
@@ -88,7 +88,6 @@ extern "C" {
 #include "./comm_func/prayer_time_func.h"
 #include "./comm_func/remote_music_func.h"
 #include "./comm_nor_vm/nor_vm_activity.h"
-#include "./comm_func/azkar_prayer_func.h"
 #include "./comm_nor_vm/nor_vm_call_log.h"
 #include "./ui_menu/scrollbar/scrollbar.h"
 #include "./comm_widget/widget_distance.h"
@@ -148,6 +147,17 @@ char *GetQRCodeLinkStrBuf(void);
 /**********控制屏幕TE开关**************/
 u8 GetUsrWaitTe(void);
 void SetUsrWaitTe(u8 en);
+
+/*********************************************************************************
+                        获取bt使能状态                              
+*********************************************************************************/
+bool GetBtEnableState(void);
+
+/*********************************************************************************
+                        设置bt开关                             
+*********************************************************************************/
+void UserEnableBt(void);
+void UserDisableBt(void);
 
 #ifdef __cplusplus
 }

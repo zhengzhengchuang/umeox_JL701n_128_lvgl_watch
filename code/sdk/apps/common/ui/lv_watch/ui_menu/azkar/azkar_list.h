@@ -7,7 +7,7 @@ extern "C" {
 
 #include "../../lv_watch.h"
 
-#define Elem_Num (AzkarTypeNum)
+#define Elem_Num AzkarTypeNum
 
 #define Title_Container_W \
     (LCD_WIDTH)

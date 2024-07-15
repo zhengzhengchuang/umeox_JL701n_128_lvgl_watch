@@ -54,7 +54,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_textarea_para.width = 330;
     widget_textarea_para.height = LCD_HEIGHT - 130;
     widget_textarea_para.txt = GetAllahNameExTableFollowLang(ExId);
-    widget_textarea_para.font = &font_common_30_no_ch;
+    widget_textarea_para.font = &font_common_24_no_ch;
     widget_textarea_para.color = lv_color_hex(0xffffff);
     if(IsArabic)
         widget_textarea_para.align = LV_TEXT_ALIGN_RIGHT;
@@ -89,7 +89,6 @@ register_ui_menu_load_info(\
     .return_flag = true,
     .menu_id = \
         ui_act_id_al_name_ex,
-    .disable_te = true,
     .user_offscreen_time = 0,
     .user_refresh_time_inv = 0,
     .key_func_cb = menu_key_cb,

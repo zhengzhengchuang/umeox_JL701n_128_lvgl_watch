@@ -245,7 +245,7 @@ void lv_point_transform(lv_point_t * p, int32_t angle, int32_t zoom, const lv_po
 #if LV_USE_LARGE_COORD
 #define _LV_COORD_TYPE_SHIFT    (29U)
 #else
-#define _LV_COORD_TYPE_SHIFT    (13U)
+#define _LV_COORD_TYPE_SHIFT    (14U)
 #endif
 
 #define _LV_COORD_TYPE_MASK     (3 << _LV_COORD_TYPE_SHIFT)

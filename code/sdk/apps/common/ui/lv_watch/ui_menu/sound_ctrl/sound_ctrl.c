@@ -23,12 +23,10 @@ static void switch_cb(lv_event_t *e)
     sound_state = !sound_state;
     SetVmParaCacheByLabel(vm_label_sys_sound, sound_state);
 
-    static s8 call_vol_b;
-    static s8 media_vol_b;
     if(sound_state == 0)
     {
-        call_vol_b = call_vol_tmp;
-        media_vol_b = media_vol_tmp;
+        SetVmParaCacheByLabel(vm_label_call_vol_b, call_vol_tmp);
+        SetVmParaCacheByLabel(vm_label_media_vol_b, media_vol_tmp);
 
         //设置媒体音量值为0
         app_audio_set_volume(APP_AUDIO_STATE_MUSIC, 0, 1);
@@ -39,6 +37,9 @@ static void switch_cb(lv_event_t *e)
         user_send_cmd_prepare(USER_CTRL_HFP_CALL_SET_VOLUME, 1, &call_vol_val);
     }else
     {
+        s8 call_vol_b = GetVmParaCacheByLabel(vm_label_call_vol_b);
+        s8 media_vol_b = GetVmParaCacheByLabel(vm_label_media_vol_b);
+
         //恢复媒体音量值
         app_audio_set_volume(APP_AUDIO_STATE_MUSIC, media_vol_b, 1);
 
@@ -110,7 +111,7 @@ static void menu_create_cb(lv_obj_t *obj)
     if(!obj) return;
 
     ui_act_id_t prev_act_id = \
-        ui_act_id_set_main;
+        read_menu_return_level_id();
     if(!lang_txt_is_arabic())
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             prev_act_id, ui_act_id_null, ui_act_id_sound_ctrl);

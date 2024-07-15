@@ -74,7 +74,7 @@ move font res.ori\font
 ::..\..\packres.exe -n res -o res.bin new_res.bin 0x4FE000 -normal
 
 ::..\..\packres.exe -n res -o new_res.bin file.bin 0x000000 -normal
-..\..\packres.exe -n res -o res.bin font.bin 0x000000 -normal
+..\..\packres.exe -n res -o res.bin ex_file.bin 0x000000 -normal
 ::����flash�������ļ���ʾ��Ϊ����0xb00000��ַ����Ҫ������nor_up.ufw
 ::..\..\packres.exe -n res -o res.bin new_res.bin 0 nor_up.ufw 0xb00000 -normal
 

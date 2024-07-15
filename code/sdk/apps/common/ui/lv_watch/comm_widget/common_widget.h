@@ -112,7 +112,9 @@ lv_img_dsc_t *common_widget_img_open_res(uint32_t file_img_dat);
 void common_widget_img_replace_src(lv_obj_t *obj, uint32_t file_img_dat, \
     uint16_t img_dsc_idx);
 
-
+lv_obj_t *common_widget_ex_img_create(common_widget_img_para_t *img_para, \
+    uint16_t *img_dsc_idx);
+lv_img_dsc_t *common_widget_img_open_ex_res(uint32_t file_img_dat);
 
 /*********************************************************************************
                                   标签控件                                       

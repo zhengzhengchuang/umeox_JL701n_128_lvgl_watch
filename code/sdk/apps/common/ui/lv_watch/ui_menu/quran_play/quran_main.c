@@ -246,12 +246,12 @@ static void menu_display_cb(lv_obj_t *obj)
     lv_obj_align(SelArLabel, LV_ALIGN_TOP_MID, 0, 32);
 
     widget_label_para.label_w = 180;
-    widget_label_para.label_h = 41;
+    widget_label_para.label_h = Label_Line_Height;
     widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
     widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
     widget_label_para.label_text_color = lv_color_hex(0x666666);
     widget_label_para.label_ver_center = false;
-    widget_label_para.user_text_font = &font_common_30_no_ch;
+    widget_label_para.user_text_font = NULL;
     widget_label_para.label_parent = obj;
     if(SelIdx >= 0 && SelIdx < QpMaxNum)
         widget_label_para.label_text = quran_table_en[SelIdx];

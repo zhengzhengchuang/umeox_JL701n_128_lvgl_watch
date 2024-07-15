@@ -43,7 +43,6 @@ void common_menu_lock_timer_del(void)
 void common_menu_lock_timer_add(void)
 {
     /* 灭屏页面锁定 */
-    
     set_menu_timer_lock_flag(true);
 
     if(!menu_lock_timer_id)
@@ -68,8 +67,7 @@ void common_offscreen_handle(void)
 
 static void common_offscreen_timer_cb(void *priv)
 {
-    if(cur_offscreen_time == \
-        Always_OnScreen)
+    if(cur_offscreen_time == Always_OnScreen)
         return;
         
     common_offscreen_handle();

@@ -6525,14 +6525,23 @@ static lv_res_t lv_draw_jl_imb_img(struct _lv_draw_ctx_t * draw_buf, const lv_dr
     }
 
     struct _lv_draw_ctx_t * draw_ctx = draw_buf;
+
+
+
+    // printf("map_area_rot:x1 = %d, x2 = %d, y1 = %d, y2 = %d\n", map_area_rot.x1, \
+    //     map_area_rot.x2, map_area_rot.y1, map_area_rot.y2);
+    // printf("clip_area:x1 = %d, x2 = %d, y1 = %d, y2 = %d\n", draw_ctx->clip_area->x1, \
+    //     draw_ctx->clip_area->x2, draw_ctx->clip_area->y1, draw_ctx->clip_area->y2);
+
     lv_area_t clip_com; /*Common area of mask and coords*/
     bool union_ok;
     union_ok = _lv_area_intersect(&clip_com, draw_ctx->clip_area, &map_area_rot);
-    /*Out of mask. There is nothing to draw so the image is drawn successfully.*/
-    if (union_ok == false)
+        if (union_ok == false)
     {
         // printf("Out of mask. There is nothing to draw so the image is drawn successfully.");
         // draw_cleanup(cdsc);
+
+
         return LV_RES_OK;
     }
 
@@ -7184,7 +7193,7 @@ void lv_draw_imb_img_decoded(struct _lv_draw_ctx_t * draw_ctx, const lv_draw_img
     int py = coords->y1; //图片绝对区域y
     int pw = coords->x2-coords->x1+1; //图片绝对区域w
     int ph = coords->y2-coords->y1+1;  //图片绝对区域h
-
+    // printf("x = %d, y = %d, w = ")
     //  支持的
 #if 0
     if(((LV_IMG_CF_TRUE_COLOR == cf || LV_IMG_CF_TRUE_COLOR_ALPHA == cf) && (src_buf >= PSRAM_CACHE_ADDR))
@@ -7346,7 +7355,8 @@ void lv_draw_imb_img_decoded(struct _lv_draw_ctx_t * draw_ctx, const lv_draw_img
     rect.left = draw_buf->buf_area->x1;
     rect.top = draw_buf->buf_area->y1;
     rect.width = (draw_buf->buf_area->x2) - (draw_buf->buf_area->x1) +1;
-    rect.height = (draw_buf->buf_area->y2) - (draw_buf->buf_area->y1) +1;
+    rect.height = (draw_buf->buf_area->y2) - (draw_buf->buf_area->y1) + 1;
+    // printf("left = %d, top = %d, w = %d, h = %d", rect.left, rect.top, rect.width, rect.height);
     
     //  图片相关参数    
     int prw =  draw_dsc->zoom;
@@ -7385,6 +7395,8 @@ void lv_draw_imb_img_decoded(struct _lv_draw_ctx_t * draw_ctx, const lv_draw_img
     int ss = TICK_CNT;
     int imb_task_get_id = 0;
 
+    // printf("compx = %d, compy = %d\n", compx, compy);
+    // printf("w = %d, h = %d\n", rect.width, rect.height);
     struct imb_task_info imb_tsk_info = {0};
     imb_tsk_info.data_src       = DATA_SRC_NONE;//无数据源
     imb_tsk_info.zip_en         = 0;
@@ -7438,6 +7450,11 @@ void lv_draw_imb_img_decoded(struct _lv_draw_ctx_t * draw_ctx, const lv_draw_img
 #endif
     }else
     {    //      原大小
+        // imb_create_image_task(++imb_task_get_id, &file, src_addr, 
+        //     px, py, pw, ph, crop, file.compress, load_mef);//width,height参数可小于file.width, file.height,若小于则裁剪 
+
+        // printf("px = %d, py = %d\n", px, py);
+        // printf("pw = %d, ph = %d\n", pw, ph);
         imb_create_image_task(++imb_task_get_id, &file, src_addr, 
             px, py, pw, ph, crop, file.compress, load_mef);//width,height参数可小于file.width, file.height,若小于则裁剪 
     }       
@@ -8909,7 +8926,6 @@ void close_fd(void)
 //#include "../../../apps/common/include/norflash_sfc.h"
 void lv_open_res(void *fd, int phyaddr, int offset, struct file_index_t res, lv_img_dsc_t *img_dst)
 {
-#if TCFG_VIRFAT_INSERT_FLASH_ENABLE
     if(!img_dst) return;
 
     memset(img_dst, 0, sizeof(lv_img_dsc_t));
@@ -8919,55 +8935,28 @@ void lv_open_res(void *fd, int phyaddr, int offset, struct file_index_t res, lv_
     
     memcpy(&(img_dst->header), img_header, sizeof(lv_img_header_t));
     
-#if 0
-    // int cpuaddr = sdfile_flash_addr2cpu_addr(phyaddr);
-
-    // u8 *img_addr = cpuaddr + offset + res.addr;
-
-    // u8 buf[5] = {0};
-    // memcpy(buf, img_addr, 4);
-    // for(u8 i = 0; i < 4; i++)
-    //     printf("buf[%d] = %x\n", i, buf[i]);
-
-    memcpy(&(img_dst->header), img_addr, sizeof(lv_img_header_t));
-
-    
-#endif
-
     img_dst->data = img_header + sizeof(lv_img_header_t);
     img_dst->data_size = res.len - sizeof(lv_img_header_t);
-#else
-    if(!fd || !img_dst) return;
+
+    return;
+}
+
+void lv_open_ex_res(int phyaddr, struct ex_file_index_t res, lv_img_dsc_t *img_dst)
+{
+    if(!img_dst) return;
 
     memset(img_dst, 0, sizeof(lv_img_dsc_t));
 
-    dev_bulk_read(fd, &(img_dst->header), phyaddr + offset + res.addr, sizeof(lv_img_header_t));
-
-    printf("%s:cf = %d, w = %d, h = %d\n", __func__, \
-        img_dst->header.cf, img_dst->header.w, img_dst->header.h);
-
-    int cpuaddr = 0x4000000 + phyaddr;
- 
-    img_dst->data = cpuaddr + offset + res.addr + sizeof(lv_img_header_t);
+    u32 cpuaddr = 0x4000000 + phyaddr + res.addr;
+    u8 *img_header = (u8 *)cpuaddr;
+    
+    memcpy(&(img_dst->header), img_header, sizeof(lv_img_header_t));
+    
+    img_dst->data = img_header + sizeof(lv_img_header_t);
     img_dst->data_size = res.len - sizeof(lv_img_header_t);
-#endif
-}
 
-#if 0
-void lv_close_res(lv_img_dsc_t*img_dst)
-{
-    if((img_dst->header.reserved&0x2))
-    { 
-        if(img_dst->data)
-        {
-            free(img_dst->data);
-            img_dst->data == NULL;
-        }
-    }
-
-    memset(img_dst, 0, sizeof(img_dst));
+    return;
 }
-#endif
 
 #define FONT_LEN (512)
 static u8 g_font_buf[FONT_LEN];

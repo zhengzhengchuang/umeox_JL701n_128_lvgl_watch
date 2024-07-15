@@ -105,21 +105,22 @@ enum
     lang_txtid_unit_mins,//分钟
     lang_txtid_reminder_on,//提醒开启
     lang_txtid_voice_on,//语音开启
-    lang_txtid_MRem,//晨间纪念
-    lang_txtid_ERem,//晚间纪念
-    lang_txtid_Apr,//祈祷后赞念
-    lang_txtid_HaU,//朝觐与乌姆拉
-    lang_txtid_Fasting,//斋月
-    lang_txtid_Waking_up,//起床
-    lang_txtid_Garment,//服装
-    lang_txtid_Ablution,//沐浴
-    lang_txtid_Home,//家
-    lang_txtid_Mosque,//清真寺
-    lang_txtid_Athan,//祈祷的呼唤
-    lang_txtid_Food,//食物
-    lang_txtid_Traveling,//旅行
-    lang_txtid_Other_remembrance,//其他祷告
-    lang_txtid_Prayer,//礼拜
+    lang_txtid_MR,//晨间纪念
+    lang_txtid_ER,//晚间纪念
+    lang_txtid_BS,//睡觉前
+    lang_txtid_APR,//祈祷后赞念
+    lang_txtid_HAU,//朝觐与乌姆拉
+    lang_txtid_FAS,//斋月
+    lang_txtid_WWU,//起床
+    lang_txtid_GAR,//服装
+    lang_txtid_ABU,//沐浴
+    lang_txtid_HOME,//家
+    lang_txtid_MOS,//清真寺
+    lang_txtid_ATH,//祈祷的呼唤
+    lang_txtid_FOOD,//食物
+    lang_txtid_TRA,//旅行
+    lang_txtid_OR,//其他祷告
+    lang_txtid_PRA,//礼拜
     lang_txtid_set_reminders_tasbih,//为赞念设置提醒。
     lang_txtid_reminders_on,//提醒 - 开启
     lang_txtid_reminders_off,//提醒 - 关闭
@@ -187,11 +188,10 @@ enum
     lang_txtid_Mor_remembrance,//早上祈祷词
     lang_txtid_Eve_remembrance,//晚上祈祷词
     lang_txtid_add_new_devices,//添加新的无线音频设备
-    lang_txtid_searching,//搜索中...
-    lang_txtid_tws_not_found,//未找到无线音频设备，请重试。
     lang_txtid_paired_tws,//配对设备
     lang_txtid_unpaired_tws,//取消配对音频设备？
     lang_txtid_disc_tws,//断开音频设备？
+    lang_txtid_not_found_tws,//未找到无线音频设备，请重试。
    
     lang_txtid_max,
 };

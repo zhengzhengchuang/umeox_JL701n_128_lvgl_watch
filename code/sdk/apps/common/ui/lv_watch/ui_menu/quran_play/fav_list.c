@@ -278,12 +278,12 @@ static void elem_01_create(uint8_t menu_align, int8_t sidx, int8_t eidx)
 static void elem_02_create(uint8_t menu_align, int8_t sidx, int8_t eidx)
 {
     widget_label_para.label_w = 180;
-    widget_label_para.label_h = 41;
+    widget_label_para.label_h = Label_Line_Height;
     widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
     widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
     widget_label_para.label_text_color = lv_color_hex(0x666666);
     widget_label_para.label_ver_center = false;
-    widget_label_para.user_text_font = &font_common_30_no_ch;
+    widget_label_para.user_text_font = NULL;
 
     lv_obj_t *elem_02_obj;
     for(int8_t i = sidx; i < eidx; i++)

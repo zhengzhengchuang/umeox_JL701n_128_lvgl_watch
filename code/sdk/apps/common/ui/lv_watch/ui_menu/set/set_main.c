@@ -87,8 +87,7 @@ static void list_ctx_container_create(lv_obj_t *obj)
         true;
     list_ctx_container = \
         common_widget_obj_create(&widget_obj_para);
-    lv_obj_add_event_cb(list_ctx_container, scroll_cb, \
-        LV_EVENT_SCROLL, NULL);
+    lv_obj_add_event_cb(list_ctx_container, scroll_cb, LV_EVENT_SCROLL, NULL);
 
     return;
 }
@@ -283,29 +282,14 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_mode_t ui_mode = \
-        p_ui_info_cache->ui_mode;
-    if(ui_mode == ui_mode_tool_box)
-    {
-        ui_act_id_t prev_act_id = \
-            ui_act_id_tool_box;
-        if(!lang_txt_is_arabic())
-            tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
-                prev_act_id, ui_act_id_null, ui_act_id_set_main);
-        else
-            tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
-                ui_act_id_null, prev_act_id, ui_act_id_set_main);
-    }else
-    {
-        ui_act_id_t prev_act_id = \
-            ui_act_id_menu;
-        if(!lang_txt_is_arabic())
-            tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
-                prev_act_id, ui_act_id_null, ui_act_id_set_main);
-        else
-            tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
-                ui_act_id_null, prev_act_id, ui_act_id_set_main);
-    }
+    ui_act_id_t prev_act_id = \
+        read_menu_return_level_id();
+    if(!lang_txt_is_arabic())
+        tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
+            prev_act_id, ui_act_id_null, ui_act_id_set_main);
+    else
+        tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
+            ui_act_id_null, prev_act_id, ui_act_id_set_main);
 
     return;
 }

@@ -31,6 +31,8 @@ void ui_menu_jump(ui_act_id_t act_id)
 
     AppCtrlLcdEnterSleep(false);
 
+    common_menu_lock_timer_del();
+
     ui_menu_jump_post_msg(act_id);
 
     return;
@@ -282,4 +284,34 @@ void SetUsrWaitTe(u8 en)
 u8 GetUsrWaitTe(void)
 {
     return usr_wait_te;
+}
+
+/*********************************************************************************
+                        获取bt使能状态                              
+*********************************************************************************/
+bool GetBtEnableState(void)
+{
+    bool en_state;
+
+    if(is_bredr_close() == 1)
+        en_state = false;
+    else
+        en_state = true;
+
+    return en_state;
+}
+
+/*********************************************************************************
+                        设置bt开关                             
+*********************************************************************************/
+void UserEnableBt(void)
+{
+    bt_init_bredr();
+    return;
+}
+
+void UserDisableBt(void)
+{
+    bt_close_bredr();
+    return;
 }

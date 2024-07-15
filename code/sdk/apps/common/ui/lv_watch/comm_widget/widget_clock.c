@@ -20,37 +20,31 @@ static common_clock_pointer_para_t *clk_p_para = NULL;
 
 void common_clock_pointer_para_init(void)
 {
-    if(!clk_p_timer_id) 
+    if(clk_p_num == 0)
         return;
 
-    clk_p_num = 0;
-
-    clk_p_para = NULL; 
+    if(clk_p_timer_id)
+        sys_hi_timer_del(clk_p_timer_id);
+    clk_p_timer_id = 0; 
 
     for(uint8_t i = 0; i < 3; i++)
-       clk_p_obj[i] = NULL;
+       clk_p_obj[i] = NULL; 
 
-    sys_hi_timer_del(clk_p_timer_id);
+    clk_p_para = NULL;
 
-    clk_p_timer_id = 0;
-
-    if(!lcd_sleep_status())
+    if(GetIsEnterOffScreen() == false)
     {
-        clock_hour_angle_l = \
-            clock_hour_angle;
-        clock_minute_angle_l = \
-            clock_minute_angle;
-        clock_second_angle_l = \
-            clock_second_angle;
+        clock_hour_angle_l = clock_hour_angle;
+        clock_minute_angle_l = clock_minute_angle;
+        clock_second_angle_l = clock_second_angle;
     }else
     {   
-        clock_hour_angle_l = \
-            Clock_Pointer_Inv_Angle;
-        clock_minute_angle_l = \
-            Clock_Pointer_Inv_Angle;
-        clock_second_angle_l = \
-            Clock_Pointer_Inv_Angle;
+        clock_hour_angle_l = Clock_Pointer_Inv_Angle;
+        clock_minute_angle_l = Clock_Pointer_Inv_Angle;
+        clock_second_angle_l = Clock_Pointer_Inv_Angle;
     }
+
+    clk_p_num = 0;
 
     return;
 }
