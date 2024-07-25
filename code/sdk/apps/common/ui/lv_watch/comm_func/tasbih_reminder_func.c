@@ -82,17 +82,11 @@ static void TasbihReminderIsOnHandle(void)
     return;
 }
 
-void TasbihReminderProcess(struct sys_time *utc_time)
+void TasbihReminderProcess(struct sys_time *ptime)
 {
-    if(!utc_time) return;
-
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
     bool TasbihR_Enable = \
         TasbihR_info.TasbihR_Enable;
@@ -114,7 +108,7 @@ void TasbihReminderProcess(struct sys_time *utc_time)
         return;
 
     u32 CurTimestamp = \
-        utc_time->hour*3600 + utc_time->min*60;
+        ptime->hour*3600 + ptime->min*60;
 
     if(TasbihR_ETimestamp > TasbihR_STimestamp)
     { 

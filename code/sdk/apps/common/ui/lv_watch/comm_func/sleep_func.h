@@ -28,7 +28,7 @@ typedef struct
 extern SleepInfoPara_t Slp_Info;
 
 void SetSleepInfoPara(void);
-void SleepProcess(struct sys_time *utc_time);
+void SleepProcess(struct sys_time *ptime);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

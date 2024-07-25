@@ -74,7 +74,7 @@ CFLAGS := \
 	-Wuninitialized \
 	-Wno-invalid-noreturn \
 	-fno-common \
-	-integrated-as \
+	-mllvm -inline-threshold=5 \
 	-Oz \
 	-g \
 	-flto \
@@ -91,8 +91,11 @@ CFLAGS := \
 	-fdiscrete-bitfield-abi \
 	-w \
 
-
-# C++额外的编译参数
+# C++额外的编译参数 
+# -Wl,--no-relax 
+# -mcmodel=large 
+# -fno-common
+# -mlong-calls
 CXXFLAGS :=
 
 
@@ -949,6 +952,7 @@ c_SRC_FILES := \
 	apps/common/ui/lv_watch/comm_parse/common_parse.c \
 	apps/common/ui/lv_watch/comm_parse/common_le_set.c \
 	apps/common/ui/lv_watch/comm_parse/common_le_get.c \
+	apps/common/ui/lv_watch/comm_parse/le_history_data.c \
 	apps/common/ui/lv_watch/comm_offscr/common_offscreen.c \
 	apps/common/ui/lv_watch/comm_refr/common_refresh.c \
 	apps/common/ui/lv_watch/comm_widget/widget_time.c \
@@ -994,6 +998,7 @@ c_SRC_FILES := \
 	apps/common/ui/lv_watch/comm_func/data_mana_func.c \
 	apps/common/ui/lv_watch/comm_func/quran_play_func.c \
 	apps/common/ui/lv_watch/comm_func/tws_func.c \
+	apps/common/ui/lv_watch/pedo_data/pedo_data.c \
 	apps/common/ui/lv_watch/comm_task/comm_task.c \
 	apps/common/ui/lv_watch/comm_task/utc_time_task.c \
 	apps/common/ui/lv_watch/comm_sensor/sensor_hr_task.c \
@@ -1115,7 +1120,7 @@ c_SRC_FILES := \
 	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_sleep.c \
 	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_hr.c \
 	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_bo.c \
-	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_activity.c \
+	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_pedo.c \
 
 # 需要编译的 .S 文件
 S_SRC_FILES := \
@@ -1216,6 +1221,7 @@ LFLAGS := \
 	cpu/br28/liba/gh3018/Algo_Lib/nadt_pi32v2_clang-4.0.1.a \
 	cpu/br28/liba/gh3018/Algo_Lib/spo2_pi32v2_clang-4.0.1.a \
 	cpu/br28/liba/gh3018/Drv_Lib/Default_CLANG_PI32.a \
+	cpu/br28/liba/gomore/libgomore.a \
 	cpu/br28/liba/fall_detection.a \
 	cpu/br28/liba/motion_detection.a \
 	cpu/br28/liba/sedentary.a \

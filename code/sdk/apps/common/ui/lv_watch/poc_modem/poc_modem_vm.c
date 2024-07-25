@@ -62,9 +62,6 @@ static const vm_ctx_t vm_def[Vm_Num] = {
     {.label = vm_label_call_vol_b, .val = 0},
     {.label = vm_label_media_vol_b, .val = 0},
 
-    /*******久坐步数*******/
-    {.label = vm_label_sedentary_steps, .val = 0},
-
     /*******计量单位*******/
     {.label = vm_label_unit_distance, .val = unit_distance_kilometre},
     {.label = vm_label_unit_temperature, .val = unit_temperature_C},
@@ -86,11 +83,6 @@ static const vm_ctx_t vm_def[Vm_Num] = {
 
     /*********血氧值*********/
     {.label = vm_label_bo_real_val, .val = 0},
-
-    /*********活动数据*********/
-    {.label = vm_label_daily_step, .val = 0},
-    {.label = vm_label_daily_calorie, .val = 0},
-    {.label = vm_label_daily_distance, .val = 0},
 
     /*******特定开关*******/
     {.label = vm_label_auto_hr_sw, .val = 0},
@@ -154,12 +146,13 @@ void vm_store_para_init(void)
     DndInfoParaRead();
     TwsInfoParaRead();
     UserInfoParaRead();
-    GalgoInfoParaRead();
+    //GalgoInfoParaRead();
     BondCodeInfoParaRead();
     MsgNotifyInfoParaRead();
     SedInfoParaRead();
     RmusicInfoParaRead();
     QpUserInfoParaRead();
+    PedoDataVmRead();
     
     return;
 }

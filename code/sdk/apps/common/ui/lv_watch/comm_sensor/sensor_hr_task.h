@@ -8,56 +8,59 @@ extern "C" {
 #include "../include/ui_menu.h"
 #include "../../../device/hr_sensor/gh3018/Drv_Code/inc/gh30x_example_common.h"
 
-#define Sensor_Hr_Task_Name \
-    "sensor_hr_task"
+#define Ppg_Task_Name "ppg_task"
 
-#define Hr_Data_Filter_Cnt 5
-
-enum
-{
-    SensorWorkHr, //心率
-    SensorWorkBo, //血氧
-
-    SensorWorkNone, //无工作
-};
-typedef u8 SensorWorkType_t;
+#define Hr_Data_Filter 5
 
 enum
 {
-    SensorModeAuto,   //自动
-    SensorModeManual, //手动
+    PpgWorkHr, //心率
+    PpgWorkBo, //血氧
+
+    PpgWorkNone, //无工作
 };
-typedef u8 SensorWorkMode_t;
+typedef u8 PpgWorkType_t;
 
 enum
 {
-    SensorHrProcess,
-    SensorHrEnableModule,
-    SensorHrDisableModule,
+    PpgModeAuto,   //自动
+    PpgModeManual, //手动
+};
+typedef u8 PpgWorkMode_t;
+
+enum
+{
+    PpgMsgProcess,
+    PpgMsgEnable,
+    PpgMsgDisable,
 };
 
-void SensorHrTaskCreate(void);
-void SensorHrTaskHandle(int *rev_msg, u8 len);
-int PostSensorHrTaskMsg(int *post_msg, u8 len);
+void PpgTaskCreate(void);
+int PostPpgTaskMsg(int *msg, u8 len);
+void PpgTaskMsgHandle(int *msg, u8 len);
 
-u8 GetHrSensorMode(void);
-void SetHrSensorMode(u8 mode);
+void DisablePpgModule(void);
+void EnablePpgModule(u8 type, u8 mode);
 
-u8 GetHrSensorWorkType(void);
-void SetHrSensorWorkType(u8 type);
+/* PPG工作模式：手动、自动 */
+u8 GetPpgMode(void);
+void SetPpgMode(u8 mode);
 
-u8 GetHrSensorDataFilterCnt(void);
-void SetHrSensorDataFilterCnt(u8 Cnt);
+/* PPG工作类型：心率、血氧 */
+u8 GetPpgWorkType(void);
+void SetPpgWorkType(u8 work);
 
-bool GetHrSensorEnableFlag(void);
-void SetHrSensorEnableFlag(bool en);
+/* 心率出值过滤次数 */
+u8 GetHrDataFilter(void);
+void SetHrDataFilter(u8 f);
 
-bool GetHrSensorWearStatus(void);
-void SetHrSensorWearStatus(bool status);
+/* PPG当前使能标志 */
+bool GetPpgEnableFlag(void);
+void SetPpgEnableFlag(bool en);
 
-void HrSensorStopSample(void);
-void HrSensorStartSample(SensorWorkType_t type, \
-    SensorWorkMode_t mode);
+/* PPG佩戴状态 */
+bool GetPpgWearStatus(void);
+void SetPpgWearStatus(bool wear);
 
 void HrGsDataFifoWrite(u8 *w_buf, u32 w_len);
 void HrGsDataFifoRead(ST_GS_DATA_TYPE *Gs_data, u16 *r_idx);

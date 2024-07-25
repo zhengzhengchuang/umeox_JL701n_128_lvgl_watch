@@ -10,7 +10,7 @@ static void shutdown_cb(void *priv)
 
     int task_post[1];
     task_post[0] = comm_msg_dev_shutdown;
-    post_comm_task_msg(task_post, 1);
+    PostCommTaskMsg(task_post, 1);
 
     return;
 }
@@ -23,7 +23,7 @@ static void restart_cb(void *priv)
 
     int task_post[1];
     task_post[0] = comm_msg_dev_restart;
-    post_comm_task_msg(task_post, 1);
+    PostCommTaskMsg(task_post, 1);
 
     return;
 }
@@ -36,16 +36,16 @@ static void reset_cb(void *priv)
 
     int task_post[1];
     task_post[0] = comm_msg_dev_reset;
-    post_comm_task_msg(task_post, 1);
+    PostCommTaskMsg(task_post, 1);
 
     return;
 }
 
 static void DevAllSensorDisable(void)
 {
-    DisableSensorGsModule();
-    DisableSensorGmModule();
-    HrSensorStopSample();
+    DisableGsModule();
+    DisablePpgModule();
+    DisableGmModule();
 
     return;
 }
@@ -66,7 +66,7 @@ void DevOpResetHandle(void)
     ResetAllVmData();
 
     int ui_msg_post[1];
-    ui_msg_post[0] = ui_msg_nor_vm_clear;
+    ui_msg_post[0] = ui_msg_nor_data_clear;
     post_ui_msg(ui_msg_post, 1);
   
     DevAllSensorDisable();

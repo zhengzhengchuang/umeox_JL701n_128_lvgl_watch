@@ -1,11 +1,8 @@
 #include "azkar_sec_comm.h"
 
 static lv_obj_t *tileview;
+static lv_obj_t *tv_tile[Elem_Num];
 static lv_obj_t *elem_container[Elem_Num];
-
-static int8_t load_sidx;
-static int8_t load_eidx;
-static const uint8_t load_range = 3;
 
 static void tileview_cb(lv_event_t *e)
 {
@@ -18,14 +15,12 @@ static void tileview_cb(lv_event_t *e)
     uint8_t sec_num = GetAzkarSecNum();
     for(i = 0; i < sec_num; i++)
     {
-        if(act == elem_container[i])
+        if(act == tv_tile[i])
             break;
     }
     SetAzkarSecIdx(i);
-    printf("%s:%d\n", __func__, i);
-
-
-
+    printf("%s:%d\n", __func__, GetAzkarSecIdx());
+    
     return;
 }
 
@@ -40,14 +35,27 @@ static void tileview_create(lv_obj_t *obj)
     lv_obj_set_style_bg_color(tileview, lv_color_hex(0x000000), LV_PART_MAIN);
     lv_obj_remove_style(tileview, NULL, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
     lv_obj_remove_style(tileview, NULL, LV_PART_SCROLLBAR|LV_STATE_PRESSED);
+
     for(uint8_t i = 0; i < sec_num; i++)
     {
-        elem_container[i] = lv_tileview_add_tile(tileview, i, 0, LV_DIR_HOR);
-        lv_obj_set_scrollbar_mode(elem_container[i], LV_SCROLLBAR_MODE_OFF);
-        lv_obj_set_style_pad_bottom(elem_container[i], 30, LV_PART_MAIN);
-        lv_obj_update_layout(tileview);
-    }      
+        tv_tile[i] = lv_tileview_add_tile(tileview, i, 0, LV_DIR_HOR);
+        
+        widget_obj_para.obj_parent = tv_tile[i];
+        widget_obj_para.obj_width = LCD_WIDTH;
+        widget_obj_para.obj_height = 388;
+        widget_obj_para.obj_bg_opax = LV_OPA_0;
+        widget_obj_para.obj_bg_color = lv_color_hex(0x000000);
+        widget_obj_para.obj_border_opax = LV_OPA_0;
+        widget_obj_para.obj_border_width = 0;
+        widget_obj_para.obj_border_color = lv_color_hex(0x000000);
+        widget_obj_para.obj_radius = 0;
+        widget_obj_para.obj_is_scrollable = true;
+        elem_container[i] = common_widget_obj_create(&widget_obj_para);
+        lv_obj_align(elem_container[i], LV_ALIGN_TOP_MID, 0, 0);
+    }
+
     u8 idx = GetAzkarSecIdx();
+    printf("%s:%d\n", __func__, idx);
     lv_obj_set_tile_id(tileview, idx, 0, LV_ANIM_OFF);
     lv_obj_add_event_cb(tileview, tileview_cb, LV_EVENT_VALUE_CHANGED, NULL);
 
@@ -58,15 +66,13 @@ static void elem_ctx_create(void)
 { 
     /* 元素创建 */
     int16_t sec_pos0 = 60;
-    int16_t sec_pos1 = 100;
 
     char freq_str[8];
 
     lv_img_dsc_t *img_dsc;
-
+    uint8_t sec_num = GetAzkarSecNum();
     uint32_t file = GetAzkarStartFile();
 
-    uint8_t sec_num = GetAzkarSecNum();
     for(uint8_t i = 0; i < sec_num; i++)
     {
         int freq_num = GetAzkarFreq(i);
@@ -75,29 +81,26 @@ static void elem_ctx_create(void)
             memset(freq_str, 0, sizeof(freq_str));
             sprintf(freq_str, "[%d]", freq_num);
             widget_label_para.label_w = 60;
-            widget_label_para.label_h = 28;
+            widget_label_para.label_h = 37;
             widget_label_para.long_mode = LV_LABEL_LONG_CLIP;
             widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
             widget_label_para.label_text_color = lv_color_hex(0xf0d790);
             widget_label_para.label_ver_center = false;
-            widget_label_para.user_text_font = &font_common_num_24;
-            widget_label_para.label_parent = elem_container[i];
+            widget_label_para.user_text_font = &font_common_num_32;
+            widget_label_para.label_parent = tv_tile[i];
             widget_label_para.label_text = freq_str;
             lv_obj_t *freq_label = common_widget_label_create(&widget_label_para);
-            lv_obj_align(freq_label, LV_ALIGN_TOP_MID, 0, sec_pos0);
+            lv_obj_align(freq_label, LV_ALIGN_BOTTOM_MID, 0, -20);
         }
 
         int16_t y;
-        if(freq_num > 0)
-            y = sec_pos1;
-        else
-            y = sec_pos0;
+        y = sec_pos0;
 
         widget_img_para.img_parent = elem_container[i];
         widget_img_para.img_click_attr = false;
         widget_img_para.event_cb = NULL;
 
-        uint8_t img_num = GetAzkarEnImgNum(i);
+        uint8_t img_num = GetAzkarImgNum(i);
         for(uint8_t j = 0; j < img_num; j++)
         {
             widget_img_para.file_img_dat = file;
@@ -110,6 +113,54 @@ static void elem_ctx_create(void)
             file++;
         }
     }
+
+    return;
+}
+
+static void tr_icon_cb(lv_event_t *e)
+{
+    if(!e) return;
+
+    uint8_t lang = GetAzkarLang();
+
+    if(lang == AzkarLangEn)
+        lang = AzkarLangEnTr;
+    else if(lang == AzkarLangEnTr)
+        lang = AzkarLangEn;
+    else if(lang == AzkarLangFr)
+        lang = AzkarLangFrTr;
+    else if(lang == AzkarLangFrTr)
+        lang = AzkarLangFr;
+    SetAzkarLang(lang);
+    
+    ui_act_id_t act_id = \
+        p_ui_info_cache->cur_act_id;
+    ui_menu_jump(act_id);
+
+    return;
+}
+
+static void elem_tr_icon_create(lv_obj_t *obj)
+{
+    uint8_t lang = GetAzkarLang();
+
+    if(lang == AzkarLangAr) return;
+
+    widget_img_para.img_parent = obj;
+    if(lang == AzkarLangEn)
+        widget_img_para.file_img_dat = azkar_tr_00_index;
+    else if(lang == AzkarLangEnTr)
+        widget_img_para.file_img_dat = azkar_tr_01_index;
+    else if(lang == AzkarLangFr)
+        widget_img_para.file_img_dat = azkar_tr_00_index;
+    else if(lang == AzkarLangFrTr)
+        widget_img_para.file_img_dat = azkar_tr_01_index;
+    widget_img_para.img_click_attr = true;
+    widget_img_para.event_cb = tr_icon_cb;
+    widget_img_para.user_data = NULL;
+    lv_obj_t *tr_icon = common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_align(tr_icon, LV_ALIGN_BOTTOM_RIGHT, -40, -20);
+    lv_obj_set_ext_click_area(tr_icon, 20);
 
     return;
 }
@@ -143,17 +194,16 @@ static void menu_display_cb(lv_obj_t *obj)
 
     uint8_t sec_num = GetAzkarSecNum();
     for(uint8_t i = 0; i < sec_num; i++)
+    {
+        tv_tile[i] = NULL;
         elem_container[i] = NULL;
-
-    // uint8_t sec_idx = GetAzkarSecIdx();
-    // load_sidx = sec_idx - load_range;
-    // load_eidx = sec_idx + load_range;
-    // load_sidx = load_sidx<0?0:load_sidx;
-    // load_eidx = load_eidx>sec_num?sec_num:load_eidx;
-
+    }
+        
     tileview_create(obj);
 
     elem_ctx_create();
+
+    elem_tr_icon_create(obj);
 
     return;
 }

@@ -2,94 +2,113 @@
 
 static u8 GsFifoData[Gs_Fifo_Size];
 
-static void SensorGsTask(void *p)
+static void GsEnableHandle(void)
 {
-    int rev_ret;
-    int rev_msg[8] = {0};
+    qmi8658_enableSensors(QMI8658_ACC_ENABLE);
 
-    EnableSensorGsModule();
+    return;
+}
+
+static void GsDisableHandle(void)
+{
+    qmi8658_enableSensors(QMI8658_DISABLE_ALL);
+    
+    return;
+}
+
+static void GsIntProcess(void)
+{
+	memset(GsFifoData, 0, Gs_Fifo_Size);
+	u8 fifo = qmi8658_read_fifo(GsFifoData);
+	if(fifo > Qmi8658_Fifo_WM)
+		fifo = Qmi8658_Fifo_WM;
+    
+    u32 fifo_len = fifo*Gs_Fifo_Num*6;
+
+    /*运动心率与Gs数据的配套使用*/
+    HrGsDataFifoWrite(GsFifoData, fifo_len);
+
+    /*地磁与Gs数据的配套使用*/
+    GmGsDataFifoWrite(GsFifoData, fifo_len);
+
+    /* gomore与Gs数据配套使用 */
+    GoGsDataFifoWrite(GsFifoData, fifo_len);
+
+    return;
+}
+
+static void GsTask(void *p)
+{
+    int ret;
+    int msg[8] = {0};
+
+    EnableGsModule();
 
     while(1)
     {
-        rev_ret = \
-            os_taskq_pend(NULL, rev_msg, \
-                ARRAY_SIZE(rev_msg)); 
+        ret = os_taskq_pend(NULL, msg, ARRAY_SIZE(msg)); 
 
-        if(rev_ret == OS_TASKQ)
-            SensorGsTaskMsgHandle(rev_msg, \
-                ARRAY_SIZE(rev_msg));
+        if(ret == OS_TASKQ)
+            GsTaskMsgHandle(msg, ARRAY_SIZE(msg));
     }
     
     return;
 }
 
-void SensorGsTaskCreate(void)
+void GsTaskCreate(void)
 {
-    int err = task_create(SensorGsTask, \
-        NULL, Sensor_Gs_Task_Name);
-    if(err) 
-        r_printf("Gs task create err!!!!!!!:%d \n", err);
+    int err = task_create(GsTask, NULL, Gs_Task_Name);
+    if(err) printf("Gs task create err!!!!!!!:%d \n", err);
 
     return;
 }
 
-void SensorGsTaskMsgHandle(int *rev_msg, u8 len)
+void GsTaskMsgHandle(int *msg, u8 len)
 {
-    if(!rev_msg || len == 0)
+    if(!msg || len == 0)
         return;
 
-    int msg_cmd = rev_msg[0];
+    int msg_cmd = msg[0];
 
     switch(msg_cmd)
     {
-        case SensorGsMsgProcess:
-        {
-            SensorGsIntProcess();
-        }
+        case GsMsgProcess:
+            GsIntProcess();
             break;
 
-        case SensorGsMsgEnableModule:
-        {
-            qmi8658_enableSensors(\
-                QMI8658_ACC_ENABLE);
-        }
+        case GsMsgEnable:
+            GsEnableHandle();
             break;
 
-        case SensorGsMsgDisableModule:
-        {
-            qmi8658_enableSensors(\
-                QMI8658_DISABLE_ALL);
-        }
+        case GsMsgDisable:
+            DisableGsModule();
             break;
 
         default:
-            printf("*************ui msg not found\n");
             break;
     }
 
     return;
 }
 
-int PostSensorGsTaskMsg(int *post_msg, u8 len)
+int PostGsTaskMsg(int *msg, u8 len)
 {
     int err = 0;
     int count = 0;
 
-    if(!post_msg || len == 0)
+    if(!msg || len == 0)
         return -1;
 
 __retry:
-    err = os_taskq_post_type(\
-        Sensor_Gs_Task_Name, post_msg[0], \
-            len - 1, &post_msg[1]);
+    err = os_taskq_post_type(Gs_Task_Name, msg[0], \
+        len - 1, &msg[1]);
 
     if(cpu_in_irq() || cpu_irq_disabled())
         return err;
 
     if(err) 
     {
-        if(!strcmp(os_current_task(), \
-            Sensor_Gs_Task_Name)) 
+        if(!strcmp(os_current_task(), Gs_Task_Name)) 
             return err;
 
         if(count > 20)
@@ -103,40 +122,20 @@ __retry:
     return err;
 }
 
-void EnableSensorGsModule(void)
+void EnableGsModule(void)
 {
-    int SensorGsMsg[1];
-	SensorGsMsg[0] = SensorGsMsgEnableModule;
-	PostSensorGsTaskMsg(SensorGsMsg, 1); 
+    int GsMsg[1];
+	GsMsg[0] = GsMsgEnable;
+	PostGsTaskMsg(GsMsg, 1); 
 
     return;
 } 
 
-void DisableSensorGsModule(void)
+void DisableGsModule(void)
 {
-    int SensorGsMsg[1];
-	SensorGsMsg[0] = SensorGsMsgDisableModule;
-	PostSensorGsTaskMsg(SensorGsMsg, 1); 
+    int GsMsg[1];
+	GsMsg[0] = GsMsgDisable;
+	PostGsTaskMsg(GsMsg, 1); 
 
     return;
 } 
-
-void SensorGsIntProcess(void)
-{
-	memset(GsFifoData, 0, \
-		Gs_Fifo_Size);
-	u8 fifo_level = \
-		 qmi8658_read_fifo(GsFifoData);
-	if(fifo_level > Qmi8658_Fifo_WM)
-		fifo_level = Qmi8658_Fifo_WM;
-  
-    /*运动心率与Gs数据的配套使用*/
-    HrGsDataFifoWrite(GsFifoData, \
-        fifo_level*Gs_Fifo_Num*6);
-
-    /*地磁与Gs数据的配套使用*/
-    SensorGmGsDataFifoWrite(GsFifoData, \
-        fifo_level*Gs_Fifo_Num*6);
-
-    return;
-}

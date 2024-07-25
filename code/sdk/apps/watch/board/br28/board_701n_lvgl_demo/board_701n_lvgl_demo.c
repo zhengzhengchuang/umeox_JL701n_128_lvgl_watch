@@ -797,8 +797,8 @@ IMU_SENSOR_PLATFORM_DATA_END();
 #if TCFG_RTC_ENABLE
 const struct sys_time def_sys_time = {  //初始一下当前时间
     .year = 2024,
-    .month = 1,
-    .day = 1,
+    .month = 7,
+    .day = 24,
     .hour = 0,
     .min = 0,
     .sec = 0,
@@ -1345,12 +1345,11 @@ void board_init()
     //alarm_init(); //不用RTC闹钟，使用用户闹钟
 #endif
     le_task_create();
-    comm_task_create();
-    //nor_vm_task_create();
-
-    SensorHrTaskCreate();
-    SensorGsTaskCreate();
-    SensorGmTaskCreate();
+    CommTaskCreate();
+  
+    GsTaskCreate();
+    GmTaskCreate();
+    PpgTaskCreate();
 
 #if TCFG_SENSOR_DEBUG_ENABLE
     data_export_init();

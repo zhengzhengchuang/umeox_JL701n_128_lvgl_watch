@@ -148,12 +148,13 @@
 #define     CFG_ALARM_PARA_INFO	        197//存储闹钟参数信息
 #define     CFG_DND_PARA_INFO	        198//存储勿扰参数信息
 #define     CFG_USER_PERSONAL_INFO	    199//存储用户个人信息
-#define     CFG_GM_ALGO_KEY_INFO	    200//存储GoMore算法密钥
+#define     CFG_GOMORE_PARA_INFO	    200//存储GoMore参数
 #define     CFG_DEV_BOND_CODE_INFO	    201//存储设备绑定码
 #define     CFG_MSG_NOTIFY_PARA_INFO	202//存储消息通知参数信息
 #define     CFG_SEDENTARY_PARA_INFO	    203//存储久坐提醒参数
 #define     CFG_QPUSER_PARA_INFO	    204//古兰经播放参数
 #define     CFG_TWS_PARA_INFO	        205//tws参数
+#define     CFG_PEDO_DATA_INFO	        206//日常活动参数
 #if 0
 #define     VM_WATCH_EX_BEGIN            191//拓展表盘信息
 #define     VM_WATCH_EX0                      VM_WATCH_EX_BEGIN//拓展表盘信息

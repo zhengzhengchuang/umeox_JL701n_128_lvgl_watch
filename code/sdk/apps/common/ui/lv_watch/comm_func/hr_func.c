@@ -1,14 +1,13 @@
 #include "../lv_watch.h"
 
-static u8 HrAutoCnt = 0;
+static u32 HrAutoCnt = 0;
 static vm_hr_ctx_t w_hr_cache;
 static const u8 HrAutoDur = 45;//自动心率时长 s
 
 u8 GetHrRealVal(void)
 {
     int real_val = \
-        GetVmParaCacheByLabel(\
-            vm_label_hr_real_val);
+        GetVmParaCacheByLabel(vm_label_hr_real_val);
 
     return ((u8)real_val);
 }
@@ -25,15 +24,13 @@ void SetHrVmCtxCache(u8 val)
     if(val == 0)
         return;
 
-    u8 VmIdx = \
-        w_hr.CurIdx;
+    u8 VmIdx = w_hr.CurIdx;
     if(VmIdx >= Hr_Day_Num)
         return;
 
     w_hr.data[VmIdx] = val;
 
-    u8 HIdx = \
-       VmIdx/(60/Hr_Inv_Dur);
+    u8 HIdx = VmIdx/(60/Hr_Inv_Dur);
     if(HIdx >= 24)
         return;
 
@@ -107,6 +104,7 @@ void PowerOnSetHrVmCache(void)
     w_hr.CurIdx = (w_hr.time.hour*60 + w_hr.time.min)/Hr_Inv_Dur;
 
     u8 hr_num = VmHrItemNum();
+    printf("%s:hr_num = %d\n", __func__, hr_num);
 
     /*读取vm的最新一条数据*/
     bool data_ret = GetHrData();
@@ -115,6 +113,7 @@ void PowerOnSetHrVmCache(void)
     /*判断vm的最新数据是否已经过期*/
     bool IsPast = \
         HrVmDataIsPast(&(r_hr.time));
+    printf("%s:IsPast = %d\n", __func__, IsPast);
     if(IsPast == true)
     {
         //如果说已经过期数据，且存储数超过上限，删除最旧一条
@@ -145,7 +144,7 @@ void PowerOffSetHrVmFlashSave(void)
     SetHrDayVmData(false);
     memcpy(&w_hr_cache, &w_hr, sizeof(vm_hr_ctx_t));
     int ui_msg_post[1];
-    ui_msg_post[0] = ui_msg_nor_vm_hr;
+    ui_msg_post[0] = ui_msg_nor_hr_wirte;
     post_ui_msg(ui_msg_post, 1);
 
     return;
@@ -163,25 +162,21 @@ void VmHrCtxFlashWrite(void)
 
 void HrTimerSecProcess(void)
 {
-    bool EnableFlag = \
-        GetHrSensorEnableFlag();
-    if(EnableFlag)
+    bool PpgEn = GetPpgEnableFlag();
+    if(PpgEn == true)
     {
-        u8 work_type = \
-            GetHrSensorWorkType();
-        if(work_type == SensorWorkBo || \
-            work_type == SensorWorkNone)
+        u8 work = GetPpgWorkType();
+        if(work == PpgWorkBo || work == PpgWorkNone)
             return;
 
-        u8 work_mode = \
-            GetHrSensorMode();
-        if(work_mode == SensorModeAuto)
+        u8 mode = GetPpgMode();
+        if(mode == PpgModeAuto)
         {
             HrAutoCnt++;
             if(HrAutoCnt >= HrAutoDur)
             {
                 HrAutoCnt = 0;
-                HrSensorStopSample();
+                DisablePpgModule();
             }
         }else
         {
@@ -192,36 +187,29 @@ void HrTimerSecProcess(void)
     return;
 }
 
-void HrProcess(struct sys_time *utc_time)
+void HrProcess(struct sys_time *ptime)
 {
-    if(!utc_time) return;
-
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
-    if(utc_time->hour == 0 && \
-        utc_time->min == 0)
+    if(ptime->hour == 0 && ptime->min == 0)
     {
         //保存上一天的心率历史数据
         SetHrDayVmData(true);
         memcpy(&w_hr_cache, &w_hr, sizeof(vm_hr_ctx_t));
         int ui_msg_post[1];
-        ui_msg_post[0] = ui_msg_nor_vm_hr;
+        ui_msg_post[0] = ui_msg_nor_hr_wirte;
         post_ui_msg(ui_msg_post, 1);
     
         //清除缓存数据，开始新一天的数据记录
         memset(&w_hr, 0, sizeof(vm_hr_ctx_t));
         w_hr.check_code = Nor_Vm_Check_Code;
-        memcpy(&(w_hr.time), utc_time, sizeof(struct sys_time));
+        memcpy(&(w_hr.time), ptime, sizeof(struct sys_time));
     }
 
     u16 utc_timestamp = \
-        utc_time->hour*60 + utc_time->min;
+        ptime->hour*60 + ptime->min;
     u8 HrCurIdx = \
         utc_timestamp / Hr_Inv_Dur;
     w_hr.CurIdx = HrCurIdx;
@@ -232,18 +220,16 @@ void HrProcess(struct sys_time *utc_time)
         GetVmParaCacheByLabel(vm_label_auto_hr_sw);
     if(HrInvOn == 0 && auto_hr_sw)
     {
-        printf("++++++%s\n", __func__);
-
         //整点15分钟到 启动自动心率
         bool EnableFlag = \
-            GetHrSensorEnableFlag();
+            GetPpgEnableFlag();
         if(!EnableFlag)
         {
             HrAutoCnt = 0;
             SetHrRealVal(0);
 
             //如果PPG手动启动，禁止自动启动，只是辅助
-            HrSensorStartSample(SensorWorkHr, SensorModeAuto);
+            EnablePpgModule(PpgWorkHr, PpgModeAuto);
         }
     }
     

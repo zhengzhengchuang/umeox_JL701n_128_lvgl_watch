@@ -99,9 +99,6 @@ enum
     vm_label_call_vol_b,
     vm_label_media_vol_b,
 
-    /*******久坐步数*******/
-    vm_label_sedentary_steps,
-
     /*******计量单位*******/
     vm_label_unit_distance,
     vm_label_unit_temperature,
@@ -124,11 +121,6 @@ enum
     /*******血氧值*******/
     vm_label_bo_real_val,
 
-    /*******活动数据*******/
-    vm_label_daily_step,       //步
-    vm_label_daily_calorie,    //千卡
-    vm_label_daily_distance,   //米
-
     /*******特定开关*******/
     vm_label_auto_hr_sw,        //自动心率开关
     vm_label_auto_bo_sw,        //自动血氧开关
@@ -139,7 +131,7 @@ enum
 
 #define Vm_Num \
     (vm_label_num)
-#define Vm_Mask (0x55b5)//每次更新vm参数的时候都需要更改
+#define Vm_Mask (0x55b6)//每次更新vm参数的时候都需要更改
 
 typedef struct
 {

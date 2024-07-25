@@ -86,14 +86,9 @@ bool VmContactsCtxByIdx(uint8_t idx)
 *********************************************************************************/
 void VmContactsCtxFlashSave(uint8_t idx, void *p)
 {
-#if !Vm_Debug_En
-    /*如果设备不绑定、不允许存储任何数据*/
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
     if(!p) return;
 

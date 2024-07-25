@@ -83,18 +83,7 @@ void common_calorie_widget_refresh(void)
         widget_data_para_t *p_calorie_para = \
             &calorie_para_cache[i];
 
-        uint16_t vm_label_type = \
-            vm_label_none;
-
-        if(calorie_data_type[i] == \
-            widget_data_type_calorie)
-            vm_label_type = vm_label_daily_calorie;
-        else
-            continue;
-
-        int __data = \
-            GetVmParaCacheByLabel(\
-                vm_label_type); 
+        u32 __data = PedoData.calorie;
 
         if(__data > Calorie_Disp_Max)
             __data = Calorie_Disp_Max;
@@ -202,7 +191,7 @@ int16_t common_calorie_widget_create(widget_data_para_t *data_para, \
         Calorie_Group_Max)
         return data_end_x;
 
-    int __data = *(int *)data_val;
+    u32 __data = *(u32 *)data_val;
 
     if(__data > Calorie_Disp_Max)
         __data = Calorie_Disp_Max;

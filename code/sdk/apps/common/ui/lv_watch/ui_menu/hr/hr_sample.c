@@ -232,14 +232,14 @@ static void menu_create_cb(lv_obj_t *obj)
     }
 
     //启动手动心率
-    HrSensorStartSample(SensorWorkHr, SensorModeManual);
+    EnablePpgModule(PpgWorkHr, PpgModeManual);
 
     return;
 }
 
 static void menu_destory_cb(lv_obj_t *obj)
 {
-    HrSensorStopSample();
+    DisablePpgModule();
 
     return;
 }
@@ -254,7 +254,7 @@ static void menu_refresh_cb(lv_obj_t *obj)
         hr_GIF_00_index + hr_GIF_cnt, hr_GIF_dsc_idx);
 
     bool wear_status = \
-        GetHrSensorWearStatus();
+        GetPpgWearStatus();
     if(!wear_status)
     {
         ui_menu_jump(\

@@ -24,7 +24,7 @@ void le_task_post(int type, int *para, int len)
 static void le_task_handle(void *p)
 {
     int rev_ret;
-    int rev_msg[32] = {0};
+    int rev_msg[64] = {0};
 
     while(1)
     {
@@ -38,16 +38,16 @@ static void le_task_handle(void *p)
     return;
 }
 
-void le_task_msg_handle(int *rev_msg, u8 len)
+void le_task_msg_handle(int *msg, u8 len)
 {
-    if(!rev_msg || len == 0)
+    if(!msg || len == 0)
         return;
 
-    int ui_msg_post[2];
+    int ui_msg[2] = {0};
 
-    int msg_cmd = rev_msg[0];
+    int cmd = msg[0];
 
-    switch(msg_cmd)
+    switch(cmd)
     {
         case Le_Set_UtcTime:
             common_clock_pointer_angle_update();
@@ -74,7 +74,7 @@ void le_task_msg_handle(int *rev_msg, u8 len)
             break;
 
         case Le_Find_Dev:
-            int enable = rev_msg[1];
+            int enable = msg[1];
             if(enable)
                 FindDevEnableHandle();
             else
@@ -86,37 +86,32 @@ void le_task_msg_handle(int *rev_msg, u8 len)
             break;
 
         case Le_GalgoKey_Update:
-            GalgoInfoParaUpdate();      
+            //GalgoInfoParaUpdate();      
             break;
 
         case Le_First_Dev_Bond:
-            ui_msg_post[0] = \
-                ui_msg_first_bond_handle;
-            post_ui_msg(ui_msg_post, 1);
+            ui_msg[0] = ui_msg_first_bond_handle;
+            post_ui_msg(ui_msg, 1);
             break;
 
         case Le_Ori_Dev_Bond:
-            ui_msg_post[0] = \
-                ui_msg_ori_bond_handle;
-            post_ui_msg(ui_msg_post, 1);
+            ui_msg[0] = ui_msg_ori_bond_handle;
+            post_ui_msg(ui_msg, 1);
             break;
 
         case Le_New_Dev_Bond:
-            ui_msg_post[0] = \
-                ui_msg_new_bond_handle;
-            post_ui_msg(ui_msg_post, 1);
+            ui_msg[0] = ui_msg_new_bond_handle;
+            post_ui_msg(ui_msg, 1);
             break;
 
         case Le_Dev_UnBond:
-            ui_msg_post[0] = \
-                ui_msg_unbond_handle;
-            post_ui_msg(ui_msg_post, 1);
+            ui_msg[0] = ui_msg_unbond_handle;
+            post_ui_msg(ui_msg, 1);
             break;
 
         case Le_Notify_Push:
-            ui_msg_post[0] = \
-                ui_msg_nor_vm_message;
-            post_ui_msg(ui_msg_post, 1);
+            ui_msg[0] = ui_msg_nor_message_write;
+            post_ui_msg(ui_msg, 1);
             break;
 
         case Le_ANCSSw_Update:
@@ -130,9 +125,8 @@ void le_task_msg_handle(int *rev_msg, u8 len)
             break;
 
         case Le_Weather_Update:
-            ui_msg_post[0] = \
-                ui_msg_nor_vm_weather;
-            post_ui_msg(ui_msg_post, 1);
+            ui_msg[0] = ui_msg_nor_weather_write;
+            post_ui_msg(ui_msg, 1);
             break;
 
         case Le_Sed_Info_Update:
@@ -157,9 +151,20 @@ void le_task_msg_handle(int *rev_msg, u8 len)
             break;
 
         case Le_Call_Contacts_Update:
-            ui_msg_post[0] = \
-                ui_msg_nor_vm_contacts;
-            post_ui_msg(ui_msg_post, 1);
+            ui_msg[0] = ui_msg_nor_contacts_write;
+            post_ui_msg(ui_msg, 1);
+            break;
+
+        case Le_History_Hr_Data:
+            HistoryHrDataSend(msg[1], msg[2], msg[3], msg[4]);
+            break;
+
+        case Le_History_Bo_Data:
+            HistoryBoDataSend(msg[1], msg[2], msg[3], msg[4]);
+            break;
+
+        case Le_History_Pedo_Data:
+            HistoryPedoDataSend(msg[1], msg[2], msg[3], msg[4]);
             break;
 
         default:
@@ -172,25 +177,23 @@ void le_task_msg_handle(int *rev_msg, u8 len)
 
 void le_task_create(void)
 {
-    int err = task_create(le_task_handle, \
-        NULL, Le_Task_Name);
-    if(err) 
-        r_printf("le task create err!!!!!!!:%d \n", err);
+    int err = task_create(le_task_handle, NULL, Le_Task_Name);
+    if(err) printf("le task create err!!!!!!!:%d \n", err);
 
     return;
 }
 
-int post_le_task_msg(int *post_msg, u8 len)
+int post_le_task_msg(int *msg, u8 len)
 {
     int err = 0;
     int count = 0;
 
-    if(!post_msg || len == 0)
+    if(!msg || len == 0)
         return -1;
 
 __retry:
     err = os_taskq_post_type(Le_Task_Name, \
-        post_msg[0], len - 1, &post_msg[1]);
+        msg[0], len - 1, &msg[1]);
 
     if(cpu_in_irq() || cpu_irq_disabled())
         return err;

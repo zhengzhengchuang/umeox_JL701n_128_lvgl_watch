@@ -28,13 +28,9 @@ void SetCameraUnlockExit(bool f)
 
 void RemoteReqEnterCameraHandle(void)
 {
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
     //判断当前是否符合弹出的条件
     if(!MenuSupportPopup())
@@ -50,13 +46,9 @@ void RemoteReqEnterCameraHandle(void)
 
 void RemoteReqExitCameraHandle(void)
 {  
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
  
     /*如果不在当前页面，不必跳转退出*/
     ui_act_id_t cur_act_id = \

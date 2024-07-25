@@ -53,7 +53,7 @@
 #define qmi8658_log(...)
 #endif
 
-#define Qmi8658_Fifo_WM (30)
+#define Qmi8658_Fifo_WM (10)
 
 enum Qmi8658Register
 {

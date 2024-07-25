@@ -29,7 +29,7 @@ void DndInfoParaReset(void);
 void DndInfoParaUpdate(void);
 
 void DndManualUpdate(void);//手动立即刷新
-void DndProcess(struct sys_time *utc_time);
+void DndProcess(struct sys_time *ptime);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

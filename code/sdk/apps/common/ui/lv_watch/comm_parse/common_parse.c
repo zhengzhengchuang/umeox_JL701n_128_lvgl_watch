@@ -87,16 +87,16 @@ void umeox_common_le_cmd_parse(u8 *buf, u8 len)
             RemoteGetHistoryBoData(buf, len);
             break;
 
-        case Cmd_Get_History_Activity_Data:
-            RemoteGetHistoryActivityData(buf, len);
+        case Cmd_Get_History_Pedo_Data:
+            RemoteGetHistoryPedoData(buf, len);
             break;
 
         case Cmd_Get_History_Sleep_Data:
             RemoteGetHistorySleepData(buf, len);
             break;
 
-        case Cmd_Get_Activity_Data:
-            RemoteGetActivityData(buf, len);
+        case Cmd_Get_Pedo_Data:
+            RemoteGetPedoData(buf, len);
             break;
 
         case Cmd_Set_Spec_Func_Sw:

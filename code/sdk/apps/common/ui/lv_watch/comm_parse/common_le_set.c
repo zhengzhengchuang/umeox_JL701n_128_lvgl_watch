@@ -255,13 +255,11 @@ void RemoteSetSpecFuncSw(u8 *buf, u8 len)
             break;
 
         case 0x04:/*自动心率*/
-            SetVmParaCacheByLabel(\
-                vm_label_auto_hr_sw, sw_enable);
+            SetVmParaCacheByLabel(vm_label_auto_hr_sw, sw_enable);
             break;
 
         case 0x05:/*自动血氧*/
-            SetVmParaCacheByLabel(\
-                vm_label_auto_bo_sw, sw_enable);
+            SetVmParaCacheByLabel(vm_label_auto_bo_sw, sw_enable);
             break;
 
         default:
@@ -277,6 +275,7 @@ void RemoteSetSpecFuncSw(u8 *buf, u8 len)
 //修改GoMore算法密钥
 void RemoteModifyGalgoKey(u8 *buf, u8 len)
 {  
+#if 0
     static u8 pkt_num;
     static u8 pkt_sum;
     static u8 ctx_offset;
@@ -342,6 +341,7 @@ __reply:
     umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
 
 __end:
+#endif
     return;
 }
 

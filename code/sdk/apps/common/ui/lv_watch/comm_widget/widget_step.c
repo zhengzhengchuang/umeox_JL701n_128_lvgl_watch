@@ -84,18 +84,7 @@ void common_step_widget_refresh(void)
         widget_data_para_t *p_step_para = \
             &step_para_cache[i];
 
-        uint16_t vm_label_type = \
-            vm_label_none;
-
-        if(step_data_type[i] == \
-            widget_data_type_step)
-            vm_label_type = vm_label_daily_step;
-        else
-            continue;
-
-        int __data = \
-            GetVmParaCacheByLabel(\
-                vm_label_type); 
+        u32 __data = PedoData.steps;
 
         if(__data > Step_Disp_Max)
             __data = Step_Disp_Max;
@@ -203,7 +192,7 @@ int16_t common_step_widget_create(widget_data_para_t *data_para, \
         Step_Group_Max)
         return data_end_x;
 
-    int __data = *(int *)data_val;
+    u32 __data = *(u32 *)data_val;
 
     if(__data > Step_Disp_Max)
         __data = Step_Disp_Max;

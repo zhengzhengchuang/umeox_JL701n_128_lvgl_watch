@@ -68,7 +68,7 @@ void HcalendarInfoParaRead(void);
 void HcalendarInfoParaWrite(void);
 void HcalendarInfoParaReset(void);
 void HcalendarInfoParaUpdate(void);
-void HcalendarProcess(struct sys_time *utc_time);
+void HcalendarProcess(struct sys_time *ptime);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

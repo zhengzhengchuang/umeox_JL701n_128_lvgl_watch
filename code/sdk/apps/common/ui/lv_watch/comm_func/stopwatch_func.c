@@ -18,7 +18,7 @@ static void StopwatchOverPost(void)
     int over_post[1];
     over_post[0] = \
         comm_msg_stopwatch_over;
-    post_comm_task_msg(over_post, 1);
+    PostCommTaskMsg(over_post, 1);
 
     return;
 }

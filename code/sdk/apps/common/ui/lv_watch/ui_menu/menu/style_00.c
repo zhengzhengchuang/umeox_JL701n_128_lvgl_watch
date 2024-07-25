@@ -159,7 +159,7 @@ static void elem_container_cb(lv_event_t *e)
     if(idx == 2)
     {
         bool cali_succ = \
-            GetSensorGmCaliSucc();
+            GetGmCaliSucc();
         if(cali_succ == false)
             ui_menu_jump(ui_act_id_gm_cali);
         else

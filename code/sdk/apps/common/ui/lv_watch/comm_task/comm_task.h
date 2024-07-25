@@ -25,9 +25,9 @@ enum
     comm_msg_dev_reset,
 };
 
-void comm_task_create(void);
-void comm_task_msg_handle(int *msg, u8 len);
-int post_comm_task_msg(int *post_msg, u8 len);
+void CommTaskCreate(void);
+int PostCommTaskMsg(int *msg, u8 len);
+void CommTaskMsgHandle(int *msg, u8 len);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

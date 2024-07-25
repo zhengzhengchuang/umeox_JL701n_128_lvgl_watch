@@ -725,7 +725,7 @@ static u8 qmc6309_idle_query(void)
 {
 	//1：允许 0：不允许  
 	bool GmEnableFlag = \
-		GetSensorGmEnableFlag();
+		GetGmEnableFlag();
 
 	if(GmEnableFlag == true)
 		return 0;

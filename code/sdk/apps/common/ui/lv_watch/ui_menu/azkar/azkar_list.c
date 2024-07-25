@@ -109,6 +109,7 @@ static void elem_container_cb(lv_event_t *e)
 
     uint8_t idx = \
         *(uint8_t *)lv_event_get_user_data(e);
+    if(idx >= AzkarTypeNum) return;
 
     SetAzkarType(idx);
     int language = GetVmParaCacheByLabel(vm_label_sys_language);

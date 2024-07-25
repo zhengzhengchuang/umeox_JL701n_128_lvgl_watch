@@ -82,9 +82,9 @@ static void common_menu_lock_timer_cb(void *priv)
 
     //地磁如果开启，关掉
     bool GmEnableFlag = \
-        GetSensorGmEnableFlag();
+        GetGmEnableFlag();
     if(GmEnableFlag == true)
-        DisableSensorGmModule();
+        DisableGmModule();
 
     /*相机解锁退出*/
     bool CameraUnlock = \

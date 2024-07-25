@@ -34,11 +34,15 @@ enum
     Le_PTime_Cfg_Para_Update,
     Le_Call_Contacts_Clear,
     Le_Call_Contacts_Update,
+
+    Le_History_Hr_Data,
+    Le_History_Bo_Data,
+    Le_History_Pedo_Data,
 };
 
 void le_task_create(void);
-int post_le_task_msg(int *post_msg, u8 len);
-void le_task_msg_handle(int *rev_msg, u8 len);
+int post_le_task_msg(int *msg, u8 len);
+void le_task_msg_handle(int *msg, u8 len);
 
 void le_task_post(int type, int *para, int len);
 #ifdef __cplusplus

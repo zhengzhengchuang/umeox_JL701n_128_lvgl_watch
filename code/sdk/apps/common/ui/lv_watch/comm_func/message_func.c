@@ -88,13 +88,9 @@ static void MessageNotifyIsOnHandle(void)
 
 void MsgNotifyProcess(void)
 {
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
     vm_message_ctx_t *w_ctx = \
         &w_message;
@@ -201,7 +197,7 @@ void MsgNotifyFromAncs(void *name, void *data, u16 len)
 
         int ui_msg_post[1];
         ui_msg_post[0] = \
-            ui_msg_nor_vm_message;
+            ui_msg_nor_message_write;
         post_ui_msg(ui_msg_post, 1);
     }
 

@@ -82,6 +82,25 @@ void GetUtcTime(struct sys_time *utc_time)
 }
 
 /*********************************************************************************
+                                utc-->sec                                   
+*********************************************************************************/
+u32 UtcTimeToSec(struct sys_time *utc_time)
+{
+    u32 sec;
+    sec = timestamp_mytime_2_utc_sec(utc_time);
+    return sec;
+}
+
+/*********************************************************************************
+                                sec-->utc                                   
+*********************************************************************************/
+void SecToUtcTime(u32 sec, struct sys_time *utc_time)
+{
+    timestamp_utc_sec_2_mytime(sec, utc_time);
+    return;
+}
+
+/*********************************************************************************
                                 获取系统星期                                    
 *********************************************************************************/
 comm_enum_week_t GetUtcWeek(struct sys_time *utc_time)
@@ -313,5 +332,24 @@ void UserEnableBt(void)
 void UserDisableBt(void)
 {
     bt_close_bredr();
+    return;
+}
+
+/*********************************************************************************
+                        设备绑定标志                            
+*********************************************************************************/
+bool GetDevBondFlag(void)
+{
+    int Flag = GetVmParaCacheByLabel(vm_label_dev_bond);
+
+    if(Flag == 1)
+        return true;
+
+    return false;
+}
+
+void SetDevBondFlag(int f)
+{
+    SetVmParaCacheByLabel(vm_label_dev_bond, !!f);
     return;
 }

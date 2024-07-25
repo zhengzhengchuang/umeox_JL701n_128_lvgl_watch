@@ -847,9 +847,9 @@ void qmi8658_config_reg(unsigned char low_power)
 	{
 		g_imu.cfg.enSensors = QMI8658_ACCGYR_ENABLE;
 		g_imu.cfg.accRange = Qmi8658AccRange_8g;
-		g_imu.cfg.accOdr = Qmi8658AccOdr_62_5Hz;
+		g_imu.cfg.accOdr = Qmi8658AccOdr_31_25Hz;
 		g_imu.cfg.gyrRange = Qmi8658GyrRange_1024dps;
-		g_imu.cfg.gyrOdr = Qmi8658GyrOdr_62_5Hz;
+		g_imu.cfg.gyrOdr = Qmi8658GyrOdr_31_25Hz;
 	}
 	
 	if(g_imu.cfg.enSensors & QMI8658_ACC_ENABLE)
@@ -1378,9 +1378,9 @@ void qmi8658_do_hw_selftest(int enSensor)
 			}
 		}
 		qmi8658_read_reg(Qmi8658Register_Dvx_L, reg, 6);
-		raw[0] = (short)((unsigned short)(reg[1]<<8) |( reg[0]));
-		raw[1] = (short)((unsigned short)(reg[3]<<8) |( reg[2]));
-		raw[2] = (short)((unsigned short)(reg[5]<<8) |( reg[4]));
+		raw[0] = (short)((unsigned short)(reg[1]<<8)|(reg[0]));
+		raw[1] = (short)((unsigned short)(reg[3]<<8)|(reg[2]));
+		raw[2] = (short)((unsigned short)(reg[5]<<8)|(reg[4]));
 		st_out[0] = (float)(raw[0]*1000.0f/2048);	// mg
 		st_out[1] = (float)(raw[1]*1000.0f/2048);
 		st_out[2] = (float)(raw[2]*1000.0f/2048);
@@ -1467,10 +1467,9 @@ void qmi8658_get_hw_selftest_data(float out[6])
 
 static void Qmi8658_Fifo_WM_int_handle(u8 index, u8 gpio)
 {
-	int SensorGsMsg[1];
-	SensorGsMsg[0] = \
-		SensorGsMsgProcess;
-	PostSensorGsTaskMsg(SensorGsMsg, 1);
+	int GsMsg[1];
+	GsMsg[0] = GsMsgProcess;
+	PostGsTaskMsg(GsMsg, 1);
 
 	return;
 }

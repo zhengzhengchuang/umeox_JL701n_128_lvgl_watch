@@ -72,8 +72,7 @@ u8 GetAzkarSecNum(void);
 
 int GetAzkarFreq(u8 sec_idx);
 
-u8 GetAzkarEnImgNum(u8 sec_idx);
-
+u8 GetAzkarImgNum(u8 sec_idx);
 u32 GetAzkarStartFile(void);
 #ifdef __cplusplus
 } /* extern "C" */

@@ -25,17 +25,11 @@ void DndManualUpdate(void)
     return;
 }
 
-void DndProcess(struct sys_time *utc_time)
+void DndProcess(struct sys_time *ptime)
 {
-    if(!utc_time) return;
-
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
     int cur_dnd_state;
     int next_dnd_state;
@@ -88,14 +82,14 @@ void DndProcess(struct sys_time *utc_time)
         Dnd_Info.dnd_repeat;
 
     u32 utc_ts = \
-        utc_time->hour*60 + utc_time->min;
+        ptime->hour*60 + ptime->min;
     u32 start_ts = \
         start_hour*60 + start_minute;
     u32 end_ts = \
         end_hour*60 + end_minute;
     
     u8 weekday = \
-        GetUtcWeek(utc_time);
+        GetUtcWeek(ptime);
     u8 weeklday = \
         (weekday + Comm_Enum_Week_Max) - 1;
     weeklday %= Comm_Enum_Week_Max;

@@ -447,8 +447,8 @@ static void init_scroll_limits(_lv_indev_proc_t * proc)
                     lv_coord_t x_mid = obj->coords.x1 + lv_area_get_width(&obj->coords) / 2;
                     proc->types.pointer.scroll_area.x1 = find_snap_point_x(obj, x_mid + 1, LV_COORD_MAX, 0);
                     proc->types.pointer.scroll_area.x2 = find_snap_point_x(obj, LV_COORD_MIN, x_mid - 1, 0);
-                    printf("%s:x1 = %d, x2 = %d\n", __func__, proc->types.pointer.scroll_area.x1, \
-                        proc->types.pointer.scroll_area.x2);
+                    // printf("%s:x1 = %d, x2 = %d\n", __func__, proc->types.pointer.scroll_area.x1, \
+                    //     proc->types.pointer.scroll_area.x2);
                     break;
                 }
             default:

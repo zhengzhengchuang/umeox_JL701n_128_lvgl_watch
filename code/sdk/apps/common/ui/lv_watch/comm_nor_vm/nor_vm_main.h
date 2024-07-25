@@ -11,7 +11,7 @@ extern "C" {
 #include "nor_vm_sleep.h"
 #include "nor_vm_message.h"
 #include "nor_vm_weather.h"
-#include "nor_vm_activity.h"
+#include "nor_vm_pedo.h"
 #include "nor_vm_call_log.h"
 #include "nor_vm_contacts.h"
 #include "../include/ui_conf.h"

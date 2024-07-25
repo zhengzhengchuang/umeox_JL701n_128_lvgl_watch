@@ -462,6 +462,8 @@ def main():
         
         if depth == "RGBA":
             outformat = "ARGB8565"
+        # elif depth == "P":
+        #     outformat = "AL88"
       
         format = outformat#ARGB8565" # 使用argb8565格式
         print(format)

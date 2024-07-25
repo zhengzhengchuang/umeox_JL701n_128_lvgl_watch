@@ -1,27 +1,18 @@
 #include "nor_vm_main.h"
 
-static void *nor_vm_file[\
-    Nor_Vm_Type_Max] = {NULL};
+static void *nor_vm_file[Nor_Vm_Type_Max] = {NULL};
 
 static const nor_vm_para_t nor_vm_para[\
     Nor_Vm_Type_Max] = 
 {
-    {nor_vm_type_contacts, Contacts_Max_Num, \
-        Nor_Vm_Contacts_Size, Nor_Vm_Contacts_Offset},
-    {nor_vm_type_weather, Weather_Sync_Days, \
-        Nor_Vm_Weather_Size, Nor_Vm_Weather_Offset},
-    {nor_vm_type_call_log, Call_log_Max_Num, \
-        Nor_Vm_Call_log_Size, Nor_Vm_Call_log_Offset},
-    {nor_vm_type_message, Msg_Max_Num, \
-        Nor_Vm_Message_Size, Nor_Vm_Message_Offset},
-    {nor_vm_type_sleep, Sleep_Max_Days, \
-        Nor_Vm_Sleep_Size, Nor_Vm_Sleep_Offset},
-    {nor_vm_type_hr, Hr_Max_Days, \
-        Nor_Vm_Hr_Size, Nor_Vm_Hr_Offset},
-    {nor_vm_type_bo, Bo_Max_Days, \
-        Nor_Vm_Bo_Size, Nor_Vm_Bo_Offset},
-    {nor_vm_type_activity, Activity_Max_Days, \
-        Nor_Vm_Activity_Size, Nor_Vm_Activity_Offset},
+    {nor_vm_type_contacts, Contacts_Max_Num, Nor_Vm_Contacts_Size, Nor_Vm_Contacts_Offset},
+    {nor_vm_type_weather, Weather_Sync_Days, Nor_Vm_Weather_Size, Nor_Vm_Weather_Offset},
+    {nor_vm_type_call_log, Call_log_Max_Num, Nor_Vm_Call_log_Size, Nor_Vm_Call_log_Offset},
+    {nor_vm_type_message, Msg_Max_Num, Nor_Vm_Message_Size, Nor_Vm_Message_Offset},
+    {nor_vm_type_sleep, Sleep_Max_Days, Nor_Vm_Sleep_Size, Nor_Vm_Sleep_Offset},
+    {nor_vm_type_hr, Hr_Max_Days, Nor_Vm_Hr_Size, Nor_Vm_Hr_Offset},
+    {nor_vm_type_bo, Bo_Max_Days, Nor_Vm_Bo_Size, Nor_Vm_Bo_Offset},
+    {nor_vm_type_pedo, Pedo_Max_Days, Nor_Vm_Pedo_Size, Nor_Vm_Pedo_Offset},
 };
 
 void nor_flash_vm_init(void)
@@ -59,17 +50,6 @@ void nor_flash_vm_clear(void)
         flash_common_reset(&nor_vm_file[p->type], "nor_ui_vm", \
             p->type, p->vm_num_max, p->vm_offset, p->vm_offset + p->vm_size);
     }
-
-#if 0
-    VmHrCtxClear();
-    VmBoCtxClear();
-    VmSleepCtxClear();
-    VmWeatherCtxClear();
-    VmMessageCtxClear();
-    VmCallLogCtxClear();
-    VmContactsCtxClear();
-    VmActivityCtxClear();
-#endif
 
     return;
 }

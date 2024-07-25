@@ -22,15 +22,21 @@ enum
     ui_msg_key_handle,
     ui_msg_rdec_handle,
 
-    /*外部flash数据操作*/
-    ui_msg_nor_vm_hr,
-    ui_msg_nor_vm_bo,
-    ui_msg_nor_vm_clear,
-    ui_msg_nor_vm_sleep,
-    ui_msg_nor_vm_weather,
-    ui_msg_nor_vm_message,
-    ui_msg_nor_vm_call_log,
-    ui_msg_nor_vm_contacts,
+    /*nor flash数据写*/
+    ui_msg_nor_hr_wirte,
+    ui_msg_nor_bo_write,
+    ui_msg_nor_pedo_write,
+    ui_msg_nor_sleep_write,
+    ui_msg_nor_weather_write,
+    ui_msg_nor_message_write,
+    ui_msg_nor_contacts_write,
+    ui_msg_nor_call_log_write,
+
+    /*nor flash数据擦除*/
+    ui_msg_nor_data_clear,
+    
+    /*nor flash数据读*/
+    //ui_msg_nor_pedo_send,
     
     /*设备绑定操作*/
     ui_msg_unbond_handle,

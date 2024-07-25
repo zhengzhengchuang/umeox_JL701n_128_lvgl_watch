@@ -44,7 +44,7 @@
       <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_parse/common_le_set.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_parse/common_le_set.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_remind/alarm_manage.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_remind/alarm_manage.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_gs_task.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_gs_task.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/gs_task.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/gs_task.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_hr_task.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_hr_task.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_hr_task.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_hr_task.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_mag_task.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../ui/lv_watch/comm_sensor/sensor_mag_task.c" afterDir="false" />

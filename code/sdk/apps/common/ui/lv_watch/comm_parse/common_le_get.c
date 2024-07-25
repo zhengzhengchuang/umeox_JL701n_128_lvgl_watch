@@ -217,123 +217,13 @@ void RemoteGetAlarmInfo(u8 *buf, u8 len)
 //获取历史心率数据
 void RemoteGetHistoryHrData(u8 *buf, u8 len)
 {
-    u8 nfy_buf[Cmd_Pkt_Len];
-    
-    le_cmd_t cmd = buf[0];
-    u16 year = buf[1] + 2000;
-    u8 month = buf[2];
-    u8 day = buf[3];
-
-    u8 i;
-    u8 idx;
-    u8 num = VmHrItemNum();
-    for(i = 0; i < num; i++)
-    {
-        bool ret = \
-            VmHrCtxByIdx(i);
-        if(ret == false)
-            continue;
-
-        if(r_hr.time.year == year && \
-            r_hr.time.month == month && \
-                r_hr.time.day == day)
-        {
-            break;
-        }    
-    }
-
-    if(i >= num)
-    {
-        if(w_hr.time.year == year && \
-            w_hr.time.month == month && \
-                w_hr.time.day == day)
-        {
-            printf("Get today Hr data......\n");
-            goto __SEND_HISTORY_HR_DATA;
-        }else
-        {
-            memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-            //无数据
-            idx = 0;
-            nfy_buf[idx++] = cmd;
-            nfy_buf[idx++] = 0xff;
-
-            u8 crc_idx = Cmd_Pkt_Len - 1;
-            nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-            printf_buf(nfy_buf, Cmd_Pkt_Len);
-            
-            umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-
-            return;
-        }
-    }
-
-__SEND_HISTORY_HR_DATA:
-
-    const u8 para_pkt_num = 1;
-    const u8 data_pkt_num = 24;
-    const u8 total_pkt_num = \
-        para_pkt_num + data_pkt_num;
-
-    //Max：存储历史天数7 + 今天1
-    for(; i < num + 1; i++)
-    {
-        if(i < num)
-        {
-            bool ret = \
-                VmHrCtxByIdx(i);
-            if(ret == false)
-                continue;
-        }else
-            memcpy(&r_hr, &w_hr, \
-                sizeof(vm_hr_ctx_t));
-            
-        for(u8 j = 0; j < total_pkt_num; j++)
-        {
-            if(j == 0)
-            {
-                //参数包
-                memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-                idx = 0;
-                nfy_buf[idx++] = cmd;
-                nfy_buf[idx++] = 0x00;
-                nfy_buf[idx++] = data_pkt_num;
-                nfy_buf[idx++] = r_hr.time.year - 2000;
-                nfy_buf[idx++] = r_hr.time.month;
-                nfy_buf[idx++] = r_hr.time.day;
-
-                u8 crc_idx = Cmd_Pkt_Len - 1;
-                nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-                printf_buf(nfy_buf, Cmd_Pkt_Len);
-                
-                umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-            }else
-            {
-                //数据包
-                memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-                idx = 0;
-                nfy_buf[idx++] = cmd;
-                nfy_buf[idx++] = j;
-                nfy_buf[idx++] = Hr_Inv_Dur;
-                nfy_buf[idx++] = r_hr.data[(j - 1)*4 + 0];
-                nfy_buf[idx++] = r_hr.data[(j - 1)*4 + 1];
-                nfy_buf[idx++] = r_hr.data[(j - 1)*4 + 2];
-                nfy_buf[idx++] = r_hr.data[(j - 1)*4 + 3];
-
-                u8 crc_idx = Cmd_Pkt_Len - 1;
-                nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-                printf_buf(nfy_buf, Cmd_Pkt_Len);
-                
-                umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-            }
-        }
-    }
+    int le_msg[6];
+    le_msg[0] = Le_History_Hr_Data;
+    le_msg[1] = buf[0];
+    le_msg[2] = buf[1] + 2000;
+    le_msg[3] = buf[2];
+    le_msg[4] = buf[3];
+    post_le_task_msg(le_msg, 5);
 
     return;
 }
@@ -341,262 +231,28 @@ __SEND_HISTORY_HR_DATA:
 //获取历史血氧数据
 void RemoteGetHistoryBoData(u8 *buf, u8 len)
 {
-    u8 nfy_buf[Cmd_Pkt_Len];
-    
-    le_cmd_t cmd = buf[0];
-    u16 year = buf[1] + 2000;
-    u8 month = buf[2];
-    u8 day = buf[3];
-
-    u8 i;
-    u8 idx;
-    u8 num = VmBoItemNum();
-    for(i = 0; i < num; i++)
-    {
-        bool ret = \
-            VmBoCtxByIdx(i);
-        if(ret == false)
-            continue;
-
-        if(r_bo.time.year == year && \
-            r_bo.time.month == month && \
-                r_bo.time.day == day)
-        {
-            break;
-        }    
-    }
-
-    if(i >= num)
-    {
-        if(w_bo.time.year == year && \
-            w_bo.time.month == month && \
-                w_bo.time.day == day)
-        {
-            printf("Get today Bo data......\n");
-            goto __SEND_HISTORY_BO_DATA;
-        }else
-        {
-            memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-            //无数据
-            idx = 0;
-            nfy_buf[idx++] = cmd;
-            nfy_buf[idx++] = 0xff;
-
-            u8 crc_idx = Cmd_Pkt_Len - 1;
-            nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-            printf_buf(nfy_buf, Cmd_Pkt_Len);
-            
-            umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-
-            return;
-        }
-    }
-
-__SEND_HISTORY_BO_DATA:
-
-    const u8 para_pkt_num = 1;
-    const u8 data_pkt_num = 24;
-    const u8 total_pkt_num = \
-        para_pkt_num + data_pkt_num;
-
-    //Max：存储历史天数7 + 今天1
-    for(; i < num + 1; i++)
-    {
-        if(i < num)
-        {
-            bool ret = \
-                VmBoCtxByIdx(i);
-            if(ret == false)
-                continue;
-        }else
-            memcpy(&r_bo, &w_bo, \
-                sizeof(vm_bo_ctx_t));
-            
-        for(u8 j = 0; j < total_pkt_num; j++)
-        {
-            if(j == 0)
-            {
-                //参数包
-                memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-                idx = 0;
-                nfy_buf[idx++] = cmd;
-                nfy_buf[idx++] = 0x00;
-                nfy_buf[idx++] = data_pkt_num;
-                nfy_buf[idx++] = r_bo.time.year - 2000;
-                nfy_buf[idx++] = r_bo.time.month;
-                nfy_buf[idx++] = r_bo.time.day;
-
-                u8 crc_idx = Cmd_Pkt_Len - 1;
-                nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-                printf_buf(nfy_buf, Cmd_Pkt_Len);
-                
-                umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-            }else
-            {
-                //数据包
-                memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-                idx = 0;
-                nfy_buf[idx++] = cmd;
-                nfy_buf[idx++] = j;
-                nfy_buf[idx++] = Bo_Inv_Dur;
-                nfy_buf[idx++] = r_bo.data[(j - 1)*4 + 0];
-                nfy_buf[idx++] = r_bo.data[(j - 1)*4 + 1];
-                nfy_buf[idx++] = r_bo.data[(j - 1)*4 + 2];
-                nfy_buf[idx++] = r_bo.data[(j - 1)*4 + 3];
-
-                u8 crc_idx = Cmd_Pkt_Len - 1;
-                nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-                printf_buf(nfy_buf, Cmd_Pkt_Len);
-                
-                umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-            }
-        }
-    }
+    int le_msg[6];
+    le_msg[0] = Le_History_Bo_Data;
+    le_msg[1] = buf[0];
+    le_msg[2] = buf[1] + 2000;
+    le_msg[3] = buf[2];
+    le_msg[4] = buf[3];
+    post_le_task_msg(le_msg, 5);
 
     return;
 }
 
 
 //获取历史活动数据
-void RemoteGetHistoryActivityData(u8 *buf, u8 len)
+void RemoteGetHistoryPedoData(u8 *buf, u8 len)
 {
-    u8 nfy_buf[Cmd_Pkt_Len];
-    
-    le_cmd_t cmd = buf[0];
-    u16 year = buf[1] + 2000;
-    u8 month = buf[2];
-    u8 day = buf[3];
-
-    u8 i;
-    u8 idx;
-    u8 num = VmActivityItemNum();
-    for(i = 0; i < num; i++)
-    {
-        bool ret = \
-            VmActivityCtxByIdx(i);
-        if(ret == false)
-            continue;
-
-        if(r_activity.time.year == year && \
-            r_activity.time.month == month && \
-                r_activity.time.day == day)
-        {
-            break;
-        }    
-    }
-
-    if(i >= num)
-    {
-        if(w_activity.time.year == year && \
-            w_activity.time.month == month && \
-                w_activity.time.day == day)
-        {
-            printf("Get today Activity data......\n");
-            goto __SEND_HISTORY_ACTIVITY_DATA;
-        }else
-        {
-            memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-            //无数据
-            idx = 0;
-            nfy_buf[idx++] = cmd;
-            nfy_buf[idx++] = 0xff;
-
-            u8 crc_idx = Cmd_Pkt_Len - 1;
-            nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-            printf_buf(nfy_buf, Cmd_Pkt_Len);
-            
-            umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-
-            return;
-        }
-    }
-
-__SEND_HISTORY_ACTIVITY_DATA:
-
-    const u8 para_pkt_num = 1;
-    const u8 data_pkt_num = 24;
-    const u8 total_pkt_num = \
-        para_pkt_num + data_pkt_num;
-
-    //Max：存储历史天数7 + 今天1
-    for(; i < num + 1; i++)
-    {
-        if(i < num)
-        {
-            bool ret = \
-                VmActivityCtxByIdx(i);
-            if(ret == false)
-                continue;
-        }else
-            memcpy(&r_activity, &w_activity, \
-                sizeof(vm_activity_ctx_t));
-            
-        for(u8 j = 0; j < total_pkt_num; j++)
-        {
-            if(j == 0)
-            {
-                //参数包
-                memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-                idx = 0;
-                nfy_buf[idx++] = cmd;
-                nfy_buf[idx++] = 0x00;
-                nfy_buf[idx++] = data_pkt_num;
-                nfy_buf[idx++] = r_activity.time.year - 2000;
-                nfy_buf[idx++] = r_activity.time.month;
-                nfy_buf[idx++] = r_activity.time.day;
-
-                u8 crc_idx = Cmd_Pkt_Len - 1;
-                nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-                printf_buf(nfy_buf, Cmd_Pkt_Len);
-                
-                umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-            }else
-            {
-                //数据包
-                memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-                idx = 0;
-                nfy_buf[idx++] = cmd;
-                nfy_buf[idx++] = j;
-                nfy_buf[idx++] = Activity_Inv_Dur;
-                nfy_buf[idx++] = \
-                    (r_activity.steps[j - 1] >> 16)&(0xff);
-                nfy_buf[idx++] = \
-                    (r_activity.steps[j - 1] >> 8)&(0xff);
-                nfy_buf[idx++] = \
-                    (r_activity.steps[j - 1] >> 0)&(0xff);
-
-                nfy_buf[idx++] = \
-                    (r_activity.calorie[j - 1] >> 8)&(0xff);
-                nfy_buf[idx++] = \
-                    (r_activity.calorie[j - 1] >> 0)&(0xff);
-
-                nfy_buf[idx++] = \
-                    (r_activity.distance[j - 1] >> 16)&(0xff);
-                nfy_buf[idx++] = \
-                    (r_activity.distance[j - 1] >> 8)&(0xff);
-                nfy_buf[idx++] = \
-                    (r_activity.distance[j - 1] >> 0)&(0xff);
-
-                u8 crc_idx = Cmd_Pkt_Len - 1;
-                nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-                printf_buf(nfy_buf, Cmd_Pkt_Len);
-                
-                umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-            }
-        }
-    }
+    int le_msg[6];
+    le_msg[0] = Le_History_Pedo_Data;
+    le_msg[1] = buf[0];
+    le_msg[2] = buf[1] + 2000;
+    le_msg[3] = buf[2];
+    le_msg[4] = buf[3];
+    post_le_task_msg(le_msg, 5);
 
     return;
 }
@@ -604,6 +260,7 @@ __SEND_HISTORY_ACTIVITY_DATA:
 //获取历史睡眠数据
 void RemoteGetHistorySleepData(u8 *buf, u8 len)
 {
+#if 0
     u8 nfy_buf[Cmd_Pkt_Len];
     
     le_cmd_t cmd = buf[0];
@@ -724,45 +381,34 @@ void RemoteGetHistorySleepData(u8 *buf, u8 len)
             }
         }
     }
-
+#endif
     return;
 }
 
 //同步实时活动数据
-void RemoteGetActivityData(u8 *buf, u8 len)
+void RemoteGetPedoData(u8 *buf, u8 len)
 {
     u8 nfy_buf[Cmd_Pkt_Len];
     memset(nfy_buf, 0x00, Cmd_Pkt_Len);
 
-    int steps = \
-        GetVmParaCacheByLabel(vm_label_daily_step);
-    int calorie = \
-        GetVmParaCacheByLabel(vm_label_daily_calorie);
-    int distance = \
-        GetVmParaCacheByLabel(vm_label_daily_distance);
+    u32 steps = PedoData.steps;
+    u32 calorie = PedoData.calorie;
+    u32 distance = PedoData.distance;
 
     le_cmd_t cmd = buf[0];
 
     u8 idx = 0;
     nfy_buf[idx++] = cmd;
-    nfy_buf[idx++] = \
-        (steps >> 16)&(0xff);
-    nfy_buf[idx++] = \
-        (steps >> 8)&(0xff);
-    nfy_buf[idx++] = \
-        (steps >> 0)&(0xff);
+    nfy_buf[idx++] = (steps>>16)&(0xff);
+    nfy_buf[idx++] = (steps>>8)&(0xff);
+    nfy_buf[idx++] = (steps>>0)&(0xff);
 
-    nfy_buf[idx++] = \
-        (calorie >> 8)&(0xff);
-    nfy_buf[idx++] = \
-        (calorie >> 0)&(0xff);
+    nfy_buf[idx++] = (calorie>>8)&(0xff);
+    nfy_buf[idx++] = (calorie>>0)&(0xff);
 
-    nfy_buf[idx++] = \
-        (distance >> 16)&(0xff);
-    nfy_buf[idx++] = \
-        (distance >> 8)&(0xff);
-    nfy_buf[idx++] = \
-        (distance >> 0)&(0xff);
+    nfy_buf[idx++] = (distance>>16)&(0xff);
+    nfy_buf[idx++] = (distance>>8)&(0xff);
+    nfy_buf[idx++] = (distance>>0)&(0xff);
 
     u8 crc_idx = Cmd_Pkt_Len - 1;
     nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);

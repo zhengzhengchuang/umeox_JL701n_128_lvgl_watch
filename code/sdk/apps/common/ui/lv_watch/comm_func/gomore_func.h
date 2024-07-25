@@ -5,23 +5,19 @@
 extern "C" {
 #endif
 
+#include "workout.h"
+#include "GoMoreLib.h"
+#include "exampleUtils.h"
+#include "GoMoreLibStruct.h"
 #include "../include/ui_menu.h"
 
-#define GalgoKeyLen (64)
+#define GoGs_Fifo_WM (Qmi8658_Fifo_WM)
 
-typedef struct
-{
-    u16 vm_mask;
+extern IndexIO mInput;
 
-    u8 algo_key[GalgoKeyLen];
-}GMalgokeyInfo_t;
-extern GMalgokeyInfo_t Galgo_info;
-
-void GalgoInfoParaRead(void);
-void GalgoInfoParaWrite(void);
-void GalgoInfoParaReset(void);
-void GalgoInfoParaUpdate(void);
-
+void GoMoreAlgoInit(void);
+void GoGsDataFifoWrite(u8 *w_buf, u32 w_len);
+u16 GoGsDataFifoRead(float *acc_x, float *acc_y, float *acc_z, u16 max_len);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

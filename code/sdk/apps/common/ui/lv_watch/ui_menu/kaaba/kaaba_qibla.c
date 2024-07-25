@@ -11,7 +11,7 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    EnableSensorGmModule();
+    EnableGmModule();
 
     kaaba_azimuth = GetKaabaQiblaAzimuth();
 
@@ -32,7 +32,7 @@ static void menu_destory_cb(lv_obj_t *obj)
     bool OffScreen = \
         GetIsEnterOffScreen();
     if(OffScreen == false)
-        DisableSensorGmModule();
+        DisableGmModule();
 
     return;
 }
@@ -42,7 +42,7 @@ static void menu_refresh_cb(lv_obj_t *obj)
     if(!obj) return;
 
     bool cali_succ = \
-        GetSensorGmCaliSucc();
+        GetGmCaliSucc();
     if(cali_succ == false)
     {
         ui_menu_jump(ui_act_id_gm_cali);
@@ -50,7 +50,7 @@ static void menu_refresh_cb(lv_obj_t *obj)
         return;
     }
 
-    int16_t Yaw = GetSensorGmYaw();
+    int16_t Yaw = GetGmYawAngle();
     int16_t compass_rotate = (-1)*Yaw*10;
     lv_img_set_angle(kaaba_compass, compass_rotate);
 
@@ -116,7 +116,7 @@ static void menu_display_cb(lv_obj_t *obj)
     lv_obj_align(kaaba_qibla_container, LV_ALIGN_CENTER, 0, 0);
 
     int16_t Yaw = \
-        GetSensorGmYaw();
+        GetGmYawAngle();
     int16_t compass_rotate = (-1)*Yaw*10;
     widget_img_para.img_parent = \
         kaaba_qibla_container;

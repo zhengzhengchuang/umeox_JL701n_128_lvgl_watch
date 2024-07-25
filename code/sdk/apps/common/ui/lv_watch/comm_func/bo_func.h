@@ -18,7 +18,7 @@ void PowerOffSetBoVmFlashSave(void);
 void VmBoCtxFlashWrite(void);
 
 void BoTimerSecProcess(void);
-void BoProcess(struct sys_time *utc_time);
+void BoProcess(struct sys_time *ptime);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

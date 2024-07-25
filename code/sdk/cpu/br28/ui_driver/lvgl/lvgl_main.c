@@ -76,9 +76,8 @@ static void lvgl_task(void *p)
 
     vm_store_para_init();
     ui_act_id_t act_id = ui_act_id_watchface;
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(vm_label_dev_bond);
-    if(DevBondFlag == false)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         act_id = ui_act_id_dev_bond;
     ui_info_cache_init(act_id);
     
@@ -329,36 +328,44 @@ void ui_msg_handle(int *msg, u8 len)
             common_rdec_msg_handle(msg[1]);
             break;
 
-        case ui_msg_nor_vm_hr:
+        case ui_msg_nor_hr_wirte:
             VmHrCtxFlashWrite();
             break;
 
-        case ui_msg_nor_vm_bo:
+        case ui_msg_nor_bo_write:
             VmBoCtxFlashWrite();
             break;
 
-        case ui_msg_nor_vm_clear:
-            ResetAllNorVmData();
+        case ui_msg_nor_pedo_write:
+            VmPedoCtxFlashWrite();
             break;
 
-        case ui_msg_nor_vm_sleep:
+        case ui_msg_nor_sleep_write:
             break;
 
-        case ui_msg_nor_vm_weather:
+        case ui_msg_nor_weather_write:
             WeatherInfoParaUpdate();
             break;
 
-        case ui_msg_nor_vm_message:
+        case ui_msg_nor_message_write:
             MsgNotifyProcess();
             break;
 
-        case ui_msg_nor_vm_call_log:
+        case ui_msg_nor_call_log_write:
             VmCallLogCtxFlashWrite();
             break;
 
-        case ui_msg_nor_vm_contacts:
+        case ui_msg_nor_contacts_write:
             UpdateContactsVmFlash();
             break;
+
+        case ui_msg_nor_data_clear:
+            ResetAllNorVmData();
+            break;
+
+        // case ui_msg_nor_pedo_send:
+        //     HistoryPedoDataSend(msg[1], msg[2], msg[3], msg[4]);
+        //     break;
 
         case ui_msg_unbond_handle:
             DevUnBondHandle();

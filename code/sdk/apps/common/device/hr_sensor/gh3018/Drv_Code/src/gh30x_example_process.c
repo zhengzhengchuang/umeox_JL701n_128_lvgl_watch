@@ -710,18 +710,18 @@ void CtrlGh30xModuleStart(uint8_t work_type)
     gh30x_module_stop();
 
 #if 1
-    if(work_type == SensorWorkHr)
+    if(work_type == PpgWorkHr)
         start_run_mode = HR_WORK_MODE;
-    else if(work_type == SensorWorkBo)
+    else if(work_type == PpgWorkBo)
         start_run_mode = BO_WORK_MODE;
     else
         start_run_mode = HR_WORK_MODE;
 #else
 
-    if(work_type == SensorWorkHr)
+    if(work_type == PpgWorkHr)
         start_run_mode = \
             GH30X_FUNCTION_ADT;
-    else if(work_type == SensorWorkBo)
+    else if(work_type == PpgWorkBo)
         start_run_mode = \
             GH30X_FUNCTION_ADT;
     else

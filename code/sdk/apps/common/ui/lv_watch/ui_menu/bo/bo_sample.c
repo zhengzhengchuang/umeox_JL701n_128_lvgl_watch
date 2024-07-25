@@ -67,7 +67,7 @@ static void bo_sample_timeout_cb(lv_timer_t *timer)
         lv_timer_del(bo_sample_timer);
     bo_sample_timer = NULL;
 
-    HrSensorStopSample();
+    DisablePpgModule();
 
     bo_sample_user_enable = false;
 
@@ -89,8 +89,8 @@ static void bo_sample_start_event_cb(lv_event_t *e)
 
     SetBoRealVal(0);
 
-    HrSensorStartSample(\
-        SensorWorkBo, SensorModeManual);
+    EnablePpgModule(\
+        PpgWorkBo, PpgModeManual);
 
     bo_sample_user_enable = true;
 
@@ -297,7 +297,7 @@ static void menu_destory_cb(lv_obj_t *obj)
         lv_timer_del(bo_sample_timer);
     bo_sample_timer = NULL;
 
-    HrSensorStopSample();
+    DisablePpgModule();
         
     return;
 }
@@ -310,7 +310,7 @@ static void menu_refresh_cb(lv_obj_t *obj)
         return;
 
     bool wear_status = \
-        GetHrSensorWearStatus();
+        GetPpgWearStatus();
     if(!wear_status)
     {
         ui_menu_jump(\

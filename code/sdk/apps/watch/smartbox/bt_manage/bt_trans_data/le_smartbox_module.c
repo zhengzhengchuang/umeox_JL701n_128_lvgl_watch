@@ -74,7 +74,7 @@ static const char user_tag_string[] = {EIR_TAG_STRING};
 
 //------
 #define ATT_LOCAL_PAYLOAD_SIZE    (247)//(517)                   //note: need >= 20
-#define ATT_SEND_CBUF_SIZE        (512*2)                   //note: need >= 20,缓存大小，可修改
+#define ATT_SEND_CBUF_SIZE        (512*8)                   //note: need >= 20,缓存大小，可修改
 #define ATT_RAM_BUFSIZE           (ATT_CTRL_BLOCK_SIZE + ATT_LOCAL_PAYLOAD_SIZE + ATT_SEND_CBUF_SIZE)                   //note:
 static u8 att_ram_buffer[ATT_RAM_BUFSIZE] __attribute__((aligned(4)));
 
@@ -94,7 +94,7 @@ static const uint8_t sm_min_key_size = 7;
 
 //连接参数设置
 static const uint8_t connection_update_enable = 1; ///0--disable, 1--enable
-static uint8_t connection_update_cnt = 0; //
+static uint8_t connection_update_cnt = 1; //
 static const struct conn_update_param_t connection_param_table[] = {
     {48, 64, 10, 600},
     {25, 32, 16, 600},
@@ -1347,13 +1347,13 @@ static int app_send_user_data_do(void *priv, u8 *data, u16 len)
     if(priv)
     {
         u8 att_service = *(u8 *)priv;
-        printf("____%s:%d\n", __func__, att_service);
+        //printf("____%s:%d\n", __func__, att_service);
         if(att_service == BLE_USER_SERVICE)
             return app_send_user_data(ATT_CHARACTERISTIC_A6ED0102_D344_460A_8075_B9E8EC90D71B_01_VALUE_HANDLE, \
                 data, len, ATT_OP_AUTO_READ_CCC); 
     }
 
-    printf("......%s:OTA\n", __func__);
+    //printf("......%s:OTA\n", __func__);
 
     return app_send_user_data(ATT_CHARACTERISTIC_ae02_01_VALUE_HANDLE, \
         data, len, ATT_OP_AUTO_READ_CCC);  

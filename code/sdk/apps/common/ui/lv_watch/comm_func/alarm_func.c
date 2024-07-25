@@ -389,20 +389,12 @@ static void UserAlarmIsOnHandle(void)
     return;
 }
 
-void UserAlarmProcess(struct sys_time *utc_time)
+void UserAlarmProcess(struct sys_time *ptime)
 {
-    if(!utc_time) return;
-
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false) 
         return;
-#endif
 
-    u8 alarm_weekday = 0;
- 
     uint8_t alarm_num = \
         Alarm_Info.alarm_num;
 
@@ -412,13 +404,13 @@ void UserAlarmProcess(struct sys_time *utc_time)
     if(alarm_num == 0)
         return;
 
+    u8 week = 0;
     for(uint8_t i = 0; i < alarm_num; i++)
     {
-        if(utc_time->hour == p_alarm_union[i].bit_field.alarm_hour && \
-            utc_time->min == p_alarm_union[i].bit_field.alarm_minute)
+        if(ptime->hour == p_alarm_union[i].bit_field.alarm_hour && \
+            ptime->min == p_alarm_union[i].bit_field.alarm_minute)
         {
-            alarm_weekday = \
-                GetUtcWeek(utc_time);
+            week = GetUtcWeek(ptime);
 
             uint8_t alarm_repeat = \
                 p_alarm_union[i].bit_field.alarm_repeat;
@@ -439,7 +431,7 @@ void UserAlarmProcess(struct sys_time *utc_time)
                 }
             }else
             {
-                if(alarm_repeat & (0x1 << alarm_weekday))
+                if(alarm_repeat & (0x1 << week))
                 {
                     if(alarm_enable)
                     {

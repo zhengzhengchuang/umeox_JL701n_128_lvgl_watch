@@ -72,9 +72,8 @@ void common_key_msg_handle(int key_value, int key_event)
                 common_offscreen_handle();
             }else if(key_event == KEY_EVENT_LONG_3S)
             {
-                int DevBondFlag = \
-                    GetVmParaCacheByLabel(vm_label_dev_bond);
-                if(!DevBondFlag && cur_act_id == ui_act_id_dev_bond)
+                bool BondFlag = GetDevBondFlag();
+                if(BondFlag == false && cur_act_id == ui_act_id_dev_bond)
                     ui_menu_jump(ui_act_id_device_op);
                 else
                     DevOpMenuPopUp();
@@ -126,9 +125,8 @@ void common_key_msg_handle(int key_value, int key_event)
 #endif
             }else if(key_event == KEY_EVENT_FIRTH_CLICK)
             {
-                int DevBondFlag = \
-                    GetVmParaCacheByLabel(vm_label_dev_bond);
-                if(!DevBondFlag && cur_act_id == ui_act_id_dev_bond)
+                bool BondFlag = GetDevBondFlag();
+                if(BondFlag == false && cur_act_id == ui_act_id_dev_bond)
                     ui_menu_jump(ui_act_id_watchface);
             }
         }else

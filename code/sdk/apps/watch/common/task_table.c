@@ -26,9 +26,10 @@ const struct task_info task_info_table[] = {
 #if TCFG_HR_SENSOR_ENABLE
     {"heartrate",			1,		0,  256,	0},
 #endif
-    {"sensor_hr_task",			1,		0,  1024,	64},
-    {"sensor_gs_task",			1,		0,  256,	64},
-    {"sensor_gm_task",			1,		0,  256,	128},
+
+    {"gs_task",			1,		0,  256,	64},
+    {"gm_task",	        1,		0,  256,	128},
+    {"ppg_task",	    1,		0,  1024,	64},
 
 #if TCFG_GSENSOR_ENABLE
     {"gsensor",				1,	    0,  768,     0  },
@@ -101,8 +102,8 @@ const struct task_info task_info_table[] = {
 #if PRODUCT_TEST_ENABLE
     {"pt",					1,	    0,  512,	  128  },
 #endif
-    {"le_task",       1,     1,   512,   64},
-    {"comm_task",       1,     1,   512,   64},
+    {"le_task",       1,     1,   1024,  128},
+    {"comm_task",     1,     1,   1024,  128},
     {0, 0},
 };
 

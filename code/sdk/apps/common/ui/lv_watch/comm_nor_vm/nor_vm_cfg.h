@@ -25,56 +25,38 @@ enum
     nor_vm_type_sleep,
     nor_vm_type_hr,
     nor_vm_type_bo,
-    nor_vm_type_activity,
+    nor_vm_type_pedo,
 
     nor_vm_type_max,
 };
 typedef uint8_t nor_vm_type_t;
 
-#define Nor_Vm_Type_Max \
-    (nor_vm_type_max)
-#define Nor_Vm_Type_Invalid \
-    (Nor_Vm_Type_Max)
+#define Nor_Vm_Type_Max (nor_vm_type_max)
+#define Nor_Vm_Type_Invalid (Nor_Vm_Type_Max)
 
 /*********************************************************************************
                                   Nor vm具体分块大小                                     
 *********************************************************************************/
-#define Nor_Vm_Contacts_Size  \
-    (2*4096)
-#define Nor_Vm_Weather_Size   \
-    (2*4096)
-#define Nor_Vm_Call_log_Size  \
-    (2*4096)
-#define Nor_Vm_Message_Size   \
-    (2*4096)
-#define Nor_Vm_Sleep_Size   \
-    (2*4096)
-#define Nor_Vm_Hr_Size   \
-    (2*4096)
-#define Nor_Vm_Bo_Size   \
-    (2*4096)
-#define Nor_Vm_Activity_Size   \
-    (2*4096)
+#define Nor_Vm_Contacts_Size  (2*4096)
+#define Nor_Vm_Weather_Size   (2*4096)
+#define Nor_Vm_Call_log_Size  (2*4096)
+#define Nor_Vm_Message_Size   (2*4096)
+#define Nor_Vm_Sleep_Size     (2*4096)
+#define Nor_Vm_Hr_Size        (2*4096)
+#define Nor_Vm_Bo_Size        (2*4096)
+#define Nor_Vm_Pedo_Size      (2*4096)
 
 /*********************************************************************************
                                   Nor vm具体分块偏移                                     
 *********************************************************************************/
-#define Nor_Vm_Contacts_Offset \
-    (0)
-#define Nor_Vm_Weather_Offset \
-    (Nor_Vm_Contacts_Offset + Nor_Vm_Contacts_Size)
-#define Nor_Vm_Call_log_Offset \
-    (Nor_Vm_Weather_Offset + Nor_Vm_Weather_Size)
-#define Nor_Vm_Message_Offset \
-    (Nor_Vm_Call_log_Offset + Nor_Vm_Call_log_Size)
-#define Nor_Vm_Sleep_Offset \
-    (Nor_Vm_Message_Offset + Nor_Vm_Message_Size)
-#define Nor_Vm_Hr_Offset \
-    (Nor_Vm_Sleep_Offset + Nor_Vm_Sleep_Size)
-#define Nor_Vm_Bo_Offset \
-    (Nor_Vm_Hr_Offset + Nor_Vm_Hr_Size)
-#define Nor_Vm_Activity_Offset \
-    (Nor_Vm_Bo_Offset + Nor_Vm_Bo_Size)
+#define Nor_Vm_Contacts_Offset (0)
+#define Nor_Vm_Weather_Offset (Nor_Vm_Contacts_Offset + Nor_Vm_Contacts_Size)
+#define Nor_Vm_Call_log_Offset (Nor_Vm_Weather_Offset + Nor_Vm_Weather_Size)
+#define Nor_Vm_Message_Offset (Nor_Vm_Call_log_Offset + Nor_Vm_Call_log_Size)
+#define Nor_Vm_Sleep_Offset (Nor_Vm_Message_Offset + Nor_Vm_Message_Size)
+#define Nor_Vm_Hr_Offset (Nor_Vm_Sleep_Offset + Nor_Vm_Sleep_Size)
+#define Nor_Vm_Bo_Offset (Nor_Vm_Hr_Offset + Nor_Vm_Hr_Size)
+#define Nor_Vm_Pedo_Offset (Nor_Vm_Bo_Offset + Nor_Vm_Bo_Size)
 
 /*********************************************************************************
                                   Nor vm信息载体                                       

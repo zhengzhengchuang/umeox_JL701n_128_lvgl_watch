@@ -295,8 +295,8 @@ static void hal_gh30x_int_handle(void)
 
 	int SensorHrMsg[1];
 	SensorHrMsg[0] = \
-		SensorHrProcess;
-	PostSensorHrTaskMsg(SensorHrMsg, 1);
+		PpgMsgProcess;
+	PostPpgTaskMsg(SensorHrMsg, 1);
 
 	return;
 }
@@ -383,19 +383,19 @@ void handle_wear_status_result(uint8_t wearing_state_val, GU8 uchLivingFlag)
 #if 0
     // code implement by user
     // if(wearing_state_val == WEAR_STATUS_WEAR)
-    //     SetHrSensorWearStatus(true);
+    //     SetPpgWearStatus(true);
     // else if(wearing_state_val == WEAR_STATUS_UNWEAR)
-    //     SetHrSensorWearStatus(false);
+    //     SetPpgWearStatus(false);
     // else
-    //     SetHrSensorWearStatus(true);
+    //     SetPpgWearStatus(true);
     // if(uchLivingFlag == 1)
     // {
     //     if(wearing_state_val == WEAR_STATUS_WEAR)
-    //         SetHrSensorWearStatus(true);
+    //         SetPpgWearStatus(true);
     //     else
-    //         SetHrSensorWearStatus(false);
+    //         SetPpgWearStatus(false);
     // }else
-    //     SetHrSensorWearStatus(false);
+    //     SetPpgWearStatus(false);
 
     // printf("%s:%d  %d\n", __func__, \
     //     uchLivingFlag, wearing_state_val);
@@ -405,10 +405,10 @@ void handle_wear_status_result(uint8_t wearing_state_val, GU8 uchLivingFlag)
         wearing_state_val);
 
 #if 0
-    u8 SensorMode = GetHrSensorMode();
+    u8 SensorMode = GetPpgMode();
     if(wearing_state_val == WEAR_STATUS_UNWEAR)
     {
-        SetHrSensorWearStatus(false);
+        SetPpgWearStatus(false);
 
         if(g_firstflag)			
 		{
@@ -417,7 +417,7 @@ void handle_wear_status_result(uint8_t wearing_state_val, GU8 uchLivingFlag)
                 g_unGh30xDemoFuncMode;		
 		}
         
-        if(SensorMode == SensorModeAuto)
+        if(SensorMode == PpgModeAuto)
         {
             switch (g_unGh30xDemoFuncMode)
             {
@@ -441,7 +441,7 @@ void handle_wear_status_result(uint8_t wearing_state_val, GU8 uchLivingFlag)
         }
     }else if(wearing_state_val == WEAR_STATUS_WEAR)
     {
-        SetHrSensorWearStatus(true);
+        SetPpgWearStatus(true);
 
         if(g_firstflag)			
 		{
@@ -450,7 +450,7 @@ void handle_wear_status_result(uint8_t wearing_state_val, GU8 uchLivingFlag)
                 g_unGh30xDemoFuncMode;		
 		}
 
-        if(SensorMode == SensorModeAuto)
+        if(SensorMode == PpgModeAuto)
         {
             switch (g_MyselfGh30xDemoFuncMode)
             {

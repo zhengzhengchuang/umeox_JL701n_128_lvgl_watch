@@ -7,6 +7,8 @@ extern "C" {
 
 #include "../../lv_watch.h"
 
+#define Elem_Num (Azkar_Max_Sec)
+
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

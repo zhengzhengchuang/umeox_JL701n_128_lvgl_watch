@@ -215,7 +215,7 @@ extern const struct ex_file_index_t ex_file_index[];
 current_address = 0x00000000
 output_bin = b""
 
-# 添加字库
+# 添加字库 start
 font_folder = "./font/"
 font_list = []
 for font in os.listdir(font_folder):
@@ -233,6 +233,7 @@ for i in range(len(font_list)):
     file_size = os.path.getsize(file_name)
     # print(file_size)
     current_address += file_size
+# 添加字库 end
 
 for index, filename in enumerate(bin_files):
     # print(index, filename)

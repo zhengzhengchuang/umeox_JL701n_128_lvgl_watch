@@ -701,21 +701,15 @@ static void PTimeIsOnHandle(uint8_t type)
     return;
 }
 
-void PTimeProcess(struct sys_time *utc_time)
+void PTimeProcess(struct sys_time *ptime)
 {
-    if(!utc_time) return;
-
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
-    u8 hour = utc_time->hour;
-    u8 minute = utc_time->min;
-    u8 second = utc_time->sec;
+    u8 hour = ptime->hour;
+    u8 minute = ptime->min;
+    u8 second = ptime->sec;
 
     u32 UtcTimestamp = \
         hour*3600 + minute*60 + second;

@@ -729,17 +729,11 @@ static const HcaleFesSInfo_t HFSInfo[\
 
 };
 
-void HcalendarProcess(struct sys_time *utc_time)
+void HcalendarProcess(struct sys_time *ptime)
 {
-    if(!utc_time) return;
-
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
     bool FesRemindersFlag = \
         HcalendarInfo.FesRemindersFlag;
@@ -749,9 +743,9 @@ void HcalendarProcess(struct sys_time *utc_time)
     bool HcaleFesIsOn = false;
 
     bool IsSunset = \
-        IsPrayerTimeSunset(utc_time);
+        IsPrayerTimeSunset(ptime);
     bool IsSunrise = \
-        IsPrayerTimeSunrise(utc_time);
+        IsPrayerTimeSunrise(ptime);
 
     u16 Hyear = \
         HcalendarInfo.Hcalendar_year;

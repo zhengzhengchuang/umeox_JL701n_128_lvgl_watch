@@ -4,7 +4,7 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    EnableSensorGmModule();
+    EnableGmModule();
 
     ui_act_id_t prev_act_id = \
         ui_act_id_menu;
@@ -24,7 +24,7 @@ static void menu_destory_cb(lv_obj_t *obj)
     bool OffScreen = \
         GetIsEnterOffScreen();
     if(OffScreen == false)
-        DisableSensorGmModule();
+        DisableGmModule();
 
     return;
 }
@@ -34,7 +34,7 @@ static void menu_refresh_cb(lv_obj_t *obj)
     if(!obj) return;
 
     bool cali_succ = \
-        GetSensorGmCaliSucc();
+        GetGmCaliSucc();
     if(cali_succ == true)
     {
         if(!(ll_info.position_valid))

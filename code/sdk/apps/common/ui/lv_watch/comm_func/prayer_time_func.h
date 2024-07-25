@@ -96,7 +96,7 @@ u8 GetPTimeProcessType(void);
 void SetPTimeProcessType(u8 Type);
 u8 GetPTimeCountdownMode(u8 type);
 u32 GetPTimeCountdownTime(u8 type);
-void PTimeProcess(struct sys_time *utc_time);
+void PTimeProcess(struct sys_time *ptime);
 void PTimeResultOffsetUpdate(u8 type, s8 val);
 void PTimeRemindOffsetUpdate(u8 type, s8 val);
 

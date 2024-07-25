@@ -2,13 +2,9 @@
 
 void FindDevEnableHandle(void)
 {
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
     //判断当前是否符合弹出的条件
     if(!MenuSupportPopup())
@@ -26,13 +22,9 @@ void FindDevEnableHandle(void)
 
 void FindDevDisableHandle(void)
 {
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
     /*如果不在当前页面，不必跳转退出*/
     ui_act_id_t cur_act_id = \
@@ -50,13 +42,9 @@ void FindDevDisableHandle(void)
 
 void FindPhoneHandle(void)
 {
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
     RemoteGetDevEvents(Le_Event_Find_Phone);
 

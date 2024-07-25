@@ -163,7 +163,7 @@ void UpdateCallLogVmFlash(void)
 
     int ui_msg_post[1];
     ui_msg_post[0] = \
-        ui_msg_nor_vm_call_log;
+        ui_msg_nor_call_log_write;
     post_ui_msg(ui_msg_post, 1);
 
     return;
@@ -253,13 +253,9 @@ void CallOutOrInProcess(void)
     bool valid = false;
     SetProcessValid(valid);
 
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
     //判断当前是否符合弹出的条件
     if(!MenuSupportPopup())

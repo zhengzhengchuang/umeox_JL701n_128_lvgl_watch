@@ -21,7 +21,7 @@ static void CountdownTimeoutPost(void)
     int timeout_post[1];
     timeout_post[0] = \
         comm_msg_countdown_timeout;
-    post_comm_task_msg(timeout_post, 1);
+    PostCommTaskMsg(timeout_post, 1);
 
     return;
 }

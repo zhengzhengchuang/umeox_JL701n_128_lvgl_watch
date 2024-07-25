@@ -280,7 +280,7 @@
         "qmc6309.h": "c",
         "stdio.h": "c",
         "sensor_mag_task.h": "c",
-        "sensor_gs_task.h": "c",
+        "gs_task.h": "c",
         "mag_calibra.h": "c",
         "kaaba_position.h": "c",
         "kaaba_qibla.h": "c",
@@ -444,7 +444,20 @@
         "scan_timeout.h": "c",
         "azkar_sec_comm.h": "c",
         "azkar_sec_ar.h": "c",
-        "ex_file_index.h": "c"
+        "ex_file_index.h": "c",
+        "gomorelibstruct.h": "c",
+        "gomorelib.h": "c",
+        "workout.h": "c",
+        "exampleutils.h": "c",
+        "sport_info_personal_info.h": "c",
+        "pedo_data.h": "c",
+        "sensor_gs_task.h": "c",
+        "nor_vm_pedo_data.h": "c",
+        "nor_vm_pedo.h": "c",
+        "acc_data.h": "c",
+        "big_data_send.h": "c",
+        "history_data.h": "c",
+        "le_history_data.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

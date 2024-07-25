@@ -10,10 +10,10 @@ static const GmCaliInfoPara_t InitInfo = {
 };
 
 /****地磁与加速度计参数配套*****/
-#define GmGs_FifoSize (GmGs_Fifo_WM*6*3)
-static u32 GmGs_WFifoIdx;
-static u32 GmGs_RFifoIdx;
-static u8 GmGs_FifoData[GmGs_FifoSize];
+#define FifoSize (GmGs_Fifo_WM*6*3)
+static u32 WFifoIdx;
+static u32 RFifoIdx;
+static u8 FifoData[FifoSize];
 
 static u8 GmAccRawIdx;
 static s16 GmAccRawX[GmGs_Fifo_WM];
@@ -27,17 +27,13 @@ float AccCorrect[3] = {0.0f, 0.0f, 0.0f};
 float EulerValue[3] = {0.0f, 0.0f, 0.0f};
 float GmOutputOffset[4] = {0.0f, 0.0f, 0.0f, 0.0f}; 
 
-static u16 timer_id;
-static s16 GmYawAngle;
-static bool GmEnableFlag;
 static int8_t QmcAccuracy;
 
 static void GmGsFifoParaInit(void)
 {
-    GmGs_WFifoIdx = 0;
-    GmGs_RFifoIdx = 0;
-    memset(GmGs_FifoData, 0, \
-        GmGs_FifoSize);
+    WFifoIdx = 0;
+    RFifoIdx = 0;
+    memset(FifoData, 0, FifoSize);
 
     return;
 }
@@ -53,250 +49,68 @@ static void GmAccRawDataInit(void)
     return;
 }
 
-
-static void ProcessTimeoutCb(void *priv)
+static u16 gm_timer;
+static void TimerCb(void *priv)
 {
-    int SensorGmMsg[1];
-	SensorGmMsg[0] = SensorGmMsgProcess;
-	PostSensorGmTaskMsg(SensorGmMsg, 1);
+    int GmMsg[2];
+	GmMsg[0] = GmMsgProcess;
+	PostGmTaskMsg(GmMsg, 1);
 
     return;
 }
 
-static void ProcessTimerCreate(void)
+static void GmTimerCreate(void)
 {
-    if(timer_id)
-        sys_hi_timer_del(timer_id);
-
-    timer_id = 0;
-
-    if(!timer_id)
-        timer_id = \
-            sys_hi_timer_add(NULL, ProcessTimeoutCb, 20);
+    if(gm_timer == 0)
+        gm_timer = sys_hi_timer_add(NULL, TimerCb, 40);
 
     return;
 }
 
-void ProcessTimerDestory(void)
+static void GmTimerDestory(void)
 {
-    if(timer_id)
-        sys_hi_timer_del(timer_id);
+    if(gm_timer)
+        sys_hi_timer_del(gm_timer);
 
-    timer_id = 0;
+    gm_timer = 0;
 
     return;
 }
 
-static void SensorGmTask(void *p)
+static void EnableGmModuleHandle(void)
 {
-    int rev_ret;
-    int rev_msg[8] = {0};
-
-    GmGsFifoParaInit();
+    qmc6309_enable();
     GmAccRawDataInit();
-
-    SensorGmCaliInfoRead();
-
-    qst_ical_init(\
-        Cali_Info.calipara);
-	fusion_enable();
-
-    /*开机先失能模块*/
-    DisableSensorGmModule();
-
-    while(1)
-    {
-        rev_ret = \
-            os_taskq_pend(NULL, rev_msg, \
-                ARRAY_SIZE(rev_msg)); 
-
-        if(rev_ret == OS_TASKQ)
-            SensorGmTaskMsgHandle(rev_msg, \
-                ARRAY_SIZE(rev_msg));
-    }
-    
-    return;
-}
-
-void SensorGmTaskCreate(void)
-{
-    int err = task_create(SensorGmTask, \
-        NULL, Sensor_Gm_Task_Name);
-    if(err) 
-        r_printf("Gm task create err!!!!!!!:%d \n", err);
+    SetGmEnableFlag(true);     
+    GmTimerCreate();
 
     return;
 }
 
-void SensorGmTaskMsgHandle(int *rev_msg, u8 len)
+static void DisableGmModuleHandle(void)
 {
-    if(!rev_msg || len == 0)
-        return;
-
-    int msg_cmd = rev_msg[0];
-
-    switch(msg_cmd)
-    {
-        case SensorGmMsgProcess:
-        {
-            SensorGmProcess();
-        }
-            break;
-        
-        case SensorGmMsgEnableModule:
-        {
-            qmc6309_enable();
-
-            GmAccRawDataInit();
-
-            SetSensorGmEnableFlag(true);
-            
-            ProcessTimerCreate();
-
-            printf("Gm enable!!!!!!!!!!!!\n");
-        } 
-            break;
-
-        case SensorGmMsgDisableModule:
-        {
-            qmc6309_disable();
-
-            SetSensorGmEnableFlag(false);
-
-            ProcessTimerDestory();
-
-            printf("Gm disable!!!!!!!!!!!!\n");
-        }  
-            break;
-
-        default:
-            printf("*************Gm msg not found\n");
-            break;
-    }
+    qmc6309_disable();
+    SetGmEnableFlag(false);
+    GmTimerDestory();
 
     return;
 }
 
-int PostSensorGmTaskMsg(int *post_msg, u8 len)
-{
-    int err = 0;
-    int count = 0;
-
-    if(!post_msg || len == 0)
-        return -1;
-
-__retry:
-    err = os_taskq_post_type(\
-        Sensor_Gm_Task_Name, post_msg[0], \
-            len - 1, &post_msg[1]);
-
-    if(cpu_in_irq() || cpu_irq_disabled())
-        return err;
-
-    if(err) 
-    {
-        if(!strcmp(os_current_task(), \
-            Sensor_Gm_Task_Name)) 
-            return err;
-
-        if(count > 20)
-            return -1;
-        
-        count++;
-        os_time_dly(1);
-        goto __retry;
-    }
-
-    return err;
-}
-
-/***********地磁航向角**************/
-s16 GetSensorGmYaw(void)
-{
-    return GmYawAngle;
-}
-
-void SetSensorGmYaw(s16 yaw)
-{
-    GmYawAngle = yaw;
-
-    return;
-}
-
-/***********地磁使能标志**************/
-bool GetSensorGmEnableFlag(void)
-{
-    return GmEnableFlag;
-}
-
-void SetSensorGmEnableFlag(bool f)
-{
-    GmEnableFlag = f;
-
-    return;
-}
-
-/***********地磁校准成功**************/
-bool GetSensorGmCaliSucc(void)
-{
-    return Cali_Info.cali_succ;
-}
-
-void SetSensorGmCaliSucc(bool f)
-{
-    Cali_Info.cali_succ = f;
-
-    return;
-}
-
-/***********地磁模块启动/停止**************/
-void EnableSensorGmModule(void)
-{
-    bool GmEnableFlag = \
-        GetSensorGmEnableFlag();
-    if(GmEnableFlag == true)
-        return;
-
-    int SensorGmMsg[1];
-	SensorGmMsg[0] = SensorGmMsgEnableModule;
-	PostSensorGmTaskMsg(SensorGmMsg, 1); 
-
-    return;
-}
-
-void DisableSensorGmModule(void)
-{
-    bool GmEnableFlag = \
-        GetSensorGmEnableFlag();
-    if(GmEnableFlag == false)
-        return;
-
-    int SensorGmMsg[1];
-	SensorGmMsg[0] = SensorGmMsgDisableModule;
-	PostSensorGmTaskMsg(SensorGmMsg, 1); 
-
-    return;
-}
-
-void SensorGmProcess(void)
+static void GmProcess(void)
 {
     static u8 CaliCnt = 0;
 
     if(GmAccRawIdx == 0)
-        SensorGmGsDataFifoRead(GmAccRawX, \
-            GmAccRawY, GmAccRawZ, GmGs_Fifo_WM);
+        GmGsDataFifoRead(GmAccRawX, GmAccRawY, GmAccRawZ, GmGs_Fifo_WM);
 
 #if 0
     printf("x = %d, y = %d, z = %d\n", \
         GmAccRawX[GmAccRawIdx], GmAccRawY[GmAccRawIdx], GmAccRawZ[GmAccRawIdx]);
 #endif
 
-    AccCorrect[0] = \
-        (float)(GmAccRawX[GmAccRawIdx]*ONE_G)/GetGsACCSsvt();
-	AccCorrect[1] = \
-        (float)(GmAccRawY[GmAccRawIdx]*ONE_G)/GetGsACCSsvt();
-	AccCorrect[2] = \
-        (float)(GmAccRawZ[GmAccRawIdx]*ONE_G)/GetGsACCSsvt();
+    AccCorrect[0] = (float)(GmAccRawX[GmAccRawIdx]*ONE_G)/GetGsACCSsvt();
+	AccCorrect[1] = (float)(GmAccRawY[GmAccRawIdx]*ONE_G)/GetGsACCSsvt();
+	AccCorrect[2] = (float)(GmAccRawZ[GmAccRawIdx]*ONE_G)/GetGsACCSsvt();
     
     GmAccRawIdx++;
     GmAccRawIdx %= GmGs_Fifo_WM;
@@ -310,8 +124,7 @@ void SensorGmProcess(void)
         GmRawData[2]=1.0f;
     }
 
-    fusion_docali(GmRawData, AccCorrect, \
-        GmOutput, GmOutputOffset, EulerValue, &QmcAccuracy);
+    fusion_docali(GmRawData, AccCorrect, GmOutput, GmOutputOffset, EulerValue, &QmcAccuracy);
     s16 yaw = (s16)(EulerValue[0] + 0.5f);
 	//printf("yaw = %d, QmcAccuracy = %d\n", yaw, QmcAccuracy); //EulerValue[0]:是地磁计算出来的yaw航向角;
 
@@ -319,24 +132,19 @@ void SensorGmProcess(void)
     {
         //8字校准成功 
         CaliCnt = 0;
-        SetSensorGmYaw(yaw);
+        SetGmYawAngle(yaw);
  
-        bool *cali_succ = \
-            &(Cali_Info.cali_succ);
+        bool *cali_succ = &(Cali_Info.cali_succ);
         if(*cali_succ == false)
         {
             *cali_succ = true;
 
-            Cali_Info.calipara[0] = \
-                GmOutputOffset[0];
-            Cali_Info.calipara[1] = \
-                GmOutputOffset[1];
-            Cali_Info.calipara[2] = \
-                GmOutputOffset[2];
-            Cali_Info.calipara[3] = \
-                GmOutputOffset[3];
+            Cali_Info.calipara[0] = GmOutputOffset[0];
+            Cali_Info.calipara[1] = GmOutputOffset[1];
+            Cali_Info.calipara[2] = GmOutputOffset[2];
+            Cali_Info.calipara[3] = GmOutputOffset[3];
 
-            SensorGmCaliInfoUpdate();
+            GmCaliInfoUpdate();
 
             printf("Update Cali Para succ\n");
         }
@@ -351,7 +159,7 @@ void SensorGmProcess(void)
             bool *cali_succ = \
                 &(Cali_Info.cali_succ);
             *cali_succ = false;
-            SensorGmCaliInfoUpdate();
+            GmCaliInfoUpdate();
             
             printf("Recalibrate parameters\n");
         }
@@ -362,56 +170,207 @@ void SensorGmProcess(void)
         bool *cali_succ = \
             &(Cali_Info.cali_succ);
         *cali_succ = false;
-        SensorGmCaliInfoUpdate();
+        GmCaliInfoUpdate();
     }
 
     return;
 }
 
-void SensorGmGsDataFifoWrite(u8 *w_buf, u32 w_len)
+static void GmTask(void *p)
 {
-    if(!w_buf || w_len == 0)
-        return;
+    int ret;
+    int msg[8] = {0};
 
-    u8 *pWFifoStr = \
-        &GmGs_FifoData[GmGs_WFifoIdx];
+    GmGsFifoParaInit();
+    GmAccRawDataInit();
 
-    memcpy(pWFifoStr, w_buf, w_len);
+    GmCaliInfoRead();
 
-    GmGs_RFifoIdx = GmGs_WFifoIdx;
+    qst_ical_init(Cali_Info.calipara);
+	fusion_enable();
 
-    GmGs_WFifoIdx += GmGs_Fifo_WM*6;
-    GmGs_WFifoIdx %= GmGs_FifoSize;
+    /*开机先失能模块*/
+    DisableGmModule();
+
+    while(1)
+    {
+        ret = os_taskq_pend(NULL, msg, ARRAY_SIZE(msg)); 
+
+        if(ret == OS_TASKQ)
+            GmTaskMsgHandle(msg, ARRAY_SIZE(msg));
+    }
+    
+    return;
+}
+
+void GmTaskCreate(void)
+{
+    int err = task_create(GmTask, NULL, Gm_Task_Name);
+    if(err) printf("Gm task create err!!!!!!!:%d \n", err);
 
     return;
 }
 
-u16 SensorGmGsDataFifoRead(s16 *xdata, s16 *ydata, \
-    s16 *zdata, u16 r_max_num)
+void GmTaskMsgHandle(int *msg, u8 len)
 {
-    u16 r_num = 0;
+    if(!msg || len == 0)
+        return;
 
-    if(!xdata || !ydata || !zdata || \
-        r_max_num == 0)
-        return r_num;
+    int cmd = msg[0];
 
-    u8 *pRFifoStr = \
-        &GmGs_FifoData[GmGs_RFifoIdx];
+    switch(cmd)
+    {
+        case GmMsgProcess:
+            GmProcess();
+            break;
+        
+        case GmMsgEnable:
+            EnableGmModuleHandle();
+            break;
+
+        case GmMsgDisable:
+            DisableGmModuleHandle(); 
+            break;
+
+        default:
+            printf("*************Gm msg not found\n");
+            break;
+    }
+
+    return;
+}
+
+int PostGmTaskMsg(int *msg, u8 len)
+{
+    int err = 0;
+    int count = 0;
+
+    if(!msg || len == 0)
+        return -1;
+
+__retry:
+    err = os_taskq_post_type(Gm_Task_Name, msg[0], \
+        len - 1, &msg[1]);
+
+    if(cpu_in_irq() || cpu_irq_disabled())
+        return err;
+
+    if(err) 
+    {
+        if(!strcmp(os_current_task(), Gm_Task_Name)) 
+            return err;
+
+        if(count > 20)
+            return -1;
+        
+        count++;
+        os_time_dly(1);
+        goto __retry;
+    }
+
+    return err;
+}
+
+/***********地磁航向角**************/
+static s16 YawAngle;
+s16 GetGmYawAngle(void)
+{
+    return YawAngle;
+}
+
+void SetGmYawAngle(s16 yaw)
+{
+    YawAngle = yaw;
+    return;
+}
+
+/***********地磁使能标志**************/
+static bool GmEn;
+bool GetGmEnableFlag(void)
+{
+    return GmEn;
+}
+
+void SetGmEnableFlag(bool f)
+{
+    GmEn = f;
+    return;
+}
+
+/***********地磁校准成功**************/
+bool GetGmCaliSucc(void)
+{
+    return Cali_Info.cali_succ;
+}
+
+void SetGmCaliSucc(bool f)
+{
+    Cali_Info.cali_succ = f;
+
+    return;
+}
+
+/***********地磁模块启动/停止**************/
+void EnableGmModule(void)
+{
+    bool GmEn = GetGmEnableFlag();
+    if(GmEn == true)
+        return;
+
+    int GmMsg[2];
+	GmMsg[0] = GmMsgEnable;
+	PostGmTaskMsg(GmMsg, 1); 
+
+    return;
+}
+
+void DisableGmModule(void)
+{
+    bool GmEn = GetGmEnableFlag();
+    if(GmEn == false)
+        return;
+
+    int GmMsg[2];
+	GmMsg[0] = GmMsgDisable;
+	PostGmTaskMsg(GmMsg, 1); 
+
+    return;
+}
+
+void GmGsDataFifoWrite(u8 *w_buf, u32 w_len)
+{
+    if(!w_buf || w_len == 0)
+        return;
+
+    u8 *pWFifoStr = &FifoData[WFifoIdx];
+
+    memcpy(pWFifoStr, w_buf, w_len);
+
+    RFifoIdx = WFifoIdx;
+
+    WFifoIdx += w_len;
+    WFifoIdx %= FifoSize;
+
+    return;
+}
+
+u16 GmGsDataFifoRead(s16 *xdata, s16 *ydata, s16 *zdata, u16 max_len)
+{
+    u16 r_len = 0;
+
+    u8 *pRFifoStr = &FifoData[RFifoIdx];
 
     u8 FifoData[6];
     s16 AccRawData[3];
 
     u32 i;
-    for(i = 0; i < r_max_num; i++)
+    for(i = 0; i < max_len; i++)
     {
         memcpy(FifoData, pRFifoStr, 6);
 
-        AccRawData[0] = (s16)(((uint16_t)FifoData[1] << 8) | \
-            (FifoData[0]));
-        AccRawData[1] = (s16)(((uint16_t)FifoData[3] << 8) | \
-            (FifoData[2]));
-        AccRawData[2] = (s16)(((uint16_t)FifoData[5] << 8) | \
-            (FifoData[4]));
+        AccRawData[0] = (s16)(((u16)FifoData[1]<<8)|(FifoData[0]));
+        AccRawData[1] = (s16)(((u16)FifoData[3]<<8)|(FifoData[2]));
+        AccRawData[2] = (s16)(((u16)FifoData[5]<<8)|(FifoData[4]));
 
         xdata[i] = AccRawData[0];
         ydata[i] = AccRawData[1];
@@ -420,25 +379,21 @@ u16 SensorGmGsDataFifoRead(s16 *xdata, s16 *ydata, \
         pRFifoStr += 6;
     }
 
-    return r_num;
+    return r_len;
 }
 
-void SensorGmCaliInfoRead(void)
+void GmCaliInfoRead(void)
 {
-    int vm_op_len = \
-        sizeof(GmCaliInfoPara_t);
+    int vm_op_len = sizeof(GmCaliInfoPara_t);
     int ret = syscfg_read(CFG_GM_CALIPARA_INFO, \
         &Cali_Info, vm_op_len);
-    if(ret != vm_op_len || \
-        Cali_Info.vm_mask != Cali_Vm_Mask)
-    {
-        SensorGmCaliInfoReset();
-    }
+    if(ret != vm_op_len || Cali_Info.vm_mask != Cali_Vm_Mask)
+        GmCaliInfoReset();
 
     return;
 }
 
-void SensorGmCaliInfoWrite(void)
+void GmCaliInfoWrite(void)
 {
     int vm_op_len = \
         sizeof(GmCaliInfoPara_t);
@@ -454,23 +409,22 @@ void SensorGmCaliInfoWrite(void)
     return;
 }
 
-void SensorGmCaliInfoReset(void)
+void GmCaliInfoReset(void)
 {
-    int vm_op_len = \
-        sizeof(GmCaliInfoPara_t);
+    int vm_op_len = sizeof(GmCaliInfoPara_t);
 
     memcpy(&Cali_Info, &InitInfo, vm_op_len);
         
     Cali_Info.vm_mask = Cali_Vm_Mask;
 
-    SensorGmCaliInfoUpdate();
+    GmCaliInfoUpdate();
 
     return;
 }
 
-void SensorGmCaliInfoUpdate(void)
+void GmCaliInfoUpdate(void)
 {
-    SensorGmCaliInfoWrite();
+    GmCaliInfoWrite();
 
     return;
 }

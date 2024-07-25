@@ -164,19 +164,13 @@ void WeatherInfoParaUpdate(void)
     return;
 }
 
-void WeatherProcess(struct sys_time *utc_time)
+void WeatherProcess(struct sys_time *ptime)
 {
-    if(!utc_time) return;
-
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
-    if(utc_time->min == 0)
+    if(ptime->min == 0)
     {
         /*清空数据*/
         ClearWeatherInfoPara();

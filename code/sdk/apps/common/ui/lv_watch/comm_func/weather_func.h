@@ -26,7 +26,7 @@ weather_type_t weather_weather_type(uint8_t day);
 
 void SetWeatherInfoPara(void);
 void WeatherInfoParaUpdate(void);
-void WeatherProcess(struct sys_time *utc_time);
+void WeatherProcess(struct sys_time *ptime);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

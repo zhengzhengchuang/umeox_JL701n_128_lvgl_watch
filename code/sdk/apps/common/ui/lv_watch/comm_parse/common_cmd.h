@@ -25,9 +25,9 @@ enum
     Cmd_Set_User_Info =               0x15,//设置用户信息
     Cmd_Get_History_Hr_Data =         0x17,//获取历史心率数据
     Cmd_Get_History_Bo_Data =         0x18,//获取历史血氧数据
-    Cmd_Get_History_Activity_Data =   0x19,//获取历史活动数据
+    Cmd_Get_History_Pedo_Data =       0x19,//获取历史活动数据
     Cmd_Get_History_Sleep_Data =      0x1C,//获取历史睡眠数据
-    Cmd_Get_Activity_Data =           0x1D,//同步实时活动数据
+    Cmd_Get_Pedo_Data =               0x1D,//同步实时活动数据
     Cmd_Set_Spec_Func_Sw =            0x1E,//设置指定功能开关
     Cmd_Get_Spec_Func_Sw =            0x1F,//获取指定功能开关
     Cmd_Device_Events =               0x20,//设备上报事件

@@ -285,16 +285,16 @@ void vcHr02_process(AlgoSportMode sportMode)
 							Algo_Init();
 
 							SetHrRealVal(0);
-							SetHrSensorDataFilterCnt(\
-								Hr_Data_Filter_Cnt);
+							SetHrDataFilter(\
+								Hr_Data_Filter);
 						}else
 						{
-							SetHrSensorWearStatus(true);
+							SetPpgWearStatus(true);
 							
 							if(HeartRateValue > 0)
 							{
 								u8 FilterCnt = \
-									GetHrSensorDataFilterCnt();
+									GetHrDataFilter();
 								if(FilterCnt == 0)
 								{
 									SetHrRealVal((u8)HeartRateValue);
@@ -302,18 +302,18 @@ void vcHr02_process(AlgoSportMode sportMode)
 								}else
 								{
 									FilterCnt--;
-									SetHrSensorDataFilterCnt(\
+									SetHrDataFilter(\
 										FilterCnt);
 								}
 							}
 						}
 					}else
 					{
-						SetHrSensorWearStatus(false);
+						SetPpgWearStatus(false);
 
 						SetHrRealVal(0);
-						SetHrSensorDataFilterCnt(\
-							Hr_Data_Filter_Cnt);
+						SetHrDataFilter(\
+							Hr_Data_Filter);
 					}
 				}
 				else 
@@ -324,8 +324,8 @@ void vcHr02_process(AlgoSportMode sportMode)
 					HeartRateValue = -2;
 
 					SetHrRealVal(0);
-					SetHrSensorDataFilterCnt(\
-						Hr_Data_Filter_Cnt);
+					SetHrDataFilter(\
+						Hr_Data_Filter);
 				}
 			}
 		}
@@ -385,7 +385,7 @@ void vcHr02_process(AlgoSportMode sportMode)
 								if(real_spo > 0)
 								{
 									u8 FilterCnt = \
-										GetHrSensorDataFilterCnt();
+										GetHrDataFilter();
 									if(FilterCnt == 0)
 									{
 										SetBoRealVal((u8)real_spo);
@@ -393,7 +393,7 @@ void vcHr02_process(AlgoSportMode sportMode)
 									}else
 									{
 										FilterCnt--;
-										SetHrSensorDataFilterCnt(\
+										SetHrDataFilter(\
 											FilterCnt);
 									}
 								}
@@ -447,8 +447,8 @@ void vcHr02IRQHandler(void)
 {
 	int SensorHrMsg[1];
 	SensorHrMsg[0] = \
-		SensorHrProcess;
-	PostSensorHrTaskMsg(SensorHrMsg, 1);
+		PpgMsgProcess;
+	PostPpgTaskMsg(SensorHrMsg, 1);
 
 	return;
 }
@@ -614,9 +614,9 @@ void CtrlvcHr02StartSample(u8 type)
 
 	CtrlvcHr02StopSample();
 
-	if(type == SensorWorkHr)
+	if(type == PpgWorkHr)
 		vcMode = VCWORK_MODE_HRWORK;
-	else if(type == SensorWorkBo)
+	else if(type == PpgWorkBo)
 		vcMode = VCWORK_MODE_SPO2WORK;
 	else
 		vcMode = VCWORK_MODE_HRWORK;

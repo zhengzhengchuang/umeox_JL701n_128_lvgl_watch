@@ -9,16 +9,15 @@ extern "C" {
 #include "../../../device/gSensor/qmi8658/qmi8658.h"
 #include "../../../device/m_sensor/qmc6309/qmc6309.h"
 
-#define Sensor_Gm_Task_Name \
-    "sensor_gm_task"
+#define Gm_Task_Name "gm_task"
 
 #define GmGs_Fifo_WM (Qmi8658_Fifo_WM)
 
 enum
 {
-    SensorGmMsgProcess,
-    SensorGmMsgEnableModule,
-    SensorGmMsgDisableModule,
+    GmMsgProcess,
+    GmMsgEnable,
+    GmMsgDisable,
 };
 
 typedef struct
@@ -30,32 +29,29 @@ typedef struct
 }GmCaliInfoPara_t;
 extern GmCaliInfoPara_t Cali_Info;
 
-void SensorGmTaskCreate(void);
-int PostSensorGmTaskMsg(int *post_msg, u8 len);
-void SensorGmTaskMsgHandle(int *rev_msg, u8 len);
+void GmTaskCreate(void);
+int PostGmTaskMsg(int *msg, u8 len);
+void GmTaskMsgHandle(int *msg, u8 len);
 
-s16 GetSensorGmYaw(void);
-void SetSensorGmYaw(s16 yaw);
+void EnableGmModule(void);
+void DisableGmModule(void);
 
-bool GetSensorGmEnableFlag(void);
-void SetSensorGmEnableFlag(bool f);
+s16 GetGmYawAngle(void);
+void SetGmYawAngle(s16 yaw);
 
-bool GetSensorGmCaliSucc(void);
-void SetSensorGmCaliSucc(bool f);
+bool GetGmEnableFlag(void);
+void SetGmEnableFlag(bool f);
 
-void EnableSensorGmModule(void);
-void DisableSensorGmModule(void);
+bool GetGmCaliSucc(void);
+void SetGmCaliSucc(bool f);
 
-void SensorGmProcess(void);
+void GmGsDataFifoWrite(u8 *w_buf, u32 w_len);
+u16 GmGsDataFifoRead(s16 *xdata, s16 *ydata, s16 *zdata, u16 max_len);
 
-void SensorGmGsDataFifoWrite(u8 *w_buf, u32 w_len);
-u16 SensorGmGsDataFifoRead(s16 *xdata, s16 *ydata, \
-    s16 *zdata, u16 r_max_num);
-
-void SensorGmCaliInfoRead(void);
-void SensorGmCaliInfoWrite(void);
-void SensorGmCaliInfoReset(void);
-void SensorGmCaliInfoUpdate(void);
+void GmCaliInfoRead(void);
+void GmCaliInfoWrite(void);
+void GmCaliInfoReset(void);
+void GmCaliInfoUpdate(void);
 
 #ifdef __cplusplus
 } /* extern "C" */

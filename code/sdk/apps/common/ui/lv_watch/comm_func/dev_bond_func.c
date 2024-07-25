@@ -36,9 +36,7 @@ void FirstDevBondHandle(void)
         DevBondCodeLen);
     BondCodeInfoParaUpdate();
 
-    int DevBondFlag = 1;
-    SetVmParaCacheByLabel(vm_label_dev_bond, \
-        DevBondFlag);
+    SetDevBondFlag(1);
 
     ui_act_id_t act_id = \
         ui_act_id_watchface;
@@ -72,9 +70,7 @@ void NewDevBondHandle(void)
         DevBondCodeLen);
     BondCodeInfoParaUpdate();
 
-    int DevBondFlag = 1;
-    SetVmParaCacheByLabel(vm_label_dev_bond, \
-        DevBondFlag);
+    SetDevBondFlag(1);
 
     ui_act_id_t act_id = \
         ui_act_id_new_bond;
@@ -100,9 +96,7 @@ void DevUnBondHandle(void)
         DevBondCodeLen);
     BondCodeInfoParaUpdate();
 
-    int DevBondFlag = 0;
-    SetVmParaCacheByLabel(vm_label_dev_bond, \
-        DevBondFlag);
+    SetDevBondFlag(0);
 
     ui_act_id_t act_id = \
         ui_act_id_dev_bond;

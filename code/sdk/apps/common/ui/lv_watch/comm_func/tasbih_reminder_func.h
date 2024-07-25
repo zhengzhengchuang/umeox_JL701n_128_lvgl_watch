@@ -32,7 +32,7 @@ void TasbihRInfoParaUpdate(void);
 extern u8 rtc_calculate_week_val(\
     struct sys_time *data_time);
 
-void TasbihReminderProcess(struct sys_time *utc_time);
+void TasbihReminderProcess(struct sys_time *ptime);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

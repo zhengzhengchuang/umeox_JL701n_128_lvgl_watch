@@ -83,19 +83,7 @@ void common_distance_widget_refresh(void)
         widget_data_para_t *p_distance_para = \
             &distance_para_cache[i];
 
-        uint16_t vm_label_type = \
-            vm_label_none;
-
-        if(distance_data_type[i] == \
-            Widget_Data_type_distance)
-            vm_label_type = vm_label_daily_distance;
-        else
-            continue;
-
-        int __data = \
-            GetVmParaCacheByLabel(\
-                vm_label_type); 
-
+        u32 __data = PedoData.distance;
         if(__data > Distance_Disp_Max)
             __data = Distance_Disp_Max;
 

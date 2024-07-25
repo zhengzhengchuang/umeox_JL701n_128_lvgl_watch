@@ -211,34 +211,22 @@ void SetSleepInfoPara(void)
     return;
 }
 
-void SleepProcess(struct sys_time *utc_time)
+void SleepProcess(struct sys_time *ptime)
 {
-    if(!utc_time) return;
-
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
         return;
-#endif
 
-    if(utc_time->hour == SlpStartH && \
-        utc_time->min == 0)
+    if(ptime->hour == SlpStartH && ptime->min == 0)
     {
         /*每天固定18:00，启动睡眠算法，清除数据*/
 
         ClearSleepInfoPara();
 
-        memset(&w_sleep, 0, \
-            sizeof(vm_sleep_ctx_t));
-        w_sleep.check_code = \
-            Nor_Vm_Check_Code;
-        w_sleep.CurSecNum = \
-            0;
+        memset(&w_sleep, 0, sizeof(vm_sleep_ctx_t));
+        w_sleep.check_code = Nor_Vm_Check_Code;
+        w_sleep.CurSecNum = 0;
         GetUtcTime(&(w_sleep.time));
-        
-
     }
 
     return;

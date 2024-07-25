@@ -18,7 +18,7 @@ void PowerOffSetHrVmFlashSave(void);
 void VmHrCtxFlashWrite(void);
 
 void HrTimerSecProcess(void);
-void HrProcess(struct sys_time *utc_time);
+void HrProcess(struct sys_time *ptime);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

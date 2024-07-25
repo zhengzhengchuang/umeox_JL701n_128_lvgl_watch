@@ -7,9 +7,8 @@ extern "C" {
 
 #include "fs.h"
 #include "device.h"
+#include "timestamp.h"
 #include "app_config.h"
-
-
 #include "./include/ui_conf.h"
 #include "./include/ui_menu.h"
 #include "./include/version.h"
@@ -21,6 +20,7 @@ extern "C" {
 #include "./comm_parse/le_task.h"
 #include "./comm_func/dnd_func.h"
 #include "./comm_func/find_func.h"
+#include "./pedo_data/pedo_data.h"
 #include "./comm_task/comm_task.h"
 #include "./comm_lang/lang_conf.h"
 #include "./comm_key/common_key.h"
@@ -46,7 +46,6 @@ extern "C" {
 #include "./comm_func/weather_func.h"
 #include "./comm_nor_vm/nor_vm_cfg.h"
 #include "./poc_modem/poc_modem_ui.h"
-#include "./comm_nor_vm/nor_vm_task.h"
 #include "./comm_func/dev_bond_func.h"
 #include "./comm_parse/common_parse.h"
 #include "./comm_lang/al_name_table.h"
@@ -59,6 +58,7 @@ extern "C" {
 #include "./comm_widget/common_data.h"
 #include "./comm_widget/widget_date.h"
 #include "./comm_widget/widget_time.h"
+#include "./comm_nor_vm/nor_vm_pedo.h"
 #include "./comm_func/data_mana_func.h"
 #include "./comm_func/sedentary_func.h"
 #include "./comm_func/user_info_func.h"
@@ -75,6 +75,7 @@ extern "C" {
 #include "./comm_func/allah_name_func.h"
 #include "../../../device/motor/motor.h"
 #include "./comm_func/quran_play_func.h"
+#include "./comm_parse/le_history_data.h"
 #include "./comm_sensor/sensor_hr_task.h"
 #include "./comm_sensor/sensor_gs_task.h"
 #include "./comm_sensor/sensor_gm_task.h"
@@ -87,7 +88,6 @@ extern "C" {
 #include "./comm_nor_vm/nor_vm_message.h"
 #include "./comm_func/prayer_time_func.h"
 #include "./comm_func/remote_music_func.h"
-#include "./comm_nor_vm/nor_vm_activity.h"
 #include "./comm_nor_vm/nor_vm_call_log.h"
 #include "./ui_menu/scrollbar/scrollbar.h"
 #include "./comm_widget/widget_distance.h"
@@ -135,6 +135,10 @@ void AppSetSysBacklight(int val);
 void SetUtcTime(struct sys_time *utc_time);
 void GetUtcTime(struct sys_time *utc_time);
 
+/**********utc-->sec**************/
+u32 UtcTimeToSec(struct sys_time *utc_time);
+void SecToUtcTime(u32 sec, struct sys_time *utc_time);
+
 /**********获取电池电量**************/
 uint8_t GetBatteryPower(void);
 
@@ -148,16 +152,16 @@ char *GetQRCodeLinkStrBuf(void);
 u8 GetUsrWaitTe(void);
 void SetUsrWaitTe(u8 en);
 
-/*********************************************************************************
-                        获取bt使能状态                              
-*********************************************************************************/
+/**********获取bt使能状态**********/
 bool GetBtEnableState(void);
 
-/*********************************************************************************
-                        设置bt开关                             
-*********************************************************************************/
+/**********设置bt开关**********/
 void UserEnableBt(void);
 void UserDisableBt(void);
+
+/**********获取设备绑定标志**********/
+bool GetDevBondFlag(void);
+void SetDevBondFlag(int f);
 
 #ifdef __cplusplus
 }

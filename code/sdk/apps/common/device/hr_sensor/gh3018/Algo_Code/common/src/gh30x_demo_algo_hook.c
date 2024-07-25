@@ -101,7 +101,7 @@ void GH30X_HrAlgorithmResultReport(STGh30xAlgoResult *pstAlgoResult, GU32 lubFra
         //过滤5秒内的数据
 
         u8 FilterCnt = \
-            GetHrSensorDataFilterCnt();
+            GetHrDataFilter();
         if(FilterCnt == 0)
         {
             SetHrRealVal((u8)hr);
@@ -109,14 +109,12 @@ void GH30X_HrAlgorithmResultReport(STGh30xAlgoResult *pstAlgoResult, GU32 lubFra
         }else
         {
             FilterCnt--;
-            SetHrSensorDataFilterCnt(\
-                FilterCnt);
+            SetHrDataFilter(FilterCnt);
         }
     }else
     {
         SetHrRealVal(0);
-        SetHrSensorDataFilterCnt(\
-            Hr_Data_Filter_Cnt);
+        SetHrDataFilter(Hr_Data_Filter);
     }
 }
 
@@ -155,7 +153,7 @@ void GH30X_Spo2AlgorithmResultReport(STGh30xAlgoResult *pstAlgoResult, GU32 lubF
         //过滤5秒内的数据
 
         u8 FilterCnt = \
-            GetHrSensorDataFilterCnt();
+            GetHrDataFilter();
         if(FilterCnt == 0)
         {
             SetBoRealVal((u8)bo);
@@ -163,14 +161,14 @@ void GH30X_Spo2AlgorithmResultReport(STGh30xAlgoResult *pstAlgoResult, GU32 lubF
         }else
         {
             FilterCnt--;
-            SetHrSensorDataFilterCnt(\
+            SetHrDataFilter(\
                 FilterCnt);
         }
     }else
     {
         SetBoRealVal(0);
-        SetHrSensorDataFilterCnt(\
-            Hr_Data_Filter_Cnt);
+        SetHrDataFilter(\
+            Hr_Data_Filter);
     }
 }
 

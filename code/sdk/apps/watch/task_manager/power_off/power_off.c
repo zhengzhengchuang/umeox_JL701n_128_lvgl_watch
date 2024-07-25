@@ -195,7 +195,7 @@ static inline void poweroff_wait_ui()
     }
 #endif
 
-#if USR_LVGL_IMB2D_EN
+#if 0
     lcd_sleep_ctrl(1);
     struct lcd_interface *lcd = lcd_get_hdl();
     if (lcd->power_ctrl) {
@@ -212,7 +212,7 @@ void poweroff_tone_end(void *priv, int flag)
     {
         log_info("audio_play_event_end,enter soft poweroff");
         //extern void timer(void *p);
-        poweroff_wait_ui();//等待关机显示完毕
+        //poweroff_wait_ui();//等待关机显示完毕
         // while (get_ui_busy_status()) {
         // }
 #if (TCFG_CHARGE_ENABLE && TCFG_CHARGE_POWERON_ENABLE)

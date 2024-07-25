@@ -111,10 +111,11 @@ void PowerOnSetBoVmCache(void)
     if(!data_ret) return;
 
     u8 bo_num = VmBoItemNum();
+    printf("%s:bo_num = %d\n", __func__, bo_num);
 
     /*判断vm的最新数据是否已经过期*/
-    bool IsPast = \
-        BoVmDataIsPast(&(r_bo.time));
+    bool IsPast = BoVmDataIsPast(&(r_bo.time));
+    printf("%s:IsPast = %d\n", __func__, IsPast);
     if(IsPast == true)
     {
         //如果说已经过期数据，且存储数超过上限，删除最旧一条
@@ -144,7 +145,7 @@ void PowerOffSetBoVmFlashSave(void)
     SetBoDayVmData(false);
     memcpy(&w_bo_cache, &w_bo, sizeof(vm_bo_ctx_t));
     int ui_msg_post[1];
-    ui_msg_post[0] = ui_msg_nor_vm_bo;
+    ui_msg_post[0] = ui_msg_nor_bo_write;
     post_ui_msg(ui_msg_post, 1);
  
     return;
@@ -163,24 +164,21 @@ void VmBoCtxFlashWrite(void)
 void BoTimerSecProcess(void)
 {
     bool EnableFlag = \
-        GetHrSensorEnableFlag();
+        GetPpgEnableFlag();
     if(EnableFlag)
     {
-        u8 work_type = \
-            GetHrSensorWorkType();
-        if(work_type == SensorWorkHr || \
-            work_type == SensorWorkNone)
+        u8 work = GetPpgWorkType();
+        if(work == PpgWorkHr || work == PpgWorkNone)
             return;
 
-        u8 work_mode = \
-            GetHrSensorMode();
-        if(work_mode == SensorModeAuto)
+        u8 mode = GetPpgMode();
+        if(mode == PpgModeAuto)
         {
             BoAutoCnt++;
             if(BoAutoCnt >= BoAutoDur)
             {
                 BoAutoCnt = 0;
-                HrSensorStopSample();
+                DisablePpgModule();
             }
         }else
         {
@@ -191,40 +189,33 @@ void BoTimerSecProcess(void)
     return;
 }
 
-void BoProcess(struct sys_time *utc_time)
+void BoProcess(struct sys_time *ptime)
 {
-    if(!utc_time) return;
-    
-#if !Vm_Debug_En
-    int DevBondFlag = \
-        GetVmParaCacheByLabel(\
-            vm_label_dev_bond);
-    if(!DevBondFlag)
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false) 
         return;
-#endif
 
-    if(utc_time->hour == 0 && \
-        utc_time->min == 0)
+    if(ptime->hour == 0 && ptime->min == 0)
     {
         //保存上一天的心率历史数据
         SetBoDayVmData(true);
         memcpy(&w_bo_cache, &w_bo, sizeof(vm_bo_ctx_t));
         int ui_msg_post[1];
-        ui_msg_post[0] = ui_msg_nor_vm_bo;
+        ui_msg_post[0] = ui_msg_nor_bo_write;
         post_ui_msg(ui_msg_post, 1);
   
         //清除缓存数据，开始新一天的数据记录
         memset(&w_bo, 0, sizeof(vm_bo_ctx_t));
         w_bo.check_code = \
             Nor_Vm_Check_Code;
-        memcpy(&(w_bo.time), utc_time, \
+        memcpy(&(w_bo.time), ptime, \
             sizeof(struct sys_time));
 
         return;
     }
 
     u16 utc_timestamp = \
-        (utc_time->hour*60 + utc_time->min);
+        (ptime->hour*60 + ptime->min);
     if(utc_timestamp > 0) 
         utc_timestamp -= 1;
     else
@@ -242,14 +233,14 @@ void BoProcess(struct sys_time *utc_time)
     {
         //整点15分钟到 启动自动心率
         bool EnableFlag = \
-            GetHrSensorEnableFlag();
+            GetPpgEnableFlag();
         if(!EnableFlag)
         {
             BoAutoCnt = 0;
             SetBoRealVal(0);
 
             //如果PPG手动启动，禁止自动启动，只是辅助
-            HrSensorStartSample(SensorWorkBo, SensorModeAuto);
+            EnablePpgModule(PpgWorkBo, PpgModeAuto);
         }
     }
 

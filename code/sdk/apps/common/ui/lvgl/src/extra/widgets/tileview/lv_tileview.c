@@ -182,7 +182,7 @@ static void tileview_event_cb(lv_event_t * e)
         lv_coord_t left = scroll_end.x;
         lv_coord_t top = scroll_end.y;
 
-        printf("%s:left = %d, top = %d\n", __func__, left, top);
+        //printf("%s:left = %d, top = %d\n", __func__, left, top);
 
         lv_coord_t tx = ((left + (w / 2)) / w) * w;
         lv_coord_t ty = ((top + (h / 2)) / h) * h;
