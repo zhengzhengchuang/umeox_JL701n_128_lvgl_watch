@@ -2127,7 +2127,7 @@ void Gh30xFrameDataHookFunc(const STGh30xFrameInfo * const pstFrameInfo);
 #define FIFO_THR_CONFIG_TYPE_SPO2           (5)
 
 /// gsensor soft fifo buffer len, should >FIFO_THR_CNT_CONFIG
-#define GSENSOR_SOFT_FIFO_BUFFER_MAX_LEN    (70)
+#define GSENSOR_SOFT_FIFO_BUFFER_MAX_LEN    (40)
 /// generate fake gsensor data for test
 #define USE_FAKE_GS_DATA_FOR_TEST           (0)
 

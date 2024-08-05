@@ -29,10 +29,8 @@ static void menu_create_cb(lv_obj_t *obj)
 
 static void menu_destory_cb(lv_obj_t *obj)
 {
-    bool OffScreen = \
-        GetIsEnterOffScreen();
-    if(OffScreen == false)
-        DisableGmModule();
+    bool OffScr = GetIsEnterOffScreen();
+    if(OffScr == false) DisableGmModule();
 
     return;
 }

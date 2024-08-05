@@ -6,8 +6,7 @@ static void menu_create_cb(lv_obj_t *obj)
 
     EnableGmModule();
 
-    ui_act_id_t prev_act_id = \
-        ui_act_id_menu;
+    ui_act_id_t prev_act_id = ui_act_id_menu;
     if(!lang_txt_is_arabic())
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             prev_act_id, ui_act_id_null, ui_act_id_gm_cali);
@@ -21,10 +20,8 @@ static void menu_create_cb(lv_obj_t *obj)
 static void menu_destory_cb(lv_obj_t *obj)
 {
     /*熄屏不关闭地磁*/
-    bool OffScreen = \
-        GetIsEnterOffScreen();
-    if(OffScreen == false)
-        DisableGmModule();
+    bool OffScr = GetIsEnterOffScreen();
+    if(OffScr == false) DisableGmModule();
 
     return;
 }
@@ -33,8 +30,7 @@ static void menu_refresh_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    bool cali_succ = \
-        GetGmCaliSucc();
+    bool cali_succ = GetGmCaliSucc();
     if(cali_succ == true)
     {
         if(!(ll_info.position_valid))
@@ -50,44 +46,27 @@ static void menu_display_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    widget_img_para.img_parent = \
-        obj;
-    widget_img_para.file_img_dat = \
-        kaaba_00_index;
-    widget_img_para.img_click_attr = \
-        false;
-    widget_img_para.event_cb = \
-        NULL;
-    lv_obj_t *mag_calibra_icon = \
-        common_widget_img_create(&widget_img_para, NULL);
+    widget_img_para.img_parent = obj;
+    widget_img_para.file_img_dat = kaaba_00_index;
+    widget_img_para.img_click_attr = false;
+    widget_img_para.event_cb = NULL;
+    lv_obj_t *mag_calibra_icon = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(mag_calibra_icon, LV_ALIGN_TOP_MID, 0, 88);
 
-    widget_img_para.file_img_dat = \
-        comm_icon_11_index;
-    lv_obj_t *comm_11_icon = \
-        common_widget_img_create(&widget_img_para, NULL);
+    widget_img_para.file_img_dat = comm_icon_11_index;
+    lv_obj_t *comm_11_icon = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(comm_11_icon, LV_ALIGN_TOP_MID, 0, 266);
 
-    widget_label_para.label_w = \
-        300;
-    widget_label_para.label_h = \
-        Label_Line_Height*2;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_WRAP;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_ver_center = \
-        false;
-    widget_label_para.user_text_font = \
-        NULL;
-    widget_label_para.label_parent = \
-        obj;
-    widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_mag_calibra_tips);
-    lv_obj_t *mag_calibra_tips_label = \
-        common_widget_label_create(&widget_label_para);
+    widget_label_para.label_w = 300;
+    widget_label_para.label_h = Label_Line_Height*2;
+    widget_label_para.long_mode = LV_LABEL_LONG_WRAP;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_ver_center = false;
+    widget_label_para.user_text_font = NULL;
+    widget_label_para.label_parent = obj;
+    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_gm_cali);
+    lv_obj_t *mag_calibra_tips_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(mag_calibra_tips_label, LV_ALIGN_TOP_MID, 0, 342);
 
     return;

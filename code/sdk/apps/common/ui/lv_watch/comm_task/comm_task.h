@@ -11,6 +11,8 @@ extern "C" {
 
 enum
 {
+    comm_msg_gomore_init,
+
     comm_msg_utcday_handle,
     comm_msg_utcmin_handle,
     comm_msg_utcsec_handle,

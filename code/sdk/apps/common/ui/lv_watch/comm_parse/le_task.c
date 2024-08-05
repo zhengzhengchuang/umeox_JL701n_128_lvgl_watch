@@ -167,6 +167,10 @@ void le_task_msg_handle(int *msg, u8 len)
             HistoryPedoDataSend(msg[1], msg[2], msg[3], msg[4]);
             break;
 
+        case Le_History_Sleep_Data:
+            HistorySleepDataSend(msg[1], msg[2], msg[3], msg[4]);
+            break;
+
         default:
             printf("le task not found\n");
             break;

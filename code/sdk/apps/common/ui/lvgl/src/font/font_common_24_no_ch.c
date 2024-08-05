@@ -10,8 +10,10 @@
 
 
 #include "imb_demo.h"
-#include "../../../ui/jl_images/ex_file_index.h"
+#include "../../../ui/jl_images/file_index.h"
 #include "../../../../../../cpu/br28/ui_driver/lvgl/lvgl_main.h"
+
+
 
 
 typedef struct{

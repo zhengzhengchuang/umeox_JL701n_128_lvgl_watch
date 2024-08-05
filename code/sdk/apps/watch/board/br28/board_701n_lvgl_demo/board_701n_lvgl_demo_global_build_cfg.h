@@ -32,7 +32,7 @@
 
 #define CONFIG_FLASH_SIZE                       FLASH_SIZE_16M//FLASH_SIZE_2M    //配置FLASH大小
 
-#define CONFIG_EXTERN_FLASH_SIZE                FLASH_SIZE_16M    //配置外挂FLASH大小
+#define CONFIG_EXTERN_FLASH_SIZE                FLASH_SIZE_32M    //配置外挂FLASH大小
 /*
  * 配置外挂FLASH VM大小
  * download.bat中的配置需要和该配置对应上，

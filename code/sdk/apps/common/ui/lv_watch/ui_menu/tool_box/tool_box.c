@@ -269,18 +269,35 @@ static void menu_display_cb(lv_obj_t *obj)
     common_widget_img_create(&widget_img_para, NULL);
 
     /* 指示点 */
-    widget_img_para.img_x = 164;
-    widget_img_para.img_y = 408;
-    widget_img_para.img_parent = obj;
-    widget_img_para.file_img_dat = tool_box_other_01_index;
-    widget_img_para.img_click_attr = false;
-    widget_img_para.event_cb = NULL;
-    widget_img_para.user_data = NULL;
-    common_widget_img_create(&widget_img_para, NULL);
+    if(lang_txt_is_arabic() == false)
+    {
+        widget_img_para.img_x = 164;
+        widget_img_para.img_y = 408;
+        widget_img_para.img_parent = obj;
+        widget_img_para.file_img_dat = tool_box_other_01_index;
+        widget_img_para.img_click_attr = false;
+        widget_img_para.event_cb = NULL;
+        widget_img_para.user_data = NULL;
+        common_widget_img_create(&widget_img_para, NULL);
 
-    widget_img_para.img_x = 188;
-    widget_img_para.file_img_dat = tool_box_other_00_index;
-    common_widget_img_create(&widget_img_para, NULL);
+        widget_img_para.img_x = 188;
+        widget_img_para.file_img_dat = tool_box_other_00_index;
+        common_widget_img_create(&widget_img_para, NULL);
+    }else
+    {
+        widget_img_para.img_x = 188;
+        widget_img_para.img_y = 408;
+        widget_img_para.img_parent = obj;
+        widget_img_para.file_img_dat = tool_box_other_01_index;
+        widget_img_para.img_click_attr = false;
+        widget_img_para.event_cb = NULL;
+        widget_img_para.user_data = NULL;
+        common_widget_img_create(&widget_img_para, NULL);
+
+        widget_img_para.img_x = 164;
+        widget_img_para.file_img_dat = tool_box_other_00_index;
+        common_widget_img_create(&widget_img_para, NULL);
+    }
 
     return;
 }

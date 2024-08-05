@@ -84,10 +84,7 @@ void common_step_widget_refresh(void)
         widget_data_para_t *p_step_para = \
             &step_para_cache[i];
 
-        u32 __data = PedoData.steps;
-
-        if(__data > Step_Disp_Max)
-            __data = Step_Disp_Max;
+        u32 __data = GetPedoDataSteps();
 
         uint32_t num_addr_index = \
             p_step_para->num_addr_index;

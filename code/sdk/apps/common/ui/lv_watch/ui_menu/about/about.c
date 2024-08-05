@@ -40,15 +40,11 @@ static void about_container_create(lv_obj_t *obj)
 
 static void about_title_icon_create(void)
 {
-    widget_img_para.img_parent = \
-        about_container;
-    widget_img_para.file_img_dat = \
-        about_00_index;
-    widget_img_para.img_click_attr = \
-        false;
+    widget_img_para.img_parent = about_container;
+    widget_img_para.file_img_dat = about_00_index;
+    widget_img_para.img_click_attr = false;
     widget_img_para.event_cb = NULL;
-    lv_obj_t *title_icon = \
-        common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_t *title_icon = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(title_icon, LV_ALIGN_TOP_MID, 0, 20);
 
     return;
@@ -56,26 +52,16 @@ static void about_title_icon_create(void)
 
 static void about_title_label_create(void)
 {
-    widget_label_para.label_w = \
-        300;
-    widget_label_para.label_h = \
-        Label_Line_Height;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_SCROLL;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_ver_center = \
-        false;
-    widget_label_para.user_text_font = \
-        NULL;
-    widget_label_para.label_parent = \
-        about_container;
-    widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_quran_watch);
-    lv_obj_t *title_label = \
-        common_widget_label_create(&widget_label_para);
+    widget_label_para.label_w = 300;
+    widget_label_para.label_h = Label_Line_Height;
+    widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_ver_center = false;
+    widget_label_para.user_text_font = NULL;
+    widget_label_para.label_parent = about_container;
+    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_quran_watch);
+    lv_obj_t *title_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(title_label, LV_ALIGN_TOP_MID, 0, 88);
 
     return;
@@ -83,47 +69,29 @@ static void about_title_label_create(void)
 
 static void about_ble_name_elem_create(void)
 {
-    widget_img_para.img_parent = \
-        about_container;
-    widget_img_para.file_img_dat = \
-        comm_icon_10_index;
-    widget_img_para.img_click_attr = \
-        false;
+    widget_img_para.img_parent = about_container;
+    widget_img_para.file_img_dat = comm_icon_10_index;
+    widget_img_para.img_click_attr = false;
     widget_img_para.event_cb = NULL;
-    lv_obj_t *ble_name_container = \
-        common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_t *ble_name_container = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(ble_name_container, LV_ALIGN_TOP_MID, 0, 152);
 
-    widget_label_para.label_w = \
-        260;
-    widget_label_para.label_h = \
-        Label_Line_Height;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_SCROLL;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0x777777);
-    widget_label_para.label_ver_center = \
-        false;
-    widget_label_para.user_text_font = \
-        NULL;
-    widget_label_para.label_parent = \
-        ble_name_container;
-    widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_bluetooth_name);
-    lv_obj_t *ble_name_label = \
-        common_widget_label_create(&widget_label_para);
+    widget_label_para.label_w = 260;
+    widget_label_para.label_h = Label_Line_Height;
+    widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0x777777);
+    widget_label_para.label_ver_center = false;
+    widget_label_para.user_text_font = NULL;
+    widget_label_para.label_parent = ble_name_container;
+    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_bluetooth_name);
+    lv_obj_t *ble_name_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(ble_name_label, LV_ALIGN_TOP_MID, 0, 6);
 
-    const char *ble_name_str = \
-        GetDevBleName();
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_text = \
-        (char *)ble_name_str;
-    lv_obj_t *ble_name_str_label = \
-        common_widget_label_create(&widget_label_para);
+    const char *ble_name_str = GetDevBleName();
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_text = (char *)ble_name_str;
+    lv_obj_t *ble_name_str_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(ble_name_str_label, LV_ALIGN_BOTTOM_MID, 0, -6);
 
     return;
@@ -132,43 +100,28 @@ static void about_ble_name_elem_create(void)
 extern void swapX(const uint8_t *src, uint8_t *dst, int len);
 static void about_ble_mac_elem_create(void)
 {   
-    widget_img_para.img_parent = \
-        about_container;
-    widget_img_para.file_img_dat = \
-        comm_icon_10_index;
-    widget_img_para.img_click_attr = \
-        false;
+    widget_img_para.img_parent = about_container;
+    widget_img_para.file_img_dat = comm_icon_10_index;
+    widget_img_para.img_click_attr = false;
     widget_img_para.event_cb = NULL;
-    lv_obj_t *ble_mac_container = \
-        common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_t *ble_mac_container = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(ble_mac_container, LV_ALIGN_TOP_MID, 0, 272);
 
-    widget_label_para.label_w = \
-        260;
-    widget_label_para.label_h = \
-        Label_Line_Height;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_SCROLL;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0x777777);
-    widget_label_para.label_ver_center = \
-        false;
-    widget_label_para.user_text_font = \
-        NULL;
-    widget_label_para.label_parent = \
-        ble_mac_container;
-    widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_bluetooth_mac);
-    lv_obj_t *ble_mac_label = \
-        common_widget_label_create(&widget_label_para);
+    widget_label_para.label_w = 260;
+    widget_label_para.label_h = Label_Line_Height;
+    widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0x777777);
+    widget_label_para.label_ver_center = false;
+    widget_label_para.user_text_font = NULL;
+    widget_label_para.label_parent = ble_mac_container;
+    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_bluetooth_mac);
+    lv_obj_t *ble_mac_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(ble_mac_label, LV_ALIGN_TOP_MID, 0, 6);
 
     uint8_t ble_mac_idx = 0;
     char ble_mac_str[18] = {0};
-    const uint8_t *ble_mac = \
-        GetDevBleMac();
+    const uint8_t *ble_mac = GetDevBleMac();
     
     static u8 dst_ble_mac[6];
     memset(dst_ble_mac, 0, 6);
@@ -192,12 +145,9 @@ static void about_ble_mac_elem_create(void)
                     (dst_ble_mac[ble_mac_idx] & 0x0f) + 0x30;
 		}
     }
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_text = \
-        ble_mac_str;
-    lv_obj_t *ble_mac_str_label = \
-        common_widget_label_create(&widget_label_para);
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_text = ble_mac_str;
+    lv_obj_t *ble_mac_str_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(ble_mac_str_label, LV_ALIGN_BOTTOM_MID, 0, -6);
 
     return;
@@ -205,47 +155,29 @@ static void about_ble_mac_elem_create(void)
 
 static void about_version_elem_create(void)
 {
-    widget_img_para.img_parent = \
-        about_container;
-    widget_img_para.file_img_dat = \
-        comm_icon_10_index;
-    widget_img_para.img_click_attr = \
-        false;
+    widget_img_para.img_parent = about_container;
+    widget_img_para.file_img_dat = comm_icon_10_index;
+    widget_img_para.img_click_attr = false;
     widget_img_para.event_cb = NULL;
-    lv_obj_t *version_container = \
-        common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_t *version_container = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(version_container, LV_ALIGN_TOP_MID, 0, 392);
 
-    widget_label_para.label_w = \
-        260;
-    widget_label_para.label_h = \
-        Label_Line_Height;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_SCROLL;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0x777777);
-    widget_label_para.label_ver_center = \
-        false;
-    widget_label_para.user_text_font = \
-        NULL;
-    widget_label_para.label_parent = \
-        version_container;
-    widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_version);
-    lv_obj_t *version_label = \
-        common_widget_label_create(&widget_label_para);
+    widget_label_para.label_w = 260;
+    widget_label_para.label_h = Label_Line_Height;
+    widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0x777777);
+    widget_label_para.label_ver_center = false;
+    widget_label_para.user_text_font = NULL;
+    widget_label_para.label_parent = version_container;
+    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_version);
+    lv_obj_t *version_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(version_label, LV_ALIGN_TOP_MID, 0, 6);
 
-    char *version_str = \
-        Version_Release_Str;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_text = \
-        version_str;
-    lv_obj_t *version_str_label = \
-        common_widget_label_create(&widget_label_para);
+    char *version_str = Version_Release_Str;
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_text = version_str;
+    lv_obj_t *version_str_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(version_str_label, LV_ALIGN_BOTTOM_MID, 0, -6);
 
     return;
@@ -253,51 +185,30 @@ static void about_version_elem_create(void)
 
 static void about_QR_code_elem_create(void)
 {
-    widget_label_para.label_w = \
-        300;
-    widget_label_para.label_h = \
-        Label_Line_Height;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_SCROLL;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_ver_center = \
-        false;
-    widget_label_para.user_text_font = \
-        NULL;
-    widget_label_para.label_parent = \
-        about_container;
-    widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_QR_code);
-    lv_obj_t *QR_code_label = \
-        common_widget_label_create(&widget_label_para);
-    lv_obj_align(QR_code_label, LV_ALIGN_TOP_MID, \
-        0, LCD_HEIGHT + 102);
+    widget_label_para.label_w = 300;
+    widget_label_para.label_h = Label_Line_Height;
+    widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_ver_center = false;
+    widget_label_para.user_text_font = NULL;
+    widget_label_para.label_parent = about_container;
+    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_QR_code);
+    lv_obj_t *QR_code_label = common_widget_label_create(&widget_label_para);
+    lv_obj_align(QR_code_label, LV_ALIGN_TOP_MID, 0, LCD_HEIGHT + 102);
 
-    widget_obj_para.obj_parent = \
-        about_container;
-    widget_obj_para.obj_width = \
-        230;
-    widget_obj_para.obj_height = \
-        230;
-    widget_obj_para.obj_bg_opax = \
-        LV_OPA_100;
-    widget_obj_para.obj_bg_color = \
-        lv_color_hex(0xffffff);
-    widget_obj_para.obj_border_opax = \
-        LV_OPA_0;
+    widget_obj_para.obj_parent = about_container;
+    widget_obj_para.obj_width = 230;
+    widget_obj_para.obj_height = 230;
+    widget_obj_para.obj_bg_opax = LV_OPA_100;
+    widget_obj_para.obj_bg_color = lv_color_hex(0xffffff);
+    widget_obj_para.obj_border_opax = LV_OPA_0;
     widget_obj_para.obj_border_width = 0;
-    widget_obj_para.obj_border_color = \
-        lv_color_hex(0x000000);
+    widget_obj_para.obj_border_color = lv_color_hex(0x000000);
     widget_obj_para.obj_radius = 20;
-    widget_obj_para.obj_is_scrollable = \
-        false;
-    lv_obj_t *QR_code_container = \
-        common_widget_obj_create(&widget_obj_para);
-    lv_obj_align_to(QR_code_container, QR_code_label, \
-        LV_ALIGN_OUT_BOTTOM_MID, 0, 10);
+    widget_obj_para.obj_is_scrollable = false;
+    lv_obj_t *QR_code_container = common_widget_obj_create(&widget_obj_para);
+    lv_obj_align_to(QR_code_container, QR_code_label, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);
 
     lv_color_t dcolor;
     lv_color_t lcolor;
@@ -310,15 +221,14 @@ static void about_QR_code_elem_create(void)
     dcolor = lv_color_hex(0x000000);
     lcolor = lv_color_hex(0xffffff);
     
-    QR_code = \
-        lv_qrcode_create(QR_code_container, QR_code_size, dcolor, lcolor);
+    QR_code = lv_qrcode_create(QR_code_container, QR_code_size, dcolor, lcolor);
     lv_qrcode_update(QR_code, p, link_str_len);
     lv_obj_center(QR_code);
 
     return;
 }
 
-static void reset_button_cb(lv_event_t *e)
+static void reset_cb(lv_event_t *e)
 {
     if(!e) return;
 
@@ -329,44 +239,15 @@ static void reset_button_cb(lv_event_t *e)
 
 static void about_reset_button_elem_create(void)
 {
-    widget_img_para.img_parent = \
-        about_container;
-    widget_img_para.file_img_dat = \
-        about_02_index;
-    widget_img_para.img_click_attr = \
-        true;
-    widget_img_para.event_cb = \
-        reset_button_cb;
+    widget_img_para.img_parent = about_container;
+    widget_img_para.file_img_dat = comm_icon_04_index;
+    widget_img_para.img_click_attr = true;
+    widget_img_para.event_cb = reset_cb;
     widget_img_para.user_data = NULL;
-    lv_obj_t *reset_button = \
-        common_widget_img_create(&widget_img_para, \
-            NULL);
-    lv_obj_align(reset_button, LV_ALIGN_TOP_MID, \
-        0, LCD_HEIGHT + 430);
-    lv_obj_set_ext_click_area(reset_button, 20);
-
-    widget_label_para.label_w = \
-        200;
-    widget_label_para.label_h = \
-        Label_Line_Height;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_SCROLL;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_ver_center = \
-        false;
-    widget_label_para.user_text_font = \
-        NULL;
-    widget_label_para.label_parent = \
-        reset_button;
-    widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_reset);
-    lv_obj_t *reset_label = \
-        common_widget_label_create(&widget_label_para);
-    lv_obj_center(reset_label);
-
+    lv_obj_t *reset_icon = common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_align(reset_icon, LV_ALIGN_TOP_MID, 0, LCD_HEIGHT + 430);
+    lv_obj_set_ext_click_area(reset_icon, 20);
+ 
     return;
 }
 
@@ -374,8 +255,7 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_act_id_t prev_act_id = \
-        ui_act_id_set_main;
+    ui_act_id_t prev_act_id = ui_act_id_set_main;
     if(!lang_txt_is_arabic())
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             prev_act_id, ui_act_id_null, ui_act_id_about);
@@ -405,19 +285,12 @@ static void menu_display_cb(lv_obj_t *obj)
     if(!obj) return;
 
     about_container_create(obj);
-
     about_title_icon_create();
-
     about_title_label_create();
-
     about_ble_name_elem_create();
-
     about_ble_mac_elem_create();
-
     about_version_elem_create();
-
     about_QR_code_elem_create();
-
     about_reset_button_elem_create();
 
     lv_obj_scroll_to_y(about_container, 0, LV_ANIM_OFF);

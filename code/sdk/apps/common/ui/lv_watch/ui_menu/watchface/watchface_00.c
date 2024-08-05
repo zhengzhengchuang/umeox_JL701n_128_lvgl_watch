@@ -25,7 +25,6 @@ static void menu_display_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-#if 1
     widget_img_para.img_x = 0;
     widget_img_para.img_y = 0;
     widget_img_para.img_parent = obj;
@@ -73,7 +72,6 @@ static void menu_display_cb(lv_obj_t *obj)
         comm_week_para.week_addr_index = \
             watchface_00_week_en_00_index;
     common_week_widget_create(&comm_week_para);
-#endif
 
     return;
 }

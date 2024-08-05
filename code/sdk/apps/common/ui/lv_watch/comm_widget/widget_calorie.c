@@ -83,10 +83,7 @@ void common_calorie_widget_refresh(void)
         widget_data_para_t *p_calorie_para = \
             &calorie_para_cache[i];
 
-        u32 __data = PedoData.calorie;
-
-        if(__data > Calorie_Disp_Max)
-            __data = Calorie_Disp_Max;
+        u32 __data = GetPedoDataKcal();
 
         uint32_t num_addr_index = \
             p_calorie_para->num_addr_index;

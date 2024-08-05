@@ -1,7 +1,7 @@
 #include "acc_data.h"
 #include "../lv_watch.h"
 
-#define VM_MASK (0x55ab)
+#define VM_MASK (0x55ae)
 
 PedoData_t PedoData;
 static vm_pedo_ctx_t w_pedo_cache;
@@ -15,78 +15,108 @@ static const PedoData_t init = {
     .distance = 0,
 };
 
-#define ACC_MAX 40
-static float accX[ACC_MAX];
-static float accY[ACC_MAX];
-static float accZ[ACC_MAX];
-
-static void PedoDataStore(float steps, float calorie, float distance)
+static void PedoDataRemoteSend(void)
 {
-    if(steps == 0.0f && calorie == 0.0f && distance == 0.0f)
+    /* Ble未连接，不上报 */
+    u8 BleBtConn = GetDevBleBtConnectStatus();
+    if(BleBtConn == 0 || BleBtConn == 2)
         return;
 
-    __this_module->steps += (u32)steps;
-    __this_module->calorie += (u32)calorie;
-    __this_module->distance += (u32)distance;
+    u8 nfy_buf[Cmd_Pkt_Len];
+    memset(nfy_buf, 0x00, Cmd_Pkt_Len);
 
-    if(__this_module->steps > Steps_Max)
-        __this_module->steps = Steps_Max;
+    u32 steps = GetPedoDataSteps();
+    u32 kcal = GetPedoDataKcal();
+    u32 dis_m = GetPedoDataDisM();
 
-    if(__this_module->calorie > Calorie_Max)
-        __this_module->calorie = Calorie_Max;
+    le_cmd_t cmd = Cmd_Get_Pedo_Data;
 
-    if(__this_module->distance > Distance_Max)
-        __this_module->distance = Distance_Max;
+    u8 idx = 0;
+    nfy_buf[idx++] = cmd;
+    nfy_buf[idx++] = (steps>>16)&(0xff);
+    nfy_buf[idx++] = (steps>>8)&(0xff);
+    nfy_buf[idx++] = (steps>>0)&(0xff);
+    nfy_buf[idx++] = (kcal>>8)&(0xff);
+    nfy_buf[idx++] = (kcal>>0)&(0xff);
+    nfy_buf[idx++] = (dis_m>>16)&(0xff);
+    nfy_buf[idx++] = (dis_m>>8)&(0xff);
+    nfy_buf[idx++] = (dis_m>>0)&(0xff);
 
-    PedoDataVmWrite();
+    u8 crc_idx = Cmd_Pkt_Len - 1;
+    nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
+
+    printf_buf(nfy_buf, Cmd_Pkt_Len);
+    
+    umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
 
     return;
 }
 
-static void SetPedoDataVmCtxCache(float steps, float calorie, float distance)
+float KmToMile(float km)
 {
-    if(steps == 0.0f && calorie == 0.0f && distance == 0.0f)
-        return;
+    float mile = km*0.621371f;
+    return mile;
+}
+
+float DistanceCalc(float steps)
+{
+    float steplen = 0.0f;
+    float distance = 0.0f;
+
+    if(steps == 0.0f) 
+        return distance;
+
+    u8 gender = User_Info.gender;
+    u8 height = User_Info.height;
+    if(gender == Gender_Female)
+        steplen = height*(0.35f)/100.0f;
+    else if(gender == Gender_Male)
+        steplen = height*(0.4f)/100.0f;
+    else
+        steplen = height*(0.4f)/100.0f;
+
+    distance = steplen*steps;//
+
+    return distance;
+}
+
+void PedoDataHandle(float steps, float calorie, float distance)
+{
+    float *psteps = &__this_module->steps;
+    float *pcalorie = &__this_module->calorie;
+    float *pdistance = &__this_module->distance;
+
+    *psteps += steps;
+    *pcalorie += calorie;
+    *pdistance += distance;
+
+    if(*psteps > Steps_Max) *psteps = Steps_Max;
+    if(*pcalorie > Calorie_Max) *pcalorie = Calorie_Max;
+    if(*pdistance > Distance_Max) *pdistance = Distance_Max;
+    PedoDataVmWrite();
+
+    /* 主动上报app */
+    //PedoDataRemoteSend();
+
+    return;
+}
+
+void SetPedoDataVmCtxCache(float steps, float calorie, float distance)
+{
     u8 idx = w_pedo.CurIdx;
     if(idx >= Pedo_Day_Num)
         return;
 
-    w_pedo.steps[idx] += (u32)steps;
-    w_pedo.calorie[idx] += (u32)calorie;
-    w_pedo.distance[idx] += (u32)distance;
+    w_pedo.steps[idx] += steps;
+    w_pedo.calorie[idx] += calorie;
+    w_pedo.distance[idx] += distance;
+
     return;
 }
 
 void PedoDataClear(void)
 {
     PedoDataVmReset();
-    return;
-}
-
-void PedoDataAlgoProcess(struct sys_time *ptime)
-{
-    bool BondFlag = GetDevBondFlag();
-    if(BondFlag == false)
-        return;
-
-    u16 acc_len = GoGsDataFifoRead(accX, accY, accZ, ACC_MAX);
-
-    mInput.timestamp = (int)UtcTimeToSec(ptime);
-
-    mInput.accX = accX;
-    mInput.accY = accY;
-    mInput.accZ = accZ;
-    mInput.accLength = acc_len;
-    int16_t flag = updateIndex(&mInput);
-    if(flag < 0) return;
-    float steps = mInput.stepCountOut;
-    float calorie = mInput.kcalOut;
-    float distance = 0.0f;
-    
-    SedSetSteps(steps);
-    PedoDataStore(steps, calorie, distance);
-    SetPedoDataVmCtxCache(steps, calorie, distance);
-
     return;
 }
 
@@ -120,28 +150,25 @@ void PedoDataMinProcess(struct sys_time *ptime)
         //清除缓存数据，开始新一天的数据记录
         memset(&w_pedo, 0, sizeof(vm_pedo_ctx_t));
         w_pedo.check_code = Nor_Vm_Check_Code;
-        memcpy(&(w_pedo.time), ptime, sizeof(struct sys_time));
+        w_pedo.timestamp = UtcTimeToSec(ptime);
     }
 
-    u16 timestamp = ptime->hour*60 + ptime->min;
+    u32 timestamp = ptime->hour*60 + ptime->min;
     w_pedo.CurIdx = timestamp/Pedo_Inv_Dur;
     
     return;
 }
 
 //false 没过期  true 过期
-static bool PedoVmDataIsPast(struct sys_time *ptime)
+static bool PedoVmDataIsPast(u32 timestamp)
 {
-    //今天
-    struct sys_time *time1 = &(w_pedo.time);
-    struct sys_time *time2 = ptime;
+    if(w_pedo.timestamp < timestamp) 
+        goto __end;
 
-    if(time1->year == time2->year && time1->month == time2->month && \
-        time1->day == time2->day)
-    {
+    if(w_pedo.timestamp - timestamp < SEC_PER_DAY) 
         return false;
-    }
-        
+
+__end:      
     return true;
 }
 
@@ -163,29 +190,40 @@ __end:
     return ret;
 }
 
+void WPedoParaInit(void)
+{
+    memset(&w_pedo, 0, sizeof(vm_pedo_ctx_t));
+    w_pedo.check_code = Nor_Vm_Check_Code;
+    struct sys_time time;
+    GetUtcTime(&time);
+    w_pedo.CurIdx = (time.hour*60 + time.min)/Pedo_Inv_Dur;
+    time.hour = 0; time.min = 0; time.sec = 0;
+    w_pedo.timestamp = UtcTimeToSec(&time);
+
+    return;
+}
+
 void PowerOnSetPedoVmCache(void)
 {
     printf("%s:%d\n", __func__, sizeof(vm_pedo_ctx_t));
 
-    /*初始化今天的vm缓存参数*/
-    memset(&w_pedo, 0, sizeof(vm_pedo_ctx_t));
-    w_pedo.check_code = Nor_Vm_Check_Code;
-    GetUtcTime(&(w_pedo.time));
-    w_pedo.CurIdx = (w_pedo.time.hour*60 + w_pedo.time.min)/Pedo_Inv_Dur;
-
-    u8 num = VmPedoItemNum();
-    printf("%s:num = %d\n", __func__, num);
-
+    WPedoParaInit();
+    
     /*读取vm的最新一条数据*/
     bool data_ret = GetPedoData();
-    if(!data_ret) return;
+    if(data_ret == false) return;
     printf("%s:data_ret = %d\n", __func__, data_ret);
 
+    u8 num = VmPedoItemNum();
+
     /*判断vm的最新数据是否已经过期*/
-    bool IsPast = PedoVmDataIsPast(&(r_pedo.time));
+    bool IsPast = PedoVmDataIsPast(r_pedo.timestamp);
     printf("%s:IsPast = %d\n", __func__, IsPast);
     if(IsPast == true)
     {
+        //过期数据，需要清除
+        PedoDataVmReset();
+
         //如果说已经过期数据，且存储数超过上限，删除最旧一条
         if(num > Pedo_Max_Days)
         {
@@ -204,9 +242,6 @@ void PowerOnSetPedoVmCache(void)
     memcpy(w_pedo.steps, r_pedo.steps, sizeof(r_pedo.steps));
     memcpy(w_pedo.calorie, r_pedo.calorie, sizeof(r_pedo.calorie));
     memcpy(w_pedo.distance, r_pedo.distance, sizeof(r_pedo.distance));
-
-    // for(u8 i = 0; i < Pedo_Day_Num; i++)
-    //     printf("steps[%d] = %d\n", i, w_pedo.steps[i]);
 
     return;
 }
@@ -229,7 +264,9 @@ void PedoDataVmRead(void)
     if(ret != __this_module_size || __this_module->vm_mask != VM_MASK)
         PedoDataVmReset();
 
-    GoMoreAlgoInit();
+    int CommMsg[1];
+    CommMsg[0] = comm_msg_gomore_init;
+    PostCommTaskMsg(CommMsg, 1);
 
     return;
 }
@@ -238,8 +275,7 @@ void PedoDataVmWrite(void)
 {
     for(u8 i = 0; i < 3; i++)
     {
-        int ret = syscfg_write(CFG_PEDO_DATA_INFO, \
-            __this_module, __this_module_size);
+        int ret = syscfg_write(CFG_PEDO_DATA_INFO, __this_module, __this_module_size);
         if(ret == __this_module_size)
             break;
     }

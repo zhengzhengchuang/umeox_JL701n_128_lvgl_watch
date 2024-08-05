@@ -134,8 +134,8 @@ static void CommTaskHandle(void *p)
     return;
 }
 
-//重启保留时间
-//extern void user_write_p11_sys_time_by_timer(void *priv);
+extern void user_dev_reset_handle(void *priv);
+extern void user_dev_restart_handle(void *priv);
 void CommTaskMsgHandle(int *msg, u8 len)
 {
     if(msg == NULL || len == 0)
@@ -145,6 +145,10 @@ void CommTaskMsgHandle(int *msg, u8 len)
 
     switch(cmd)
     {
+        case comm_msg_gomore_init:
+            GoMoreAlgoInit();
+            break;
+
         case comm_msg_utcday_handle:
             utc_day_task_handle(msg[1]);
             break;
@@ -174,11 +178,11 @@ void CommTaskMsgHandle(int *msg, u8 len)
             break;
 
         case comm_msg_dev_restart:
-            cpu_reset();
+            user_dev_restart_handle(NULL);
             break;
 
         case comm_msg_dev_reset:
-            cpu_reset();
+            user_dev_reset_handle(NULL);
             break;
 
         default:

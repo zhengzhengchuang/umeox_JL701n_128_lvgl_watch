@@ -1,13 +1,5 @@
 #include "timestamp.h"
 
-
-#define UTC_BASE_YEAR 		1970
-#define MONTH_PER_YEAR 		12
-#define DAY_PER_YEAR 		365
-#define SEC_PER_DAY 		86400
-#define SEC_PER_HOUR 		3600
-#define SEC_PER_MIN 		60
-
 /* Number of days per month */
 static const u8  days_per_month[MONTH_PER_YEAR] = {
     /*

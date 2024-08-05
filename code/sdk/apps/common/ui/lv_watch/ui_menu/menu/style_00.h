@@ -7,7 +7,7 @@ extern "C" {
 
 #include "../../lv_watch.h"
 
-#define Elem_Num (17)
+#define Elem_Num (16)
 
 #define Container_W (LCD_WIDTH)
 #define Container_H \

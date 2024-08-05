@@ -10,21 +10,15 @@ static const nor_vm_type_t nor_vm_type = \
 *********************************************************************************/
 void VmCallLogCtxClear(void)
 { 
-    void *nor_vm_file = \
-        nor_flash_vm_file(nor_vm_type);
+    void *nor_vm_file = nor_flash_vm_file(nor_vm_type);
+    if(!nor_vm_file) return;
 
-    if(!nor_vm_file)
-        return;
+    u8 num = VmCallLogItemNum();
 
-    uint8_t call_log_num = \
-        VmCallLogItemNum();
-
-    while(call_log_num)
+    while(num)
     {
-        flash_common_delete_by_index(\
-            nor_vm_file, 0);
-
-        call_log_num--;
+        flash_common_delete_by_index(nor_vm_file, 0);
+        num--;
     }
     
     return;
@@ -33,43 +27,32 @@ void VmCallLogCtxClear(void)
 /*********************************************************************************
                               存储数量                                         
 *********************************************************************************/
-uint8_t VmCallLogItemNum(void)
+u8 VmCallLogItemNum(void)
 {
-    uint8_t call_log_num = 0;
+    u8 num = 0;
 
-    void *nor_vm_file = \
-        nor_flash_vm_file(nor_vm_type);
+    void *nor_vm_file = nor_flash_vm_file(nor_vm_type);
+    if(!nor_vm_file) return num;
 
-    if(!nor_vm_file)
-        return call_log_num;
+    num = flash_common_get_total(nor_vm_file);
 
-    call_log_num = \
-        flash_common_get_total(nor_vm_file);
+    if(num > Call_log_Max_Num)
+        num = Call_log_Max_Num;
 
-    if(call_log_num > Call_log_Max_Num)
-        call_log_num = Call_log_Max_Num;
-
-    return call_log_num;
+    return num;
 }
 
 /*********************************************************************************
                               获取内容                                        
 *********************************************************************************/
-bool VmCallLogCtxByIdx(uint8_t idx)
+bool VmCallLogCtxByIdx(u8 idx)
 {
-    uint8_t num = \
-        VmCallLogItemNum();
+    u8 num = VmCallLogItemNum();
+    if(idx >= num) return false;
 
-    if(idx >= num)
-        return false;
-
-    void *nor_vm_file = \
-        nor_flash_vm_file(nor_vm_type);
-    int ctx_len = \
-        sizeof(vm_call_log_ctx_t);
-    
-    if(!nor_vm_file)
-        return false;
+    void *nor_vm_file = nor_flash_vm_file(nor_vm_type);
+    int ctx_len = sizeof(vm_call_log_ctx_t);
+    if(!nor_vm_file) return false;
 
     idx = (num - 1) - idx;
     
@@ -77,8 +60,7 @@ bool VmCallLogCtxByIdx(uint8_t idx)
     flash_common_read_by_index(nor_vm_file, idx, 0, \
         ctx_len, (u8 *)&r_call_log);
 
-    if(r_call_log.check_code != \
-        Nor_Vm_Check_Code)
+    if(r_call_log.check_code != Nor_Vm_Check_Code)
         return false;
 
     return true;
@@ -90,26 +72,19 @@ bool VmCallLogCtxByIdx(uint8_t idx)
 void VmCallLogCtxFlashSave(void *p)
 {
     bool BondFlag = GetDevBondFlag();
-    if(BondFlag == false)
-        return;
+    if(BondFlag == false) return;
 
     if(!p) return;
 
-    void *nor_vm_file = \
-        nor_flash_vm_file(nor_vm_type);
-    int ctx_len = \
-        sizeof(vm_call_log_ctx_t);
+    void *nor_vm_file = nor_flash_vm_file(nor_vm_type);
+    int ctx_len = sizeof(vm_call_log_ctx_t);
+    if(!nor_vm_file) return;
 
-    if(!nor_vm_file)
-        return;
+    u8 num = VmCallLogItemNum();
 
-    uint8_t call_log_num = \
-        VmCallLogItemNum();
-
-    printf("call_log_num = %d\n", \
-        call_log_num);
+    printf("call_log_num = %d\n", num);
     
-    if(call_log_num >= Call_log_Max_Num)
+    if(num >= Call_log_Max_Num)
         flash_common_delete_by_index(nor_vm_file, 0);
 
     flash_common_write_file(nor_vm_file, 0, ctx_len, (u8 *)p);

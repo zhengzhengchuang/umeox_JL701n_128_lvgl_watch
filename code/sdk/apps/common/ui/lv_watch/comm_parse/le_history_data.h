@@ -10,6 +10,7 @@ extern "C" {
 void HistoryHrDataSend(int cmd, int year, int month, int day);
 void HistoryBoDataSend(int cmd, int year, int month, int day);
 void HistoryPedoDataSend(int cmd, int year, int month, int day);
+void HistorySleepDataSend(int cmd, int year, int month, int day);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

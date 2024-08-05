@@ -81,7 +81,7 @@ void GsTaskMsgHandle(int *msg, u8 len)
             break;
 
         case GsMsgDisable:
-            DisableGsModule();
+            GsDisableHandle();
             break;
 
         default:

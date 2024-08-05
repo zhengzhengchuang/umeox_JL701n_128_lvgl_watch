@@ -76,8 +76,7 @@ static void TasbihReminderIsOnHandle(void)
     //播放
     //...
 
-    ui_menu_jump(\
-        ui_act_id_tasbih_remind);
+    ui_menu_jump(ui_act_id_tasbih_remind);
 
     return;
 }

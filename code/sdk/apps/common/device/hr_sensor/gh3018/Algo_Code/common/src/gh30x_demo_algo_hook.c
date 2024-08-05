@@ -94,27 +94,11 @@ void GH30X_HrAlgorithmResultReport(STGh30xAlgoResult *pstAlgoResult, GU32 lubFra
 #endif
 
     int hr = pstAlgoResult->snResult[0];
-    int ry = pstAlgoResult->snResult[3];
-    
     if(hr > 0)
     {
-        //过滤5秒内的数据
-
-        u8 FilterCnt = \
-            GetHrDataFilter();
-        if(FilterCnt == 0)
-        {
-            SetHrRealVal((u8)hr);
-            SetHrVmCtxCache((u8)hr);
-        }else
-        {
-            FilterCnt--;
-            SetHrDataFilter(FilterCnt);
-        }
-    }else
-    {
-        SetHrRealVal(0);
-        SetHrDataFilter(Hr_Data_Filter);
+        printf("%s:hr = %d\n", __func__, hr);
+        SetHrRealVal((u8)hr);
+        SetHrVmCtxCache((u8)hr);
     }
 }
 
@@ -144,32 +128,12 @@ void GH30X_Spo2AlgorithmResultReport(STGh30xAlgoResult *pstAlgoResult, GU32 lubF
 //    GOODIX_PLANFROM_SPO2_RESULT_REPORT_ENTITY();
 #endif
     int bo = pstAlgoResult->snResult[0];
-    int ry = pstAlgoResult->snResult[3];
-
-    printf("%s:bo = %d, ry = %d\n", __func__, bo, ry);
-
     if(bo > 0)
     {
-        //过滤5秒内的数据
-
-        u8 FilterCnt = \
-            GetHrDataFilter();
-        if(FilterCnt == 0)
-        {
-            SetBoRealVal((u8)bo);
-            SetBoVmCtxCache((u8)bo);
-        }else
-        {
-            FilterCnt--;
-            SetHrDataFilter(\
-                FilterCnt);
-        }
-    }else
-    {
-        SetBoRealVal(0);
-        SetHrDataFilter(\
-            Hr_Data_Filter);
-    }
+        printf("%s:bo = %d\n", __func__, bo);
+        SetBoRealVal((u8)bo);
+        SetBoVmCtxCache((u8)bo);
+    } 
 }
 
 /**

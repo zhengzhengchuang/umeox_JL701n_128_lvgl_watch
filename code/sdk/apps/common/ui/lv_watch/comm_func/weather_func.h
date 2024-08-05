@@ -13,9 +13,8 @@ typedef struct
 {
     bool valid;        //数据是否有效
 
-    struct sys_time time;
-    vm_weather_data_ctx_t \
-        data_ctx[Weather_Sync_Days];
+    u32 timestamp;
+    vm_weather_data_ctx_t data_ctx[Weather_Sync_Days];
 }WeatherInfoPara_t;
 extern WeatherInfoPara_t Weather_Info;
 
@@ -26,7 +25,7 @@ weather_type_t weather_weather_type(uint8_t day);
 
 void SetWeatherInfoPara(void);
 void WeatherInfoParaUpdate(void);
-void WeatherProcess(struct sys_time *ptime);
+void WeatherUtcMinProcess(struct sys_time *ptime);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

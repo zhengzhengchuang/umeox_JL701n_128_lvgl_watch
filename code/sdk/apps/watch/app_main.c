@@ -192,6 +192,8 @@ void app_main()
 
     app_var.start_time = timer_get_ms();
 
+    printf("%s:charge = %d\n", __func__, get_charge_online_flag());
+
     if (get_charge_online_flag()) {
 
         app_var.poweron_charge = 1;
@@ -217,6 +219,8 @@ void app_main()
             app_curr_task = APP_POWERON_TASK;
         }
     }
+
+    printf("%s:app_curr_task = %d\n", __func__, app_curr_task);
 
 #if TCFG_PSRAM_UI_EFFECT
     //sal.sca = 0.85;

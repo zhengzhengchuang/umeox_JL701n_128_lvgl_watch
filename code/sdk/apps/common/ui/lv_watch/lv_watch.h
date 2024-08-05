@@ -163,6 +163,10 @@ void UserDisableBt(void);
 bool GetDevBondFlag(void);
 void SetDevBondFlag(int f);
 
+/**********pedo data获取**********/
+u32 GetPedoDataSteps(void);
+u32 GetPedoDataKcal(void);
+u32 GetPedoDataDisM(void);
 #ifdef __cplusplus
 }
 #endif

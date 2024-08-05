@@ -2,6 +2,9 @@
 
 void ResetAllVmData(void)
 {
+    HrDataVmReset();
+    BoDataVmReset();
+    SlpDataVmReset();
     LLInfoParaReset();
     GmCaliInfoReset();
     PedoDataVmReset();
@@ -32,10 +35,12 @@ void ResetAllNorVmData(void)
 void PowerOnVmDataRead(void)
 {
     /*开机:vm--->数据*/
+    PowerOnSetSleepData();
     PowerOnSetHrVmCache();
     PowerOnSetBoVmCache();
+    SetWeatherInfoPara();
     PowerOnSetPedoVmCache();
-
+    
     return;
 }
 
@@ -46,5 +51,14 @@ void PowerOffVmDataWrite(void)
     PowerOffSetBoVmFlashSave();
     PowerOffSetPedoVmFlashSave();
 
+    return;
+}
+
+void TimeUpdateDataHandle(void)
+{
+    WHrParaInit();
+    WBoParaInit();
+    WPedoParaInit();
+    
     return;
 }

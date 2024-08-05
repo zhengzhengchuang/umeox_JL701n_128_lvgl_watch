@@ -11,7 +11,6 @@ extern "C" {
 /*********************************************************************************
                                   配速显示最大值                                    
 *********************************************************************************/
-#define Distance_Disp_Max (99999)
 
 void common_distance_widget_init(void);
 void common_distance_widget_refresh(void);

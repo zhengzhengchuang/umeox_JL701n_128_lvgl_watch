@@ -13,43 +13,27 @@ static const uint8_t click_idx[\
 
 static void no_call_log_menu_create(lv_obj_t *obj)
 {
-    widget_img_para.img_parent = \
-        obj;
-    widget_img_para.file_img_dat = \
-        call_04_index;
-    widget_img_para.img_click_attr = \
-        false;
-    widget_img_para.event_cb = \
-        NULL;
-    lv_obj_t *no_call_log_icon = \
-        common_widget_img_create(&widget_img_para, NULL);
+    widget_img_para.img_parent = obj;
+    widget_img_para.file_img_dat = call_04_index;
+    widget_img_para.img_click_attr = false;
+    widget_img_para.event_cb = NULL;
+    lv_obj_t *no_call_log_icon = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(no_call_log_icon, LV_ALIGN_TOP_MID, 0, 88);
 
-    widget_img_para.file_img_dat = \
-        comm_icon_11_index;
-    lv_obj_t *comm_11_icon = \
-        common_widget_img_create(&widget_img_para, NULL);
+    widget_img_para.file_img_dat = comm_icon_11_index;
+    lv_obj_t *comm_11_icon = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(comm_11_icon, LV_ALIGN_TOP_MID, 0, 266);
 
-    widget_label_para.label_w = \
-        300;
-    widget_label_para.label_h = \
-        Label_Line_Height*2;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_WRAP;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_ver_center = \
-        true;
+    widget_label_para.label_w = 300;
+    widget_label_para.label_h = Label_Line_Height*2;
+    widget_label_para.long_mode = LV_LABEL_LONG_WRAP;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_ver_center = true;
     widget_label_para.user_text_font = NULL;
-    widget_label_para.label_parent = \
-        obj;
-    widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_no_record);
-    lv_obj_t *no_record_label = \
-        common_widget_label_create(&widget_label_para);
+    widget_label_para.label_parent = obj;
+    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_no_record);
+    lv_obj_t *no_record_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(no_record_label, LV_ALIGN_TOP_MID, 0, 342);
 
     return;
@@ -65,42 +49,31 @@ static void scroll_cb(lv_event_t *e)
 
 static void list_ctx_container_create(lv_obj_t *obj)
 {
-    widget_obj_para.obj_parent = \
-        obj;
+    widget_obj_para.obj_parent = obj;
     widget_obj_para.obj_x = 0;
     widget_obj_para.obj_y = 0;
-    widget_obj_para.obj_width = \
-        LCD_WIDTH;
-    widget_obj_para.obj_height = \
-        LCD_HEIGHT;
-    widget_obj_para.obj_bg_opax = \
-        LV_OPA_0;
-    widget_obj_para.obj_bg_color = \
-        lv_color_hex(0x000000);
-    widget_obj_para.obj_border_opax = \
-        LV_OPA_0;
+    widget_obj_para.obj_width = LCD_WIDTH;
+    widget_obj_para.obj_height = LCD_HEIGHT;
+    widget_obj_para.obj_bg_opax = LV_OPA_0;
+    widget_obj_para.obj_bg_color = lv_color_hex(0x000000);
+    widget_obj_para.obj_border_opax = LV_OPA_0;
     widget_obj_para.obj_border_width = 0;
-    widget_obj_para.obj_border_color = \
-        lv_color_hex(0x000000);
+    widget_obj_para.obj_border_color = lv_color_hex(0x000000);
     widget_obj_para.obj_radius = 0;
-    widget_obj_para.obj_is_scrollable = \
-        true;
-    list_ctx_container = \
-        common_widget_obj_create(&widget_obj_para);
-    lv_obj_add_event_cb(list_ctx_container, scroll_cb, \
-        LV_EVENT_SCROLL, NULL);
+    widget_obj_para.obj_is_scrollable = true;
+    list_ctx_container = common_widget_obj_create(&widget_obj_para);
+    lv_obj_add_event_cb(list_ctx_container, scroll_cb, LV_EVENT_SCROLL, NULL);
 
     return;
 }
 
 static uint32_t sel_state_icon(call_log_state_t state)
 {
-    uint32_t file_img_dat = \
-        call_05_index;
+    uint32_t file_img_dat = call_05_index;
 
-    if(state == call_log_state_in)
+    if(state == call_log_in)
         file_img_dat = call_07_index;
-    else if(state == call_log_state_out)
+    else if(state == call_log_out)
         file_img_dat = call_06_index;
 
     return file_img_dat;
@@ -110,17 +83,13 @@ static void elem_click_cb(lv_event_t *e)
 {
     if(!e) return;
 
-    uint8_t idx = \
-        *(uint8_t *)lv_event_get_user_data(e);
+    uint8_t idx = *(uint8_t *)lv_event_get_user_data(e);
 
-    bool ret = \
-        VmCallLogCtxByIdx(idx);
+    bool ret = VmCallLogCtxByIdx(idx);
     if(ret == false) return;
 
-    char *number = \
-        r_call_log.number_str;
-    uint8_t len = \
-        strlen(r_call_log.number_str);
+    char *number = r_call_log.number_str;
+    uint8_t len = strlen(r_call_log.number_str);
 
     CtrlCallOutByNum(number, len);
 
@@ -132,68 +101,51 @@ static void has_call_log_menu_create(lv_obj_t *obj, \
 {
     list_ctx_container_create(obj);
 
-    widget_obj_para.obj_parent = \
-        list_ctx_container;
-    widget_obj_para.obj_width = \
-        LCD_WIDTH;   
-    widget_obj_para.obj_height = \
-        ec_h;
-    widget_obj_para.obj_is_scrollable = \
-        false;
+    widget_obj_para.obj_parent = list_ctx_container;
+    widget_obj_para.obj_width = LCD_WIDTH;   
+    widget_obj_para.obj_height = ec_h;
+    widget_obj_para.obj_is_scrollable = false;
 
-    widget_img_para.img_click_attr = \
-            false;
+    widget_img_para.img_click_attr = false;
     widget_img_para.event_cb = NULL;
 
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_SCROLL;
+    widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
     if(menu_align == menu_align_right)
-        widget_label_para.text_align = \
-            LV_TEXT_ALIGN_RIGHT;
+        widget_label_para.text_align = LV_TEXT_ALIGN_RIGHT;
     else
-        widget_label_para.text_align = \
-            LV_TEXT_ALIGN_LEFT;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_ver_center = \
-        false;
+        widget_label_para.text_align = LV_TEXT_ALIGN_LEFT;
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_ver_center = false;
     widget_label_para.user_text_font = NULL;
 
+    struct sys_time time;
     uint8_t am_or_pm = 0;
     static char time_str[6];
-
+    
     for(uint8_t i = 0; i < num; i++)
     {
-        bool ret = \
-            VmCallLogCtxByIdx(i);
+        bool ret = VmCallLogCtxByIdx(i);
         if(ret == false) continue;
 
         widget_obj_para.obj_y = 40 + ec_h*i;
-        lv_obj_t *elem_container = \
-            common_widget_obj_create(&widget_obj_para);
-        lv_obj_add_event_cb(elem_container, \
-            elem_click_cb, LV_EVENT_SHORT_CLICKED, \
-                (void *)&click_idx[i]);
+        lv_obj_t *elem_container = common_widget_obj_create(&widget_obj_para);
+        lv_obj_add_event_cb(elem_container, elem_click_cb, LV_EVENT_SHORT_CLICKED, \
+            (void *)&click_idx[i]);
 
-        widget_img_para.img_parent = \
-            elem_container;
-        widget_img_para.file_img_dat = \
-            sel_state_icon(r_call_log.state);
-        lv_obj_t *elem_icon = \
-             common_widget_img_create(&widget_img_para, NULL);
+        widget_img_para.img_parent = elem_container;
+        widget_img_para.file_img_dat = sel_state_icon(r_call_log.state);
+        lv_obj_t *elem_icon = common_widget_img_create(&widget_img_para, NULL);
         if(menu_align == menu_align_right)
             lv_obj_align(elem_icon, LV_ALIGN_RIGHT_MID, -24, 0);
         else
             lv_obj_align(elem_icon, LV_ALIGN_LEFT_MID, 24, 0);
 
-        uint8_t hour = \
-            r_call_log.time.hour;
-        uint8_t minute = \
-            r_call_log.time.min;
+        SecToUtcTime(r_call_log.timestamp, &time);
+        uint8_t hour = time.hour;
+        uint8_t minute = time.min;
 
         memset(time_str, 0, sizeof(time_str));
-        int time_format = \
-            GetVmParaCacheByLabel(vm_label_time_format);
+        int time_format = GetVmParaCacheByLabel(vm_label_time_format);
         if(time_format == time_format_12)
         {
            if(hour >= 12)
@@ -209,27 +161,19 @@ static void has_call_log_menu_create(lv_obj_t *obj, \
         sprintf(time_str, "%02d:%02d", hour, minute);
 
         widget_label_para.label_w = 80;
-        widget_label_para.label_h = \
-            Label_Line_Height;
-        widget_label_para.label_text_color = \
-            lv_color_hex(0xffffff);
-        widget_label_para.label_parent = \
-            elem_container;
-        widget_label_para.label_text = \
-            time_str;
-        lv_obj_t *time_label = \
-            common_widget_label_create(&widget_label_para);
+        widget_label_para.label_h = Label_Line_Height;
+        widget_label_para.label_text_color = lv_color_hex(0xffffff);
+        widget_label_para.label_parent = elem_container;
+        widget_label_para.label_text = time_str;
+        lv_obj_t *time_label = common_widget_label_create(&widget_label_para);
         if(menu_align == menu_align_right)
             lv_obj_align_to(time_label, elem_icon, LV_ALIGN_OUT_LEFT_TOP, -15, 4);
         else
             lv_obj_align_to(time_label, elem_icon, LV_ALIGN_OUT_RIGHT_TOP, 15, 4);
 
-        widget_img_para.img_parent = \
-            elem_container;
-        widget_img_para.file_img_dat = \
-            am_or_pm + comm_icon_20_index;
-        lv_obj_t *ampm_icon = \
-             common_widget_img_create(&widget_img_para, NULL);
+        widget_img_para.img_parent = elem_container;
+        widget_img_para.file_img_dat = am_or_pm + comm_icon_20_index;
+        lv_obj_t *ampm_icon = common_widget_img_create(&widget_img_para, NULL);
         if(menu_align == menu_align_right)
             lv_obj_align_to(ampm_icon, time_label, LV_ALIGN_OUT_LEFT_BOTTOM, 0, -5);
         else
@@ -239,20 +183,15 @@ static void has_call_log_menu_create(lv_obj_t *obj, \
         
         char *ctx_str;
         if(strlen(r_call_log.name_str))
-            ctx_str = \
-                r_call_log.name_str;
+            ctx_str = r_call_log.name_str;
         else
-            ctx_str = \
-                r_call_log.number_str;
+            ctx_str = r_call_log.number_str;
 
         widget_label_para.label_w = 220;
-        widget_label_para.label_h = \
-            Label_Line_Height;
-        widget_label_para.label_text_color = \
-            lv_color_hex(0x666666);
+        widget_label_para.label_h = Label_Line_Height;
+        widget_label_para.label_text_color = lv_color_hex(0x666666);
         widget_label_para.label_text = ctx_str;
-        lv_obj_t *ctx_label = \
-            common_widget_label_create(&widget_label_para);
+        lv_obj_t *ctx_label = common_widget_label_create(&widget_label_para);
         if(menu_align == menu_align_right)
             lv_obj_align_to(ctx_label, elem_icon, LV_ALIGN_OUT_LEFT_BOTTOM, -15, 0);
         else
@@ -274,8 +213,7 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_act_id_t prev_act_id = \
-        ui_act_id_call_main;
+    ui_act_id_t prev_act_id = ui_act_id_call_main;
     if(!lang_txt_is_arabic())
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             prev_act_id, ui_act_id_null, ui_act_id_call_log);
@@ -302,8 +240,7 @@ static void menu_display_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    uint8_t call_log_num = \
-        VmCallLogItemNum();
+    uint8_t call_log_num = VmCallLogItemNum();
 
     if(!call_log_num)
         no_call_log_menu_create(obj);
@@ -314,8 +251,7 @@ static void menu_display_cb(lv_obj_t *obj)
         if(lang_txt_is_arabic())
             menu_align = menu_align_right;
 
-        has_call_log_menu_create(obj, \
-            call_log_num, menu_align);
+        has_call_log_menu_create(obj, call_log_num, menu_align);
     }
         
     return;
@@ -331,10 +267,8 @@ static void menu_key_cb(lv_obj_t *obj, int key_value, \
 
 static void menu_rdec_cb(lv_obj_t *obj, int state)
 {
-    uint8_t num = \
-        VmCallLogItemNum();
-    if(num == 0)
-        return;
+    uint8_t num = VmCallLogItemNum();
+    if(num == 0) return;
 
     if(lv_anim_get(list_ctx_container, NULL))
         return;

@@ -228,7 +228,7 @@ typedef struct IndexIO {
     // float gpsAccuracy;
     // float incline;
     float hrRef;
-    float speedRef;
+    // float speedRef;
     // float cyclingCadence;
     // float cyclingPower;
     // float cyclingResistance;

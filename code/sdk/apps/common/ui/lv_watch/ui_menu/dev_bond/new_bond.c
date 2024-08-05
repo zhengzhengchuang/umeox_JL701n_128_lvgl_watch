@@ -88,7 +88,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_label_para.label_ver_center = true;
     widget_label_para.user_text_font = NULL;
     widget_label_para.label_parent = obj;
-    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_new_bond_tips);
+    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_new_bond);
     lv_obj_t *reset_tips_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(reset_tips_label, LV_ALIGN_TOP_MID, 0, 132);
 

@@ -1,28 +1,67 @@
 #include "../lv_watch.h"
 
-static u32 HrAutoCnt = 0;
+#define VM_MASK (0x55aa)
+
+static u32 auto_hr_cnt;
+static bool auto_hr_enable;
+static const u8 auto_hr_dur = 45;//自动心率时长 s
+
 static vm_hr_ctx_t w_hr_cache;
-static const u8 HrAutoDur = 45;//自动心率时长 s
+
+HrPara_t HrPara;
+static const HrPara_t init = {
+    .hr_real = 0, .hr_min = {0}, .hr_max = {0},
+    .hr_low_sw = 1, .hr_high_sw = 1,
+    .hr_low_val = 40, .hr_high_val = 150,
+};
+
+#define __this_module (&HrPara)
+#define __this_module_size (sizeof(HrPara_t))
 
 u8 GetHrRealVal(void)
 {
-    int real_val = \
-        GetVmParaCacheByLabel(vm_label_hr_real_val);
-
-    return ((u8)real_val);
+    return __this_module->hr_real;
 }
+
 void SetHrRealVal(u8 val)
 {
-    SetVmParaCacheByLabel(\
-        vm_label_hr_real_val, (int)val);
+    if(val == 0) return;
+
+    __this_module->hr_real = val;
+
+    u8 VmIdx = w_hr.CurIdx;
+    if(VmIdx >= Hr_Day_Num)
+        return;
+
+    u8 HIdx = VmIdx/(60/Hr_Inv_Dur);
+    if(HIdx >= 24) return;
+
+    if(__this_module->hr_min[HIdx] == 0)
+        __this_module->hr_min[HIdx] = val;
+
+    if(__this_module->hr_max[HIdx] == 0)
+        __this_module->hr_max[HIdx] = val;
+
+    if(val < __this_module->hr_min[HIdx])
+        __this_module->hr_min[HIdx] = val;
+
+    if(val > __this_module->hr_max[HIdx])
+        __this_module->hr_max[HIdx] = val;
+
+    HrDataVmWrite();
 
     return;
 }
 
+void ClearHrRealVal(void)
+{
+    __this_module->hr_real = 0;
+    HrDataVmWrite();
+}
+
 void SetHrVmCtxCache(u8 val)
 {
-    if(val == 0)
-        return;
+    if(val == 0) return;
 
     u8 VmIdx = w_hr.CurIdx;
     if(VmIdx >= Hr_Day_Num)
@@ -30,45 +69,19 @@ void SetHrVmCtxCache(u8 val)
 
     w_hr.data[VmIdx] = val;
 
-    u8 HIdx = VmIdx/(60/Hr_Inv_Dur);
-    if(HIdx >= 24)
-        return;
-
-    if(w_hr.min_data[HIdx] == 0)
-        w_hr.min_data[HIdx] = val;
-
-    if(w_hr.max_data[HIdx] == 0)
-        w_hr.max_data[HIdx] = val;
-
-    if(val < w_hr.min_data[HIdx])
-        w_hr.min_data[HIdx] = val;
-
-    if(val > w_hr.max_data[HIdx])
-        w_hr.max_data[HIdx] = val;
-
-    // printf("%d:min = %d, max = %d\n", HIdx, \
-    //     w_hr.min_data[HIdx], w_hr.max_data[HIdx]);
-
     return;
 }
 
 //false 没过期  true 过期
-static bool HrVmDataIsPast(struct sys_time *hr_time)
+static bool HrVmDataIsPast(u32 timestamp)
 {
-    if(!hr_time) return true;
+    if(w_hr.timestamp < timestamp) 
+        goto __end;
 
-    //今天
-    struct sys_time *utc_time1 = &(w_hr.time);
-    struct sys_time *utc_time2 = hr_time;
-
-    if(utc_time1->year == utc_time2->year && \
-        utc_time1->month == utc_time2->month && \
-            utc_time1->day == utc_time2->day)
-    {
+    if(w_hr.timestamp - timestamp < SEC_PER_DAY) 
         return false;
-    }
-        
 
+__end:
     return true;
 }
 
@@ -76,14 +89,11 @@ static bool GetHrData(void)
 {
     bool ret = false;
 
-    uint8_t hr_num = \
-        VmHrItemNum();
-    if(hr_num == 0)
-        goto __end;
+    u8 num = VmHrItemNum();
+    if(num == 0) goto __end;
 
-    u8 idx = hr_num - 1;
-    bool r_hr_ret = \
-        VmHrCtxByIdx(idx);
+    u8 idx = num - 1;
+    bool r_hr_ret = VmHrCtxByIdx(idx);
     if(r_hr_ret == false)
         goto __end;
 
@@ -93,31 +103,45 @@ __end:
     return ret;
 }
 
+void WHrParaInit(void)
+{
+    memset(&w_hr, 0, sizeof(vm_hr_ctx_t));
+    w_hr.check_code = Nor_Vm_Check_Code;
+    struct sys_time time;
+    GetUtcTime(&time);
+    w_hr.CurIdx = (time.hour*60 + time.min)/Hr_Inv_Dur;
+    time.hour = 0; time.min = 0; time.sec = 0;
+    w_hr.timestamp = UtcTimeToSec(&time);
+
+    return;
+}
+
 void PowerOnSetHrVmCache(void)
 {
     printf("%s:%d\n", __func__, sizeof(vm_hr_ctx_t));
 
-    /*初始化今天的vm缓存参数*/
-    memset(&w_hr, 0, sizeof(vm_hr_ctx_t));
-    w_hr.check_code = Nor_Vm_Check_Code;
-    GetUtcTime(&(w_hr.time));
-    w_hr.CurIdx = (w_hr.time.hour*60 + w_hr.time.min)/Hr_Inv_Dur;
+    WHrParaInit();
 
-    u8 hr_num = VmHrItemNum();
-    printf("%s:hr_num = %d\n", __func__, hr_num);
+    u8 num = VmHrItemNum();
+    printf("%s:hr_num = %d\n", __func__, num);
 
     /*读取vm的最新一条数据*/
     bool data_ret = GetHrData();
-    if(!data_ret) return;
+    if(data_ret == false) return;
 
     /*判断vm的最新数据是否已经过期*/
-    bool IsPast = \
-        HrVmDataIsPast(&(r_hr.time));
+    bool IsPast = HrVmDataIsPast(r_hr.timestamp);
     printf("%s:IsPast = %d\n", __func__, IsPast);
     if(IsPast == true)
     {
+        //过期数据，清除用户数据
+        __this_module->hr_real = 0;
+        memset(__this_module->hr_min, 0, 24);
+        memset(__this_module->hr_max, 0, 24);
+        HrDataVmWrite();
+
         //如果说已经过期数据，且存储数超过上限，删除最旧一条
-        if(hr_num > Hr_Max_Days)
+        if(num > Hr_Max_Days)
         {
             u8 del_idx = 0;
             VmHrCtxDelByIdx(del_idx);
@@ -128,13 +152,11 @@ void PowerOnSetHrVmCache(void)
         
 
     //删除副本数据，继续新的vm缓存
-    u8 del_idx = hr_num - 1;
+    u8 del_idx = num - 1;
     VmHrCtxDelByIdx(del_idx);
 
     //拷贝保存的数据
     memcpy(w_hr.data, r_hr.data, Hr_Day_Num);
-    memcpy(w_hr.min_data, r_hr.min_data, 24);
-    memcpy(w_hr.max_data, r_hr.max_data, 24);
 
     return;
 }
@@ -162,32 +184,60 @@ void VmHrCtxFlashWrite(void)
 
 void HrTimerSecProcess(void)
 {
-    bool PpgEn = GetPpgEnableFlag();
-    if(PpgEn == true)
-    {
-        u8 work = GetPpgWorkType();
-        if(work == PpgWorkBo || work == PpgWorkNone)
-            return;
+    bool BondFlag = GetDevBondFlag();
+    if(BondFlag == false)
+        return;
 
-        u8 mode = GetPpgMode();
-        if(mode == PpgModeAuto)
-        {
-            HrAutoCnt++;
-            if(HrAutoCnt >= HrAutoDur)
-            {
-                HrAutoCnt = 0;
-                DisablePpgModule();
-            }
-        }else
-        {
-            HrAutoCnt = 0;
-        }
+    if(auto_hr_enable == true)
+    {
+        bool en = GetPpgEnableFlag();
+        if(en == true) goto __end;
+
+        auto_hr_enable = false;
+        auto_hr_cnt = 0;
+        EnablePpgModule(PpgWorkHr, PpgModeAuto);
     }
 
+    u8 work = GetPpgWorkType();
+    if(work == PpgWorkHr)
+    {
+        u8 mode = GetPpgMode();
+        if(mode == PpgModeManual)
+        {
+            /* 手动心率，不做处理 */
+            auto_hr_cnt = 0;
+            goto __end;
+        }else
+        {
+            bool fall_asleep = GetFallAsleepFlag();
+            if(fall_asleep == true)
+            {
+                /* 睡眠自动心率，不做处理 */
+                auto_hr_cnt = 0;
+                goto __end;
+            }else
+            {
+                /* 正常自动心率流程 */
+                auto_hr_cnt++;
+                if(auto_hr_cnt >= auto_hr_dur)
+                {
+                    auto_hr_cnt = 0;
+                    DisablePpgModule();
+                }
+            }
+        }
+    }else
+    {
+        /* 传感器不工作在心率，不做处理 */
+        auto_hr_cnt = 0;
+        goto __end;
+    }
+
+__end:
     return;
 }
 
-void HrProcess(struct sys_time *ptime)
+void HrUtcMinProcess(struct sys_time *ptime)
 {
     bool BondFlag = GetDevBondFlag();
     if(BondFlag == false)
@@ -205,33 +255,77 @@ void HrProcess(struct sys_time *ptime)
         //清除缓存数据，开始新一天的数据记录
         memset(&w_hr, 0, sizeof(vm_hr_ctx_t));
         w_hr.check_code = Nor_Vm_Check_Code;
-        memcpy(&(w_hr.time), ptime, sizeof(struct sys_time));
+        w_hr.timestamp = UtcTimeToSec(ptime);
+   
+        __this_module->hr_real = 0;
+        memset(__this_module->hr_min, 0, 24);
+        memset(__this_module->hr_max, 0, 24);
+        HrDataVmWrite();
     }
 
-    u16 utc_timestamp = \
-        ptime->hour*60 + ptime->min;
-    u8 HrCurIdx = \
-        utc_timestamp / Hr_Inv_Dur;
-    w_hr.CurIdx = HrCurIdx;
-
-    u8 HrInvOn = \
-        utc_timestamp % Hr_Inv_Dur;
-    int auto_hr_sw = \
-        GetVmParaCacheByLabel(vm_label_auto_hr_sw);
-    if(HrInvOn == 0 && auto_hr_sw)
+    u32 timestamp = ptime->hour*60 + ptime->min;
+    u8 idx = timestamp/Hr_Inv_Dur;
+    w_hr.CurIdx = idx;
+    u8 on = timestamp%Hr_Inv_Dur;
+    int auto_sw = GetVmParaCacheByLabel(vm_label_auto_hr_sw);
+    if(on == 0 && auto_sw == 1)
     {
-        //整点15分钟到 启动自动心率
-        bool EnableFlag = \
-            GetPpgEnableFlag();
-        if(!EnableFlag)
+        /* 自动心率 */
+        u8 work = GetPpgWorkType();
+        if(work == PpgWorkHr)
         {
-            HrAutoCnt = 0;
-            SetHrRealVal(0);
-
-            //如果PPG手动启动，禁止自动启动，只是辅助
-            EnablePpgModule(PpgWorkHr, PpgModeAuto);
+            /* 如果当前已经工作在心率，这本次自动心率不会开启 */
+            auto_hr_enable = false;
+        }else
+        {
+            bool fall_asleep = GetFallAsleepFlag();
+            if(fall_asleep == true)
+            {
+                /* 入睡不开启自动心率，由算法睡眠去接管 */
+                auto_hr_enable = false;
+            }else
+            {
+                auto_hr_enable = true;
+            }
         }
+    }else
+    {
+        auto_hr_enable = false;
     }
-    
+
+    return;
+}
+
+void HrDataVmRead(void)
+{
+    int ret = syscfg_read(CFG_HR_PARA_INFO, __this_module, \
+        __this_module_size);
+    if(ret != __this_module_size || __this_module->vm_mask != VM_MASK)
+        HrDataVmReset();
+
+    return;
+}
+
+void HrDataVmWrite(void)
+{
+    for(u8 i = 0; i < 3; i++)
+    {
+        int ret = syscfg_write(CFG_HR_PARA_INFO, __this_module, \
+            __this_module_size);
+        if(ret == __this_module_size)
+            break;
+    }
+
+    return;
+}
+
+void HrDataVmReset(void)
+{
+    memcpy(__this_module, &init, __this_module_size);
+
+    __this_module->vm_mask = VM_MASK;
+
+    HrDataVmWrite();
+
     return;
 }

@@ -13,7 +13,7 @@ extern "C" {
 
 enum
 {
-    /*ui相关操作*/
+    /* ui相关操作 */
     ui_msg_menu_jump = 0x00,
     ui_msg_menu_refresh,
     ui_msg_menu_offscreen,
@@ -22,7 +22,7 @@ enum
     ui_msg_key_handle,
     ui_msg_rdec_handle,
 
-    /*nor flash数据写*/
+    /* nor flash数据写 */
     ui_msg_nor_hr_wirte,
     ui_msg_nor_bo_write,
     ui_msg_nor_pedo_write,
@@ -32,13 +32,10 @@ enum
     ui_msg_nor_contacts_write,
     ui_msg_nor_call_log_write,
 
-    /*nor flash数据擦除*/
+    /* nor flash数据擦除 */
     ui_msg_nor_data_clear,
     
-    /*nor flash数据读*/
-    //ui_msg_nor_pedo_send,
-    
-    /*设备绑定操作*/
+    /* 设备绑定操作 */
     ui_msg_unbond_handle,
     ui_msg_ori_bond_handle,
     ui_msg_new_bond_handle,

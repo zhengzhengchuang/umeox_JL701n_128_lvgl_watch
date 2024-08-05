@@ -11,6 +11,8 @@ void ResetAllNorVmData(void);
 
 void PowerOnVmDataRead(void);
 void PowerOffVmDataWrite(void);
+
+void TimeUpdateDataHandle(void);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

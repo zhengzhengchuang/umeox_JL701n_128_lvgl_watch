@@ -60,6 +60,9 @@ common_widget_img_para_t widget_img_para = {0};
 lv_obj_t *common_widget_img_create(common_widget_img_para_t *img_para, \
     uint16_t *img_dsc_idx)
 {
+    lv_obj_t *common_widget_img = common_widget_ex_img_create(img_para, img_dsc_idx);
+    return common_widget_img;
+#if 0
     if(!img_para)
         return NULL;
 
@@ -100,16 +103,24 @@ lv_obj_t *common_widget_img_create(common_widget_img_para_t *img_para, \
     user_img_dsc.img_dst_cnt++;
 
     return common_widget_img;
+#endif
+
 }
 
 lv_img_dsc_t *common_widget_img_open_res(uint32_t file_img_dat)
 {
+    static lv_img_dsc_t *p_ex_img;
+
+    p_ex_img = common_widget_img_open_ex_res(file_img_dat);
+    return p_ex_img;
+#if 0
     static lv_img_dsc_t widget_img_dst;
 
     lv_open_res(get_res_fd(), RES_BASE_ADDR, 0, file_index[file_img_dat], \
         &widget_img_dst);
 
     return (&widget_img_dst);
+#endif
 }
 
 void common_widget_img_replace_src(lv_obj_t *obj, uint32_t file_img_dat, \
@@ -117,16 +128,17 @@ void common_widget_img_replace_src(lv_obj_t *obj, uint32_t file_img_dat, \
 {
     if(!obj) return;
 
-    uint8_t img_dst_cnt = \
-        user_img_dsc.img_dst_cnt;
-    lv_img_dsc_t *img_dst_gather = \
-        user_img_dsc.img_dst_gather;
+    uint8_t img_dst_cnt = user_img_dsc.img_dst_cnt;
+    lv_img_dsc_t *img_dst_gather = user_img_dsc.img_dst_gather;
 
     if(img_dsc_idx >= img_dst_cnt)
         return;
 
+    lv_open_ex_res(EX_RES_BASE_ADDR, file_index[file_img_dat], &img_dst_gather[img_dsc_idx]);
+#if 0
     lv_open_res(get_res_fd(), RES_BASE_ADDR, 0, file_index[file_img_dat], \
         &img_dst_gather[img_dsc_idx]);
+#endif
 
     lv_img_set_src(obj, &img_dst_gather[img_dsc_idx]);
 
@@ -139,10 +151,8 @@ lv_obj_t *common_widget_ex_img_create(common_widget_img_para_t *img_para, \
     if(!img_para)
         return NULL;
 
-    uint8_t img_dst_cnt = \
-        user_img_dsc.img_dst_cnt;
-    lv_img_dsc_t *img_dst_gather = \
-        user_img_dsc.img_dst_gather;
+    uint8_t img_dst_cnt = user_img_dsc.img_dst_cnt;
+    lv_img_dsc_t *img_dst_gather = user_img_dsc.img_dst_gather;
 
     if(img_dst_cnt >= Img_Dsc_Max)
     {
@@ -152,7 +162,7 @@ lv_obj_t *common_widget_ex_img_create(common_widget_img_para_t *img_para, \
 
     if(!(img_dst_gather[img_dst_cnt].data) && img_para->file_img_dat != File_Img_Dat_None)
     {
-        lv_open_ex_res(EX_RES_BASE_ADDR, ex_file_index[img_para->file_img_dat], &img_dst_gather[img_dst_cnt]);
+        lv_open_ex_res(EX_RES_BASE_ADDR, file_index[img_para->file_img_dat], &img_dst_gather[img_dst_cnt]);
     }
     
     lv_obj_t *common_widget_img = lv_img_create(img_para->img_parent);
@@ -180,8 +190,7 @@ lv_img_dsc_t *common_widget_img_open_ex_res(uint32_t file_img_dat)
 {
     static lv_img_dsc_t ex_img;
 
-    lv_open_ex_res(EX_RES_BASE_ADDR, ex_file_index[file_img_dat], \
-        &ex_img);
+    lv_open_ex_res(EX_RES_BASE_ADDR, file_index[file_img_dat], &ex_img);
 
     return (&ex_img);
 }
@@ -193,8 +202,7 @@ common_widget_label_para_t widget_label_para = {0};
 
 static const lv_font_t *sys_default_label_font(void)
 {
-    const lv_font_t *sel_font = \
-        &font_common_32;
+    const lv_font_t *sel_font = &font_common_32;
 
     return sel_font;
 }

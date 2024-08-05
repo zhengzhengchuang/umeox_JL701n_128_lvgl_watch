@@ -389,7 +389,7 @@ static void UserAlarmIsOnHandle(void)
     return;
 }
 
-void UserAlarmProcess(struct sys_time *ptime)
+void UserUtcMinAlarmProcess(struct sys_time *ptime)
 {
     bool BondFlag = GetDevBondFlag();
     if(BondFlag == false) 

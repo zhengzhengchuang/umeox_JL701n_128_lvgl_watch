@@ -38,6 +38,7 @@ enum
     Le_History_Hr_Data,
     Le_History_Bo_Data,
     Le_History_Pedo_Data,
+    Le_History_Sleep_Data,
 };
 
 void le_task_create(void);

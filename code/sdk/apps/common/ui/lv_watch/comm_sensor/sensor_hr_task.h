@@ -10,12 +10,14 @@ extern "C" {
 
 #define Ppg_Task_Name "ppg_task"
 
-#define Hr_Data_Filter 5
+//#define Hr_Data_Filter 1
+
+#define HrGs_Fifo_WM (Qmi8658_Fifo_WM)
 
 enum
 {
-    PpgWorkHr, //心率
-    PpgWorkBo, //血氧
+    PpgWorkHr,  //心率
+    PpgWorkBo,  //血氧
 
     PpgWorkNone, //无工作
 };
@@ -50,10 +52,6 @@ void SetPpgMode(u8 mode);
 u8 GetPpgWorkType(void);
 void SetPpgWorkType(u8 work);
 
-/* 心率出值过滤次数 */
-u8 GetHrDataFilter(void);
-void SetHrDataFilter(u8 f);
-
 /* PPG当前使能标志 */
 bool GetPpgEnableFlag(void);
 void SetPpgEnableFlag(bool en);
@@ -63,7 +61,7 @@ bool GetPpgWearStatus(void);
 void SetPpgWearStatus(bool wear);
 
 void HrGsDataFifoWrite(u8 *w_buf, u32 w_len);
-void HrGsDataFifoRead(ST_GS_DATA_TYPE *Gs_data, u16 *r_idx);
+void HrGsDataFifoRead(ST_GS_DATA_TYPE *gs_data, u16 *gs_len);
 
 #ifdef __cplusplus
 } /* extern "C" */

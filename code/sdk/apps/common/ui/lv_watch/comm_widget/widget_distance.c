@@ -83,10 +83,8 @@ void common_distance_widget_refresh(void)
         widget_data_para_t *p_distance_para = \
             &distance_para_cache[i];
 
-        u32 __data = PedoData.distance;
-        if(__data > Distance_Disp_Max)
-            __data = Distance_Disp_Max;
-
+        u32 __data = GetPedoDataDisM();
+      
         uint32_t num_addr_index = \
             p_distance_para->num_addr_index;
 
@@ -115,14 +113,22 @@ void common_distance_widget_refresh(void)
             data_img_dsc->header.w;
 
         char distance_num_str[Distance_Obj_Max + 1];
-        memset(distance_num_str, 0, \
-            sizeof(distance_num_str));
+        memset(distance_num_str, 0, sizeof(distance_num_str));
 
-        if(!__data)
+        float mile;
+        int unit_dis = GetVmParaCacheByLabel(vm_label_unit_distance);
+        if(unit_dis == unit_distance_mile)
+        {
+            mile = KmToMile(__data/1000.0f);
+            __data = (u32)(mile*1000.0f + 0.5f);
+        }
+        __data /= 10;
+
+        if(__data == 0)
             memcpy(distance_num_str, (void *)"__", 2);
         else
             sprintf(distance_num_str, "%d.%02d", \
-                __data/1000, (__data%1000)/10);
+                __data/100, (__data%100));
 
         uint8_t data_bit_num = \
             strlen((const char *)distance_num_str);
@@ -220,10 +226,7 @@ int16_t common_distance_widget_create(widget_data_para_t *data_para, \
         Distance_Group_Max)
         return data_end_x;
 
-    int __data = *(int *)data_val;
-
-    if(__data > Distance_Disp_Max)
-        __data = Distance_Disp_Max;
+    u32 __data = *(u32 *)data_val;
 
     distance_data_type[distance_group_num] = type;
 
@@ -261,14 +264,22 @@ int16_t common_distance_widget_create(widget_data_para_t *data_para, \
         data_img_dsc->header.w;
 
     char distance_num_str[Distance_Obj_Max + 1];
-    memset(distance_num_str, 0, \
-        sizeof(distance_num_str));
+    memset(distance_num_str, 0, sizeof(distance_num_str));
 
-    if(!__data)
+    float mile;
+    int unit_dis = GetVmParaCacheByLabel(vm_label_unit_distance);
+    if(unit_dis == unit_distance_mile)
+    {
+        mile = KmToMile(__data/1000.0f);
+        __data = (u32)(mile*1000.0f + 0.5f);
+    }
+    __data /= 10;
+
+    if(__data == 0)
         memcpy(distance_num_str, (void *)"__", 2);
     else
         sprintf(distance_num_str, "%d.%02d", \
-            __data/1000, (__data%1000)/10);
+            __data/100, (__data%100));
 
     uint8_t data_bit_num = \
         strlen((const char *)distance_num_str);

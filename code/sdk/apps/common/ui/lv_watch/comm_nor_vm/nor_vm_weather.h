@@ -45,12 +45,10 @@ typedef struct
 
 typedef struct
 {
-    uint16_t check_code;
+    u16 check_code;
 
-    struct sys_time time;
-
-    vm_weather_data_ctx_t \
-        vm_ctx[Weather_Sync_Days];
+    u32 timestamp;
+    vm_weather_data_ctx_t vm_ctx[Weather_Sync_Days];
 }vm_weather_ctx_t;
 extern vm_weather_ctx_t w_weather;
 extern vm_weather_ctx_t r_weather;

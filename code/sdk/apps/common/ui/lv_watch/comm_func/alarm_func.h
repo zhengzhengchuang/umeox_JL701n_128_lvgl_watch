@@ -74,7 +74,7 @@ uint32_t GetUserAlarmInfo(uint8_t alarm_id);
 
 uint8_t GetAlarmIsOnId(void);
 void SetAlarmIsOnId(uint8_t id);
-void UserAlarmProcess(struct sys_time *ptime);
+void UserUtcMinAlarmProcess(struct sys_time *ptime);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

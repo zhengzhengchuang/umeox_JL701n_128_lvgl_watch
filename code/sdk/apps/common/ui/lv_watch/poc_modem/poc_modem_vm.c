@@ -47,7 +47,7 @@ static const vm_ctx_t vm_def[Vm_Num] = {
     {.label = vm_label_watchface_sel, .val = ui_watchface_id_00},
 
     /*********系统语言*********/
-    {.label = vm_label_sys_language, .val = lang_id_chinese},
+    {.label = vm_label_sys_language, .val = lang_id_arabic},
 
     /*********系统声音开启*********/
     {.label = vm_label_sys_sound, .val = 1},
@@ -72,21 +72,9 @@ static const vm_ctx_t vm_def[Vm_Num] = {
     /*******设备绑定*******/
     {.label = vm_label_dev_bond, .val = 0},
     
-    /*******心率值*******/
-    {.label = vm_label_hr_real_val, .val = 0},
-
-    /*********心率过高值*********/
-    {.label = vm_label_hr_low_remind_sw, .val = 1},
-    {.label = vm_label_hr_high_remind_sw, .val = 1},
-    {.label = vm_label_hr_low_val, .val = 40},
-    {.label = vm_label_hr_high_val, .val = 150},
-
-    /*********血氧值*********/
-    {.label = vm_label_bo_real_val, .val = 0},
-
     /*******特定开关*******/
-    {.label = vm_label_auto_hr_sw, .val = 0},
-    {.label = vm_label_auto_bo_sw, .val = 0},
+    {.label = vm_label_auto_hr_sw, .val = 1},
+    {.label = vm_label_auto_bo_sw, .val = 1},
     {.label = vm_label_lpw_remind_sw, .val = 1},
 };
 
@@ -137,6 +125,8 @@ void vm_store_para_init(void)
         vm_para_cache_reset();
     }
 
+    printf("ret = %d, op_vm_len = %d\n", ret, op_vm_len);
+
     LLInfoParaRead();
     KaabaQiblaParaUpdate();
     PTimeCfgParaRead();
@@ -153,6 +143,10 @@ void vm_store_para_init(void)
     RmusicInfoParaRead();
     QpUserInfoParaRead();
     PedoDataVmRead();
+    HrDataVmRead();
+    BoDataVmRead();
+    SlpDataVmRead();
+    //SysTimeVmRead();
     
     return;
 }

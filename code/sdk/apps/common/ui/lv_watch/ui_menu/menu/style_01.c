@@ -17,14 +17,14 @@ static const uint8_t visual_line = 2;
 
 static const uint8_t ec_idx[Elem_Num] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, \
-    10, 11, 12, 13, 14, 15, 16,
+    10, 11, 12, 13, 14, 15,
 };
 
 static const ui_act_id_t act_id[Elem_Num] = {
     ui_act_id_call_main, ui_act_id_msg_list, ui_act_id_null, \
     ui_act_id_quran_main, ui_act_id_prayer_time_main, ui_act_id_azkar_list, \
     ui_act_id_tasbih_main, ui_act_id_al_name_list, ui_act_id_Gcalendar_main, \
-    ui_act_id_null, ui_act_id_sleep_main, ui_act_id_weather_data, \
+    /*ui_act_id_null,*/ ui_act_id_sleep_main, ui_act_id_weather_data, \
     ui_act_id_hr_sample, ui_act_id_bo_sample, ui_act_id_alarm_main, \
     ui_act_id_more_menu, ui_act_id_set_main, 
 };
@@ -157,17 +157,11 @@ static void elem_container_cb(lv_event_t *e)
 
     if(idx == 2)
     {
-        bool cali_succ = \
-            GetGmCaliSucc();
+        bool cali_succ = GetGmCaliSucc();
         if(cali_succ == false)
             ui_menu_jump(ui_act_id_gm_cali);
         else
-        {
-            if(!(ll_info.position_valid))
-                ui_menu_jump(ui_act_id_kaaba_position);   
-            else
-                ui_menu_jump(ui_act_id_kaaba_qibla);
-        }
+            ui_menu_jump(ui_act_id_kaaba_qibla);
     }else
     {
         ui_menu_jump(act_id[idx]);

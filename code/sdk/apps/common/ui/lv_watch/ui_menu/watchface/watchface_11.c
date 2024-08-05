@@ -107,7 +107,7 @@ static void menu_display_cb(lv_obj_t *obj)
             watchface_11_week_en_00_index;
     common_week_widget_create(&comm_week_para);
 
-    u32 step = PedoData.steps;
+    u32 steps = GetPedoDataSteps();
     widget_data_para.data_x = 21;
     widget_data_para.data_y = 332;
     widget_data_para.num_inv = 0;
@@ -117,7 +117,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_data_para.data_align = \
         widget_data_align_center;
     common_data_widget_create(&widget_data_para, \
-        widget_data_type_step, &step);
+        widget_data_type_step, &steps);
 
     int hr_val = \
         GetHrRealVal();

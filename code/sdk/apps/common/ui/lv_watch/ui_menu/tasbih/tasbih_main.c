@@ -66,12 +66,7 @@ static void tasbih_main_enable_create(lv_obj_t *obj, \
         false;
     widget_label_para.user_text_font = \
         NULL;
-    if(TasbihR_Enable)
-        widget_label_para.label_text = \
-            get_lang_txt_with_id(lang_txtid_reminders_on);
-    else
-        widget_label_para.label_text = \
-            get_lang_txt_with_id(lang_txtid_reminders_off);
+    get_lang_txt_with_id(lang_txtid_remind);
     lv_obj_t *enable_label = \
         common_widget_label_create(&widget_label_para);
     if(menu_align == menu_align_right)
@@ -368,7 +363,7 @@ static void tasbih_main_interval_time_create(\
     widget_label_para.label_parent = \
         interval_time_container;
     widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_interval_time);
+        get_lang_txt_with_id(lang_txtid_inv_time);
     lv_obj_t *interval_time_label = \
         common_widget_label_create(&widget_label_para);
     lv_obj_align_to(interval_time_label, interval_time_line, \

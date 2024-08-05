@@ -73,7 +73,7 @@ static void menu_display_cb(lv_obj_t *obj)
             watchface_06_week_en_00_index;
     common_week_widget_create(&comm_week_para);
 
-    u32 step = PedoData.steps;
+    u32 steps = GetPedoDataSteps();
     widget_data_para.data_x = 266;
     widget_data_para.data_y = 68;
     widget_data_para.num_inv = 0;
@@ -83,7 +83,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_data_para.data_align = \
         widget_data_align_left;
     common_data_widget_create(&widget_data_para, \
-        widget_data_type_step, &step);
+        widget_data_type_step, &steps);
 
     u8 hr_val = \
         GetHrRealVal();
@@ -92,11 +92,11 @@ static void menu_display_cb(lv_obj_t *obj)
     common_data_widget_create(&widget_data_para, \
         widget_data_type_hr, &hr_val);
 
-    u32 calorie = PedoData.calorie;
+    u32 kcal = GetPedoDataKcal();
     widget_data_para.data_x = 266;
     widget_data_para.data_y = 264;
     common_data_widget_create(&widget_data_para, \
-        widget_data_type_calorie, &calorie);
+        widget_data_type_calorie, &kcal);
 
     return;
 }

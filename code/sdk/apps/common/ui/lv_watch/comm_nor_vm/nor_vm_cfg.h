@@ -41,7 +41,7 @@ typedef uint8_t nor_vm_type_t;
 #define Nor_Vm_Weather_Size   (2*4096)
 #define Nor_Vm_Call_log_Size  (2*4096)
 #define Nor_Vm_Message_Size   (2*4096)
-#define Nor_Vm_Sleep_Size     (2*4096)
+#define Nor_Vm_Sleep_Size     (5*4096)
 #define Nor_Vm_Hr_Size        (2*4096)
 #define Nor_Vm_Bo_Size        (2*4096)
 #define Nor_Vm_Pedo_Size      (2*4096)

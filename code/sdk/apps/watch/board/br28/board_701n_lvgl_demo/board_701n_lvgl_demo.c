@@ -796,9 +796,9 @@ IMU_SENSOR_PLATFORM_DATA_END();
 /************************** rtc ****************************/
 #if TCFG_RTC_ENABLE
 const struct sys_time def_sys_time = {  //初始一下当前时间
-    .year = 2024,
-    .month = 7,
-    .day = 24,
+    .year = 2020,
+    .month = 1,
+    .day = 1,
     .hour = 0,
     .min = 0,
     .sec = 0,
@@ -1222,6 +1222,10 @@ void board_init()
 #if TCFG_RTC_ENABLE
     extern void p11_sys_time_init();
     p11_sys_time_init();
+
+    // bool read_p11_sys_time(struct sys_time *t);
+    // struct sys_time sys_time;
+    // read_p11_sys_time(&sys_time);
 #if TCFG_RTC_USE_LRC
 	// LRC做时钟源时，每过一段时间读一下rtc用于校准
 	sys_timer_add(NULL, rtc_lrc_timer_deal, 1*60*60*1000);
@@ -1344,13 +1348,14 @@ void board_init()
 #if TCFG_RTC_ENABLE
     //alarm_init(); //不用RTC闹钟，使用用户闹钟
 #endif
+
     le_task_create();
     CommTaskCreate();
   
     GsTaskCreate();
     GmTaskCreate();
     PpgTaskCreate();
-
+    
 #if TCFG_SENSOR_DEBUG_ENABLE
     data_export_init();
     extern void *sensor_de_file;

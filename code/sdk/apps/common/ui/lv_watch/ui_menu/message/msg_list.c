@@ -27,8 +27,7 @@ static void delete_cb(lv_event_t *e)
 
     VmMessageCtxClear();
 
-    ui_act_id_t cur_act_id = \
-        p_ui_info_cache->cur_act_id;
+    ui_act_id_t cur_act_id = p_ui_info_cache->cur_act_id;
     ui_menu_jump(cur_act_id);
 
     return;
@@ -38,19 +37,14 @@ static void elem_container_cb(lv_event_t *e)
 {
     if(!e) return;
 
-    uint8_t idx = \
-        *(uint8_t *)lv_event_get_user_data(e);
+    uint8_t idx = *(uint8_t *)lv_event_get_user_data(e);
 
-    uint8_t num = \
-        GetMessageNum();
-
-    if(idx >= num)
-        return;
+    uint8_t num = GetMessageNum();
+    if(idx >= num) return;
 
     SetQueryId(idx);
 
-    ui_menu_jump(\
-        ui_act_id_msg_detail);
+    ui_menu_jump(ui_act_id_msg_detail);
 
     return;
 }
@@ -78,43 +72,27 @@ static void list_ctx_container_create(lv_obj_t *obj)
 
 static void no_message_menu_create(lv_obj_t *obj)
 {
-    widget_img_para.img_parent = \
-        obj;
-    widget_img_para.file_img_dat = \
-        message_icon_00_index;
-    widget_img_para.img_click_attr = \
-        false;
-    widget_img_para.event_cb = \
-        NULL;
-    lv_obj_t *no_msg_icon = \
-        common_widget_img_create(&widget_img_para, NULL);
+    widget_img_para.img_parent = obj;
+    widget_img_para.file_img_dat = message_icon_00_index;
+    widget_img_para.img_click_attr = false;
+    widget_img_para.event_cb = NULL;
+    lv_obj_t *no_msg_icon = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(no_msg_icon, LV_ALIGN_TOP_MID, 0, 88);
 
-    widget_img_para.file_img_dat = \
-        comm_icon_11_index;
-    lv_obj_t *comm_11_icon =
-        common_widget_img_create(&widget_img_para, NULL);
+    widget_img_para.file_img_dat = comm_icon_11_index;
+    lv_obj_t *comm_11_icon = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(comm_11_icon, LV_ALIGN_TOP_MID, 0, 266);
 
-    widget_label_para.label_w = \
-        300;
-    widget_label_para.label_h = \
-        Label_Line_Height*2;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_WRAP;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_ver_center = \
-        true;
+    widget_label_para.label_w = 300;
+    widget_label_para.label_h = Label_Line_Height*2;
+    widget_label_para.long_mode = LV_LABEL_LONG_WRAP;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_ver_center = true;
     widget_label_para.user_text_font = NULL;
-    widget_label_para.label_parent = \
-        obj;
-    widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_no_message);
-    lv_obj_t *label = \
-        common_widget_label_create(&widget_label_para);
+    widget_label_para.label_parent = obj;
+    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_no_message);
+    lv_obj_t *label = common_widget_label_create(&widget_label_para);
     lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 342);
 
     return;
@@ -130,122 +108,81 @@ static void has_message_menu_create(lv_obj_t *obj, \
 
     uint8_t idx = 0;
     int16_t ec_sy = 28;
+    struct sys_time time;
     static char time_str[6];
-    
+
     for(uint8_t i = 0; i < msg_num; i++)
     { 
-        bool ret = \
-            GetVmFlashMessageCtx(i);
-        if(ret == false)
-            continue;
+        bool ret = GetVmFlashMessageCtx(i);
+        if(ret == false) continue;
        
-        widget_img_para.img_parent = \
-            list_ctx_container;
-        widget_img_para.file_img_dat = \
-            message_icon_02_index; 
-        widget_img_para.img_click_attr = \
-            true;
-        widget_img_para.event_cb = \
-            elem_container_cb;
-        widget_img_para.user_data = \
-            (void *)&ec_idx[i];
-        lv_obj_t *elem_container = \
-            common_widget_img_create(&widget_img_para, NULL);
+        widget_img_para.img_parent = list_ctx_container;
+        widget_img_para.file_img_dat = message_icon_02_index; 
+        widget_img_para.img_click_attr = true;
+        widget_img_para.event_cb = elem_container_cb;
+        widget_img_para.user_data = (void *)&ec_idx[i];
+        lv_obj_t *elem_container = common_widget_img_create(&widget_img_para, NULL);
         lv_obj_align(elem_container, LV_ALIGN_TOP_MID, 0, ec_sy + ec_h*i);
 
-        message_type_t type = \
-            r_message.message_type;
-        widget_img_para.img_parent = \
-            elem_container;
-        widget_img_para.file_img_dat = \
-            message_type_00_index + type; 
+        message_type_t type = r_message.message_type;
+        widget_img_para.img_parent = elem_container;
+        widget_img_para.file_img_dat = message_type_00_index + type; 
         widget_img_para.img_click_attr = false;
         widget_img_para.event_cb = NULL;
         widget_img_para.user_data = NULL;
-        lv_obj_t *msg_type_icon = \
-            common_widget_img_create(&widget_img_para, NULL); 
+        lv_obj_t *msg_type_icon = common_widget_img_create(&widget_img_para, NULL); 
         if(menu_align == menu_align_right)
             lv_obj_align(msg_type_icon, LV_ALIGN_TOP_RIGHT, -20, 10);
         else
             lv_obj_align(msg_type_icon, LV_ALIGN_TOP_LEFT, 20, 10);
 
-        uint8_t hour = \
-            r_message.message_time.hour;
-        uint8_t minute = \
-            r_message.message_time.min;
+        SecToUtcTime(r_message.timestamp, &time);
+        uint8_t hour = time.hour;
+        uint8_t minute = time.min;
         memset(time_str, 0, sizeof(time_str));
         sprintf(time_str, "%02d:%02d", hour, minute);
-        widget_label_para.label_w = \
-            80;
-        widget_label_para.label_h = \
-            Label_Line_Height;
-        widget_label_para.long_mode = \
-            LV_LABEL_LONG_CLIP;
-        widget_label_para.text_align = \
-            LV_TEXT_ALIGN_CENTER;
-        widget_label_para.label_text_color = \
-            lv_color_hex(0xffffff);
-        widget_label_para.label_ver_center = \
-            false;
-        widget_label_para.user_text_font = \
-            NULL;
-        widget_label_para.label_parent = \
-            elem_container;
-        widget_label_para.label_text = \
-            time_str;
-        lv_obj_t *time_str_label = \
-            common_widget_label_create(&widget_label_para);
+        widget_label_para.label_w = 80;
+        widget_label_para.label_h = Label_Line_Height;
+        widget_label_para.long_mode = LV_LABEL_LONG_CLIP;
+        widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+        widget_label_para.label_text_color = lv_color_hex(0xffffff);
+        widget_label_para.label_ver_center = false;
+        widget_label_para.user_text_font = NULL;
+        widget_label_para.label_parent = elem_container;
+        widget_label_para.label_text = time_str;
+        lv_obj_t *time_str_label = common_widget_label_create(&widget_label_para);
         if(menu_align == menu_align_right)
             lv_obj_align(time_str_label, LV_ALIGN_TOP_LEFT, 20, 10);
         else
             lv_obj_align(time_str_label, LV_ALIGN_TOP_RIGHT, -20, 10); 
 
-        char *ctx_str = \
-            r_message.msg_ctx;
+        char *ctx_str = r_message.msg_ctx;
         uint32_t str_len = strlen(ctx_str);
-        bool arabic_letter = \
-            utf8_str_is_arabic(ctx_str, str_len);
-        widget_label_para.label_w = \
-            288;
-        widget_label_para.label_h = \
-            Label_Line_Height*2;
-        widget_label_para.long_mode = \
-            LV_LABEL_LONG_DOT;
+        bool arabic_letter = utf8_str_is_arabic(ctx_str, str_len);
+        widget_label_para.label_w = 288;
+        widget_label_para.label_h = Label_Line_Height*2;
+        widget_label_para.long_mode = LV_LABEL_LONG_DOT;
         if(arabic_letter)
-            widget_label_para.text_align = \
-                LV_TEXT_ALIGN_RIGHT;
+            widget_label_para.text_align = LV_TEXT_ALIGN_RIGHT;
         else
-            widget_label_para.text_align = \
-                LV_TEXT_ALIGN_LEFT;
-        widget_label_para.label_text_color = \
-            lv_color_hex(0xffffff);
-        widget_label_para.label_ver_center = \
-            false;
-        widget_label_para.user_text_font = \
-            NULL;
-        widget_label_para.label_parent = \
-            elem_container;
-        widget_label_para.label_text = \
-            ctx_str;
-        lv_obj_t *short_msg_label = \
-            common_widget_label_create(&widget_label_para);
+            widget_label_para.text_align = LV_TEXT_ALIGN_LEFT;
+        widget_label_para.label_text_color = lv_color_hex(0xffffff);
+        widget_label_para.label_ver_center = false;
+        widget_label_para.user_text_font = NULL;
+        widget_label_para.label_parent = elem_container;
+        widget_label_para.label_text = ctx_str;
+        lv_obj_t *short_msg_label = common_widget_label_create(&widget_label_para);
         lv_obj_align(short_msg_label, LV_ALIGN_TOP_MID, 0, 78);
 
         idx++;
     }
 
-    widget_img_para.img_parent = \
-        list_ctx_container;
-    widget_img_para.file_img_dat = \
-        comm_icon_14_index;
-    widget_img_para.img_click_attr = \
-        true;
-    widget_img_para.event_cb = \
-        delete_cb;
-    widget_img_para.user_data = \
-        NULL;
-    lv_obj_t *delete_button = \
-        common_widget_img_create(&widget_img_para, NULL);
+    widget_img_para.img_parent = list_ctx_container;
+    widget_img_para.file_img_dat = comm_icon_14_index;
+    widget_img_para.img_click_attr = true;
+    widget_img_para.event_cb = delete_cb;
+    widget_img_para.user_data = NULL;
+    lv_obj_t *delete_button = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(delete_button, LV_ALIGN_TOP_MID, 0, ec_sy + ec_h*idx + 30);
     lv_obj_set_ext_click_area(delete_button, 20);
 
@@ -264,18 +201,15 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_mode_t ui_mode = \
-        p_ui_info_cache->ui_mode;
+    ui_mode_t ui_mode = p_ui_info_cache->ui_mode;
     if(ui_mode == ui_mode_watchface)
     {
-        ui_act_id_t up_act_id = \
-            ui_act_id_watchface;
+        ui_act_id_t up_act_id = ui_act_id_watchface;
         tileview_register_all_menu(obj, up_act_id, ui_act_id_null, \
             ui_act_id_null, ui_act_id_null, ui_act_id_msg_list);
     }else
     {
-        ui_act_id_t prev_act_id = \
-            ui_act_id_menu;
+        ui_act_id_t prev_act_id = ui_act_id_menu;
         if(!lang_txt_is_arabic())
             tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
                 prev_act_id, ui_act_id_null, ui_act_id_msg_list);
@@ -306,16 +240,13 @@ static void menu_display_cb(lv_obj_t *obj)
     menu_align_t menu_align = \
         menu_align_left;
     if(lang_txt_is_arabic())
-        menu_align = \
-            menu_align_right;
+        menu_align = menu_align_right;
 
-    uint8_t num = \
-        GetMessageNum();
+    uint8_t num = GetMessageNum();
     if(num == 0)
         no_message_menu_create(obj);
     else
-        has_message_menu_create(obj, \
-            num, menu_align);
+        has_message_menu_create(obj, num, menu_align);
 
     return;
 }
@@ -332,8 +263,7 @@ static void menu_rdec_cb(lv_obj_t *obj, int state)
 {
     if(!obj) return;
 
-    uint8_t num = \
-        GetMessageNum();
+    uint8_t num = GetMessageNum();
     if(num == 0) return;
 
     if(lv_anim_get(list_ctx_container, NULL))

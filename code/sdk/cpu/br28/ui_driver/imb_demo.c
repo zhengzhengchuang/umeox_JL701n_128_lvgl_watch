@@ -8941,7 +8941,7 @@ void lv_open_res(void *fd, int phyaddr, int offset, struct file_index_t res, lv_
     return;
 }
 
-void lv_open_ex_res(int phyaddr, struct ex_file_index_t res, lv_img_dsc_t *img_dst)
+void lv_open_ex_res(int phyaddr, struct file_index_t res, lv_img_dsc_t *img_dst)
 {
     if(!img_dst) return;
 

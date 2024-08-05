@@ -26,11 +26,9 @@ void VmPedoCtxClear(void)
 { 
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
+    if(!nor_vm_file) return;
 
-    if(!nor_vm_file)
-        return;
-
-    uint8_t num = VmPedoItemNum();
+    u8 num = VmPedoItemNum();
 
     while(num)
     {
@@ -44,9 +42,9 @@ void VmPedoCtxClear(void)
 /*********************************************************************************
                               存储数量                                         
 *********************************************************************************/
-uint8_t VmPedoItemNum(void)
+u8 VmPedoItemNum(void)
 {
-    uint8_t num = 0;
+    u8 num = 0;
 
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
@@ -63,11 +61,11 @@ uint8_t VmPedoItemNum(void)
 /*********************************************************************************
                               获取内容                                        
 *********************************************************************************/
-bool VmPedoCtxByIdx(uint8_t idx)
+bool VmPedoCtxByIdx(u8 idx)
 {
-    uint8_t num = VmPedoItemNum();
+    u8 num = VmPedoItemNum();
     if(num == 0) return false;
-
+    
     if(idx >= num) return false;
     
     void *nor_vm_file = \
@@ -78,7 +76,7 @@ bool VmPedoCtxByIdx(uint8_t idx)
 
     memset(&r_pedo, 0, ctx_len);
     flash_common_read_by_index(nor_vm_file, idx, 0, \
-        ctx_len, (uint8_t *)&r_pedo);
+        ctx_len, (u8 *)&r_pedo);
 
     if(r_pedo.check_code != Nor_Vm_Check_Code)
         return false;
@@ -89,9 +87,9 @@ bool VmPedoCtxByIdx(uint8_t idx)
 /*********************************************************************************
                               删除指定项内容                                        
 *********************************************************************************/
-void VmPedoCtxDelByIdx(uint8_t idx)
+void VmPedoCtxDelByIdx(u8 idx)
 {
-    uint8_t num = VmPedoItemNum();
+    u8 num = VmPedoItemNum();
     if(num == 0) return;
 
     if(idx >= num) return;
@@ -124,7 +122,7 @@ void VmPedoCtxFlashSave(void *p)
     if(!nor_vm_file) return;
 
     bool DayVD = GetHrDayVmData();
-    uint8_t num = VmPedoItemNum();
+    u8 num = VmPedoItemNum();
 
     printf("pedo num = %d\n", num);
     

@@ -108,10 +108,8 @@ void MsgNotifyProcess(void)
         return;
 
     /*消息推送开关*/
-    uint32_t info = \
-        Notify_Info.sw_union.info;
-    if(!((info >> type) & 0x1))
-        return;
+    u32 info = Notify_Info.sw_union.info;
+    if(!((info >> type) & 0x1)) return;
 
     VmFlashMessageCtxWrite(w_ctx);
 
@@ -127,7 +125,6 @@ void MsgNotifyFromAncs(void *name, void *data, u16 len)
     const u16 max_len = Msg_Ctx_Len;
     u8 *type = &(w_message.message_type);
     char *w_ctx = w_message.msg_ctx;
-    struct sys_time *time = &(w_message.message_time);
     u16 *check_code = &(w_message.check_code);
 
     if(strcmp((char *)name, "AppIdentifier") == 0) 
@@ -192,12 +189,13 @@ void MsgNotifyFromAncs(void *name, void *data, u16 len)
                 memcpy(&w_ctx[total_len], data, len_tmp);
         }
 
-        GetUtcTime(time);
+        struct sys_time time;
+        GetUtcTime(&time);
+        w_message.timestamp = UtcTimeToSec(&time);
         *check_code = Nor_Vm_Check_Code;
 
         int ui_msg_post[1];
-        ui_msg_post[0] = \
-            ui_msg_nor_message_write;
+        ui_msg_post[0] = ui_msg_nor_message_write;
         post_ui_msg(ui_msg_post, 1);
     }
 

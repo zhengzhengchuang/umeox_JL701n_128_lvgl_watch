@@ -26,19 +26,13 @@ void VmHrCtxClear(void)
 {
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
+    if(!nor_vm_file) return;
 
-    if(!nor_vm_file)
-        return;
-
-    uint8_t hr_num = \
-        VmHrItemNum();
-
-    while(hr_num)
+    u8 num = VmHrItemNum();
+    while(num)
     {
-        flash_common_delete_by_index(\
-            nor_vm_file, 0);
-
-        hr_num--;
+        flash_common_delete_by_index(nor_vm_file, 0);
+        num--;
     }
     
     return;
@@ -47,49 +41,41 @@ void VmHrCtxClear(void)
 /*********************************************************************************
                               存储数量                                         
 *********************************************************************************/
-uint8_t VmHrItemNum(void)
+u8 VmHrItemNum(void)
 {
-    uint8_t hr_num = 0;
+    u8 num = 0;
 
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
+    if(!nor_vm_file) return num;
 
-    if(!nor_vm_file)
-        return hr_num;
+    num = flash_common_get_total(nor_vm_file);
 
-    hr_num = \
-        flash_common_get_total(nor_vm_file);
+    if(num > Hr_Max_Days)
+        num = Hr_Max_Days;
 
-    if(hr_num > Hr_Max_Days)
-        hr_num = Hr_Max_Days;
-
-    return hr_num;
+    return num;
 }
 
 /*********************************************************************************
                               获取内容                                        
 *********************************************************************************/
-bool VmHrCtxByIdx(uint8_t idx)
+bool VmHrCtxByIdx(u8 idx)
 {
-    uint8_t hr_num = \
-        VmHrItemNum();
-    if(hr_num == 0)
-        return false;
+    u8 num = VmHrItemNum();
+    if(num == 0) return false;
 
-    if(idx >= hr_num)
-        return false;
+    if(idx >= num) return false;
     
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
-    int ctx_len = \
-        sizeof(vm_hr_ctx_t);
+    int ctx_len = sizeof(vm_hr_ctx_t);
     
-    if(!nor_vm_file)
-        return false;
+    if(!nor_vm_file) return false;
 
     memset(&r_hr, 0, ctx_len);
     flash_common_read_by_index(nor_vm_file, idx, 0, \
-        ctx_len, (uint8_t *)&r_hr);
+        ctx_len, (u8 *)&r_hr);
 
     if(r_hr.check_code != Nor_Vm_Check_Code)
         return false;
@@ -100,21 +86,16 @@ bool VmHrCtxByIdx(uint8_t idx)
 /*********************************************************************************
                               删除指定项内容                                        
 *********************************************************************************/
-void VmHrCtxDelByIdx(uint8_t idx)
+void VmHrCtxDelByIdx(u8 idx)
 {
-    uint8_t hr_num = \
-        VmHrItemNum();
-    if(hr_num == 0)
-        return;
+    u8 num = VmHrItemNum();
+    if(num == 0) return;
 
-    if(idx >= hr_num)
-        return;
+    if(idx >= num) return;
 
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
-
-    if(!nor_vm_file)
-        return;
+    if(!nor_vm_file) return;
 
     flash_common_delete_by_index(nor_vm_file, idx);
 
@@ -134,18 +115,15 @@ void VmHrCtxFlashSave(void *p)
 
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
-    int ctx_len = \
-        sizeof(vm_hr_ctx_t);
-
-    if(!nor_vm_file)
-        return;
+    int ctx_len = sizeof(vm_hr_ctx_t);
+    if(!nor_vm_file) return;
 
     bool DayVD = GetHrDayVmData();
-    uint8_t hr_num = VmHrItemNum();
+    u8 num = VmHrItemNum();
     
-    printf("hr_num = %d\n", hr_num);
+    printf("hr num = %d\n", num);
     
-    if(hr_num >= Hr_Max_Days && DayVD == true)
+    if(num >= Hr_Max_Days && DayVD == true)
         flash_common_delete_by_index(nor_vm_file, 0);
 
     flash_common_write_file(nor_vm_file, 0, ctx_len, (u8 *)p);

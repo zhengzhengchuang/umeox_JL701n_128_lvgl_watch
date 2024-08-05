@@ -353,3 +353,24 @@ void SetDevBondFlag(int f)
     SetVmParaCacheByLabel(vm_label_dev_bond, !!f);
     return;
 }
+
+/*********************************************************************************
+                        pedo data获取                            
+*********************************************************************************/
+u32 GetPedoDataSteps(void)
+{
+    u32 steps = (u32)(PedoData.steps);
+
+    return steps;
+}
+u32 GetPedoDataKcal(void)
+{
+    u32 kcal = (u32)(PedoData.calorie);
+
+    return kcal;
+}
+u32 GetPedoDataDisM(void)
+{
+    u32 dis_m = (u32)(PedoData.distance + 0.5f);
+    return dis_m;
+}

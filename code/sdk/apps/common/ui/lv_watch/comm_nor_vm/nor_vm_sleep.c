@@ -17,15 +17,12 @@ void VmSleepCtxClear(void)
     if(!nor_vm_file)
         return;
 
-    uint8_t sleep_num = \
-        VmSleepItemNum();
+    u8 num = VmSleepItemNum();
 
-    while(sleep_num)
+    while(num)
     {
-        flash_common_delete_by_index(\
-            nor_vm_file, 0);
-
-        sleep_num--;
+        flash_common_delete_by_index(nor_vm_file, 0);
+        num--;
     }
     
     return;
@@ -34,52 +31,45 @@ void VmSleepCtxClear(void)
 /*********************************************************************************
                               存储数量                                         
 *********************************************************************************/
-uint8_t VmSleepItemNum(void)
+u8 VmSleepItemNum(void)
 {
-    uint8_t sleep_num = 0;
+    u8 num = 0;
 
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
 
     if(!nor_vm_file)
-        return sleep_num;
+        return num;
 
-    sleep_num = \
-        flash_common_get_total(nor_vm_file);
+    num = flash_common_get_total(nor_vm_file);
 
-    if(sleep_num > Sleep_Max_Days)
-        sleep_num = Sleep_Max_Days;
+    if(num > Slp_Max_Days)
+        num = Slp_Max_Days;
 
-    return sleep_num;
+    return num;
 }
 
 /*********************************************************************************
                               获取内容                                        
 *********************************************************************************/
-bool VmSleepCtxByIdx(uint8_t idx)
+bool VmSleepCtxByIdx(u8 idx)
 {
-    uint8_t sleep_num = \
-        VmSleepItemNum();
-    if(sleep_num == 0)
-        return false;
+    u8 num = VmSleepItemNum();
+    if(num == 0) return false;
 
-    if(idx >= sleep_num)
-        return false;
+    if(idx >= num) return false;
     
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
-    int ctx_len = \
-        sizeof(vm_sleep_ctx_t);
+    int ctx_len = sizeof(vm_sleep_ctx_t);
     
-    if(!nor_vm_file)
-        return false;
+    if(!nor_vm_file) return false;
 
     memset(&r_sleep, 0, ctx_len);
     flash_common_read_by_index(nor_vm_file, idx, 0, \
-        ctx_len, (uint8_t *)&r_sleep);
+        ctx_len, (u8 *)&r_sleep);
 
-    if(r_sleep.check_code != \
-        Nor_Vm_Check_Code)
+    if(r_sleep.check_code != Nor_Vm_Check_Code)
         return false;
 
     return true;
@@ -98,17 +88,15 @@ void VmSleepCtxFlashSave(void *p)
 
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
-    int ctx_len = \
-        sizeof(vm_sleep_ctx_t);
+    int ctx_len = sizeof(vm_sleep_ctx_t);
 
-    if(!nor_vm_file)
-        return;
+    if(!nor_vm_file) return;
 
-    uint8_t sleep_num = VmSleepItemNum();
+    u8 num = VmSleepItemNum();
 
-    printf("sleep_num = %d\n", sleep_num);
+    printf("num = %d\n", num);
     
-    if(sleep_num >= Sleep_Max_Days)
+    if(num >= Slp_Max_Sec)
         flash_common_delete_by_index(nor_vm_file, 0);
 
     flash_common_write_file(nor_vm_file, 0, ctx_len, (u8 *)p);

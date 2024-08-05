@@ -113,32 +113,29 @@ void ClearThisCallProcess(void)
 
 void UpdateCallLogVmFlash(void)
 {
-    u8 OutOrIn = \
-        GetCallOutOrIn();
+    u8 OutOrIn = GetCallOutOrIn();
     if(OutOrIn == 0)
         return;
     
-    bool AnswerState = \
-       GetCallAnswerState(); 
+    bool AnswerState = GetCallAnswerState(); 
 
     u8 state = call_log_unknown;
     if(OutOrIn == 1)
     {
         if(AnswerState == true)
-            state = call_log_state_out;
+            state = call_log_out;
         else
-            state = call_log_state_hangup;
+            state = call_log_hangup;
     }else if(OutOrIn == 2)
     {
         if(AnswerState == true)
-            state = call_log_state_in;
+            state = call_log_in;
         else
-            state = call_log_state_hangup;
+            state = call_log_hangup;
     }
 
     u8 *call_state = &(w_call_log.state);
     u16 *check_code = &(w_call_log.check_code);
-    struct sys_time *time = &(w_call_log.time);
     char *name_str = w_call_log.name_str;
     char *number_str = w_call_log.number_str;
 
@@ -146,24 +143,22 @@ void UpdateCallLogVmFlash(void)
     *check_code = Nor_Vm_Check_Code;
     
 
-    u8 len = \
-        bt_user_priv_var.income_phone_len;
-    u8 *call_num = \
-        bt_user_priv_var.income_phone_num;
-    if(len == 0)
-        return;
+    u8 len = bt_user_priv_var.income_phone_len;
+    u8 *call_num = bt_user_priv_var.income_phone_num;
+    if(len == 0) return;
     
     memcpy(number_str, call_num, len);
 
-    char *call_name = \
-        GetContactsNameByNumber((char *)call_num);
+    char *call_name = GetContactsNameByNumber((char *)call_num);
     if(call_name)
         memcpy(name_str, call_name, Call_Name_Max_Len);
-    GetUtcTime(time);
+
+    struct sys_time time;
+    GetUtcTime(&time);
+    w_call_log.timestamp = UtcTimeToSec(&time);
 
     int ui_msg_post[1];
-    ui_msg_post[0] = \
-        ui_msg_nor_call_log_write;
+    ui_msg_post[0] = ui_msg_nor_call_log_write;
     post_ui_msg(ui_msg_post, 1);
 
     return;

@@ -71,7 +71,6 @@ static void GmTimerDestory(void)
 {
     if(gm_timer)
         sys_hi_timer_del(gm_timer);
-
     gm_timer = 0;
 
     return;
@@ -79,9 +78,10 @@ static void GmTimerDestory(void)
 
 static void EnableGmModuleHandle(void)
 {
-    qmc6309_enable();
     GmAccRawDataInit();
-    SetGmEnableFlag(true);     
+
+    SetGmEnableFlag(true); 
+    qmc6309_enable();   
     GmTimerCreate();
 
     return;
@@ -89,10 +89,10 @@ static void EnableGmModuleHandle(void)
 
 static void DisableGmModuleHandle(void)
 {
+    GmTimerDestory();
     qmc6309_disable();
     SetGmEnableFlag(false);
-    GmTimerDestory();
-
+    
     return;
 }
 
@@ -313,10 +313,6 @@ void SetGmCaliSucc(bool f)
 /***********地磁模块启动/停止**************/
 void EnableGmModule(void)
 {
-    bool GmEn = GetGmEnableFlag();
-    if(GmEn == true)
-        return;
-
     int GmMsg[2];
 	GmMsg[0] = GmMsgEnable;
 	PostGmTaskMsg(GmMsg, 1); 
@@ -326,10 +322,6 @@ void EnableGmModule(void)
 
 void DisableGmModule(void)
 {
-    bool GmEn = GetGmEnableFlag();
-    if(GmEn == false)
-        return;
-
     int GmMsg[2];
 	GmMsg[0] = GmMsgDisable;
 	PostGmTaskMsg(GmMsg, 1); 

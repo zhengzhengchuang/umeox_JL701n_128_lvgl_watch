@@ -148,13 +148,13 @@ static void elem_tr_icon_create(lv_obj_t *obj)
 
     widget_img_para.img_parent = obj;
     if(lang == AzkarLangEn)
-        widget_img_para.file_img_dat = azkar_tr_00_index;
+        widget_img_para.file_img_dat = azkar_tr_icon_00_index;
     else if(lang == AzkarLangEnTr)
-        widget_img_para.file_img_dat = azkar_tr_01_index;
+        widget_img_para.file_img_dat = azkar_tr_icon_01_index;
     else if(lang == AzkarLangFr)
-        widget_img_para.file_img_dat = azkar_tr_00_index;
+        widget_img_para.file_img_dat = azkar_tr_icon_00_index;
     else if(lang == AzkarLangFrTr)
-        widget_img_para.file_img_dat = azkar_tr_01_index;
+        widget_img_para.file_img_dat = azkar_tr_icon_01_index;
     widget_img_para.img_click_attr = true;
     widget_img_para.event_cb = tr_icon_cb;
     widget_img_para.user_data = NULL;

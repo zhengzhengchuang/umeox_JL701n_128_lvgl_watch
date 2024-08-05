@@ -7,9 +7,8 @@ static void container_event_cb(lv_event_t *e)
 {
     if(!e) return;
 
-    ui_act_id_t prev_act_id = \
-        read_menu_return_level_id();
-    ui_menu_jump(prev_act_id);
+    ui_act_id_t act_id = read_menu_return_level_id();
+    ui_menu_jump(act_id);
 
     return;
 }
@@ -29,9 +28,8 @@ static void timer_cb(lv_timer_t *timer)
 
     jump_timer_delete();
 
-    ui_act_id_t prev_act_id = \
-        read_menu_return_level_id();
-    ui_menu_jump(prev_act_id);
+    ui_act_id_t act_id = read_menu_return_level_id();
+    ui_menu_jump(act_id);
 
     return;
 }
@@ -43,8 +41,7 @@ static void jump_timer_create(void)
     
     jump_timer = NULL;
 
-    jump_timer = \
-        lv_timer_create(timer_cb, Jump_Dur, NULL);
+    jump_timer = lv_timer_create(timer_cb, Jump_Dur, NULL);
 
     return;
 }
@@ -53,8 +50,7 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_act_id_t prev_act_id = \
-        read_menu_return_level_id();
+    ui_act_id_t prev_act_id = read_menu_return_level_id();
     if(!lang_txt_is_arabic())
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             prev_act_id, ui_act_id_null, ui_act_id_call_end);
@@ -85,26 +81,16 @@ static void menu_display_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    widget_label_para.label_w = \
-        280;
-    widget_label_para.label_h = \
-        Label_Line_Height*2;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_WRAP;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_ver_center = \
-        false;
-    widget_label_para.user_text_font = \
-        NULL;
-    widget_label_para.label_parent = \
-        obj;
-    widget_label_para.label_text = \
-        GetCallNumName();
-    lv_obj_t *num_name_label = \
-        common_widget_label_create(&widget_label_para);
+    widget_label_para.label_w = 300;
+    widget_label_para.label_h = Label_Line_Height*2;
+    widget_label_para.long_mode = LV_LABEL_LONG_WRAP;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_ver_center = false;
+    widget_label_para.user_text_font = NULL;
+    widget_label_para.label_parent = obj;
+    widget_label_para.label_text = GetCallNumName();
+    lv_obj_t *num_name_label = common_widget_label_create(&widget_label_para);
     lv_obj_align(num_name_label, LV_ALIGN_TOP_MID, 0, 80);
 
     char online_duration_str[9];
@@ -120,15 +106,12 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_img_para.event_cb = NULL;
     for(uint8_t i = 0; i < 8; i++)
     {
-        widget_img_para.img_x = \
-            135 + img_x_offset;
+        widget_img_para.img_x = 135 + img_x_offset;
         if(online_duration_str[i] == ':')
-            widget_img_para.file_img_dat = \
-                comm_num_14x22_gr_10_index;
+            widget_img_para.file_img_dat = comm_num_14x22_gr_10_index;
         else
-             widget_img_para.file_img_dat = \
-                comm_num_14x22_gr_00_index + \
-                    (online_duration_str[i] - '0');
+             widget_img_para.file_img_dat = comm_num_14x22_gr_00_index + \
+                (online_duration_str[i] - '0');
         
         if(online_duration_str[i] == ':')
             img_x_offset += 7;
@@ -138,36 +121,23 @@ static void menu_display_cb(lv_obj_t *obj)
         common_widget_img_create(&widget_img_para, NULL);
     }
 
-    widget_img_para.file_img_dat = \
-        comm_icon_13_index;
+    widget_img_para.file_img_dat = comm_icon_13_index;
     widget_img_para.img_click_attr = true;
-    widget_img_para.event_cb = \
-        container_event_cb;
+    widget_img_para.event_cb = container_event_cb;
     widget_img_para.user_data = NULL;
-    lv_obj_t *call_end_container = \
-        common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_t *call_end_container = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(call_end_container, LV_ALIGN_TOP_MID, 0, 308);
     
-    widget_label_para.label_w = \
-        320;
-    widget_label_para.label_h = \
-        Label_Line_Height;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_SCROLL;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0x000000);
-    widget_label_para.label_ver_center = \
-        false;
-    widget_label_para.user_text_font = \
-        NULL;
-    widget_label_para.label_parent = \
-        call_end_container;
-    widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_call_end);
-    lv_obj_t *call_end_label = \
-        common_widget_label_create(&widget_label_para);
+    widget_label_para.label_w = 320;
+    widget_label_para.label_h = Label_Line_Height;
+    widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0x000000);
+    widget_label_para.label_ver_center = false;
+    widget_label_para.user_text_font = NULL;
+    widget_label_para.label_parent = call_end_container;
+    widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_call_end);
+    lv_obj_t *call_end_label = common_widget_label_create(&widget_label_para);
     lv_obj_center(call_end_label);
 
     return;

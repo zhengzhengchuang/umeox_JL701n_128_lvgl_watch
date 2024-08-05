@@ -21,7 +21,6 @@ enum
     lang_txtid_tasbih_reminder, //赞念提醒
     lang_txtid_allah_99_name, //阿拉的 99 个尊名
     lang_txtid_hijri_calendar, //回历
-    lang_txtid_sports, //运动
     lang_txtid_sleep, //睡眠
     lang_txtid_weather, //天气
     lang_txtid_heart_rate, //心率
@@ -34,21 +33,21 @@ enum
     lang_txtid_sound, //声音
     lang_txtid_display, //展示
     lang_txtid_language, //语言
-    lang_txtid_unit, //计量单位
+    lang_txtid_unit, //单位
     lang_txtid_shortcuts, //快捷方式
     lang_txtid_about, //关于
-    lang_txtid_sound_on, //声音 - 开启
+    lang_txtid_sound_on, //声音
     lang_txtid_view_list, //列表
     lang_txtid_view_grid_1, //网格1
     lang_txtid_view_grid_2, //网格2
     lang_txtid_screen_sleep, //屏幕休眠
     lang_txtid_distance, //距离
     lang_txtid_temperature, //温度
-    lang_txtid_kilometer, //千米
+    lang_txtid_kilometer, //公里
     lang_txtid_mile, //英里
-    lang_txtid_unit_C, //摄氏度℃
-    lang_txtid_unit_F, //华摄氏度℉
-    lang_txtid_quran_watch, //Quran Watch
+    lang_txtid_unit_C, //℃
+    lang_txtid_unit_F, //℉
+    lang_txtid_quran_watch, //QWatch
     lang_txtid_bluetooth_name, //蓝牙名称
     lang_txtid_bluetooth_mac,//蓝牙 MAC
     lang_txtid_version,//版本
@@ -86,12 +85,11 @@ enum
     lang_txtid_connect_and_open,//请连接手机，并打开播放器。
     lang_txtid_not_connected,//未连接到手机
     lang_txtid_search_phone,//正在寻找附近的手机...
-    lang_txtid_dnd_enable,//勿扰模式 - 开启
-    lang_txtid_dnd_disable,//勿扰模式 - 关闭
+    lang_txtid_dnd_mode,//勿扰模式
     lang_txtid_no_reminder,//无提醒
     lang_txtid_no_message,//无消息
-    lang_txtid_mag_calibra_tips,//地磁校准提示
-    lang_txtid_real_position_tips,//实时定位提示
+    lang_txtid_gm_cali,//按照磁性校准说明进行操作。
+    lang_txtid_real_pos,//蓝牙连接到手机，实现实时定位。
     lang_txtid_Fajr,//晨礼
     lang_txtid_Sunrise,//日出
     lang_txtid_Dhuhr,//晌礼
@@ -101,10 +99,10 @@ enum
     lang_txtid_Isha,//霄礼
     lang_txtid_remaining_time,//剩余时间
     lang_txtid_elapsed_time,//经过时间
-    lang_txtid_reminder_in_advance,//提醒提前时间
-    lang_txtid_unit_mins,//分钟
-    lang_txtid_reminder_on,//提醒开启
-    lang_txtid_voice_on,//语音开启
+    lang_txtid_reminder_ad,//提前提醒
+    lang_txtid_mins,//分钟
+    lang_txtid_remind,//提醒
+    lang_txtid_voice,//语音
     lang_txtid_MR,//晨间纪念
     lang_txtid_ER,//晚间纪念
     lang_txtid_BS,//睡觉前
@@ -121,15 +119,13 @@ enum
     lang_txtid_TRA,//旅行
     lang_txtid_OR,//其他祷告
     lang_txtid_PRA,//礼拜
-    lang_txtid_set_reminders_tasbih,//为赞念设置提醒。
-    lang_txtid_reminders_on,//提醒 - 开启
-    lang_txtid_reminders_off,//提醒 - 关闭
+    lang_txtid_set_reminder_tasbih,//为赞念设置提醒。
     lang_txtid_time_range,//时间范围
-    lang_txtid_interval_time,//间隔时间
+    lang_txtid_inv_time,//间隔时间
     lang_txtid_days,//天
     lang_txtid_tasbih_time,//赞念时间
     lang_txtid_hours,//小时
-    lang_txtid_inv_exceeds_range,//间隔时间超过了时间范围
+    lang_txtid_exc_time_range,//间隔时间超过了时间范围
     lang_txtid_start_time,//开始时间
     lang_txtid_end_time,//结束时间
     lang_txtid_January,//一月
@@ -181,9 +177,9 @@ enum
     lang_txtid_call_volumn,//通话音量
     lang_txtid_media_volumn,//媒体音量
     lang_txtid_find_dev,//寻找到您的手表
-    lang_txtid_sedentary_move,//起身走动
+    lang_txtid_move,//起身走动
     lang_txtid_dev_bond,//下载iQibla(Smart Qibla) APP，用APP扫描绑定Quran Watch。
-    lang_txtid_new_bond_tips,//当前您为新用户，设备数据已清除。
+    lang_txtid_new_bond,//当前您为新用户，设备数据已清除。
     lang_txtid_Fav_list,//收藏列表
     lang_txtid_Mor_remembrance,//早上祈祷词
     lang_txtid_Eve_remembrance,//晚上祈祷词

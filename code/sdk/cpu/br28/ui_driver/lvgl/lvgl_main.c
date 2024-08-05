@@ -341,6 +341,7 @@ void ui_msg_handle(int *msg, u8 len)
             break;
 
         case ui_msg_nor_sleep_write:
+            VmFlashSleepCtxWrite();
             break;
 
         case ui_msg_nor_weather_write:
@@ -358,14 +359,10 @@ void ui_msg_handle(int *msg, u8 len)
         case ui_msg_nor_contacts_write:
             UpdateContactsVmFlash();
             break;
-
+              
         case ui_msg_nor_data_clear:
             ResetAllNorVmData();
             break;
-
-        // case ui_msg_nor_pedo_send:
-        //     HistoryPedoDataSend(msg[1], msg[2], msg[3], msg[4]);
-        //     break;
 
         case ui_msg_unbond_handle:
             DevUnBondHandle();
@@ -384,7 +381,6 @@ void ui_msg_handle(int *msg, u8 len)
             break;
         
         default:
-            printf("*************ui msg not found\n");
             break;
     }
 

@@ -26,26 +26,26 @@ void utc_minute_task_handle(int priv)
 {
     struct sys_time *ptime = (struct sys_time *)priv;
 
+    /* 隔一分钟，轮询睡眠状态 */
+    SleepUtcMinProcess(ptime);
+    
     /* 隔一分钟，轮询自动心率开启 */
-    HrProcess(ptime);
+    HrUtcMinProcess(ptime);
 
     /* 隔一分钟，轮询自动血氧开启 */
-    BoProcess(ptime);
+    BoUtcMinProcess(ptime);
 
     /* 隔一分钟，轮询勿扰状态 */
-    DndProcess(ptime);
+    DndUtcMinProcess(ptime);
 
     /* 隔一分钟，轮询久坐提醒 */
-    SedProcess(ptime);
-
-    /* 隔一分钟，轮询睡眠状态 */
-    SleepProcess(ptime);
+    SedUtcMinProcess(ptime);
 
     /* 隔一分钟，轮询天气数据 */
-    WeatherProcess(ptime);
+    WeatherUtcMinProcess(ptime);
 
     /* 隔一分钟，轮询闹钟 */
-    UserAlarmProcess(ptime);
+    UserUtcMinAlarmProcess(ptime);
 
     /* 隔一分钟，轮询赞念提醒 */
     TasbihReminderProcess(ptime);
@@ -66,8 +66,8 @@ void utc_second_task_handle(int priv)
     /* 隔秒，判断回历节日是否到 */
     HcalendarProcess(ptime);
 
-    /* 隔秒，update日常运动数据 */
-    PedoDataAlgoProcess(ptime);
+    /* 隔秒，gomore算法process */
+    GoMoreAlgoProcess(ptime);
 
     return;
 }

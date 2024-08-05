@@ -6,7 +6,7 @@
 #define EXAMPLE_UTILS_H
 
 /* example device id */
-static char* deviceIdExample = NULL;
+static char* deviceIdExample = "F08968476615";
 // the first one checksum buffer for verify client_id/device_id/expriation_time
 static char *pKeyExample = (char*)"BR4lmTwnTku6kf8e8TNDqk356KZAtS+Qv2Log0k5bGpydVc1dQ868i2bRWHqvWBV";
 

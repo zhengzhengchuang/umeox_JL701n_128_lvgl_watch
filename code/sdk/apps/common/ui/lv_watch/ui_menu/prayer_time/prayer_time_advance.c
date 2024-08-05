@@ -97,7 +97,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_label_para.label_parent = \
         obj;
     widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_reminder_in_advance);
+        get_lang_txt_with_id(lang_txtid_reminder_ad);
     lv_obj_t *PT_reminder_advance_label = \
         common_widget_label_create(&widget_label_para);
     lv_obj_align(PT_reminder_advance_label, LV_ALIGN_TOP_MID, 0, 40);
@@ -131,7 +131,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_label_para.label_parent = \
         PT_advance_time_sel;
     widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_unit_mins);
+        get_lang_txt_with_id(lang_txtid_mins);
     lv_obj_t *unit_mins_label = \
         common_widget_label_create(&widget_label_para);
     lv_obj_align(unit_mins_label, LV_ALIGN_TOP_MID, 92, 35);

@@ -260,128 +260,14 @@ void RemoteGetHistoryPedoData(u8 *buf, u8 len)
 //获取历史睡眠数据
 void RemoteGetHistorySleepData(u8 *buf, u8 len)
 {
-#if 0
-    u8 nfy_buf[Cmd_Pkt_Len];
-    
-    le_cmd_t cmd = buf[0];
-    u16 year = buf[1] + 2000;
-    u8 month = buf[2];
-    u8 day = buf[3];
+    int le_msg[6];
+    le_msg[0] = Le_History_Sleep_Data;
+    le_msg[1] = buf[0];
+    le_msg[2] = buf[1] + 2000;
+    le_msg[3] = buf[2];
+    le_msg[4] = buf[3];
+    post_le_task_msg(le_msg, 5);
 
-    u8 i;
-    u8 idx;
-    u8 num = VmSleepItemNum();
-    for(i = 0; i < num; i++)
-    {
-        bool ret = \
-            VmSleepCtxByIdx(i);
-        if(ret == false)
-            continue;
-
-        if(r_sleep.time.year == year && \
-            r_sleep.time.month == month && \
-                r_sleep.time.day == day)
-        {
-            break;
-        }    
-    }
-
-    if(i >= num)
-    {
-        memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-        //无数据
-        idx = 0;
-        nfy_buf[idx++] = cmd;
-        nfy_buf[idx++] = 0xff;
-
-        u8 crc_idx = Cmd_Pkt_Len - 1;
-        nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-        printf_buf(nfy_buf, Cmd_Pkt_Len);
-        
-        umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-
-        return;
-    }
-
-    u8 para_pkt_num = 1;
-    u8 data_pkt_num = 0;
-    u8 total_pkt_num = 0;
-
-    //Max：存储历史天数7
-    for(; i < num; i++)
-    {
-        bool ret = \
-            VmSleepCtxByIdx(i);
-        if(ret == false)
-            continue;
-
-        data_pkt_num = \
-            r_sleep.CurSecNum;
-        total_pkt_num = \
-            para_pkt_num + data_pkt_num;
-            
-        for(u8 j = 0; j < total_pkt_num; j++)
-        {
-            if(j == 0)
-            {
-                //参数包
-                memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-                idx = 0;
-                nfy_buf[idx++] = cmd;
-                nfy_buf[idx++] = 0x00;
-                nfy_buf[idx++] = data_pkt_num;
-                nfy_buf[idx++] = r_sleep.time.year - 2000;
-                nfy_buf[idx++] = r_sleep.time.month;
-                nfy_buf[idx++] = r_sleep.time.day;
-
-                u8 crc_idx = Cmd_Pkt_Len - 1;
-                nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-                printf_buf(nfy_buf, Cmd_Pkt_Len);
-                
-                umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-            }else
-            {
-                //数据包
-                memset(nfy_buf, 0x00, Cmd_Pkt_Len);
-
-                u8 sec_attr;
-                if(j == 1)
-                    sec_attr = 0;
-                else if(j == data_pkt_num)
-                    sec_attr = 2;
-                else
-                    sec_attr = 1;
-
-                idx = 0;
-                nfy_buf[idx++] = cmd;
-                nfy_buf[idx++] = j;
-                nfy_buf[idx++] = sec_attr;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].state;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].ss_time.year;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].ss_time.month;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].ss_time.day;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].ss_time.hour;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].ss_time.min;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].se_time.year;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].se_time.month;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].se_time.day;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].se_time.hour;
-                nfy_buf[idx++] = r_sleep.vm_ctx[j - 1].se_time.min;
-
-                u8 crc_idx = Cmd_Pkt_Len - 1;
-                nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
-
-                printf_buf(nfy_buf, Cmd_Pkt_Len);
-                
-                umeox_common_le_notify_data(nfy_buf, Cmd_Pkt_Len);
-            }
-        }
-    }
-#endif
     return;
 }
 
@@ -391,9 +277,9 @@ void RemoteGetPedoData(u8 *buf, u8 len)
     u8 nfy_buf[Cmd_Pkt_Len];
     memset(nfy_buf, 0x00, Cmd_Pkt_Len);
 
-    u32 steps = PedoData.steps;
-    u32 calorie = PedoData.calorie;
-    u32 distance = PedoData.distance;
+    u32 steps = GetPedoDataSteps();
+    u32 kcal = GetPedoDataKcal();
+    u32 dis_m = GetPedoDataDisM();
 
     le_cmd_t cmd = buf[0];
 
@@ -402,13 +288,11 @@ void RemoteGetPedoData(u8 *buf, u8 len)
     nfy_buf[idx++] = (steps>>16)&(0xff);
     nfy_buf[idx++] = (steps>>8)&(0xff);
     nfy_buf[idx++] = (steps>>0)&(0xff);
-
-    nfy_buf[idx++] = (calorie>>8)&(0xff);
-    nfy_buf[idx++] = (calorie>>0)&(0xff);
-
-    nfy_buf[idx++] = (distance>>16)&(0xff);
-    nfy_buf[idx++] = (distance>>8)&(0xff);
-    nfy_buf[idx++] = (distance>>0)&(0xff);
+    nfy_buf[idx++] = (kcal>>8)&(0xff);
+    nfy_buf[idx++] = (kcal>>0)&(0xff);
+    nfy_buf[idx++] = (dis_m>>16)&(0xff);
+    nfy_buf[idx++] = (dis_m>>8)&(0xff);
+    nfy_buf[idx++] = (dis_m>>0)&(0xff);
 
     u8 crc_idx = Cmd_Pkt_Len - 1;
     nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);
@@ -521,13 +405,11 @@ void RemoteGetHealthMonitorPara(u8 *buf, u8 len)
             break;
 
         case 0x02:/*心率过高开关*/
-            sw_enable = \
-                GetVmParaCacheByLabel(vm_label_hr_high_remind_sw);
+            sw_enable = HrPara.hr_high_sw;
             break;
 
         case 0x03:/*心率过低开关*/
-            sw_enable = \
-                GetVmParaCacheByLabel(vm_label_hr_low_remind_sw);
+            sw_enable = HrPara.hr_low_sw;
             break;
         
         default:
@@ -541,13 +423,11 @@ void RemoteGetHealthMonitorPara(u8 *buf, u8 len)
             break;
             
         case 0x02:/*心率过高提醒参数*/
-            para_val = \
-                GetVmParaCacheByLabel(vm_label_hr_high_val);
+            para_val = HrPara.hr_high_val;
             break;
 
         case 0x03:/*心率过低提醒参数*/
-            para_val = \
-                GetVmParaCacheByLabel(vm_label_hr_low_val);
+            para_val = HrPara.hr_low_val;
             break;
         
         default:

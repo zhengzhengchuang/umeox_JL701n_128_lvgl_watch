@@ -13,6 +13,7 @@
 #include "../inc/gh30x_example_common.h"
 #include "../../Algo_Code/common/inc/gh30x_demo_algo_call.h"
 #include "../../Algo_Code/common/inc/gh30x_demo_algo_config.h"
+//#include "../../../../../ui/lv_watch/lv_watch.h"
 
 #if (__ALGO_LOG_CONFIG__)
 #define EXAMPLE_DEBUG_LOG_L1_HOOK EXAMPLE_DEBUG_LOG_L1
@@ -53,9 +54,14 @@ void Gh30xInitHookFunc(void)
 #endif
 }
 
+//extern void SetSleepPpgRawData(u32 *raw, u16 len);
 void Gh30xGetRawdataHookFunc(GU32 *read_buffer_ptr, GU16 length)
 {
+    // for(u16 i = 0; i < length; i++)
+    //     printf("%s:slp_raw[%d] = %d\n", __func__, i, read_buffer_ptr[i]);
+
     /* code implement by user */
+    //SetSleepPpgRawData(read_buffer_ptr, length);
 }
 
 /**

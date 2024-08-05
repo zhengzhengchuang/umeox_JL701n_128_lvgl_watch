@@ -444,7 +444,6 @@
         "scan_timeout.h": "c",
         "azkar_sec_comm.h": "c",
         "azkar_sec_ar.h": "c",
-        "ex_file_index.h": "c",
         "gomorelibstruct.h": "c",
         "gomorelib.h": "c",
         "workout.h": "c",
@@ -457,7 +456,8 @@
         "acc_data.h": "c",
         "big_data_send.h": "c",
         "history_data.h": "c",
-        "le_history_data.h": "c"
+        "le_history_data.h": "c",
+        "_default_types.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

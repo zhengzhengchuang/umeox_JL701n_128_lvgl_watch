@@ -1,123 +1,71 @@
 #include "../lv_watch.h"
 
-SleepInfoPara_t Slp_Info;
+#define VM_MASK (0x55aa)
 
-//公历闰年
-static const uint8_t calendarLDays[12]= {
-    31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
-};
-//公历非闰年
-static const uint8_t calendarNLDays[12]= {
-    31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
+SlpPara_t SlpPara;
+
+#define __this_module (&SlpPara)
+#define __this_module_size (sizeof(SlpPara_t))
+static const SlpPara_t init = {
+    .valid = false, 
+    .slp_dur = 0.0f, 
+    .d_slp_dur = 0.0f, .l_slp_dur = 0.0f, .r_slp_dur = 0.0f, .wake_dur = 0.0f,
+    .d_slp_radio = 0.0f, .l_slp_radio = 0.0f, .r_slp_radio = 0.0f, .wake_radio = 0.0f,
+    .slp_start_ts = 0,.slp_end_ts = 0,
 };
 
-static u8 IsLeapYear(u32 year)
+struct SleepSummaryInput slp_in;
+struct SleepSummaryOutput slp_out;
+
+/* true：睡眠启动 false:睡眠关闭*/
+static bool slp_en;
+bool GetSleepEnState(void)
 {
-	u8 ret_val = 0;
+    return slp_en;
+}
+void SetSleepEnState(bool en)
+{
+    slp_en = en;
+    return;
+}
 
-	ret_val = (u8)((!(year % 4) && (year % 100)) || !(year % 400));
-
-	return ret_val;
+/* true：入睡成功 false：醒来 */
+static bool FallAsleep;
+bool GetFallAsleepFlag(void)
+{
+    return FallAsleep;
+}
+void SetFallAsleepFlag(bool f)
+{
+    FallAsleep = f;
+    return;
 }
 
 //false 没过期  true 过期
-static bool SleepVmDataIsPast(struct sys_time *slp_time)
+static bool SleepVmDataIsPast(u32 timestamp)
 {
-    if(!slp_time) 
-        return true;
+    struct sys_time time;
+    GetUtcTime(&time);
+    u32 cur_timestamp = UtcTimeToSec(&time);
+    if(cur_timestamp < timestamp) goto __end;
 
-    //今天
-    struct sys_time utc_time1;
-    GetUtcTime(&utc_time1);
+    if(cur_timestamp - timestamp < SEC_PER_DAY) 
+        return false;
 
-    struct sys_time *utc_time2 = \
-        slp_time;
-    
-    u16 DysNum1 = 0;
-    u16 DysNum2 = 0;
-    if(utc_time1.year == utc_time2->year)
-    {
-        u8 LY = \
-            IsLeapYear(utc_time1.year);
-
-        for(u8 i = 1; i < utc_time1.month; i++)
-        {
-            if(LY)
-                DysNum1 += calendarLDays[i - 1];
-            else
-                DysNum1 += calendarNLDays[i - 1];
-        } 
-        DysNum1 += utc_time1.day;
-
-        for(u8 i = 1; i < utc_time2->month; i++)
-        {
-            if(LY)
-                DysNum2 += calendarLDays[i - 1];
-            else
-                DysNum2 += calendarNLDays[i - 1];
-        } 
-        DysNum2 += utc_time2->day;
-
-        s16 Dyf = DysNum1 - DysNum2;
-
-        printf("Dyf = %d\n", Dyf);
-
-        if(LV_ABS(Dyf) > 1)
-            return true;
-
-        if(utc_time1.hour >= SlpStartH)
-            return true;
-    }else
-    {
-        if(utc_time2->month == 12 && \
-            utc_time2->day == 31)
-        {
-            if(utc_time1.month == 1 && \
-                utc_time1.day == 1)
-            {
-                if(utc_time1.hour >= SlpStartH)
-                    return true;
-            }else
-            {
-                return true;
-            }
-                 
-        }else
-        {
-            return true;
-        }
-            
-    }
-
-    return false;
-}
-
-static void ClearSleepInfoPara(void)
-{
-    memset(&Slp_Info, 0, \
-        sizeof(SleepInfoPara_t));
-
-    return;
+__end:
+    return true;
 }
 
 static bool GetSleepData(void)
 {
     bool ret = false;
 
-    u8 sleep_num = \
-        VmSleepItemNum();
-    if(sleep_num == 0)
-        goto __end;
+    u8 num = VmSleepItemNum();
+    if(num == 0) goto __end;
 
-    u8 idx = \
-       sleep_num - 1; 
-    bool r_slp_ret = \
-        VmSleepCtxByIdx(idx);
-    if(r_slp_ret == false)
-        goto __end;
-
-    if(r_sleep.CurSecNum == 0)
-        goto __end;
+    u8 idx = num - 1;
+    bool r_ret = VmSleepCtxByIdx(idx);
+    if(r_ret == false) goto __end;
 
     ret = true;
 
@@ -125,109 +73,242 @@ __end:
     return ret;
 }
 
-void SetSleepInfoPara(void)
+void PowerOnSetSleepData(void)
 {
-    ClearSleepInfoPara();
+    /*读取vm的最新一条数据*/
+    bool data_ret = GetSleepData();
+    if(data_ret == false) return;
 
-    bool data_ret = \
-        GetSleepData();
-    if(data_ret == false)
-        return;
-
-    bool IsPast = \
-        SleepVmDataIsPast(&(r_sleep.time));
+    /*判断vm的最新数据是否已经过期*/
+    bool IsPast = SleepVmDataIsPast(r_sleep.timestamp);
+    printf("%s:IsPast = %d\n", __func__, IsPast);
     if(IsPast == true)
-        return;
-
-    memcpy(&(Slp_Info.time), &(r_sleep.time), \
-        sizeof(struct sys_time));
-
-    u8 sec_s = 0;
-    Slp_Info.slp_timestamp = \
-        (r_sleep.vm_ctx[sec_s].ss_time.hour)*60 + \
-            (r_sleep.vm_ctx[sec_s].ss_time.min);
-
-    u8 sec_e = \
-        r_sleep.CurSecNum - 1;
-    Slp_Info.wkp_timestamp = \
-        (r_sleep.vm_ctx[sec_e].se_time.hour)*60 + \
-            (r_sleep.vm_ctx[sec_e].se_time.min);
-
-    u16 *d_slp_total = \
-        &(Slp_Info.d_slp_total);
-    u16 *l_slp_total = \
-        &(Slp_Info.l_slp_total);
-    u16 *r_slp_total = \
-        &(Slp_Info.r_slp_total);
-    u16 *wakeup_total = \
-        &(Slp_Info.wakeup_total);
-
-    *d_slp_total = 0;
-    *l_slp_total = 0;
-    *r_slp_total = 0;
-    *wakeup_total = 0;
-    
-    u16 slp_dur;
-    sleep_state_t s_state;
-    for(u8 i = 0; i < r_sleep.CurSecNum; i++)
-    {
-        u8 ss_hour = \
-            r_sleep.vm_ctx[i].ss_time.hour;
-        u8 ss_minute = \
-            r_sleep.vm_ctx[i].ss_time.min;
-        u8 se_hour = \
-            r_sleep.vm_ctx[i].se_time.hour;
-        u8 se_minute = \
-            r_sleep.vm_ctx[i].se_time.min;
-
-        if(se_hour < ss_hour)
-            slp_dur = (se_hour*60 + 1440 + se_minute) - \
-                (ss_hour*60 + ss_minute);
-        else
-            slp_dur = (se_hour*60 + se_minute) - \
-                (ss_hour*60 + ss_minute);
-
-        s_state = \
-            r_sleep.vm_ctx[i].state;
-        if(s_state == sl_wake_up)
-            *wakeup_total += slp_dur;
-        else if(s_state == sl_rem_sleep)
-            *r_slp_total += slp_dur;
-        else if(s_state == sl_light_sleep)
-            *l_slp_total += slp_dur;
-        else if(s_state == sl_deep_sleep)
-            *d_slp_total += slp_dur;
-    }
-
-    //总的睡眠时间 = 浅睡 + 深睡 + 快速眼动
-    u16 *slp_total = \
-        &(Slp_Info.slp_total);
-    *slp_total = *l_slp_total + *d_slp_total + *r_slp_total;
-
-    bool *valid = \
-        &(Slp_Info.valid);
-    *valid = true;
+        SlpDataVmReset();
 
     return;
 }
 
-void SleepProcess(struct sys_time *ptime)
+/* 设置算法自动监测标志位 */
+static void SetSleepAutoDetEnFlag(bool en)
+{
+    SleepConfig slp_cfg;
+    getSleepConfig(0, &slp_cfg);
+    slp_cfg.disableAutoDetection = en;
+    int16_t cfg = setSleepConfig(&slp_cfg);
+    if(cfg == 0) printf("setSleepConfig success\n");
+    // printf("minNapLength = %d\n", slp_cfg.minNapLength);
+    // printf("maxGapLength = %d\n", slp_cfg.maxGapLength);
+    // printf("disablePeriodFinetuning = %d\n", slp_cfg.disablePeriodFinetuning);
+    // printf("disableAutoDetection = %d\n", slp_cfg.disableAutoDetection);
+    // printf("longSleepPeriod[0] = %d\n", slp_cfg.longSleepPeriod[0]);
+    // printf("longSleepPeriod[1] = %d\n", slp_cfg.longSleepPeriod[1]);
+
+    return;
+}
+
+static void GetSlpSummary(struct SleepSummaryInput *in, struct SleepSummaryOutput *out) 
+{
+    getEmbeddedSleepSummary(in, out);
+
+    /* 短睡不做处理 */
+    if(out->type == 2)
+        return;
+
+    /* 长睡 */
+    if(out->type == 1)
+    {
+        __this_module->valid = true;
+        __this_module->slp_dur = out->sleepPeriod;
+        __this_module->d_slp_dur = out->deepNumMinutes;
+        __this_module->l_slp_dur = out->lightNumMinutes;
+        __this_module->r_slp_dur = out->remNumMinutes;
+        __this_module->wake_dur = out->wakeNumMinutes;
+        __this_module->d_slp_radio = out->deepRatio;
+        __this_module->l_slp_radio = out->lightRatio;
+        __this_module->r_slp_radio = out->remRatio;
+        __this_module->wake_radio = out->wakeRatio;
+        __this_module->slp_start_ts = out->startTS;
+        __this_module->slp_end_ts = out->endTS;
+        SlpDataVmWrite();
+
+        w_sleep.total_start_ts = out->startTS;
+        w_sleep.total_end_ts = out->endTS;
+
+        int8_t idx = -1;
+        int8_t last_stage = -1;//上一个状态
+        int32_t numEpochs = out->numEpochs;
+        for(int32_t i = 0; i < numEpochs; i++)
+        {
+            if(last_stage != out->stages[i])
+            {
+                idx += 1;
+                if(idx >= Slp_Max_Sec) 
+                    break;
+
+                last_stage = out->stages[i];
+                w_sleep.ctx[idx].stage = last_stage;
+                w_sleep.ctx[idx].start_ts = out->startTS + i*30;
+                w_sleep.ctx[idx].end_ts = out->startTS + (i+1)*30;
+            }else
+            {
+                if(idx == -1) continue;
+
+                w_sleep.ctx[idx].end_ts = out->startTS + (i+1)*30;
+            }
+        }
+
+        //统计的总段数
+        u8 sec_num = idx + 1;
+        sec_num = sec_num>Slp_Max_Sec?Slp_Max_Sec:sec_num;
+        w_sleep.SecNum = sec_num;
+        w_sleep.check_code = Nor_Vm_Check_Code;
+
+        int msg[2];
+        msg[0] = ui_msg_nor_sleep_write;
+        post_ui_msg(msg, 1);
+    }
+
+    return;
+}
+
+void VmFlashSleepCtxWrite(void)
+{
+    if(w_sleep.check_code != 0)
+        VmSleepCtxFlashSave(&w_sleep);
+
+    memset(&w_sleep, 0, sizeof(vm_sleep_ctx_t));
+
+    return;
+}
+
+/* 根据睡眠反馈，打开ppg监测 todo */
+void SleepPpgSensorOnOff(s8 onoff)
+{
+    /* 没有监测到入睡，ppg不做处理 */
+    bool fall_asleep = GetFallAsleepFlag();
+    if(fall_asleep == false) return;
+
+    /* 入睡阶段，心率由睡眠算法去接管 */
+    if(onoff == 1)
+    {
+        u8 work = GetPpgWorkType();
+        if(work == PpgWorkBo)
+        {
+            if(GetPpgMode() == PpgModeAuto)
+                SetAutoBoRestart();
+        }else if(work == PpgWorkHr)
+            return;
+
+        /* 启动睡眠心率 */
+        EnablePpgModule(PpgWorkHr, PpgModeAuto);
+    }else
+    {
+        /* 看当前ppg工作类型 */
+        if(GetPpgWorkType() == PpgWorkHr) 
+            DisablePpgModule();
+    }
+
+    return;
+}
+
+/* 根据睡眠反馈，设置状态 */
+void SleepStatusOutHandle(u8 status)
+{
+    if(status & 0x02) 
+    {
+        /* 监测入睡成功 */
+        SetFallAsleepFlag(true);
+
+        printf("fall asleep success\n");
+    }else if(status & 0x04)
+    {
+        SetFallAsleepFlag(false);
+        SetSleepAutoDetEnFlag(false);
+
+        /* 如果说清醒的时候，时间在有效时间段内 */
+        //todo
+
+        if(status & 0x08) 
+        {
+            /* 睡眠数据有效，对数据进行解析 */
+            GetSlpSummary(&slp_in, &slp_out);
+        }
+
+        printf("fall asleep --->wake \n");
+    }
+
+    return;
+}
+
+void SleepUtcMinProcess(struct sys_time *ptime)
 {
     bool BondFlag = GetDevBondFlag();
     if(BondFlag == false)
         return;
 
-    if(ptime->hour == SlpStartH && ptime->min == 0)
+    u8 hour = ptime->hour;
+    u8 minute = ptime->min;
+    if(hour >= SlpStartH || hour < SlpEndH)
     {
-        /*每天固定18:00，启动睡眠算法，清除数据*/
+        /* 20:00 ~ 8:00 */
+        bool slp_en = GetSleepEnState();
+        if(slp_en == true) return;
 
-        ClearSleepInfoPara();
+        SlpDataVmReset();
 
+        /* 时间点刻印在20点 */
         memset(&w_sleep, 0, sizeof(vm_sleep_ctx_t));
-        w_sleep.check_code = Nor_Vm_Check_Code;
-        w_sleep.CurSecNum = 0;
-        GetUtcTime(&(w_sleep.time));
+        struct sys_time time;
+        memcpy(&time, ptime, sizeof(struct sys_time));
+        time.hour = SlpStartH; time.min = 0; time.sec = 0;
+        if(hour >= SlpStartH)
+            w_sleep.timestamp = UtcTimeToSec(&time);
+        else
+            w_sleep.timestamp = UtcTimeToSec(&time) - SEC_PER_DAY;
+
+        SetSleepEnState(true);
+        SetFallAsleepFlag(false);
+        SetSleepAutoDetEnFlag(true);
+
+        printf("---------->sleep start\n");
+    }else
+    {
+        SetSleepEnState(false);
     }
+
+    return;
+}
+
+void SlpDataVmRead(void)
+{
+    int ret = syscfg_read(CFG_SLP_PARA_INFO, \
+        __this_module, __this_module_size);
+    if(ret != __this_module_size || __this_module->vm_mask != VM_MASK)
+        SlpDataVmReset();
+
+    return;
+}
+
+void SlpDataVmWrite(void)
+{
+    for(u8 i = 0; i < 3; i++)
+    {
+        int ret = syscfg_write(CFG_SLP_PARA_INFO, \
+            __this_module, __this_module_size);
+        if(ret == __this_module_size)
+            break;
+    }
+
+    return;
+}
+
+void SlpDataVmReset(void)
+{
+    memcpy(__this_module, &init, __this_module_size);
+
+    __this_module->vm_mask = VM_MASK;
+
+    SlpDataVmWrite();
 
     return;
 }

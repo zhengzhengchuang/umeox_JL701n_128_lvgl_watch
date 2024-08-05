@@ -20,12 +20,12 @@ void DndManualUpdate(void)
     struct sys_time utc_time;
     GetUtcTime(&utc_time);
 
-    DndProcess(&utc_time);
+    DndUtcMinProcess(&utc_time);
 
     return;
 }
 
-void DndProcess(struct sys_time *ptime)
+void DndUtcMinProcess(struct sys_time *ptime)
 {
     bool BondFlag = GetDevBondFlag();
     if(BondFlag == false)

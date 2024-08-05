@@ -401,7 +401,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_label_para.label_parent = \
         tips_label_container;
     widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_inv_exceeds_range);
+        get_lang_txt_with_id(lang_txtid_exc_time_range);
     lv_obj_t *tips_label_label = \
         common_widget_label_create(&widget_label_para);
     lv_obj_align(tips_label_label, LV_ALIGN_CENTER, 0, 0);

@@ -116,7 +116,7 @@
 #define TCFG_FLASH_DEV_SPI_CS_PORT	    	IO_PORTB_07
 
 #define TCFG_VIRFAT_FLASH_ENABLE  			ENABLE	// FLASH虚拟文件系统
-#define TCFG_VIRFAT_INSERT_FLASH_ENABLE  	ENABLE//DISABLE	// 内置FLASH虚拟文件系统
+#define TCFG_VIRFAT_INSERT_FLASH_ENABLE  	ENABLE	// 内置FLASH虚拟文件系统
 
 // #define TCFG_SFC_VM                         ENABLE	// 内置FLASH自定义存储管理
 // #define TCFG_SFC_VM_SIZE                    0x8000	// 内置FLASH自定义存储管理空间大小
@@ -128,7 +128,7 @@
 
 #define FLASH_PROTECT_OPT_BEFORE_UPDATE		1 // 写保护
 
-
+#if 1
 #define TCFG_VIRFAT_INSERT_FLASH_BASE       0x4FE000 //5m - 8k
 #define TCFG_VIRFAT_INSERT_FLASH_SIZE       0xAE0000 //11m - 128k    	  	
 
@@ -141,6 +141,7 @@
 #define CONFIG_RULE_INSERT_FLASH_SIZE	  	0xAE0000
 #define CONFIG_RULE_INSERT_UI_VM_BASE	  	0xFDE000
 #define CONFIG_RULE_INSERT_UI_VM_SIZE	  	0x20000
+#endif
 
 //*********************************************************************************//
 //                                  SD 配置                                        //

@@ -159,7 +159,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_label_para.label_parent = \
         PT_reminder_on_container;
     widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_reminder_on);
+        get_lang_txt_with_id(lang_txtid_remind);
     lv_obj_t *PT_reminder_on_label = \
         common_widget_label_create(&widget_label_para);
     if(menu_align == menu_align_left)
@@ -223,7 +223,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_label_para.label_parent = \
         PT_voice_on_container;
     widget_label_para.label_text = \
-        get_lang_txt_with_id(lang_txtid_voice_on);
+        get_lang_txt_with_id(lang_txtid_voice);
     lv_obj_t *PT_voice_on_label = \
         common_widget_label_create(&widget_label_para);
     if(menu_align == menu_align_left)

@@ -81,14 +81,11 @@ static void common_menu_lock_timer_cb(void *priv)
     common_menu_lock_timer_del();
 
     //地磁如果开启，关掉
-    bool GmEnableFlag = \
-        GetGmEnableFlag();
-    if(GmEnableFlag == true)
-        DisableGmModule();
+    bool GmEn = GetGmEnableFlag();
+    if(GmEn == true) DisableGmModule();
 
     /*相机解锁退出*/
-    bool CameraUnlock = \
-        GetCameraUnlockExit();
+    bool CameraUnlock = GetCameraUnlockExit();
     if(CameraUnlock == true)
         le_task_post(Le_Req_Exit_Camera, NULL, 0);
     SetCameraUnlockExit(false);

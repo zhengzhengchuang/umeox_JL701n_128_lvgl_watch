@@ -151,10 +151,20 @@ void *is_sys_time_online()
 
 static void get_sys_time(struct sys_time *time)//获取时间
 {
-    if (!dev_handle) {
-        return ;
+    void *fd = dev_open("rtc", NULL);
+    if (!fd) {
+        printf("[ERROR] open rtc error \n");
+        return;
     }
-    dev_ioctl(dev_handle, IOCTL_GET_SYS_TIME, (u32)time);
+    dev_ioctl(fd, IOCTL_GET_SYS_TIME, (u32)time);
+    //printf(">>>>>>>>>>>>>>>>>Get systime : %d-%d-%d,%d:%d:%d\n", time->year, time->month, time->day, time->hour, time->min, time->sec);
+    dev_close(fd);
+
+    return;
+    // if (!dev_handle) {
+    //     return ;
+    // }
+    // dev_ioctl(dev_handle, IOCTL_GET_SYS_TIME, (u32)time);
 }
 
 static void set_sys_time(struct sys_time *time)//设置时间
@@ -1063,15 +1073,21 @@ static int write_p11_sys_time(int param)
         memcpy(&p11_rtc_time->ram_time, &cur_time, sizeof(struct sys_time));
         p11_rtc_time->mask = 0x12345678;
     }
-    /* printf("write_p11_sys_time \n"); */
+    //printf("write_p11_sys_time \n");
     return 0;
 }
 
+extern const struct sys_time def_sys_time;
 int user_write_p11_sys_time(int param)
 {
     struct sys_time cur_time;
-    if (p11_rtc_time) {
-        get_sys_time(&cur_time);
+    if (p11_rtc_time) 
+    {
+        printf("%s:param = %d\n", __func__, param);
+        if(param == 0)
+            get_sys_time(&cur_time);
+        else if(param == 1)
+            memcpy(&cur_time, &def_sys_time, sizeof(struct sys_time));
         memcpy(&p11_rtc_time->ram_time, &cur_time, sizeof(struct sys_time));
         p11_rtc_time->mask = 0x12345678;
     }
@@ -1088,11 +1104,21 @@ static void write_p11_sys_time_by_timer(void *priv)
     os_taskq_post_type("app_core", Q_CALLBACK, 3, argv);
 }
 
-void user_write_p11_sys_time_by_timer(void *priv)
+void user_dev_restart_handle(void *priv)
 {
     int argv[3];
     argv[0] = (int)user_write_p11_sys_time;
     argv[1] = 1;
+    argv[2] = 0;
+    os_taskq_post_type("app_core", Q_CALLBACK, 3, argv);
+}
+
+void user_dev_reset_handle(void *priv)
+{
+    int argv[3];
+    argv[0] = (int)user_write_p11_sys_time;
+    argv[1] = 1;
+    argv[2] = 1;
     os_taskq_post_type("app_core", Q_CALLBACK, 3, argv);
 }
 

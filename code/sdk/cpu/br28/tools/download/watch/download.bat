@@ -70,7 +70,7 @@ set CHIPKEY=default.key
 :: 16MBytes  修改
 ::..\..\fat_comm.exe -pad-backup2 -force-align-fat -out new_res.bin -image-size 16 -filelist -remove-empty -remove-bpb -mark-bad-after 0xfe0000 -key %CHIPKEY% -address 0
 :: 16MBytes
-..\..\fat_comm.exe -pad-backup2 -force-align-fat -out new_res.bin -image-size 16 -filelist -remove-empty -remove-bpb -mark-bad-after 0xfe0000 -key %CHIPKEY% -address 0
+..\..\fat_comm.exe -pad-backup2 -force-align-fat -out new_res.bin -image-size 32 -filelist -remove-empty -remove-bpb -mark-bad-after 0x1FE0000 -key %CHIPKEY% -address 0
 
 ::..\..\fat_comm.exe -pad-backup2 -force-align-fat -out new_res2.bin -image-size 16 -filelist  lvmg  -remove-empty -remove-bpb -mark-bad-after 0x800000 -key %CHIPKEY% -address 0
 
@@ -91,7 +91,7 @@ del upgrade.zip
 ::..\..\packres.exe -n res -o res.bin new_res.bin 0 nor_up.ufw 0xb00000 -normal
 
 ::烧录ui资源
-..\..\isd_download.exe -tonorflash -dev br28 -boot 0x120000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -res ui_upgrade p11_code.bin config.dat tone.cfg eq_cfg_hw.bin -uboot_compress -key %CHIPKEY% -ex_flash res.bin -ex_api_bin user_api.bin
+::..\..\isd_download.exe -tonorflash -dev br28 -boot 0x120000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -res ui_upgrade p11_code.bin config.dat tone.cfg eq_cfg_hw.bin -uboot_compress -key %CHIPKEY% -ex_flash res.bin -ex_api_bin user_api.bin
 ::不烧录ui资源
 ::..\..\isd_download.exe -tonorflash -dev br28 -boot 0x120000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -res ui_upgrade p11_code.bin config.dat tone.cfg eq_cfg_hw.bin -uboot_compress -key %CHIPKEY% -ex_api_bin user_api.bin
 ::-format all

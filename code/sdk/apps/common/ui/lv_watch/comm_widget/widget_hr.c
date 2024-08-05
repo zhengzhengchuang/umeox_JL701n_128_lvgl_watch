@@ -86,9 +86,7 @@ void common_hr_widget_refresh(void)
         u8 __data = \
             GetHrRealVal();
 
-        int hr_high_val = \
-            GetVmParaCacheByLabel(\
-                vm_label_hr_high_val);
+        int hr_high_val = HrPara.hr_high_val;
 
         uint32_t num_addr_index;
         if(p_hr_para->user0_para_valid)
@@ -213,9 +211,7 @@ int16_t common_hr_widget_create(widget_data_para_t *data_para, \
     widget_data_para_t *p_hr_para = \
         &hr_para_cache[hr_group_num];
 
-    int hr_high_val = \
-        GetVmParaCacheByLabel(\
-            vm_label_hr_high_val);
+    int hr_high_val = HrPara.hr_high_val;
 
     uint32_t num_addr_index;
     if(p_hr_para->user0_para_valid)

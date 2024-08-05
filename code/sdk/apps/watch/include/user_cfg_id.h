@@ -155,6 +155,9 @@
 #define     CFG_QPUSER_PARA_INFO	    204//古兰经播放参数
 #define     CFG_TWS_PARA_INFO	        205//tws参数
 #define     CFG_PEDO_DATA_INFO	        206//日常活动参数
+#define     CFG_HR_PARA_INFO	        207//心率参数信息
+#define     CFG_BO_PARA_INFO	        208//血氧参数信息
+#define     CFG_SLP_PARA_INFO	        209//睡眠参数信息
 #if 0
 #define     VM_WATCH_EX_BEGIN            191//拓展表盘信息
 #define     VM_WATCH_EX0                      VM_WATCH_EX_BEGIN//拓展表盘信息

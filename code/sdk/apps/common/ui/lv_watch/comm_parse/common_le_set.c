@@ -18,26 +18,20 @@ void RemoteSetUtcTime(u8 *buf, u8 len)
     u8 tz = buf[ctx_idx++];
     if(tz&(0x80)) pn = -1;
     time_zone = (tz&(0x7f))*pn;
-    SetVmParaCacheByLabel(vm_label_time_zone, \
-        time_zone);
+    SetVmParaCacheByLabel(vm_label_time_zone, time_zone);
     
     struct sys_time utc_time;
-    utc_time.year = \
-        buf[ctx_idx++] + 2000;
-    utc_time.month = \
-        buf[ctx_idx++];
-    utc_time.day = \
-        buf[ctx_idx++];
-    utc_time.hour = \
-        buf[ctx_idx++];
-    utc_time.min = \
-        buf[ctx_idx++];
-    utc_time.sec = \
-        buf[ctx_idx++];
+    utc_time.year = buf[ctx_idx++] + 2000;
+    utc_time.month = buf[ctx_idx++];
+    utc_time.day = buf[ctx_idx++];
+    utc_time.hour = buf[ctx_idx++];
+    utc_time.min = buf[ctx_idx++];
+    utc_time.sec = buf[ctx_idx++];
     SetUtcTime(&utc_time);
 
-    le_task_post(Le_Set_UtcTime, NULL, 0);
-    
+    TimeUpdateDataHandle();
+
+    le_task_post(Le_Set_UtcTime, NULL, 0); 
     umeox_common_le_notify_data(buf, len);
 
     return;
@@ -231,6 +225,10 @@ void RemoteSetUserInfo(u8 *buf, u8 len)
 
     umeox_common_le_notify_data(buf, len);
 
+    int CommMsg[1] = {0};
+    CommMsg[0] = comm_msg_gomore_init;
+    PostCommTaskMsg(CommMsg, 1);
+
     return;
 }
 
@@ -360,13 +358,13 @@ void RemoteSetHealthMonitorPara(u8 *buf, u8 len)
             break;
 
         case 0x02:/*心率过高开关*/
-            SetVmParaCacheByLabel(\
-                vm_label_hr_high_remind_sw, sw_enable);
+            HrPara.hr_high_sw = sw_enable;
+            HrDataVmWrite();
             break;
 
         case 0x03:/*心率过低开关*/
-            SetVmParaCacheByLabel(\
-                vm_label_hr_low_remind_sw, sw_enable);
+            HrPara.hr_low_sw = sw_enable;
+            HrDataVmWrite();
             break;
         
         default:
@@ -379,13 +377,13 @@ void RemoteSetHealthMonitorPara(u8 *buf, u8 len)
             break;
 
         case 0x02:/*心率过高提醒参数*/
-            SetVmParaCacheByLabel(\
-                vm_label_hr_high_val, para_val);
+            HrPara.hr_high_val = para_val;
+            HrDataVmWrite();
             break;
 
         case 0x03:/*心率过低提醒参数*/
-            SetVmParaCacheByLabel(\
-                vm_label_hr_low_val, para_val);
+            HrPara.hr_low_val = para_val;
+            HrDataVmWrite();
             break;
         
         default:
@@ -512,7 +510,6 @@ void RemoteMsgNotifyPush(u8 *buf, u8 len)
     char *w_ctx = w_message.msg_ctx;
     u8 *type = &(w_message.message_type);
     u16 *check_code = &(w_message.check_code);
-    struct sys_time *time = &(w_message.message_time);
 
     if(pkt_id == 0x00)
     {
@@ -547,7 +544,10 @@ void RemoteMsgNotifyPush(u8 *buf, u8 len)
                 memcpy(&w_ctx[ctx_offset], &buf[3], len);
 
             *check_code = Nor_Vm_Check_Code;
-            GetUtcTime(time);
+
+            struct sys_time time;
+            GetUtcTime(&time);
+            w_message.timestamp = UtcTimeToSec(&time);
             le_task_post(Le_Notify_Push, NULL, 0);
 
             goto __reply;
@@ -672,18 +672,13 @@ void RemoteSetWeatherData(u8 *buf, u8 len)
     int8_t min_temper = buf[4];
     int8_t max_temper = buf[5];
 
-    uint16_t *check_code = \
-        &(w_weather.check_code);
-    struct sys_time *time = \
-        &(w_weather.time);
-    vm_weather_data_ctx_t *w_ctx = \
-        w_weather.vm_ctx;
+    u16 *check_code = &(w_weather.check_code);
+    vm_weather_data_ctx_t *w_ctx = w_weather.vm_ctx;
 
     if(pkt_id == 0x00)
         pkt_sum = 0;
 
-    if(pkt_sum > \
-        Weather_Sync_Days - 1)
+    if(pkt_sum > Weather_Sync_Days - 1)
         return;
 
     w_ctx[pkt_sum].type = type;
@@ -694,9 +689,12 @@ void RemoteSetWeatherData(u8 *buf, u8 len)
 
     if(pkt_sum == Weather_Sync_Days)
     {
-        *check_code = \
-            Nor_Vm_Check_Code;
-        GetUtcTime(time);
+        *check_code = Nor_Vm_Check_Code;
+        struct sys_time time;
+        GetUtcTime(&time);
+        time.min = 0;
+        time.sec = 0;
+        w_weather.timestamp = UtcTimeToSec(&time);
         le_task_post(Le_Weather_Update, NULL, 0);
    
         u8 nfy_buf[Cmd_Pkt_Len];

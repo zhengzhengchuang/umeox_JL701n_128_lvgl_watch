@@ -70,12 +70,8 @@ void DevOpResetHandle(void)
     post_ui_msg(ui_msg_post, 1);
   
     DevAllSensorDisable();
-
     common_offscreen_handle(); 
-
-    /*程序重新启动马达会震动*/
-
-    timer_id = sys_timeout_add(NULL, reset_cb, 500);
+    timer_id = sys_timeout_add(NULL, reset_cb, 200);
 
     return;
 }
@@ -83,14 +79,9 @@ void DevOpResetHandle(void)
 void DevOpRestartHandle(void)
 {
     PowerOffVmDataWrite();
-
     DevAllSensorDisable();
-
     common_offscreen_handle(); 
-
-    /*程序重新启动马达会震动*/
-
-    timer_id = sys_timeout_add(NULL, restart_cb, 500);
+    timer_id = sys_timeout_add(NULL, restart_cb, 200);
 
     return;
 }
@@ -98,14 +89,10 @@ void DevOpRestartHandle(void)
 void DevOpShutdownHandle(void)
 {
     PowerOffVmDataWrite();
-
     DevAllSensorDisable();
-
     common_offscreen_handle(); 
-
     motor_run(1, sdw_motor_duty);
-
-    timer_id = sys_timeout_add(NULL, shutdown_cb, 500);
+    timer_id = sys_timeout_add(NULL, shutdown_cb, 200);
 
     return;
 }

@@ -1,9 +1,9 @@
 #include "../lv_watch.h"
 
-#define VM_MASK (0x55aa)
+#define VM_MASK (0x55ab)
 
 SedInfoPara_t Sed_Info;
-static const u16 LimitSteps = 120;
+static const float SedSteps = 120.0f;
 
 #define __this_module (&Sed_Info)
 #define __this_module_size (sizeof(SedInfoPara_t))
@@ -17,21 +17,18 @@ static const SedInfoPara_t init =
     .end_minute = 0,
     .repeat = 0x00,
 
-    .steps = 0,
+    .steps = 0.0f,
 };
 
 static void SedIsOnHandle(void)
 {
     int dnd_state = GetVmParaCacheByLabel(vm_label_dnd_state);
-    if(dnd_state == dnd_state_enable)
-        return;
+    if(dnd_state == dnd_state_enable) return;
 
-    //当前菜单是否支持弹窗
-    if(!MenuSupportPopup())
+    if(!MenuSupportPopup()) 
         return;
-
+        
     motor_run(1, def_motor_duty);
-
     ui_menu_jump(ui_act_id_sedentary);
 
     return;
@@ -39,16 +36,15 @@ static void SedIsOnHandle(void)
 
 void SedSetSteps(float steps)
 {
-    if(steps == 0.0f)
-        return;
+    if(steps == 0) return;
 
-    __this_module->steps += (u32)steps;
+    __this_module->steps += steps;
     SedInfoParaUpdate();
 
     return;
 }
 
-void SedProcess(struct sys_time *ptime)
+void SedUtcMinProcess(struct sys_time *ptime)
 {
     bool BondFlag = GetDevBondFlag();
     if(BondFlag == false)
@@ -59,7 +55,7 @@ void SedProcess(struct sys_time *ptime)
     {
         if(ptime->min == 0)
         {
-            __this_module->steps = 0;
+            __this_module->steps = 0.0f;
             SedInfoParaUpdate();
         }
 
@@ -88,7 +84,7 @@ void SedProcess(struct sys_time *ptime)
 
         if(utc_ts == start_ts)
         {
-            __this_module->steps = 0;
+            __this_module->steps = 0.0f;
             SedInfoParaUpdate();
         }
   
@@ -97,11 +93,11 @@ void SedProcess(struct sys_time *ptime)
             //整小时判断
             if(repeat & (0x1<<weekday))
             {
-                if(__this_module->steps < LimitSteps)
+                if(__this_module->steps < SedSteps)
                     SedIsOnHandle();
             }
             
-            __this_module->steps = 0;
+            __this_module->steps = 0.0f;
             SedInfoParaUpdate();
         }
     }

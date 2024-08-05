@@ -440,10 +440,10 @@ static const u8 *azkar_fr_img[AzkarTypeNum] =
 };
 
 static const u32 azkar_fr_file[AzkarTypeNum] = {
-    // azkar_fr_MR_00_index, azkar_fr_ER_00_index, azkar_fr_BS_00_index, azkar_fr_APR_00_index, azkar_fr_HAU_00_index, \
-    // azkar_fr_FAS_00_index, azkar_fr_WWU_00_index, azkar_fr_GAR_00_index, azkar_fr_ABU_00_index, azkar_fr_HOME_00_index, \
-    // azkar_fr_MOS_00_index, azkar_fr_ATH_00_index, azkar_fr_FOOD_00_index, azkar_fr_TRA_00_index, azkar_fr_OR_00_index, \
-    // azkar_fr_PRA_00_index,
+    azkar_fr_MR_00_index, azkar_fr_ER_00_index, azkar_fr_BS_00_index, azkar_fr_APR_00_index, azkar_fr_HAU_00_index, \
+    azkar_fr_FAS_00_index, azkar_fr_WWU_00_index, azkar_fr_GAR_00_index, azkar_fr_ABU_00_index, azkar_fr_HOME_00_index, \
+    azkar_fr_MOS_00_index, azkar_fr_ATH_00_index, azkar_fr_FOOD_00_index, azkar_fr_TRA_00_index, azkar_fr_OR_00_index, \
+    azkar_fr_PRA_00_index,
 };
 
 /* 赞念词条法译图片 */
@@ -536,10 +536,10 @@ static const u8 *azkar_fr_tr_img[AzkarTypeNum] =
 };
 
 static const u32 azkar_fr_tr_file[AzkarTypeNum] = {
-    // azkar_fr_tr_MR_00_index, azkar_fr_tr_ER_00_index, azkar_fr_tr_BS_00_index, azkar_fr_tr_APR_00_index, azkar_fr_tr_HAU_00_index, \
-    // azkar_fr_tr_FAS_00_index, azkar_fr_tr_WWU_00_index, azkar_fr_tr_GAR_00_index, azkar_fr_tr_ABU_00_index, azkar_fr_tr_HOME_00_index, \
-    // azkar_fr_tr_MOS_00_index, azkar_fr_tr_ATH_00_index, azkar_fr_tr_FOOD_00_index, azkar_fr_tr_TRA_00_index, azkar_fr_tr_OR_00_index, \
-    // azkar_fr_tr_PRA_00_index,
+    azkar_fr_tr_MR_00_index, azkar_fr_tr_ER_00_index, azkar_fr_tr_BS_00_index, azkar_fr_tr_APR_00_index, azkar_fr_tr_HAU_00_index, \
+    azkar_fr_tr_FAS_00_index, azkar_fr_tr_WWU_00_index, azkar_fr_tr_GAR_00_index, azkar_fr_tr_ABU_00_index, azkar_fr_tr_HOME_00_index, \
+    azkar_fr_tr_MOS_00_index, azkar_fr_tr_ATH_00_index, azkar_fr_tr_FOOD_00_index, azkar_fr_tr_TRA_00_index, azkar_fr_tr_OR_00_index, \
+    azkar_fr_tr_PRA_00_index,
 };
 
 /* 赞念词条阿拉伯图片 */

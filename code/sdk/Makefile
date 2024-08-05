@@ -591,7 +591,6 @@ c_SRC_FILES := \
     apps/common/ui/lvgl/src/widgets/lv_table.c  \
     apps/common/ui/lvgl/src/widgets/lv_textarea.c  \
 	apps/common/ui/ui/jl_images/file_index.c  \
-	apps/common/ui/ui/jl_images/ex_file_index.c  \
 	apps/common/update/ex_flash_file_download.c \
 	apps/common/update/norflash_ufw_update.c \
 	apps/common/update/norflash_update.c \

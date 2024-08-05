@@ -26,19 +26,14 @@ void VmBoCtxClear(void)
 {
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
+    if(!nor_vm_file) return;
 
-    if(!nor_vm_file)
-        return;
+    u8 num = VmBoItemNum();
 
-    uint8_t bo_num = \
-        VmBoItemNum();
-
-    while(bo_num)
+    while(num)
     {
-        flash_common_delete_by_index(\
-            nor_vm_file, 0);
-
-        bo_num--;
+        flash_common_delete_by_index(nor_vm_file, 0);
+        num--;
     }
     
     return;
@@ -47,52 +42,42 @@ void VmBoCtxClear(void)
 /*********************************************************************************
                               存储数量                                         
 *********************************************************************************/
-uint8_t VmBoItemNum(void)
+u8 VmBoItemNum(void)
 {
-    uint8_t bo_num = 0;
+    u8 num = 0;
 
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
+    if(!nor_vm_file) return num;
 
-    if(!nor_vm_file)
-        return bo_num;
+    num = flash_common_get_total(nor_vm_file);
 
-    bo_num = \
-        flash_common_get_total(nor_vm_file);
+    if(num > Bo_Max_Days)
+        num = Bo_Max_Days;
 
-    if(bo_num > Bo_Max_Days)
-        bo_num = Bo_Max_Days;
-
-    return bo_num;
+    return num;
 }
 
 /*********************************************************************************
                               获取内容                                        
 *********************************************************************************/
-bool VmBoCtxByIdx(uint8_t idx)
+bool VmBoCtxByIdx(u8 idx)
 {
-    uint8_t bo_num = \
-        VmBoItemNum();
-    if(bo_num == 0)
-        return false;
+    u8 num = VmBoItemNum();
+    if(num == 0) return false;
 
-    if(idx >= bo_num)
-        return false;
+    if(idx >= num) return false;
     
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
-    int ctx_len = \
-        sizeof(vm_bo_ctx_t);
-    
-    if(!nor_vm_file)
-        return false;
+    int ctx_len = sizeof(vm_bo_ctx_t);
+    if(!nor_vm_file) return false;
 
     memset(&r_bo, 0, ctx_len);
     flash_common_read_by_index(nor_vm_file, idx, 0, \
-        ctx_len, (uint8_t *)&r_bo);
+        ctx_len, (u8 *)&r_bo);
 
-    if(r_bo.check_code != \
-        Nor_Vm_Check_Code)
+    if(r_bo.check_code != Nor_Vm_Check_Code)
         return false;
 
     return true;
@@ -101,21 +86,16 @@ bool VmBoCtxByIdx(uint8_t idx)
 /*********************************************************************************
                               删除指定项内容                                        
 *********************************************************************************/
-void VmBoCtxDelByIdx(uint8_t idx)
+void VmBoCtxDelByIdx(u8 idx)
 {
-    uint8_t bo_num = \
-        VmBoItemNum();
-    if(bo_num == 0)
-        return;
+    u8 num = VmBoItemNum();
+    if(num == 0) return;
 
-    if(idx >= bo_num)
-        return;
+    if(idx >= num) return;
 
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
-
-    if(!nor_vm_file)
-        return;
+    if(!nor_vm_file) return;
 
     flash_common_delete_by_index(nor_vm_file, idx);
 
@@ -135,18 +115,16 @@ void VmBoCtxFlashSave(void *p)
 
     void *nor_vm_file = \
         nor_flash_vm_file(nor_vm_type);
-    int ctx_len = \
-        sizeof(vm_bo_ctx_t);
+    int ctx_len = sizeof(vm_bo_ctx_t);
 
-    if(!nor_vm_file)
-        return;
+    if(!nor_vm_file) return;
 
     bool DayVD = GetBoDayVmData();
-    uint8_t bo_num = VmBoItemNum();
+    u8 num = VmBoItemNum();
 
-    printf("bo_num = %d\n", bo_num);
+    printf("bo_num = %d\n", num);
     
-    if(bo_num >= Bo_Max_Days && DayVD == true)
+    if(num >= Bo_Max_Days && DayVD == true)
         flash_common_delete_by_index(nor_vm_file, 0);
 
     flash_common_write_file(nor_vm_file, 0, ctx_len, (u8 *)p);

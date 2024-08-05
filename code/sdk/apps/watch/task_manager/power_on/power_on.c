@@ -196,12 +196,16 @@ void app_poweron_task()
     }
 #endif
 
-    int err =  tone_play_with_callback_by_name(\
-        (char *)tone_table[IDEX_TONE_POWER_ON], 1, \
+#if 0
+    int err =  tone_play_with_callback_by_name((char *)tone_table[IDEX_TONE_POWER_ON], 1, \
             tone_play_end_callback, (void *)IDEX_TONE_POWER_ON);
-    if (err) { //提示音没有,播放失败，直接init流程
+    printf("----->%s:err = %d\n", __func__, err);
+    if (err){ //提示音没有,播放失败，直接init流程
         power_on_init();
     }
+#else
+    power_on_init();
+#endif
 
 
     while (1) {

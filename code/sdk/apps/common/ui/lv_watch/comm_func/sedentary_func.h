@@ -18,7 +18,7 @@ typedef struct
     u8 end_minute;
     u8 repeat;
 
-    u32 steps;
+    float steps;
 }SedInfoPara_t;
 extern SedInfoPara_t Sed_Info;
 
@@ -28,7 +28,7 @@ void SedInfoParaReset(void);
 void SedInfoParaUpdate(void);
 
 void SedSetSteps(float steps);
-void SedProcess(struct sys_time *ptime);
+void SedUtcMinProcess(struct sys_time *ptime);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

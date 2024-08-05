@@ -109,18 +109,6 @@ enum
     /*******设备绑定标志*******/
     vm_label_dev_bond,
 
-    /*******心率值*******/
-    vm_label_hr_real_val,
-    
-    /*******心率异常区间*******/
-    vm_label_hr_low_remind_sw,  //心率过低开关
-    vm_label_hr_high_remind_sw, //心率过高开关
-    vm_label_hr_low_val,        //心率过低参数
-    vm_label_hr_high_val,       //心率过高参数
-
-    /*******血氧值*******/
-    vm_label_bo_real_val,
-
     /*******特定开关*******/
     vm_label_auto_hr_sw,        //自动心率开关
     vm_label_auto_bo_sw,        //自动血氧开关
@@ -129,9 +117,8 @@ enum
     vm_label_num,
 };
 
-#define Vm_Num \
-    (vm_label_num)
-#define Vm_Mask (0x55b6)//每次更新vm参数的时候都需要更改
+#define Vm_Num (vm_label_num)
+#define Vm_Mask (0x55c2)//每次更新vm参数的时候都需要更改
 
 typedef struct
 {
