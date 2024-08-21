@@ -188,7 +188,15 @@ enum
     lang_txtid_unpaired_tws,//取消配对音频设备？
     lang_txtid_disc_tws,//断开音频设备？
     lang_txtid_not_found_tws,//未找到无线音频设备，请重试。
-   
+    lang_txtid_minutes_ago,//n分钟前
+    lang_txtid_minutes_later,//n分钟后
+    lang_txtid_charging,//充电中
+    lang_txtid_charge_full,//已充满
+    lang_txtid_low_battery,//电量低，请充电
+    lang_txtid_upgrading,//升级中
+    lang_txtid_upgrade_succ,//升级成功
+    lang_txtid_upgrade_fail,//升级失败
+
     lang_txtid_max,
 };
 typedef uint32_t lang_txtid_t;

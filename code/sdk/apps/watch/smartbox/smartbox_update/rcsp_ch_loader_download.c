@@ -15,6 +15,8 @@
 
 #include "smartbox_update_tws.h"
 
+#include "../../../common/ui/lv_watch/lv_watch.h"
+
 #if TCFG_USER_TWS_ENABLE
 #include "bt_tws.h"
 #endif
@@ -415,12 +417,13 @@ static void rcsp_update_state_cbk(int type, u32 state, void *priv)
         if (UPDATE_DUAL_BANK_IS_SUPPORT()) {
             if ((0 == ret_code->stu) && (0 == ret_code->err_code)) {
                 set_jl_update_flag(1);
-                log_info(">>>rcsp update succ\n");
+                log_info("%s:>>>rcsp update succ\n", __func__);
                 update_result_set(UPDATA_SUCC);
-
+                SetOtaUpgradeState(upgrade_succ);
             } else {
+                log_info("%s:>>>rcsp update err\n", __func__);
                 update_result_set(UPDATA_DEV_ERR);
-                log_info(">>>rcsp update succ\n");
+                SetOtaUpgradeState(upgrade_fail);
             }
         } else {
             if ((0 == ret_code->stu) && (0 == ret_code->err_code)) {

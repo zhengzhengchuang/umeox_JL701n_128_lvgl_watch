@@ -40,13 +40,13 @@ void common_key_msg_handle(int key_value, int key_event)
             ui_act_id_t act_id = ui_act_id_watchface;
             ui_menu_load_info_t *menu_load_info = \
                 &p_ui_info_cache->exit_menu_load_info;
-            bool timer_lock_flag = \
-                get_menu_timer_lock_flag();
-            if(menu_load_info->lock_flag)
-                act_id = menu_load_info->menu_id;
-            else
+            bool lock_flag = get_menu_timer_lock_flag();
+            if(menu_load_info->lock_flag == true)
             {
-                if(timer_lock_flag)
+                act_id = menu_load_info->menu_id;
+            }else
+            {
+                if(lock_flag == true && menu_load_info->menu_id != ui_act_id_null)
                     act_id = menu_load_info->menu_id;
             }
             
@@ -123,12 +123,15 @@ void common_key_msg_handle(int key_value, int key_event)
                 }
 #endif
 #endif
-            }else if(key_event == KEY_EVENT_FIRTH_CLICK)
+            }
+#if 0
+            else if(key_event == KEY_EVENT_FIRTH_CLICK)
             {
                 bool BondFlag = GetDevBondFlag();
                 if(BondFlag == false && cur_act_id == ui_act_id_dev_bond)
                     ui_menu_jump(ui_act_id_watchface);
             }
+#endif
         }else
         {
             return;

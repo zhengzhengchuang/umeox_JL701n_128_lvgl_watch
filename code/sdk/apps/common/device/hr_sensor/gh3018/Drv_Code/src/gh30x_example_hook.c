@@ -54,14 +54,14 @@ void Gh30xInitHookFunc(void)
 #endif
 }
 
-//extern void SetSleepPpgRawData(u32 *raw, u16 len);
+extern void SetSlpHrRawData(u32 *buf, u16 len);
 void Gh30xGetRawdataHookFunc(GU32 *read_buffer_ptr, GU16 length)
 {
     // for(u16 i = 0; i < length; i++)
     //     printf("%s:slp_raw[%d] = %d\n", __func__, i, read_buffer_ptr[i]);
 
     /* code implement by user */
-    //SetSleepPpgRawData(read_buffer_ptr, length);
+    SetSlpHrRawData(read_buffer_ptr, length);
 }
 
 /**

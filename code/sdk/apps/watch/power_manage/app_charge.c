@@ -19,6 +19,8 @@
 #include "app_task.h"
 #include "ui/ui_api.h"
 
+#include "../../common/ui/lv_watch/lv_watch.h"
+
 #define LOG_TAG_CONST       APP_CHARGE
 #define LOG_TAG             "[APP_CHARGE]"
 #define LOG_ERROR_ENABLE
@@ -84,11 +86,12 @@ void charge_start_deal(void)
     log_info("%s\n", __FUNCTION__);
 
     /* power_set_mode(PWR_LDO15);  //充电切到LDO模式，DCDC模式会直接消耗VBat的电 */
-
+#if 0
     u8 app = app_get_curr_task();
     if (app == APP_IDLE_TASK) {
         ui_update_status(STATUS_CHARGE_START);
     }
+#endif
 }
 
 
@@ -171,6 +174,8 @@ void ldo5v_keep_deal(void)
     charge_check_and_set_pinr(0);
 #endif
 
+//user add
+#if 1
     if (get_charge_poweron_en() == 0) {
 #if TCFG_CHARGESTORE_ENABLE
         //智能充电舱不处理充电err
@@ -199,10 +204,12 @@ void ldo5v_keep_deal(void)
     } else {
         ui_update_status(STATUS_CHARGE_ERR);
     }
+#endif
 }
 
 void charge_full_deal(void)
 {
+#if 1
     log_info("%s\n", __func__);
 
     charge_full_flag = 1;
@@ -213,6 +220,8 @@ void charge_full_deal(void)
     recharge_detect_start();
 #endif
 
+//user add
+#if 1
     if(get_charge_poweron_en() == 0) 
     {
         /* power_set_soft_poweroff(); */
@@ -225,8 +234,10 @@ void charge_full_deal(void)
         vbat_timer_delete();
 #endif
     } else {
-        ui_update_status(STATUS_CHARGE_FULL);
+        //ui_update_status(STATUS_CHARGE_FULL);
     }
+#endif
+#endif
 }
 
 void charge_close_deal(void)
@@ -235,7 +246,6 @@ void charge_close_deal(void)
     log_info("%s\n", __FUNCTION__);
 
     power_set_mode(TCFG_LOWPOWER_POWER_SEL);
-
 #if TCFG_USER_TWS_ENABLE
     //在idle的时候才执行充电关闭的UI
     u8 app = app_get_curr_task();
@@ -249,7 +259,6 @@ void charge_close_deal(void)
 void charge_ldo5v_in_deal(void)
 {
     log_info("%s\n", __FUNCTION__);
-
 
 #if TCFG_IRSENSOR_ENABLE
     if (get_bt_tws_connect_status()) {
@@ -337,13 +346,14 @@ _check_reset:
     //防止耳机低电时,插拔充电有几率出现关机不充电问题
     if (app_var.goto_poweroff_flag) {
         cpu_reset();
-    }
+    } 
+
+    Ldo5vInHandle();  
 }
 
 void charge_ldo5v_off_deal(void)
 {
     log_info("%s\n", __FUNCTION__);
-
 
     //拨出交换
     power_event_to_user(POWER_EVENT_POWER_CHANGE);
@@ -385,7 +395,8 @@ void charge_ldo5v_off_deal(void)
     chargestore_shutdown_reset();
 #endif
 
-    if ((get_charge_poweron_en() == 0)) {
+    if((get_charge_poweron_en() == 0)) 
+    {
 
         wdt_init(WDT_4S);
         log_info("set wdt to 4s!\n");
@@ -426,7 +437,12 @@ void charge_ldo5v_off_deal(void)
 #endif
     } else {
 #if 1//FAST PLUG CHARGE WHEN POWER OFF
-        if (app == APP_IDLE_TASK) {
+
+#if 0
+        if(app == APP_IDLE_TASK) 
+        {
+            printf("*************%s\n", __func__);
+            #if 0
             struct lcd_interface *lcd = lcd_get_hdl();
             if (lcd_sleep_status() == 0) {
                 UI_HIDE_CURR_WINDOW();
@@ -435,15 +451,21 @@ void charge_ldo5v_off_deal(void)
                     lcd->power_ctrl(false);
                 }
             }
+            #endif
             log_info("%s DET:%d", __func__, LVCMP_DET_GET());
+
+            #if 1
             if (!LVCMP_DET_GET()) {
-                power_set_soft_poweroff();
+                //power_set_soft_poweroff();
+                printf("%s:power off\n", __func__);
             } else {
-                if (lcd->power_ctrl) {
-                    lcd->power_ctrl(true);
-                }
+                // if (lcd->power_ctrl) {
+                //     lcd->power_ctrl(true);
+                // }
             }
+            #endif
         }
+#endif
 #else
         if (app == APP_IDLE_TASK) {
             power_set_soft_poweroff();
@@ -464,6 +486,7 @@ void charge_ldo5v_off_deal(void)
     extern void gx8002_module_resumed();
     gx8002_module_resumed();
 #endif /* #if TCFG_GX8002_NPU_ENABLE */
+    Ldo5vOutHandle();
 }
 
 int app_charge_event_handler(struct device_event *dev)
@@ -473,13 +496,13 @@ int app_charge_event_handler(struct device_event *dev)
 
     switch (dev->event) {
     case CHARGE_EVENT_CHARGE_START:
-        UI_WINDOW_PREEMPTION_POP(ID_WINDOW_IDLE);
-        UI_WINDOW_PREEMPTION_POSH(ID_WINDOW_IDLE, NULL, NULL, UI_WINDOW_PREEMPTION_TYPE_CHARGE);
+        // UI_WINDOW_PREEMPTION_POP(ID_WINDOW_IDLE);
+        // UI_WINDOW_PREEMPTION_POSH(ID_WINDOW_IDLE, NULL, NULL, UI_WINDOW_PREEMPTION_TYPE_CHARGE);
         charge_start_deal();
         break;
     case CHARGE_EVENT_CHARGE_CLOSE:
         charge_close_deal();
-        UI_WINDOW_PREEMPTION_POP(ID_WINDOW_IDLE);
+        //UI_WINDOW_PREEMPTION_POP(ID_WINDOW_IDLE);
         break;
     case CHARGE_EVENT_CHARGE_FULL:
         charge_full_deal();
@@ -497,7 +520,7 @@ int app_charge_event_handler(struct device_event *dev)
             os_time_dly(2);
         }
 #endif
-        if (otg_status != SLAVE_MODE) {
+        if(otg_status != SLAVE_MODE) {
             charge_ldo5v_in_deal();
         }
         break;
@@ -530,4 +553,3 @@ u8 get_charge_full_flag(void)
 }
 
 #endif
-

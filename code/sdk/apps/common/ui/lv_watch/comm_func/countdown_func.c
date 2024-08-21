@@ -19,8 +19,7 @@ static const uint32_t timer_inv = 100;
 static void CountdownTimeoutPost(void)
 {
     int timeout_post[1];
-    timeout_post[0] = \
-        comm_msg_countdown_timeout;
+    timeout_post[0] = comm_msg_countdown_timeout;
     PostCommTaskMsg(timeout_post, 1);
 
     return;
@@ -139,11 +138,8 @@ void UserCountdownStart(void)
 
 static void UserCountdownOverIsOn(void)
 {
-    //当前菜单是否支持弹窗
-    if(!MenuSupportPopup())
-        return;
+    if(!MenuSupportPopup()) return;
 
-    //震动
     motor_run(1, def_motor_duty);
 
     ui_menu_jump(ui_act_id_countdown_over);

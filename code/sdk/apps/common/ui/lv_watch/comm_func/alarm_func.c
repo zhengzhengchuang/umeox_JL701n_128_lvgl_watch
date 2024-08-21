@@ -1,4 +1,5 @@
 #include "../lv_watch.h"
+#include "../../../../watch/include/tone_player.h"
 
 #define VM_MASK (0x55ec)
 
@@ -373,18 +374,12 @@ void SetAlarmIsOnId(uint8_t id)
 
 static void UserAlarmIsOnHandle(void)
 {
-    //当前菜单是否支持弹窗
-    if(!MenuSupportPopup())
-        return;
+    if(!MenuSupportPopup()) return;
 
-    //震动
     motor_run(3, def_motor_duty);
+    tone_play_with_callback_by_name(tone_table[IDEX_TONE_ALARM_RING], 1, NULL, NULL);
 
-    //播放
-    //...
-
-    ui_menu_jump(\
-        ui_act_id_alarm_remind);
+    ui_menu_jump(ui_act_id_alarm_remind);
 
     return;
 }

@@ -1,13 +1,15 @@
 #include "math.h"
 #include "../lv_watch.h"
 #include "prayer_time_data.h"
+#include "../../../../watch/include/tone_player.h"
 
 #define VM_MASK (0x55bc)
 
 PTCfgPara_t PT_Cfg;
 PTInfoPara_t PT_Info;
 
-static const PTCfgPara_t InitCfg = {
+static const PTCfgPara_t init = 
+{
     .conv = Conv_Common,
     .juri = Juri_Shafii,
     .hlat = HLat_AngleBased,
@@ -20,7 +22,6 @@ static const PTCfgPara_t InitCfg = {
 
     .remind_en = {true},
     .voice_en = {true},
-
     .remind_offset = {0},
     .result_offset = {0},
 };
@@ -99,8 +100,7 @@ static float darccot(float x)
     return rad2deg(atanf(1.0f / x));
 }
 
-static float time_diff(float time1, \
-    float time2)
+static float time_diff(float time1, float time2)
 {
     return fix_hour(time2 - time1);
 }
@@ -233,22 +233,19 @@ static void AdjustHlatPTime(float info[])
 
     float fajr_diff = NightPortion(fajr_angle) * n_time;
 
-    if(isnan(info[Fajr]) || \
-        time_diff(info[Fajr], info[Sunrise]) > fajr_diff)
+    if(isnan(info[Fajr]) || time_diff(info[Fajr], info[Sunrise]) > fajr_diff)
         info[Fajr] = info[Sunrise] - fajr_diff;
 
     float isha_angle = isha_is_minutes?18.0f:isha_value;
 	float isha_diff = NightPortion(isha_angle) * n_time;
 
-    if(isnan(info[Isha]) || \
-        time_diff(info[Sunset], info[Isha]) > isha_diff)
+    if(isnan(info[Isha]) || time_diff(info[Sunset], info[Isha]) > isha_diff)
         info[Isha] = info[Sunset] + isha_diff;
 
     float maghrib_angle = maghrib_is_minutes?4.0f:maghrib_value;
 	float maghrib_diff = NightPortion(maghrib_angle) * n_time;
 
-    if(isnan(info[Maghrib]) || \
-        time_diff(info[Sunset], info[Maghrib]) > maghrib_diff)
+    if(isnan(info[Maghrib]) || time_diff(info[Sunset], info[Maghrib]) > maghrib_diff)
         info[Maghrib] = info[Sunset] + maghrib_diff;
 
     return;
@@ -326,19 +323,16 @@ static void GetPTimeEx(u16 utc_year, u8 utc_month, u8 utc_day, \
     return;
 }
 
-static void GetPTime(float latitude, float longitude, \
-	float timezone, float info[])
+static void GetPTime(float latitude, float longitude, float timezone, float info[])
 {
-    struct sys_time \
-        utc_time;
+    struct sys_time utc_time;
     GetUtcTime(&utc_time);
 
     u16 year = utc_time.year;
     u8 month = utc_time.month;
     u8 day = utc_time.day;
 
-    GetPTimeEx(year, month, day, \
-        latitude, longitude, timezone, info);
+    GetPTimeEx(year, month, day, latitude, longitude, timezone, info);
 
     return;
 }
@@ -348,8 +342,7 @@ static void PTimeInfoParaCommon(void)
     float info[PT_Num] = {0};
     float latitude = ll_info.vm_latitude;
     float longitude = ll_info.vm_longitude;
-    int tmp = \
-        GetVmParaCacheByLabel(vm_label_time_zone);
+    int tmp = GetVmParaCacheByLabel(vm_label_time_zone);
     float timezone = (tmp*(1.0f))/(10.0f);
 
     GetPTime(latitude, longitude, timezone, info);
@@ -359,36 +352,29 @@ static void PTimeInfoParaCommon(void)
     float PT_temp; 
     for(u8 i = 0; i < PT_Num; i++)
     {
-        PT_temp = \
-            fix_hour(info[i] + (0.5f/60.0f));		// add 0.5 minutes to round
-        PT_hour = \
-            (u8)floorf(PT_temp);
-        PT_minute = \
-            (u8)floorf((PT_temp - PT_hour) * 60.0f);
+        PT_temp = fix_hour(info[i] + (0.5f/60.0f));		// add 0.5 minutes to round
+        PT_hour = (u8)floorf(PT_temp);
+        PT_minute = (u8)floorf((PT_temp - PT_hour) * 60.0f);
+        PT_Info.origin_timestamp[i] = PT_hour*3600 + PT_minute*60;
 
-        PT_Info.origin_timestamp[i] = PT_hour*3600 + \
-            PT_minute*60;
-
-        s32 retult_sub = \
-            PT_Info.origin_timestamp[i] + PT_Cfg.result_offset[i];
+        s32 retult_sub = PT_Info.origin_timestamp[i] + PT_Cfg.result_offset[i];
         if(retult_sub >= 0)
         {
             PT_Info.result_timestamp[i] = retult_sub;
-            PT_Info.result_timestamp[i] %= 86400;
+            PT_Info.result_timestamp[i] %= SEC_PER_DAY;
         }else
         {
-            PT_Info.result_timestamp[i] = 86400 + retult_sub;       
+            PT_Info.result_timestamp[i] = SEC_PER_DAY + retult_sub;       
         }
 
-        s32 remind_sub = \
-            PT_Info.result_timestamp[i] + PT_Cfg.remind_offset[i];
+        s32 remind_sub = PT_Info.result_timestamp[i] + PT_Cfg.remind_offset[i];
         if(remind_sub >= 0)
         {
             PT_Info.remind_timestamp[i] = remind_sub;
-            PT_Info.remind_timestamp[i] %= 86400;
+            PT_Info.remind_timestamp[i] %= SEC_PER_DAY;
         }else
         {
-            PT_Info.remind_timestamp[i] = 86400 + remind_sub;       
+            PT_Info.remind_timestamp[i] = SEC_PER_DAY + remind_sub;       
         }
     }
 
@@ -456,8 +442,7 @@ static u16 PTimeDateNum(u16 year, u8 month, u8 day)
 
 static void PTimeInfoParaSpecial(u8 conv)
 {
-    struct sys_time \
-        utc_time;
+    struct sys_time utc_time;
     GetUtcTime(&utc_time);
 
     u16 year = utc_time.year;
@@ -493,15 +478,14 @@ static void PTimeInfoParaSpecial(u8 conv)
 
     for(u8 i = 0; i < PT_Num; i++)
     {
-        s32 retult_sub = \
-            PT_Info.origin_timestamp[i] + PT_Cfg.result_offset[i];
+        s32 retult_sub = PT_Info.origin_timestamp[i] + PT_Cfg.result_offset[i];
         if(retult_sub >= 0)
         {
             PT_Info.result_timestamp[i] = retult_sub;
-            PT_Info.result_timestamp[i] %= 86400;
+            PT_Info.result_timestamp[i] %= SEC_PER_DAY;
         }else
         {
-            PT_Info.result_timestamp[i] = 86400 + retult_sub;       
+            PT_Info.result_timestamp[i] = SEC_PER_DAY + retult_sub;       
         }
 
         s32 remind_sub = \
@@ -509,10 +493,10 @@ static void PTimeInfoParaSpecial(u8 conv)
         if(remind_sub >= 0)
         {
             PT_Info.remind_timestamp[i] = remind_sub;
-            PT_Info.remind_timestamp[i] %= 86400;
+            PT_Info.remind_timestamp[i] %= SEC_PER_DAY;
         }else
         {
-            PT_Info.remind_timestamp[i] = 86400 + remind_sub;       
+            PT_Info.remind_timestamp[i] = SEC_PER_DAY + remind_sub;       
         }
     }
 
@@ -521,38 +505,31 @@ static void PTimeInfoParaSpecial(u8 conv)
 
 u8 GetPTimeType(void)
 {
-    struct sys_time \
-        utc_time;
+    struct sys_time utc_time;
     GetUtcTime(&utc_time);
 
     u8 hour = utc_time.hour;
     u8 minute = utc_time.min;
     u8 second = utc_time.sec;
 
-    u32 UtcTimestamp = \
-        hour*3600 + minute*60 + second;
+    u32 timestamp = hour*3600 + minute*60 + second;
 
     u8 i;
     u32 PTTimestamp;
 
-    if(UtcTimestamp >= \
-        PT_Info.result_timestamp[Isha])
+    if(timestamp >= PT_Info.result_timestamp[Isha])
     {
         i = Isha;
-
         return i;
     }
 
     for(i = Fajr; i < PT_Num; i++)
     {
-        if(i == Sunset)
-            continue;
+        if(i == Sunset) continue;
 
-        PTTimestamp = \
-            PT_Info.result_timestamp[i];
+        PTTimestamp = PT_Info.result_timestamp[i];
 
-        if(UtcTimestamp < \
-            (PTTimestamp + PTimeElapsed[i]))
+        if(timestamp < (PTTimestamp + PTimeElapsed[i]))
             break;
     }
 
@@ -571,19 +548,16 @@ u8 GetPTimeCountdownMode(u8 type)
     if(type >= PT_Num)
         return mode;
 
-    struct sys_time \
-        utc_time;
+    struct sys_time utc_time;
     GetUtcTime(&utc_time);
 
     u8 hour = utc_time.hour;
     u8 minute = utc_time.min;
     u8 second = utc_time.sec;
 
-    u32 UtcTimestamp = \
-        hour*3600 + minute*60 + second;
+    u32 timestamp = hour*3600 + minute*60 + second;
 
-    if(UtcTimestamp > \
-        PT_Info.result_timestamp[type])
+    if(timestamp > PT_Info.result_timestamp[type])
         mode = 1;
 
     return mode;
@@ -596,18 +570,15 @@ u32 GetPTimeCountdownTime(u8 type)
     if(type >= PT_Num)
         return timestamp;
 
-    struct sys_time \
-        utc_time;
+    struct sys_time utc_time;
     GetUtcTime(&utc_time);
 
     u8 hour = utc_time.hour;
     u8 minute = utc_time.min;
     u8 second = utc_time.sec; 
 
-    u32 UtcTimestamp = \
-        hour*3600 + minute*60 + second;
-    s32 timestamp_diff = \
-        UtcTimestamp - PT_Info.result_timestamp[type];
+    timestamp = hour*3600 + minute*60 + second;
+    s32 timestamp_diff = timestamp - PT_Info.result_timestamp[type];
     timestamp = LV_ABS(timestamp_diff);
 
     return timestamp;
@@ -615,21 +586,19 @@ u32 GetPTimeCountdownTime(u8 type)
 
 void PTimeResultOffsetUpdate(u8 type, s8 val)
 {
-    if(type >= PT_Num)
-        return;
+    if(type >= PT_Num) return;
 
     PT_Cfg.result_offset[type] = val;
     PTimeCfgParaUpdate();
 
-    s32 retult_sub = \
-        PT_Info.origin_timestamp[type] + val;
+    s32 retult_sub = PT_Info.origin_timestamp[type] + val;
     if(retult_sub >= 0)
     {
         PT_Info.result_timestamp[type] = retult_sub;
-        PT_Info.result_timestamp[type] %= 86400;
+        PT_Info.result_timestamp[type] %= SEC_PER_DAY;
     }else
     {
-        PT_Info.result_timestamp[type] = 86400 + retult_sub;       
+        PT_Info.result_timestamp[type] = SEC_PER_DAY + retult_sub;       
     }
 
     return;
@@ -643,15 +612,14 @@ void PTimeRemindOffsetUpdate(u8 type, s8 val)
     PT_Cfg.remind_offset[type] = val;
     PTimeCfgParaUpdate();
 
-    s32 remind_sub = \
-        PT_Info.result_timestamp[type] + val;
+    s32 remind_sub = PT_Info.result_timestamp[type] + val;
     if(remind_sub >= 0)
     {
         PT_Info.remind_timestamp[type] = remind_sub;
-        PT_Info.remind_timestamp[type] %= 86400;
+        PT_Info.remind_timestamp[type] %= SEC_PER_DAY;
     }else
     {
-        PT_Info.remind_timestamp[type] = 86400 + remind_sub;       
+        PT_Info.remind_timestamp[type] = SEC_PER_DAY + remind_sub;       
     }
 
     return;
@@ -670,71 +638,130 @@ void SetPTimeProcessType(u8 Type)
     return;
 }
 
-static void PTimeIsOnHandle(uint8_t type)
+static u8 AdvanceFlag;
+u8 GetPTimeAdvanceFlag(void)
 {
-    SetPTimeProcessType(type);
+    return AdvanceFlag;
+}
 
-    //总提醒开关   语音提醒开关TODO USER 
-    bool remind_en = \
-        PT_Cfg.remind_en[type];
-    if(remind_en == false)
-        return;
-
-    //当前菜单是否支持弹窗
-    if(!MenuSupportPopup())
-        return;
-
-    //震动
-    motor_run(1, def_motor_duty);
-
-    //播放
-    bool voice_en = \
-        PT_Cfg.voice_en[type];
-    if(voice_en == true)
-    {
-        //...
-    }
-
-    ui_menu_jump(\
-        ui_act_id_prayer_time_popup);
+void SetPTimeAdvanceFlag(u8 f)
+{
+    AdvanceFlag = f;
 
     return;
 }
 
-void PTimeProcess(struct sys_time *ptime)
+/* 真正到 */
+static void PTimeIsOnHandle(uint8_t type)
+{
+    SetPTimeAdvanceFlag(0);
+    SetPTimeProcessType(type);
+ 
+    bool remind_en = PT_Cfg.remind_en[type];
+    if(remind_en == false) return;
+
+    if(!MenuSupportPopup()) return;
+
+    motor_run(1, def_motor_duty);
+
+    bool voice_en = PT_Cfg.voice_en[type];
+    if(voice_en == true)
+        tone_play_with_callback_by_name(tone_table[IDEX_TONE_AZAN_VOICE], 1, NULL, NULL);
+
+    ui_menu_jump(ui_act_id_prayer_time_popup);
+
+    return;
+}
+
+/* 提前到 */
+static void PTimeAdvanceHandle(uint8_t type)
+{
+    SetPTimeAdvanceFlag(1);
+    SetPTimeProcessType(type);
+
+    bool remind_en = PT_Cfg.remind_en[type];
+    if(remind_en == false) return;
+
+    if(!MenuSupportPopup()) return;
+
+    motor_run(1, def_motor_duty);
+
+    bool voice_en = PT_Cfg.voice_en[type];
+    if(voice_en == true)
+        tone_play_with_callback_by_name(tone_table[IDEX_TONE_MSG_NOTIFY], 1, NULL, NULL);
+
+    ui_menu_jump(ui_act_id_prayer_time_popup);
+
+    return;
+}
+
+void PTimeSecProcess(struct sys_time *ptime)
 {
     bool BondFlag = GetDevBondFlag();
-    if(BondFlag == false)
-        return;
+    if(BondFlag == false) return;
 
     u8 hour = ptime->hour;
     u8 minute = ptime->min;
     u8 second = ptime->sec;
 
-    u32 UtcTimestamp = \
-        hour*3600 + minute*60 + second;
+    u32 timestamp = hour*3600 + minute*60 + second;
 
+    /* 先轮询结果时间 */
     u8 i;
     for(i = Fajr; i < PT_Num; i++)
     {
         if(i == Sunrise || i == Sunset)
             continue;
 
-        if(UtcTimestamp == \
-            PT_Info.remind_timestamp[i])
+        u32 result_timestamp = PT_Info.result_timestamp[i];
+        if(timestamp == result_timestamp)
             break;
     }
-
-    if(i < PT_Num)
+    if(i < PT_Num) 
+    {
         PTimeIsOnHandle(i);
+    }
+        
+    /* 接着轮询提前时间 */
+    u8 j;
+    for(j = Fajr; j < PT_Num; j++)
+    {
+        if(j == Sunrise || j == Sunset)
+            continue;
+
+        u32 remind_timestamp = PT_Info.remind_timestamp[j];
+        if(timestamp == remind_timestamp)
+            break;
+    }
+    if(j < PT_Num)
+    {
+        if(PT_Cfg.remind_offset[j] != 0)
+        {
+            PTimeAdvanceHandle(j);
+        }
+    }
+
+    return;
+}
+
+void PTimeDayProcess(struct sys_time *ptime)
+{
+#if 0
+    memcpy(PT_Cfg.remind_en, init.remind_en, PT_Num);
+    memcpy(PT_Cfg.voice_en, init.voice_en, PT_Num);
+    memcpy(PT_Cfg.remind_offset, init.remind_offset, PT_Num);
+    memcpy(PT_Cfg.result_offset, init.result_offset, PT_Num);
+    PTimeCfgParaUpdate();
+#endif
+
+    PTimeInfoParaUpdate();
 
     return;
 }
 
 void PTimeCfgParaRead(void)
 {
-    int vm_op_len = \
-        sizeof(PTCfgPara_t);
+    int vm_op_len = sizeof(PTCfgPara_t);
 
     int ret = syscfg_read(CFG_PT_CFG_PARA_INFO, \
         &PT_Cfg, vm_op_len);
@@ -771,7 +798,7 @@ void PTimeCfgParaReset(void)
 {
     int vm_op_len = sizeof(PTCfgPara_t);
 
-    memcpy(&PT_Cfg, &InitCfg, vm_op_len);
+    memcpy(&PT_Cfg, &init, vm_op_len);
 
     PT_Cfg.vm_mask = VM_MASK;
 

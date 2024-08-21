@@ -77,8 +77,11 @@ static void lvgl_task(void *p)
     vm_store_para_init();
     ui_act_id_t act_id = ui_act_id_watchface;
     bool BondFlag = GetDevBondFlag();
+    u8 charge_state = GetChargeState();
     if(BondFlag == false)
         act_id = ui_act_id_dev_bond;
+    else if(charge_state == 1)
+        act_id = ui_act_id_charge;
     ui_info_cache_init(act_id);
     
     lv_port_disp_init(p);
@@ -102,14 +105,18 @@ static void lvgl_task(void *p)
     lv_port_indev_init();
  
     //lv_port_fs_init();
-
-    ui_menu_jump(act_id);
+    if(charge_state == 0)
+    {
+        ui_menu_jump(act_id);
+    }else
+    {
+        SetChargePowerFlag(1);
+    }  
 
     /*延迟开背光，防止闪屏*/
     if(!bl_timer)
         sys_timeout_add(NULL, bl_timer_cb, 100);
 #if 0
-
 #if LV_USE_DEMO_WIDGETS
     lv_demo_widgets();
 #endif /* #if LV_USE_DEMO_WIDGETS */

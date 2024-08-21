@@ -506,18 +506,18 @@ DAC硬件上的连接方式,可选的配置：
 //是否支持芯片内置充电
 #define TCFG_CHARGE_ENABLE					1//DISABLE_THIS_MOUDLE
 //是否开启复充功能,复充电压设置
-#define TCFG_RECHARGE_ENABLE                ENABLE
+#define TCFG_RECHARGE_ENABLE                0
 #define TCFG_RECHARGE_VOLTAGE               4000//4V
 //是否支持开机充电
 #define TCFG_CHARGE_POWERON_ENABLE			1//DISABLE
 //是否支持拔出充电自动开机功能
 #define TCFG_CHARGE_OFF_POWERON_NE			DISABLE
 /*充电截止电压可选配置*/
-#define TCFG_CHARGE_FULL_V					CHARGE_FULL_V_4199
+#define TCFG_CHARGE_FULL_V					CHARGE_FULL_V_4534//CHARGE_FULL_V_4199
 /*充电截止电流可选配置*/
-#define TCFG_CHARGE_FULL_MA					CHARGE_FULL_mA_10
+#define TCFG_CHARGE_FULL_MA					CHARGE_FULL_mA_20
 /*恒流充电电流可选配置*/
-#define TCFG_CHARGE_MA						CHARGE_mA_200
+#define TCFG_CHARGE_MA						CHARGE_mA_250
 /*涓流充电电流配置*/
 #define TCFG_CHARGE_TRICKLE_MA              CHARGE_mA_20
 
@@ -625,7 +625,7 @@ DAC硬件上的连接方式,可选的配置：
 //0:不使用PWM控制背光
 //1:使用PWM_LED模块控制背光(低功耗可正常输出，但不准且pwm脚需要加外部下拉，需要用示波器实际调试),使用该模块控制后不能再用该模块推灯
 //2:使用MCPWM模块控制背光(低功耗不能输出)
-#define TCFG_BACKLIGHT_PWM_MODE             0
+#define TCFG_BACKLIGHT_PWM_MODE             -1
 #define TCFG_BACKLIGHT_PWM_IO               IO_PORTB_10
 #define TCFG_BACKLIGHT_MIN_VAL              (65)
 #define TCFG_BACKLIGHT_MAX_VAL              (100)
@@ -901,7 +901,7 @@ DAC硬件上的连接方式,可选的配置：
 //*********************************************************************************//
 #define TCFG_AUTO_SHUT_DOWN_TIME		          0   //没有蓝牙连接自动关机时间
 #define TCFG_SYS_LVD_EN						      1   //电量检测使能
-#define TCFG_POWER_ON_NEED_KEY				      0	  //是否需要按按键开机配置
+#define TCFG_POWER_ON_NEED_KEY				      1	  //是否需要按按键开机配置
 #define TWFG_APP_POWERON_IGNORE_DEV         	  0//上电忽略挂载设备，0时不忽略，非0则n毫秒忽略
 
 #if TCFG_IOKEY_ENABLE
@@ -970,7 +970,7 @@ DAC硬件上的连接方式,可选的配置：
 #endif
 
 #define BT_INBAND_RINGTONE                  0   //是否播放手机自带来电铃声
-#define BT_PHONE_NUMBER                     1   //是否播放来电报号
+#define BT_PHONE_NUMBER                     0   //是否播放来电报号
 #define BT_SYNC_PHONE_RING                  0   //是否TWS同步播放来电铃声
 #define BT_SUPPORT_DISPLAY_BAT              1   //是否使能电量检测
 #define BT_SUPPORT_MUSIC_VOL_SYNC           1   //是否使能音量同步

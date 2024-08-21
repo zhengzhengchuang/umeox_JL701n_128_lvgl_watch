@@ -136,8 +136,6 @@ static void tasbih_main_ctx_container_create(lv_obj_t *obj)
         true;
     tasbih_main_ctx_container = \
         common_widget_obj_create(&widget_obj_para);
-    // lv_obj_set_style_pad_bottom(tasbih_main_ctx_container, \
-    //     0, LV_PART_MAIN);
     lv_obj_add_event_cb(tasbih_main_ctx_container, \
         tasbih_main_ctx_container_cb, LV_EVENT_SCROLL, NULL);
     if(!TasbihR_Enable)

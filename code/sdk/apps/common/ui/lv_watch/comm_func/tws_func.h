@@ -63,6 +63,7 @@ void set_unpair_dev(u8 dev);
 bool GetNewPairedDevFlag(void);
 void SetNewPairedDevFlag(bool f);
 
+void TwsBtUserCloseHandle(void);
 void TwsBtUserDiscHandle(void);
 void TwsBtEmitterStart(void);
 void TwsBtEmitterConnByMac(u8 *mac);

@@ -38,8 +38,11 @@ void FirstDevBondHandle(void)
 
     SetDevBondFlag(1);
 
-    ui_act_id_t act_id = \
-        ui_act_id_watchface;
+    /* 充电中 */
+    u8 charge_state = GetChargeState();
+    if(charge_state == 1) return;
+
+    ui_act_id_t act_id = ui_act_id_watchface;
     ui_menu_jump(act_id);
  
     return;
@@ -72,8 +75,11 @@ void NewDevBondHandle(void)
 
     SetDevBondFlag(1);
 
-    ui_act_id_t act_id = \
-        ui_act_id_new_bond;
+    /* 充电中 */
+    u8 charge_state = GetChargeState();
+    if(charge_state == 1) return;
+
+    ui_act_id_t act_id = ui_act_id_new_bond;
     ui_menu_jump(act_id);
 
     return;
@@ -98,8 +104,11 @@ void DevUnBondHandle(void)
 
     SetDevBondFlag(0);
 
-    ui_act_id_t act_id = \
-        ui_act_id_dev_bond;
+    /* 充电中 */
+    u8 charge_state = GetChargeState();
+    if(charge_state == 1) return;
+
+    ui_act_id_t act_id = ui_act_id_dev_bond;
     ui_menu_jump(act_id);
 
     //断开蓝牙

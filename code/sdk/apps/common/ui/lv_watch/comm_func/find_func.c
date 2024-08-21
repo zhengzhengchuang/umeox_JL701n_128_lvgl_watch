@@ -3,18 +3,12 @@
 void FindDevEnableHandle(void)
 {
     bool BondFlag = GetDevBondFlag();
-    if(BondFlag == false)
-        return;
+    if(BondFlag == false) return;
 
-    //判断当前是否符合弹出的条件
-    if(!MenuSupportPopup())
-        return;
-
-    /*勿扰不影响查找设备*/
+    if(!MenuSupportPopup()) return;
 
     motor_run(1, def_motor_duty);
 
-    /*弹窗*/
     ui_menu_jump(ui_act_id_find_dev);
 
     return;
@@ -23,13 +17,11 @@ void FindDevEnableHandle(void)
 void FindDevDisableHandle(void)
 {
     bool BondFlag = GetDevBondFlag();
-    if(BondFlag == false)
-        return;
+    if(BondFlag == false) return;
 
     /*如果不在当前页面，不必跳转退出*/
-    ui_act_id_t cur_act_id = \
-        p_ui_info_cache->cur_act_id;
-    if(cur_act_id != ui_act_id_find_dev)
+    ui_act_id_t act_id = p_ui_info_cache->cur_act_id;
+    if(act_id != ui_act_id_find_dev)
         return;
 
     /*返回上一级*/
@@ -43,8 +35,7 @@ void FindDevDisableHandle(void)
 void FindPhoneHandle(void)
 {
     bool BondFlag = GetDevBondFlag();
-    if(BondFlag == false)
-        return;
+    if(BondFlag == false) return;
 
     RemoteGetDevEvents(Le_Event_Find_Phone);
 

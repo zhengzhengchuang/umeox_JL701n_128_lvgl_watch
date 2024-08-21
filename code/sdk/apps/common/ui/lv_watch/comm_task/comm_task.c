@@ -111,6 +111,9 @@ static void TimerCb(void *priv)
     UtcMinuteHandle(&utc_time);
     UtcSecondHandle(&utc_time);
 
+    // u8 bt_status = get_bt_connect_status();
+    // printf("bt_status = %d\n", bt_status);
+
     return;
 }
 
@@ -183,6 +186,10 @@ void CommTaskMsgHandle(int *msg, u8 len)
 
         case comm_msg_dev_reset:
             user_dev_reset_handle(NULL);
+            break;
+
+        case comm_msg_power_update:
+            BatPowerUpdateHandle();
             break;
 
         default:

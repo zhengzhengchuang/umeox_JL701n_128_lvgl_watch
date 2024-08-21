@@ -39,10 +39,10 @@ static void elem_ctx_create(menu_align_t menu_align)
     u8 state_h[slp_state_num];
     u8 state_m[slp_state_num];
     
-    u32 deep_dur = (u32)(SlpPara.d_slp_dur);
-    u32 light_dur = (u32)(SlpPara.l_slp_dur);
-    u32 rem_dur = (u32)(SlpPara.r_slp_dur);
-    u32 wake_dur = (u32)(SlpPara.wake_dur);
+    u32 deep_dur = SlpPara.d_slp_dur;
+    u32 light_dur = SlpPara.l_slp_dur;
+    u32 rem_dur = SlpPara.r_slp_dur;
+    u32 wake_dur = SlpPara.wake_dur;
 
     if(valid == true)
     {

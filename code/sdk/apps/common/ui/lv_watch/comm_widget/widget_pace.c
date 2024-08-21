@@ -59,11 +59,11 @@ void common_pace_widget_init(void)
     if(!pace_group_num)
         return;
 
-    memset(pace_dsc_idx, 0xffff, \
+    memset(pace_dsc_idx, 0xff, \
         sizeof(pace_dsc_idx));
 
-    memset(common_pace_widget, 0, \
-        sizeof(common_pace_widget));
+    // memset(common_pace_widget, 0, \
+    //     sizeof(common_pace_widget));
 
     memset(pace_para_cache, 0, \
         sizeof(widget_data_para_t)* \

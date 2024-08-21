@@ -25,8 +25,7 @@ static void SedIsOnHandle(void)
     int dnd_state = GetVmParaCacheByLabel(vm_label_dnd_state);
     if(dnd_state == dnd_state_enable) return;
 
-    if(!MenuSupportPopup()) 
-        return;
+    if(!MenuSupportPopup()) return;
         
     motor_run(1, def_motor_duty);
     ui_menu_jump(ui_act_id_sedentary);
@@ -47,8 +46,7 @@ void SedSetSteps(float steps)
 void SedUtcMinProcess(struct sys_time *ptime)
 {
     bool BondFlag = GetDevBondFlag();
-    if(BondFlag == false)
-        return;
+    if(BondFlag == false) return;
 
     bool enable = __this_module->enable;
     if(enable == false)

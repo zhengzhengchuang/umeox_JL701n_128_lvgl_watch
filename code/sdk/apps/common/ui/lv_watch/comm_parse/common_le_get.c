@@ -25,6 +25,11 @@ void RemoteGetDeviceInfo(u8 *buf, u8 len)
 {
     u8 nfy_buf[Cmd_Pkt_Len];
     memset(nfy_buf, 0x00, Cmd_Pkt_Len);
+
+    const uint8_t *ble_mac = GetDevBleMac();
+    static u8 dst_ble_mac[6];
+    memset(dst_ble_mac, 0, 6);
+    swapX(ble_mac, dst_ble_mac, 6);
  
     le_cmd_t cmd = buf[0];
 
@@ -35,6 +40,13 @@ void RemoteGetDeviceInfo(u8 *buf, u8 len)
     nfy_buf[idx++] = Version_Release_1;
     nfy_buf[idx++] = Version_Release_0;
     nfy_buf[idx++] = Version_Internal;
+    nfy_buf[idx++] = dst_ble_mac[0];
+    nfy_buf[idx++] = dst_ble_mac[1];
+    nfy_buf[idx++] = dst_ble_mac[2];
+    nfy_buf[idx++] = dst_ble_mac[3];
+    nfy_buf[idx++] = dst_ble_mac[4];
+    nfy_buf[idx++] = dst_ble_mac[5];
+
 
     u8 crc_idx = Cmd_Pkt_Len - 1;
     nfy_buf[crc_idx] = calc_crc(nfy_buf, crc_idx);

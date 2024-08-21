@@ -57,11 +57,11 @@ void common_weather_widget_init(void)
     if(!weather_group_num)
         return;
 
-    memset(weather_dsc_idx, 0xffff, \
+    memset(weather_dsc_idx, 0xff, \
         sizeof(weather_dsc_idx));
 
-    memset(common_widget_weather, 0, \
-        sizeof(common_widget_weather));
+    // memset(common_widget_weather, 0, \
+    //     sizeof(common_widget_weather));
 
     memset(weather_para_cache, 0, \
         sizeof(widget_data_para_t)* \

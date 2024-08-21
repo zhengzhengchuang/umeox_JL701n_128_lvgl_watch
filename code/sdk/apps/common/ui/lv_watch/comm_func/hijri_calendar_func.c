@@ -1,5 +1,6 @@
 #include "math.h"
 #include "../lv_watch.h"
+#include "../../../../watch/include/tone_player.h"
 
 #define VM_MASK (0x55dc)
 
@@ -641,12 +642,10 @@ static void HcalendarFesIsOnHandle(uint8_t type)
 {
     SetHcalendarFesType(type);
 
-    //当前菜单是否支持弹窗
-    if(!MenuSupportPopup())
-        return;
+    if(!MenuSupportPopup()) return;
 
-    //震动
     motor_run(1, def_motor_duty);
+    tone_play_with_callback_by_name(tone_table[IDEX_TONE_MSG_NOTIFY], 1, NULL, NULL);
 
     ui_menu_jump(ui_act_id_Hcalendar_remind);
 
@@ -735,40 +734,30 @@ void HcalendarProcess(struct sys_time *ptime)
     if(BondFlag == false)
         return;
 
-    bool FesRemindersFlag = \
-        HcalendarInfo.FesRemindersFlag;
-    if(!FesRemindersFlag)
-        return;
+    bool FesRemindersFlag = HcalendarInfo.FesRemindersFlag;
+    if(FesRemindersFlag == false) return;
 
     bool HcaleFesIsOn = false;
 
-    bool IsSunset = \
-        IsPrayerTimeSunset(ptime);
-    bool IsSunrise = \
-        IsPrayerTimeSunrise(ptime);
+    bool IsSunset = IsPrayerTimeSunset(ptime);
+    bool IsSunrise = IsPrayerTimeSunrise(ptime);
 
-    u16 Hyear = \
-        HcalendarInfo.Hcalendar_year;
-    u8  Hmonth = \
-        HcalendarInfo.Hcalendar_month;
-    u8  Hday = \
-        HcalendarInfo.Hcalendar_day;
+    u16 Hyear = HcalendarInfo.Hcalendar_year;
+    u8  Hmonth = HcalendarInfo.Hcalendar_month;
+    u8  Hday = HcalendarInfo.Hcalendar_day;
     
-    u8 HLY = \
-        HIsLeapYear(Hyear);
+    u8 HLY = HIsLeapYear(Hyear);
 
     u8 i;
     for(i = Hijri_New_Year; i < HcalendarFesNum; i++)
     {
         if(i == Hijri_New_Year)
         {
-            if(Hmonth == HFSInfo[i].Hmonth && \
-                Hday == HFSInfo[i].Hday + HLY)
+            if(Hmonth == HFSInfo[i].Hmonth && Hday == HFSInfo[i].Hday + HLY)
                 break;
         }else
         {
-            if(Hmonth == HFSInfo[i].Hmonth && \
-                Hday == HFSInfo[i].Hday)
+            if(Hmonth == HFSInfo[i].Hmonth && Hday == HFSInfo[i].Hday)
                 break;
         }
     }
@@ -777,12 +766,10 @@ void HcalendarProcess(struct sys_time *ptime)
     {
         if(HFSInfo[i].PTtype == Sunset)
         {
-            if(IsSunset)
-               HcaleFesIsOn = true; 
+            if(IsSunset) HcaleFesIsOn = true; 
         }else if(HFSInfo[i].PTtype == Sunrise)
         {
-            if(IsSunrise)
-               HcaleFesIsOn = true;
+            if(IsSunrise) HcaleFesIsOn = true;
         }
     }
      

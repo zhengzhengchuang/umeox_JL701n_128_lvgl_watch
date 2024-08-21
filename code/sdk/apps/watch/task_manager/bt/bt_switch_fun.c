@@ -1021,6 +1021,8 @@ static int bt_close_bredr_do(int priv)
     btctrler_task_close_bredr();
     set_stack_exiting(1);
 
+    TwsBtUserCloseHandle();
+
     return 0;
 }
 

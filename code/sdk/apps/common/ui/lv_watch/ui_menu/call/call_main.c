@@ -31,8 +31,7 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_act_id_t prev_act_id = \
-        ui_act_id_menu;
+    ui_act_id_t prev_act_id = ui_act_id_menu;
     if(!lang_txt_is_arabic())
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             prev_act_id, ui_act_id_null, ui_act_id_call_main);
@@ -62,45 +61,32 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_img_para.img_parent = obj;
     widget_img_para.img_x = 32;
     widget_img_para.img_y = 80;
-    widget_img_para.file_img_dat = \
-        comm_icon_12_index;
+    widget_img_para.file_img_dat = comm_icon_12_index;
     widget_img_para.img_click_attr = true;
-    widget_img_para.event_cb = \
-        call_log_cb;
+    widget_img_para.event_cb = call_log_cb;
     widget_img_para.user_data = NULL;
-    lv_obj_t *call_log_container = \
-        common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_t *call_log_container = common_widget_img_create(&widget_img_para, NULL);
 
     widget_img_para.img_x = 194;
-    widget_img_para.event_cb = \
-        contacts_cb;
-    lv_obj_t *contacts_container = \
-        common_widget_img_create(&widget_img_para, NULL);
+    widget_img_para.event_cb = contacts_cb;
+    lv_obj_t *contacts_container = common_widget_img_create(&widget_img_para, NULL);
 
     widget_img_para.img_x = 134;
     widget_img_para.img_y = 320;
-    widget_img_para.file_img_dat = \
-        call_02_index;
-    widget_img_para.event_cb = \
-        call_dial_cb;
+    widget_img_para.file_img_dat = call_02_index;
+    widget_img_para.event_cb = call_dial_cb;
     common_widget_img_create(&widget_img_para, NULL);
 
-    widget_img_para.img_parent = \
-        call_log_container;
-    widget_img_para.file_img_dat = \
-        call_00_index;
+    widget_img_para.img_parent = call_log_container;
+    widget_img_para.file_img_dat = call_00_index;
     widget_img_para.img_click_attr = false;
     widget_img_para.event_cb = NULL;
-    lv_obj_t *call_log_icon = \
-        common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_t *call_log_icon = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(call_log_icon, LV_ALIGN_CENTER, 0, 0);
 
-    widget_img_para.img_parent = \
-        contacts_container;
-    widget_img_para.file_img_dat = \
-        call_01_index;
-    lv_obj_t *contacts_icon = \
-        common_widget_img_create(&widget_img_para, NULL);
+    widget_img_para.img_parent = contacts_container;
+    widget_img_para.file_img_dat = call_01_index;
+    lv_obj_t *contacts_icon = common_widget_img_create(&widget_img_para, NULL);
     lv_obj_align(contacts_icon, LV_ALIGN_CENTER, 0, 0);
 
 #if 0

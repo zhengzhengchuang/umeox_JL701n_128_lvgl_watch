@@ -20,6 +20,8 @@
 #include "smartbox/config.h"
 #include "syscfg_id.h"
 
+#include "../../../common/ui/lv_watch/lv_watch.h"
+
 #if (SMART_BOX_EN)
 
 #define RCSP_DEBUG_EN
@@ -61,7 +63,7 @@ extern void ble_app_disconnect(void);
 extern void updata_parm_set(UPDATA_TYPE up_type, void *priv, u32 len);
 extern u8 check_le_pakcet_sent_finish_flag(void);
 extern void lcd_st77903_singal_to_continue();
-extern u8 get_self_battery_level(void);
+//extern u8 get_self_battery_level(void);
 extern u32 classic_update_task_exist_flag_get(void);
 
 extern void rcsp_update_ancs_disconn_handler(void);
@@ -70,14 +72,14 @@ static u8 update_flag = 0;
 static u8 disconnect_flag = 0;
 u8 get_jl_update_flag(void)
 {
-    printf("get_update_flag:%x\n", update_flag);
+    //printf("get_update_flag:%x\n", update_flag);
     return update_flag;
 }
 
 void set_jl_update_flag(u8 flag)
 {
     update_flag = flag;
-    printf("update_flag:%x\n", update_flag);
+    //printf("update_flag:%x\n", update_flag);
 }
 
 static u8 device_type = 0;
@@ -158,9 +160,10 @@ static void wait_response_and_disconn_ble(void *priv)
 
 static void rcsp_update_before_jump_handle(int type)
 {
-    //printf("+++++++++++++\n");
+    AppCtrlLcdEnterSleep(true);
     cpu_reset();
-    //printf("-------------\n");
+
+    return;
 }
 
 int JL_rcsp_update_cmd_resp(void *priv, u8 OpCode, u8 OpCode_SN, u8 *data, u16 len)
@@ -499,9 +502,12 @@ int JL_rcsp_update_msg_deal(void *hdl, u8 event, u8 *msg)
         can_update_flag = UPDATE_FLAG_OK;
 #endif      //endif OTA_TWS_SAME_TIME_ENABLE
 #endif
-        if (smart->low_battery_level && (get_self_battery_level() <= (smart->low_battery_level % 10))) { // 防止设置low_battery_level大于10
+        // if (smart->low_battery_level && (get_self_battery_level() <= (smart->low_battery_level % 10))) { // 防止设置low_battery_level大于10
+        //     can_update_flag = UPDATE_FLAG_LOW_POWER;
+        // }
+        if(smart->low_battery_level && BatPowerIsAllowOta() == 0)
             can_update_flag = UPDATE_FLAG_LOW_POWER;
-        }
+
         //todo;judge voltage
         JL_resp_inquire_device_if_can_update((u8)msg[0], (u8)msg[1], can_update_flag);
 
@@ -639,6 +645,11 @@ int JL_rcsp_update_msg_deal(void *hdl, u8 event, u8 *msg)
             rcsp_update_data_api_register(rcsp_update_data_read, rcsp_update_status_response);
             register_receive_fw_update_block_handle(rcsp_update_handle);
             rcsp_update_loader_download_init(DUAL_BANK_UPDATA, rcsp_loader_download_result_handle);
+            printf("rcsp_update_loader_download_init end\n");
+
+            //user add
+            SetOtaUpgradeState(upgrading);
+            ui_menu_jump(ui_act_id_ota_update);
         }
         break;
 

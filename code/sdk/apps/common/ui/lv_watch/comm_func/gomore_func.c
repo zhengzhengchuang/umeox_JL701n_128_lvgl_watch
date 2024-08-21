@@ -80,7 +80,8 @@ int8_t gomore_device_id_get(char *Device_ID, uint8_t Size)
 
 void GoMoreAlgoProcess(struct sys_time *ptime)
 {
-    if(algo_init_flag == true) return;
+    if(algo_init_flag == false) return;
+    //printf("____________algo_init_flag = %d\n", algo_init_flag);
 
     u16 acc_len = GoGsDataFifoRead(accX, accY, accZ, ACC_MAX);
     // for(u16 i = 0; i < acc_len; i++)
@@ -97,21 +98,23 @@ void GoMoreAlgoProcess(struct sys_time *ptime)
     mInput.accLength = acc_len;
 
     /* ppg数据 */
-    // mInput.ppg1 = GetSleepPpgRawData();
-    // mInput.ppgLength = GetSleepPpgLen();
-    // mInput.ppgNumChannels = 1;
+    mInput.ppg1 = GetSlpHrRawData();
+    mInput.ppgLength = GetSlpHrRawDataLen();
+    mInput.ppgNumChannels = 1;
+    for(u8 i = 0; i < mInput.ppgLength; i++)
+        printf("ppg1[%d] = %f\n", i, mInput.ppg1[i]);
 
     int16_t flag = updateIndex(&mInput);
     if(flag < 0) return;
 
     /* pedo data */
     SedSetSteps(mInput.stepCountOut);
-    PedoDataHandle(mInput.stepCountOut, mInput.kcalOut, DistanceCalc(mInput.stepCountOut));
-    SetPedoDataVmCtxCache(mInput.stepCountOut, mInput.kcalOut, DistanceCalc(mInput.stepCountOut));
+    PedoDataHandle(mInput.stepCountOut, mInput.activityKcalOut, DistanceCalc(mInput.stepCountOut));
+    SetPedoDataVmCtxCache(mInput.stepCountOut, mInput.activityKcalOut, DistanceCalc(mInput.stepCountOut));
 
     /* sleep相关 */
-    SleepStatusOutHandle(mInput.sleepPeriodStatusOut);
-    SleepPpgSensorOnOff(mInput.sleepStagePpgOnOffOut);
+    SleepStatusOutHandle(ptime, mInput.sleepPeriodStatusOut);
+    SleepPpgSensorOnOff(ptime, mInput.sleepStagePpgOnOffOut);
 
     return;
 }
@@ -140,12 +143,14 @@ void GoMoreAlgoInit(void)
 {
     /* 设备无绑定，不初始化算法 */
     bool BondFlag = GetDevBondFlag();
-    if(BondFlag == false)
-        return;
+    if(BondFlag == false) return;
 
     if(algo_init_flag == true)
+    {
+        algo_init_flag = false;
         GoMoreAlgoUninit();
-
+    }
+        
     /* 解析设备id */
     //deviceIdExample = GoMoreDevIdParse();
     printf("deviceIdExample = %s\n", deviceIdExample);
@@ -180,8 +185,8 @@ void GoMoreAlgoInit(void)
     userInfo[6] = 40.0f;
     int r = healthIndexInitUser(sdkMem, rtc_current_time, userInfo, prevData);
     if(r < 0) return;
-    // for(u8 i = 0; i < 7; i++)
-    //     printf("userInfo[%d] = %f\n", i, userInfo[i]);
+    for(u8 i = 0; i < 7; i++)
+        printf("userInfo[%d] = %f\n", i, userInfo[i]);
 
     /* 上电先关闭自动检测，时间范围：20:00~8:00 */
     SleepConfig slp_cfg;
@@ -268,6 +273,7 @@ u16 GoGsDataFifoRead(float *acc_x, float *acc_y, float *acc_z, u16 max_len)
         AccRawData[0] = (s16)(((u16)FifoData[1]<<8)|(FifoData[0]));
         AccRawData[1] = (s16)(((u16)FifoData[3]<<8)|(FifoData[2]));
         AccRawData[2] = (s16)(((u16)FifoData[5]<<8)|(FifoData[4]));
+        //printf("x = %d, y = %d, z = %d\n", AccRawData[0], AccRawData[1], AccRawData[2]);
 
         acc_x[i] = (float)((AccRawData[0]*1000.0f)/GetGsACCSsvt());
         acc_y[i] = (float)((AccRawData[1]*1000.0f)/GetGsACCSsvt());

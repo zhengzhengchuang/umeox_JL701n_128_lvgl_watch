@@ -40,8 +40,6 @@ void clear_menu_return_level(void)
     for(uint8_t i = 0; i < Menu_Return_Level; i++)
         prev_act_id[i] = ui_act_id_null;
     
-    //printf("%s\n", __func__);
-
     return;
 }
 
@@ -74,8 +72,6 @@ ui_act_id_t read_menu_return_level_id(void)
         break;
     }
 
-    //printf("new_prev_act_id = %d\n", new_prev_act_id);
-
     return new_prev_act_id;  
 }
 
@@ -96,12 +92,6 @@ void push_menu_return_level(ui_act_id_t act_id)
     prev_act_id[*menu_return_level] = \
         act_id;
     (*menu_return_level) += 1;
-
-    // for(uint8_t i = 0; i < *menu_return_level; i++)
-    //     printf("%s:act_id %d\n", __func__, \
-    //         prev_act_id[i]);
-    // printf("%s:level deep %d\n", __func__, \
-    //     *menu_return_level);
 
     return;
 }
@@ -136,12 +126,6 @@ bool menu_return_level_exist_handle(ui_act_id_t act_id)
 
         *menu_return_level = i + 1;
     }
-
-    // for(i = 0; i < *menu_return_level; i++)
-    //     printf("%s:act_id %d\n", __func__, \
-    //         prev_act_id[i]);
-    // printf("%s:level deep %d\n", __func__, \
-    //     *menu_return_level);
 
     return act_id_exist;
 }
@@ -190,9 +174,11 @@ void ui_menu_exit_prepare(ui_act_id_t act_id)
 
     common_widget_para_init();
 
-    if(!lcd_is_sleep)
+    if(!lcd_is_sleep && p_ui_info_cache->menu_load_info.offscreen_unlock == false)
         memcpy(&p_ui_info_cache->exit_menu_load_info, &p_ui_info_cache->menu_load_info, \
             sizeof(ui_menu_load_info_t));
+    else
+        memset(&p_ui_info_cache->exit_menu_load_info, 0, sizeof(ui_menu_load_info_t));
 
     if(ui_act_id_validity(act_id))
     {

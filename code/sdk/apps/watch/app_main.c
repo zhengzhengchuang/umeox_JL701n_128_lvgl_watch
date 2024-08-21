@@ -194,12 +194,13 @@ void app_main()
 
     printf("%s:charge = %d\n", __func__, get_charge_online_flag());
 
-    if (get_charge_online_flag()) {
+    if(get_charge_online_flag()) {
 
         app_var.poweron_charge = 1;
 
 #if (TCFG_SYS_LVD_EN == 1)
-        vbat_check_init();
+        //vbat_check_init();
+        BatPowerInit();
 #endif
         app_curr_task = APP_IDLE_TASK;
     } else {
@@ -209,8 +210,8 @@ void app_main()
 #endif
 
         /* endless_loop_debug_int(); */
-        ui_manage_init();
-        ui_update_status(STATUS_POWERON);
+        // ui_manage_init();
+        // ui_update_status(STATUS_POWERON);
 
         if (0) {
             /* app_curr_task = APP_WATCH_UPDATE_TASK; */

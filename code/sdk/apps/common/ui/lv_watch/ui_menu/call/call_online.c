@@ -30,7 +30,7 @@ static void menu_create_cb(lv_obj_t *obj)
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             ui_act_id_null, prev_act_id, ui_act_id_call_online);
 
-    CallOnlineDurationTimerCreate();
+    CallOnlineDurTimerCreate();
 
     return;
 }

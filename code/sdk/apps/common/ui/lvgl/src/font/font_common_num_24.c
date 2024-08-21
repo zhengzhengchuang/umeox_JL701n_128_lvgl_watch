@@ -36,11 +36,11 @@ typedef struct{
 static x_header_t __g_xbf_hd = {
     .min = 0x0020,
     .max = 0x2109,
-    .bpp = 2,
+    .bpp = 4,
 };
 
 
-//static uint8_t __g_font_buf[168];//如bin文件存在SPI FLASH可使用此buff
+//static uint8_t __g_font_buf[308];//如bin文件存在SPI FLASH可使用此buff
 
 
 static uint8_t *__user_font_getdata(int offset, int size){
@@ -52,7 +52,6 @@ static uint8_t *__user_font_getdata(int offset, int size){
 
     return get_g_font_buf();
 }
-
 
 static const uint8_t * __user_font_get_bitmap(const lv_font_t * font, uint32_t unicode_letter) {
     if( unicode_letter>__g_xbf_hd.max || unicode_letter<__g_xbf_hd.min ) {

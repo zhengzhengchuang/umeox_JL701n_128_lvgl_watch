@@ -30,9 +30,7 @@ void ui_menu_jump(ui_act_id_t act_id)
         return;
 
     AppCtrlLcdEnterSleep(false);
-
     common_menu_lock_timer_del();
-
     ui_menu_jump_post_msg(act_id);
 
     return;
@@ -111,9 +109,9 @@ comm_enum_week_t GetUtcWeek(struct sys_time *utc_time)
 /*********************************************************************************
                                 获取电池电量                                  
 *********************************************************************************/
-uint8_t GetBatteryPower(void)
+int GetBatteryPower(void)
 {
-    return get_vbat_percent();
+    return GetBatPower();
 }
 
 /*********************************************************************************
@@ -154,20 +152,41 @@ const char *GetDevBleName(void)
 *********************************************************************************/
 uint8_t GetDevBleBtConnectStatus(void)
 {
-    uint8_t bt_status = \
-        bt_get_connect_status();
-    ble_state_e ble_state = \
-        smartbox_get_ble_work_state();
+    u8 bt_status = get_bt_connect_status();
+    u8 ble_state = smartbox_get_ble_work_state();
 
-    if(bt_status == 1 && \
-        (ble_state == BLE_ST_CONNECT || ble_state == BLE_ST_NOTIFY_IDICATE))
+    bool bt_conn = false;
+    bool ble_conn = false;
+    if(bt_status == BT_STATUS_CONNECTING || bt_status == BT_STATUS_TAKEING_PHONE || \
+        bt_status == BT_STATUS_PLAYING_MUSIC)
+        bt_conn = true;
+
+    if(ble_state == BLE_ST_NOTIFY_IDICATE)
+        ble_conn = true;
+
+    if(bt_conn == true && ble_conn == true)
         return 3;
-    else if(bt_status == 1 && \
-        (ble_state == BLE_ST_CONNECT || ble_state == BLE_ST_NOTIFY_IDICATE))
+    else if(bt_conn == true && ble_conn == false)
+        return 2;
+    else if(bt_conn == false && ble_conn == true)
+        return 1;
+
+    return 0;
+#if 0
+    u8 bt_status = get_bt_connect_status();
+    ble_state_e ble_state = smartbox_get_ble_work_state();
+    //printf("bt_status = %d, ble_state = %d\n", bt_status, ble_state);
+
+    if((bt_status == BT_STATUS_CONNECTING || bt_status == BT_STATUS_TAKEING_PHONE) && \
+        (/*ble_state == BLE_ST_CONNECT || */ble_state == BLE_ST_NOTIFY_IDICATE))
+        return 3;
+    else if((bt_status == BT_STATUS_CONNECTING || bt_status == BT_STATUS_TAKEING_PHONE) && \
+        (/*ble_state == BLE_ST_CONNECT || */ble_state != BLE_ST_NOTIFY_IDICATE))
         return 2;
     else if(bt_status == 0 && \
-        (ble_state == BLE_ST_CONNECT || ble_state == BLE_ST_NOTIFY_IDICATE))
+        (/*ble_state == BLE_ST_CONNECT || */ble_state == BLE_ST_NOTIFY_IDICATE))
         return 1;
+#endif
 
     return 0;
 }
@@ -177,11 +196,9 @@ uint8_t GetDevBleBtConnectStatus(void)
 *********************************************************************************/
 void AppSetSysBacklight(int val)
 {
-    struct lcd_interface *p;
-
-    p = lcd_get_hdl();
-
-    p->backlight_ctrl((u8)val);
+    struct lcd_interface *lcd = lcd_get_hdl();
+    if(lcd->backlight_ctrl)
+        lcd->backlight_ctrl((u8)val);
 
     return;
 }
@@ -198,11 +215,18 @@ static void dlybl_cb(void *priv)
         sys_timeout_del(dlybl_timer);
     dlybl_timer = 0;
 
+    int bl_val;
+    u8 upgrade_state = GetOtaUpgradeState();
     struct lcd_interface *lcd = lcd_get_hdl();
-    int lcd_backlight = \
-        GetVmParaCacheByLabel(vm_label_backlight);
+    if(upgrade_state == upgrade_none)
+        bl_val = GetVmParaCacheByLabel(vm_label_backlight);
+    else
+        bl_val = TCFG_BACKLIGHT_MIN_VAL;
+   
     if(lcd->backlight_ctrl)
-        lcd->backlight_ctrl((uint8_t)lcd_backlight);
+        lcd->backlight_ctrl((u8)bl_val);
+
+    //printf("lv_watch dlybl_cb\n");
 
     return;
 }
@@ -261,6 +285,11 @@ char *GetQRCodeLinkStrBuf(void)
         uint8_t ble_mac_idx = 0;
         char ble_mac_str[18] = {0};
         const u8 *ble_mac = GetDevBleMac();
+
+        static u8 dst_ble_mac[6];
+        memset(dst_ble_mac, 0, 6);
+        swapX(ble_mac, dst_ble_mac, 6);
+
         for(uint8_t i = 0; i < 17; i++)
         {
             if(((i + 1) % 3) == 0)
@@ -269,14 +298,14 @@ char *GetQRCodeLinkStrBuf(void)
                 ble_mac_str[i] = ':';
             }else if(((i + 1) % 3) == 1)
             {
-                ble_mac_str[i] = ((ble_mac[ble_mac_idx] >> 4) & 0x0f) > 9 ? \
-                    ((ble_mac[ble_mac_idx] >> 4) & 0x0f) + 0x37:\
-                        ((ble_mac[ble_mac_idx] >> 4) & 0x0f) + 0x30;
+                ble_mac_str[i] = ((dst_ble_mac[ble_mac_idx] >> 4) & 0x0f) > 9 ? \
+                    ((dst_ble_mac[ble_mac_idx] >> 4) & 0x0f) + 0x37:\
+                        ((dst_ble_mac[ble_mac_idx] >> 4) & 0x0f) + 0x30;
             }else if(((i + 1) % 3) == 2)
             {
-                ble_mac_str[i] = (ble_mac[ble_mac_idx] & 0x0f) > 9 ? \
-                    ((ble_mac[ble_mac_idx]) & 0x0f) + 0x37:\
-                        (ble_mac[ble_mac_idx] & 0x0f) + 0x30;
+                ble_mac_str[i] = (dst_ble_mac[ble_mac_idx] & 0x0f) > 9 ? \
+                    ((dst_ble_mac[ble_mac_idx]) & 0x0f) + 0x37:\
+                        (dst_ble_mac[ble_mac_idx] & 0x0f) + 0x30;
             }
         }
         memcpy(&p[45], ble_mac_str, 17);

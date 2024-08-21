@@ -9,6 +9,7 @@ widget_data_para_t widget_data_para = {0};
 
 void common_data_widget_init(void)
 {
+    WidgetPowerInit();
     common_hr_widget_init();
     common_bo_widget_init();
     common_step_widget_init();
@@ -22,6 +23,7 @@ void common_data_widget_init(void)
 
 void common_data_refresh(void)
 {
+    WidgetPowerRefresh();
     common_hr_widget_refresh();
     common_bo_widget_refresh();
     common_step_widget_refresh();

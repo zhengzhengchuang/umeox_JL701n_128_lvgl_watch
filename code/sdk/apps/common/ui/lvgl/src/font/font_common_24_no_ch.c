@@ -38,11 +38,11 @@ typedef struct{
 static x_header_t __g_xbf_hd = {
     .min = 0x000a,
     .max = 0xff1f,
-    .bpp = 2,
+    .bpp = 4,
 };
 
 
-//static uint8_t __g_font_buf[396];//如bin文件存在SPI FLASH可使用此buff
+//static uint8_t __g_font_buf[792];//如bin文件存在SPI FLASH可使用此buff
 
 
 static uint8_t *__user_font_getdata(int offset, int size){

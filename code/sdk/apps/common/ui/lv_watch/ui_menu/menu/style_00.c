@@ -98,11 +98,8 @@ static int16_t calc_throw_sum(int16_t throw_vert)
 static void throw_anim_cb(void *var, int32_t val)
 {
     scroll_offset = val;
-
     elem_container_scroll();
-
-    common_scrollbar_press_handle(\
-        scroll_offset);
+    common_scrollbar_press_handle(scroll_offset);
 
     return;
 }
@@ -343,8 +340,6 @@ static void release_cb(lv_event_t *e, int *state)
     uint32_t anim_min_duration = 300;
     uint32_t anim_max_duration = 700;
 
-    //printf("%d, %d\n", throw_end, scroll_bottom_val);
-
     if(throw_end > scroll_bottom_val && throw_end < scroll_top_val)
     {
         throw_adjust = throw_end%ec_h;
@@ -374,23 +369,19 @@ static void release_cb(lv_event_t *e, int *state)
             anim_duration = anim_min_duration;
     }
 
-    //printf("anim_duration = %d\n", anim_duration);
-
     if(throw_start == throw_end)
         return;
 
-    if(anim_duration < anim_min_duration) \
+    if(anim_duration < anim_min_duration)
         anim_duration = anim_min_duration;
-    if(anim_duration > anim_max_duration) \
+    if(anim_duration > anim_max_duration)
         anim_duration = anim_max_duration;
 
     lv_anim_t throw_anim;
 
     widget_anim_para.anim = &throw_anim;
-    widget_anim_para.anim_obj = \
-        list_ctx_container;
-    widget_anim_para.anim_exec_xcb = \
-        throw_anim_cb; 
+    widget_anim_para.anim_obj = list_ctx_container;
+    widget_anim_para.anim_exec_xcb = throw_anim_cb; 
     widget_anim_para.anim_duration = anim_duration;
     widget_anim_para.anim_start_val = throw_start;
     widget_anim_para.anim_end_val = throw_end;
@@ -440,15 +431,11 @@ static void layout_create(void)
         menu_align = menu_align_right;
 
     elem_container_create(menu_align);
-
     elem_icon_create(menu_align);
-
     elem_label_create(menu_align);
 
-    int16_t scroll_bottom_val = \
-        (-1)*(Elem_Num - visual_line)*ec_h;
-    common_scrollbar_create(list_ctx_container, \
-        scroll_offset, scroll_bottom_val, menu_align);
+    int16_t scroll_bottom_val = (-1)*(Elem_Num - visual_line)*ec_h;
+    common_scrollbar_create(list_ctx_container, scroll_offset, scroll_bottom_val, menu_align);
 
     return;
 }
@@ -457,9 +444,8 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    tileview_register_all_menu(obj, ui_act_id_null, \
-        ui_act_id_null, ui_act_id_null, ui_act_id_null, \
-            ui_act_id_menu);
+    tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
+        ui_act_id_null, ui_act_id_null, ui_act_id_menu);
 
     return;
 }

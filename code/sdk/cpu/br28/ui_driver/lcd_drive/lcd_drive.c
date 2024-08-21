@@ -524,13 +524,28 @@ int lcd_drv_power_ctrl(u8 on)
 
 
 //user 控制屏幕使能管教
-int ldo_power_ctrl(uint8_t on)
+int ldo_power_ctrl(u8 en)
 {
-    on = !!on;
+#if 1
+    en = !!en;
 
-    soff_gpio_protect(IO_PORTA_05);
+    //soff_gpio_protect(IO_PORTA_05);
     gpio_set_die(IO_PORTA_05, 1);
-    gpio_direction_output(IO_PORTA_05, on);
+    gpio_direction_output(IO_PORTA_05, en);
+#else
+    if(en) 
+    {
+        gpio_set_pull_up(IO_PORTA_05, 0);
+        gpio_set_pull_down(IO_PORTA_05, 0);
+        gpio_set_direction(IO_PORTA_05, 0);
+        gpio_set_output_value(IO_PORTA_05, 1);
+	}else 
+    {
+        gpio_set_pull_up(IO_PORTA_05, 0);
+        gpio_set_pull_down(IO_PORTA_05, 0);
+        gpio_set_direction(IO_PORTA_05, 1);
+	}
+#endif
 
     return 0;
 }

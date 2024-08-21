@@ -8,7 +8,7 @@ extern "C" {
 #include "../include/ui_menu.h"
 
 #define Slp_Max_Days (7)
-#define Slp_Max_Sec (100)
+#define Slp_Max_Sec (50)
 
 enum
 {

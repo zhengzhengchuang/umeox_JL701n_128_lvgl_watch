@@ -36,7 +36,7 @@ static void menu_display_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    widget_label_para.label_w = 300;
+    widget_label_para.label_w = 330;
     widget_label_para.label_h = Label_Line_Height*3;
     widget_label_para.long_mode = LV_LABEL_LONG_WRAP;
     widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
@@ -45,8 +45,8 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_label_para.user_text_font = NULL;
     widget_label_para.label_parent = obj;
     widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_real_pos);
-    lv_obj_t *real_pos_tips_label = common_widget_label_create(&widget_label_para);
-    lv_obj_align(real_pos_tips_label, LV_ALIGN_TOP_MID, 0, 114);
+    lv_obj_t *reset_tips_label = common_widget_label_create(&widget_label_para);
+    lv_obj_align(reset_tips_label, LV_ALIGN_TOP_MID, 0, 112);
 
     widget_img_para.img_parent = obj;
     widget_img_para.file_img_dat = comm_icon_11_index;

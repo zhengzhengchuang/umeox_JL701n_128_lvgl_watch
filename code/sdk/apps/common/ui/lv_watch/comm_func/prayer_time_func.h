@@ -70,7 +70,6 @@ typedef struct
 
     bool remind_en[PT_Num];
     bool voice_en[PT_Num];
-
     s8 remind_offset[PT_Num];
     s8 result_offset[PT_Num];
 }PTCfgPara_t;
@@ -91,12 +90,16 @@ extern PTCfgPara_t PT_Cfg;
 extern PTInfoPara_t PT_Info;
 extern const u16 PTimeElapsed[PT_Num];
 
+u8 GetPTimeAdvanceFlag(void);
+void SetPTimeAdvanceFlag(u8 f);
+
 u8 GetPTimeType(void);
 u8 GetPTimeProcessType(void);
 void SetPTimeProcessType(u8 Type);
 u8 GetPTimeCountdownMode(u8 type);
 u32 GetPTimeCountdownTime(u8 type);
-void PTimeProcess(struct sys_time *ptime);
+void PTimeSecProcess(struct sys_time *ptime);
+void PTimeDayProcess(struct sys_time *ptime);
 void PTimeResultOffsetUpdate(u8 type, s8 val);
 void PTimeRemindOffsetUpdate(u8 type, s8 val);
 

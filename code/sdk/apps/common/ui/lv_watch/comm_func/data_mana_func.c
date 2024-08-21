@@ -34,6 +34,27 @@ void ResetAllNorVmData(void)
 
 void PowerOnVmDataRead(void)
 {
+#if NOR_DEBUG_DATA
+#if 1
+    extern void sleep_data_test(void);
+    sleep_data_test();
+
+    extern void bo_test_func(void);
+    bo_test_func();
+
+    extern void hr_test_func(void);
+    hr_test_func();
+
+    extern void pedo_test_func(void);
+    pedo_test_func();
+#else
+    VmSleepCtxClear();
+    VmBoCtxClear();
+    VmHrCtxClear();
+    VmPedoCtxClear();  
+#endif
+#endif
+
     /*开机:vm--->数据*/
     PowerOnSetSleepData();
     PowerOnSetHrVmCache();

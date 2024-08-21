@@ -22,8 +22,7 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_act_id_t prev_act_id = \
-        read_menu_return_level_id();
+    ui_act_id_t prev_act_id = read_menu_return_level_id();
     if(!lang_txt_is_arabic())
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             prev_act_id, ui_act_id_null, ui_act_id_device_op);
@@ -53,20 +52,16 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_img_para.img_parent = obj;
     widget_img_para.img_x = 108;
     widget_img_para.img_y = 32;
-    widget_img_para.file_img_dat = \
-        shutdown_00_index;
+    widget_img_para.file_img_dat = shutdown_00_index;
     widget_img_para.img_click_attr = true;
-    widget_img_para.event_cb = \
-        shutdown_event_cb;
+    widget_img_para.event_cb = shutdown_event_cb;
     widget_img_para.user_data = NULL;
     common_widget_img_create(&widget_img_para, NULL);
 
     widget_img_para.img_x = 20;
     widget_img_para.img_y = 224;
-    widget_img_para.file_img_dat = \
-        restore_00_index;
-    widget_img_para.event_cb = \
-        restore_event_cb;
+    widget_img_para.file_img_dat = restore_00_index;
+    widget_img_para.event_cb = restore_event_cb;
     common_widget_img_create(&widget_img_para, NULL);
 
     return;

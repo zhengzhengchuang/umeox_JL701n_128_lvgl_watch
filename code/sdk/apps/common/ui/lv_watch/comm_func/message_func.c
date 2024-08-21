@@ -1,4 +1,5 @@
 #include "../lv_watch.h"
+#include "../../../../watch/include/tone_player.h"
 
 static const char ancs_facebook[] = "com.facebook.Facebook";
 static const char ancs_vkontakte[] = "com.vkontakte.android";
@@ -19,7 +20,8 @@ static const char ancs_phone[] = "com.apple.mobilephone";
 #define VM_MASK (0x55af)
 MsgNotifyInfoPara_t Notify_Info;
 
-static const MsgNotifyInfoPara_t InitInfo = {
+static const MsgNotifyInfoPara_t init = 
+{
     .sw_union.info = 0xFFFFFFFF,
 };
 
@@ -64,21 +66,16 @@ static void VmFlashMessageCtxWrite(\
 
 static void MessageNotifyIsOnHandle(void)
 {
-    int dnd_state = \
-        GetVmParaCacheByLabel(vm_label_dnd_state);
-    if(dnd_state == dnd_state_enable)
-        return;
+    int dnd_state = GetVmParaCacheByLabel(vm_label_dnd_state);
+    if(dnd_state == dnd_state_enable) return;
 
-    //当前菜单是否支持弹窗
-    if(!MenuSupportPopup())
-        return;
+    if(!MenuSupportPopup()) return;
 
     u8 num = GetMessageNum();
-    if(num == 0)
-        return;
+    if(num == 0) return;
 
-    //震动
     motor_run(1, def_motor_duty);
+    tone_play_with_callback_by_name(tone_table[IDEX_TONE_MSG_NOTIFY], 1, NULL, NULL);
 
     SetQueryId(0);//最新一条索引是:0
     ui_menu_jump(ui_act_id_msg_detail);
@@ -92,8 +89,7 @@ void MsgNotifyProcess(void)
     if(BondFlag == false)
         return;
 
-    vm_message_ctx_t *w_ctx = \
-        &w_message;
+    vm_message_ctx_t *w_ctx = &w_message;
 
     if(w_ctx->check_code == 0)
         return;
@@ -120,6 +116,9 @@ void MsgNotifyProcess(void)
 
 void MsgNotifyFromAncs(void *name, void *data, u16 len)
 {
+    u8 upgrade_state = GetOtaUpgradeState();
+    if(upgrade_state != upgrade_none) return;
+    
     static u16 total_len = 0;
 
     const u16 max_len = Msg_Ctx_Len;
@@ -236,7 +235,7 @@ void MsgNotifyInfoParaReset(void)
     int vm_op_len = \
         sizeof(MsgNotifyInfoPara_t);
 
-    memcpy(&Notify_Info, &InitInfo, vm_op_len);
+    memcpy(&Notify_Info, &init, vm_op_len);
 
     Notify_Info.vm_mask = VM_MASK;
 

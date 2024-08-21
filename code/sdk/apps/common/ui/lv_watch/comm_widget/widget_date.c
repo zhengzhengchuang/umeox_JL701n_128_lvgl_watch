@@ -21,11 +21,11 @@ void common_date_widget_init(void)
 
     date_group_num = 0;
 
-    memset(date_dsc_idx, 0xffff, \
+    memset(date_dsc_idx, 0xff, \
         sizeof(date_dsc_idx));
 
-    memset(common_date_widget, 0, \
-        sizeof(common_date_widget));
+    // memset(common_date_widget, 0, \
+    //     sizeof(common_date_widget));
 
     return;
 }

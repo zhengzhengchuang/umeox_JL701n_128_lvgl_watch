@@ -80,9 +80,9 @@ static void EnableGmModuleHandle(void)
 {
     GmAccRawDataInit();
 
-    SetGmEnableFlag(true); 
     qmc6309_enable();   
     GmTimerCreate();
+    SetGmEnableFlag(true); 
 
     return;
 }
@@ -103,7 +103,7 @@ static void GmProcess(void)
     if(GmAccRawIdx == 0)
         GmGsDataFifoRead(GmAccRawX, GmAccRawY, GmAccRawZ, GmGs_Fifo_WM);
 
-#if 0
+#if 1
     printf("x = %d, y = %d, z = %d\n", \
         GmAccRawX[GmAccRawIdx], GmAccRawY[GmAccRawIdx], GmAccRawZ[GmAccRawIdx]);
 #endif
@@ -156,8 +156,7 @@ static void GmProcess(void)
         {
             CaliCnt = 0;
 
-            bool *cali_succ = \
-                &(Cali_Info.cali_succ);
+            bool *cali_succ = &(Cali_Info.cali_succ);
             *cali_succ = false;
             GmCaliInfoUpdate();
             
@@ -167,8 +166,7 @@ static void GmProcess(void)
     {
         CaliCnt = 0;
 
-        bool *cali_succ = \
-            &(Cali_Info.cali_succ);
+        bool *cali_succ = &(Cali_Info.cali_succ);
         *cali_succ = false;
         GmCaliInfoUpdate();
     }
@@ -313,6 +311,9 @@ void SetGmCaliSucc(bool f)
 /***********地磁模块启动/停止**************/
 void EnableGmModule(void)
 {
+    bool gm_en = GetGmEnableFlag();
+    if(gm_en == true) return;
+
     int GmMsg[2];
 	GmMsg[0] = GmMsgEnable;
 	PostGmTaskMsg(GmMsg, 1); 
@@ -322,6 +323,9 @@ void EnableGmModule(void)
 
 void DisableGmModule(void)
 {
+    bool gm_en = GetGmEnableFlag();
+    if(gm_en == false) return;
+
     int GmMsg[2];
 	GmMsg[0] = GmMsgDisable;
 	PostGmTaskMsg(GmMsg, 1); 

@@ -478,7 +478,7 @@ u8   lcd_bl_io();
 
 //void lcd_bl_ctrl(u8 val);
 void lcd_en_ctrl(u8 val);
-int ldo_power_ctrl(uint8_t on);
+int ldo_power_ctrl(u8 en);
 
 int lcd_sleep_status();
 

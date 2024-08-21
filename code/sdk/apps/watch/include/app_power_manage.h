@@ -11,7 +11,7 @@
 #define LOW_POWER_WARN_TIME   	(60 * 1000)  //低电提醒时间
 #elif (defined(CONFIG_CPU_BR28) || defined(CONFIG_CPU_BR27))
 #define LOW_POWER_SHUTDOWN      300  //低电直接关机电压-拔出不开机-开盖不开机
-#define LOW_POWER_OFF_VAL   	330  //低电关机电压
+#define LOW_POWER_OFF_VAL   	340  //低电关机电压
 #define LOW_POWER_WARN_VAL   	340  //低电提醒电压
 #define LOW_POWER_WARN_TIME   	(60 * 1000)  //低电提醒时间
 #endif
@@ -44,8 +44,5 @@ void vbat_check(void *priv);
 bool vbat_is_low_power(void);
 void check_power_on_voltage(void);
 void vbat_timer_update(u32 msec);
-
-int vbat_power_ctrl(uint8_t on);
-
 #endif
 

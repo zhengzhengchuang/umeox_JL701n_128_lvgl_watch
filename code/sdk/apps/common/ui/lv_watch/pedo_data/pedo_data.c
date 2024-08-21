@@ -17,6 +17,10 @@ static const PedoData_t init = {
 
 static void PedoDataRemoteSend(void)
 {
+    static u32 last_kcal = 0;
+    static u32 last_dis_m = 0;
+    static u32 last_steps = 0;
+    
     /* Ble未连接，不上报 */
     u8 BleBtConn = GetDevBleBtConnectStatus();
     if(BleBtConn == 0 || BleBtConn == 2)
@@ -25,10 +29,22 @@ static void PedoDataRemoteSend(void)
     u8 nfy_buf[Cmd_Pkt_Len];
     memset(nfy_buf, 0x00, Cmd_Pkt_Len);
 
-    u32 steps = GetPedoDataSteps();
     u32 kcal = GetPedoDataKcal();
     u32 dis_m = GetPedoDataDisM();
+    u32 steps = GetPedoDataSteps();
 
+    printf("cur kcal = %d, dis_m = %d, steps = %d\n", kcal, dis_m, steps);
+    printf("last kcal = %d, dis_m = %d, steps = %d\n", last_kcal, last_dis_m, last_steps);
+    if(kcal == last_kcal && dis_m == last_dis_m && steps == last_steps)
+        return;
+        
+    printf("%s\n", __func__);
+
+    last_kcal = kcal;
+    last_dis_m = dis_m;
+    last_steps = steps;
+
+    
     le_cmd_t cmd = Cmd_Get_Pedo_Data;
 
     u8 idx = 0;
@@ -208,13 +224,14 @@ void PowerOnSetPedoVmCache(void)
     printf("%s:%d\n", __func__, sizeof(vm_pedo_ctx_t));
 
     WPedoParaInit();
+
+     u8 num = VmPedoItemNum();
+     printf("%s:pedo %d\n", __func__, num);
     
     /*读取vm的最新一条数据*/
     bool data_ret = GetPedoData();
     if(data_ret == false) return;
     printf("%s:data_ret = %d\n", __func__, data_ret);
-
-    u8 num = VmPedoItemNum();
 
     /*判断vm的最新数据是否已经过期*/
     bool IsPast = PedoVmDataIsPast(r_pedo.timestamp);

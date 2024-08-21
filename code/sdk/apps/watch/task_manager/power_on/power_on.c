@@ -108,12 +108,20 @@ static void  lcd_ui_power_on()
 #endif
 }
 
+// static void music_tone_play(void *priv, int flag)
+// {
+//     printf("______%s\n", __func__);
+//     return;
+// }
+
 static int power_on_init(void)
 {
 #if 0
     UI_SHOW_WINDOW(PAGE_3);
     return 0;
 #endif
+    
+    //tone_play_with_callback_by_name(tone_table[IDEX_TONE_RING], 1, music_tone_play, NULL);
 
     ///有些需要在开机提示完成之后再初始化的东西， 可以在这里初始化
 #if (TCFG_UI_ENABLE && TCFG_SPI_LCD_ENABLE)
@@ -140,9 +148,9 @@ static int power_on_init(void)
 
 static int power_on_unint(void)
 {
-    UI_SHOW_WINDOW(ID_WINDOW_DIAL);
-
-    tone_play_stop();
+    //UI_SHOW_WINDOW(ID_WINDOW_DIAL);
+    // tone_play_stop();
+    // printf("__________%s\n", __func__);
     /* UI_HIDE_CURR_WINDOW(); */
     return 0;
 }
@@ -165,23 +173,28 @@ static int poweron_sys_event_handler(struct sys_event *event)
 }
 
 
-static void  tone_play_end_callback(void *priv, int flag)
-{
-    int index = (int)priv;
+// static void  tone_play_end_callback(void *priv, int flag)
+// {
+//     int index = (int)priv;
 
-    if (APP_POWERON_TASK != app_get_curr_task()) {
-        log_error("tone callback task out \n");
-        return;
-    }
+//     if (APP_POWERON_TASK != app_get_curr_task()) {
+//         log_error("tone callback task out \n");
+//         return;
+//     }
 
-    switch (index) 
-    {
-        case IDEX_TONE_POWER_ON:
-            power_on_init();
-            break;
-    }
-}
+//     switch (index) 
+//     {
+//         case IDEX_TONE_POWER_ON:
+//             power_on_init();
+//             break;
+//     }
+// }
 
+// static void power_on_tone_end(void *priv, int flag)
+// {
+//     printf("_____________%s\n", __func__);
+//     return;
+// }
 
 void app_poweron_task()
 {
@@ -207,6 +220,13 @@ void app_poweron_task()
     power_on_init();
 #endif
 
+    // int err = tone_play_with_callback_by_name((char *)tone_table[IDEX_TONE_POWER_ON], 1, \
+    //     power_on_tone_end, NULL);
+
+    // u8 tone_vol = get_tone_vol();
+    // printf("%s:tone_vol = %d\n", __func__, tone_vol);
+    // int err = tone_play_by_path(SDFILE_RES_ROOT_PATH"tone/vol_max.*", 0);
+    // printf("%s:err = %d\n", __func__, err);
 
     while (1) {
         app_task_get_msg(msg, ARRAY_SIZE(msg), 1);

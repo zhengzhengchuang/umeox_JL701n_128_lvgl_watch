@@ -28,10 +28,10 @@ enum
     ui_watchface_id_05,
     ui_watchface_id_06,
     ui_watchface_id_07,
-    ui_watchface_id_08,
-    ui_watchface_id_09,
-    ui_watchface_id_10,
-    ui_watchface_id_11,
+    //ui_watchface_id_08,
+    // ui_watchface_id_09,
+    // ui_watchface_id_10,
+    // ui_watchface_id_11,
   
     ui_watchface_id_num,
 };
@@ -68,7 +68,7 @@ typedef uint8_t al_name_list_mode_t;
 
 enum
 {
-    ui_act_id_null = 0x0000,
+    ui_act_id_null = 0,
 
     /*****表盘相关页面*****/
     ui_act_id_watchface,
@@ -104,6 +104,7 @@ enum
     ui_act_id_call_end,
 
     /*****提醒相关页面*****/
+    ui_act_id_charge,
     ui_act_id_find_dev,
     ui_act_id_off_wrist,
     ui_act_id_sedentary,

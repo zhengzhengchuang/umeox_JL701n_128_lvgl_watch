@@ -112,6 +112,7 @@ void WHrParaInit(void)
     w_hr.CurIdx = (time.hour*60 + time.min)/Hr_Inv_Dur;
     time.hour = 0; time.min = 0; time.sec = 0;
     w_hr.timestamp = UtcTimeToSec(&time);
+    printf("%s:CurIdx = %d\n", __func__, w_hr.CurIdx);
 
     return;
 }
@@ -150,7 +151,6 @@ void PowerOnSetHrVmCache(void)
         return;
     }
         
-
     //删除副本数据，继续新的vm缓存
     u8 del_idx = num - 1;
     VmHrCtxDelByIdx(del_idx);
@@ -268,7 +268,9 @@ void HrUtcMinProcess(struct sys_time *ptime)
     w_hr.CurIdx = idx;
     u8 on = timestamp%Hr_Inv_Dur;
     int auto_sw = GetVmParaCacheByLabel(vm_label_auto_hr_sw);
-    if(on == 0 && auto_sw == 1)
+    u8 charge_state = GetChargeState();
+    u8 upgrade_state = GetOtaUpgradeState();
+    if(on == 0 && auto_sw == 1 && charge_state == 0 && upgrade_state == upgrade_none)
     {
         /* 自动心率 */
         u8 work = GetPpgWorkType();
@@ -286,6 +288,7 @@ void HrUtcMinProcess(struct sys_time *ptime)
             }else
             {
                 auto_hr_enable = true;
+                printf("%s:enable ppg\n", __func__);
             }
         }
     }else

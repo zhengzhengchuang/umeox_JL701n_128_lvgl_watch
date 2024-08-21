@@ -32,9 +32,7 @@ void RemoteReqEnterCameraHandle(void)
     if(BondFlag == false)
         return;
 
-    //判断当前是否符合弹出的条件
-    if(!MenuSupportPopup())
-        return;
+    if(!MenuSupportPopup()) return;
 
     /*震动*/
     motor_run(1, def_motor_duty);

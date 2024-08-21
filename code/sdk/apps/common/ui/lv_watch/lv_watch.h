@@ -16,6 +16,7 @@ extern "C" {
 #include "./comm_func/hr_func.h"
 #include "./comm_func/bo_func.h"
 #include "./include/ui_act_id.h"
+#include "./comm_func/ota_func.h"
 #include "./comm_func/tws_func.h"
 #include "./comm_parse/le_task.h"
 #include "./comm_func/dnd_func.h"
@@ -26,10 +27,12 @@ extern "C" {
 #include "./comm_key/common_key.h"
 #include "./comm_func/call_func.h"
 #include "./comm_key/common_rdec.h"
+#include "./comm_func/raise_func.h"
 #include "./comm_func/alarm_func.h"
 #include "./comm_func/sleep_func.h"
 #include "./comm_lang/lang_txtid.h"
 #include "./comm_func/azkar_func.h"
+#include "./comm_func/charge_func.h"
 #include "./comm_lang/quran_table.h"
 #include "./comm_func/camera_func.h"
 #include "./comm_nor_vm/nor_vm_hr.h"
@@ -40,6 +43,7 @@ extern "C" {
 #include "./comm_parse/common_rev.h"
 #include "./comm_func/gomore_func.h"
 #include "./comm_func/dev_op_func.h"
+#include "./comm_func/power_manage.h"
 #include "./comm_func/ll_info_func.h"
 #include "./comm_parse/common_send.h"
 #include "./comm_func/message_func.h"
@@ -59,6 +63,7 @@ extern "C" {
 #include "./comm_widget/widget_date.h"
 #include "./comm_widget/widget_time.h"
 #include "./comm_nor_vm/nor_vm_pedo.h"
+#include "./comm_widget/widget_power.h"
 #include "./comm_func/data_mana_func.h"
 #include "./comm_func/sedentary_func.h"
 #include "./comm_func/user_info_func.h"
@@ -140,7 +145,7 @@ u32 UtcTimeToSec(struct sys_time *utc_time);
 void SecToUtcTime(u32 sec, struct sys_time *utc_time);
 
 /**********获取电池电量**************/
-uint8_t GetBatteryPower(void);
+int GetBatteryPower(void);
 
 /**********获取星期**************/
 comm_enum_week_t GetUtcWeek(struct sys_time *utc_time);

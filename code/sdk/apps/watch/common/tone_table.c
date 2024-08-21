@@ -3,6 +3,7 @@
 #include "tone_player.h"
 
 const char *tone_table[] = {
+
     [IDEX_TONE_NUM_0] 			= TONE_RES_ROOT_PATH"tone/0.*",
     [IDEX_TONE_NUM_1] 			= TONE_RES_ROOT_PATH"tone/1.*",
     [IDEX_TONE_NUM_2] 			= TONE_RES_ROOT_PATH"tone/2.*",
@@ -32,5 +33,8 @@ const char *tone_table[] = {
     [IDEX_TONE_RECORD] 			= TONE_RES_ROOT_PATH"tone/record.*",
     [IDEX_TONE_UDISK] 			= TONE_RES_ROOT_PATH"tone/udisk.*",
     [IDEX_TONE_SD] 				= TONE_RES_ROOT_PATH"tone/sd.*",
+    [IDEX_TONE_CALL_IN] 	    = TONE_RES_ROOT_PATH"tone/call_in.*",
+    [IDEX_TONE_MSG_NOTIFY] 	    = TONE_RES_ROOT_PATH"tone/msg_notify.*",
+    [IDEX_TONE_AZAN_VOICE] 	    = TONE_RES_ROOT_PATH"tone/azan_voice.*",
+    [IDEX_TONE_ALARM_RING] 	    = TONE_RES_ROOT_PATH"tone/alarm.*",
 };
-

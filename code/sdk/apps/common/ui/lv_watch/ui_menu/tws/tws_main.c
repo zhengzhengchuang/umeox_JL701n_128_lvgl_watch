@@ -8,6 +8,7 @@ static lv_obj_t *elem_container[Elem_Num];
 
 //static uint8_t DevNum;
 static uint8_t ConnState;
+//static bool bt_en_state = true;
 
 static const uint8_t ec_idx[Elem_Num] = {
     0, 1, 2, 3, 4, 
@@ -219,8 +220,7 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_act_id_t prev_act_id = \
-        ui_act_id_tool_box;
+    ui_act_id_t prev_act_id = ui_act_id_tool_box;
     if(!lang_txt_is_arabic())
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             prev_act_id, ui_act_id_null, ui_act_id_tws_main);
@@ -240,8 +240,15 @@ static void menu_refresh_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_act_id_t act_id = \
-        p_ui_info_cache->cur_act_id;
+    ui_act_id_t act_id = p_ui_info_cache->cur_act_id;
+
+    // bool bt_en = GetBtEnableState();
+    // if(bt_en == false)
+    // {
+    //     TwsBtUserCloseHandle();
+    //     ui_menu_jump(act_id);
+    //     goto __end;
+    // }
 
     bool NewDev = GetNewPairedDevFlag();
     if(NewDev == true)
@@ -264,11 +271,11 @@ static void menu_display_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
+    //bt_en_state = GetBtEnableState();
     ConnState = TwsConn.state;
     SetNewPairedDevFlag(false);
 
-    menu_align_t menu_align = \
-        menu_align_left;
+    menu_align_t menu_align = menu_align_left;
     if(lang_txt_is_arabic())
         menu_align = menu_align_right;
 

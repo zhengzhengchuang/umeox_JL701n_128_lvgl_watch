@@ -97,11 +97,8 @@ static int16_t calc_throw_sum(int16_t throw_vert)
 static void throw_anim_cb(void *var, int32_t val)
 {
     scroll_offset = val;
-
     elem_container_scroll();
-
-    common_scrollbar_press_handle(\
-        scroll_offset);
+    common_scrollbar_press_handle(scroll_offset);
 
     return;
 }
@@ -119,27 +116,18 @@ static void list_ctx_container_create(lv_obj_t *obj)
 {
     widget_obj_para.obj_parent = obj;
     widget_obj_para.obj_x = 0;
-    widget_obj_para.obj_y = \
-        LCD_UI_Y_OFFSET;
-    widget_obj_para.obj_width = \
-        Container_W;
-    widget_obj_para.obj_height = \
-        Container_H;
-    widget_obj_para.obj_bg_opax = \
-        LV_OPA_0;
-    widget_obj_para.obj_bg_color = \
-        lv_color_hex(0x000000);
-    widget_obj_para.obj_border_opax = \
-        LV_OPA_0;
+    widget_obj_para.obj_y = LCD_UI_Y_OFFSET;
+    widget_obj_para.obj_width = Container_W;
+    widget_obj_para.obj_height = Container_H;
+    widget_obj_para.obj_bg_opax = LV_OPA_0;
+    widget_obj_para.obj_bg_color = lv_color_hex(0x000000);
+    widget_obj_para.obj_border_opax = LV_OPA_0;
     widget_obj_para.obj_border_width = 0;
-    widget_obj_para.obj_border_color = \
-        lv_color_hex(0x000000);
+    widget_obj_para.obj_border_color = lv_color_hex(0x000000);
     widget_obj_para.obj_radius = 0;
     widget_obj_para.obj_is_scrollable = false;
-    list_ctx_container = \
-        common_widget_obj_create(&widget_obj_para);
-    lv_obj_add_event_cb(list_ctx_container, \
-        list_ctx_container_cb, LV_EVENT_ALL, NULL);
+    list_ctx_container = common_widget_obj_create(&widget_obj_para);
+    lv_obj_add_event_cb(list_ctx_container, list_ctx_container_cb, LV_EVENT_ALL, NULL);
 
     return;
 }
@@ -148,12 +136,10 @@ static void elem_container_cb(lv_event_t *e)
 {
     if(!e) return;
 
-    bool anim_progress = \
-        anim_progress_with_var(list_ctx_container);
+    bool anim_progress = anim_progress_with_var(list_ctx_container);
     if(anim_progress == true) return;
  
-    uint8_t idx = \
-        *(uint8_t *)lv_event_get_user_data(e);
+    uint8_t idx = *(uint8_t *)lv_event_get_user_data(e);
 
     if(idx == 2)
     {
@@ -175,21 +161,14 @@ static void elem_container_create(menu_align_t menu_align)
     int16_t ec_sx = 0;
     int16_t ec_sy = 0;
 
-    widget_obj_para.obj_parent = \
-        list_ctx_container;
-    widget_obj_para.obj_width = \
-        ec_w;
-    widget_obj_para.obj_height = \
-        ec_h;
-    widget_obj_para.obj_bg_opax = \
-        LV_OPA_0;
-    widget_obj_para.obj_bg_color = \
-        lv_color_hex(0x000000);
-    widget_obj_para.obj_border_opax = \
-        LV_OPA_0;
+    widget_obj_para.obj_parent = list_ctx_container;
+    widget_obj_para.obj_width = ec_w;
+    widget_obj_para.obj_height = ec_h;
+    widget_obj_para.obj_bg_opax = LV_OPA_0;
+    widget_obj_para.obj_bg_color = lv_color_hex(0x000000);
+    widget_obj_para.obj_border_opax = LV_OPA_0;
     widget_obj_para.obj_border_width = 0;
-    widget_obj_para.obj_border_color = \
-        lv_color_hex(0x000000);
+    widget_obj_para.obj_border_color = lv_color_hex(0x000000);
     widget_obj_para.obj_radius = 0;
     widget_obj_para.obj_is_scrollable = false;
 
@@ -197,14 +176,11 @@ static void elem_container_create(menu_align_t menu_align)
     {
         widget_obj_para.obj_x = ec_sx + ec_w*(idx%3);
         widget_obj_para.obj_y = ec_sy + ec_h*(idx/3) + scroll_offset + scroll_dela;
-        elem_container[idx] = \
-            common_widget_obj_create(&widget_obj_para);
+        elem_container[idx] = common_widget_obj_create(&widget_obj_para);
         lv_obj_add_flag(elem_container[idx], LV_OBJ_FLAG_EVENT_BUBBLE);
-        lv_obj_add_event_cb(elem_container[idx], elem_container_cb, \
-            LV_EVENT_SHORT_CLICKED, (void *)&ec_idx[idx]);
+        lv_obj_add_event_cb(elem_container[idx], elem_container_cb, LV_EVENT_SHORT_CLICKED, (void *)&ec_idx[idx]);
 
-        if(widget_obj_para.obj_y >= Container_H || \
-            (widget_obj_para.obj_y + ec_h) < 0)
+        if(widget_obj_para.obj_y >= Container_H || (widget_obj_para.obj_y + ec_h) < 0)
             lv_obj_add_flag(elem_container[idx], LV_OBJ_FLAG_HIDDEN);
     }
 
@@ -219,7 +195,6 @@ static void elem_container_scroll(void)
     for(uint8_t idx = 0; idx < Elem_Num; idx++)
     {
         obj_y = ec_sy + ec_h*(idx/3) + scroll_offset + scroll_dela;
-
         if(obj_y >= Container_H || (obj_y + ec_h) < 0)
         {
             lv_obj_add_flag(elem_container[idx], LV_OBJ_FLAG_HIDDEN);
@@ -227,7 +202,6 @@ static void elem_container_scroll(void)
         }
             
         lv_obj_clear_flag(elem_container[idx], LV_OBJ_FLAG_HIDDEN);
-
         lv_obj_set_y(elem_container[idx], obj_y);
     }
 
@@ -242,12 +216,9 @@ static void elem_icon_create(menu_align_t menu_align)
 
     for(uint8_t idx = 0; idx < Elem_Num; idx++)
     {
-        widget_img_para.img_parent = \
-            elem_container[idx];
-        widget_img_para.file_img_dat = \
-            menu_100_100_icon_00_index + idx;
-        lv_obj_t *elem_icon = \
-            common_widget_img_create(&widget_img_para, NULL);
+        widget_img_para.img_parent = elem_container[idx];
+        widget_img_para.file_img_dat = menu_100_100_icon_00_index + idx;
+        lv_obj_t *elem_icon = common_widget_img_create(&widget_img_para, NULL);
         lv_obj_center(elem_icon);
     }
 
@@ -264,12 +235,9 @@ static void pressed_cb(lv_event_t *e)
 
     lv_indev_get_point(indev_act, &start_point);
 
-    memcpy(&now_point, &start_point, \
-        sizeof(lv_point_t));
-    memcpy(&min_point, &start_point, \
-        sizeof(lv_point_t));
-    memcpy(&max_point, &start_point, \
-        sizeof(lv_point_t));
+    memcpy(&now_point, &start_point, sizeof(lv_point_t));
+    memcpy(&min_point, &start_point, sizeof(lv_point_t));
+    memcpy(&max_point, &start_point, sizeof(lv_point_t));
 
     return;
 }
@@ -299,7 +267,6 @@ static void pressing_cb(lv_event_t *e)
             scroll_dela = scroll_bottom_val - ec_h - scroll_offset;
         
         elem_container_scroll();
-
         common_scrollbar_press_handle(scroll_offset + scroll_dela);
     }
 
@@ -343,8 +310,6 @@ static void release_cb(lv_event_t *e, int *state)
     uint32_t anim_min_duration = 300;
     uint32_t anim_max_duration = 700;
 
-    //printf("%d, %d\n", throw_end, scroll_bottom_val);
-
     if(throw_end > scroll_bottom_val && throw_end < scroll_top_val)
     {
         throw_adjust = throw_end%ec_h;
@@ -374,14 +339,12 @@ static void release_cb(lv_event_t *e, int *state)
             anim_duration = anim_min_duration;
     }
 
-    //printf("anim_duration = %d\n", anim_duration);
-
     if(throw_start == throw_end)
         return;
 
-    if(anim_duration < anim_min_duration) \
+    if(anim_duration < anim_min_duration)
         anim_duration = anim_min_duration;
-    if(anim_duration > anim_max_duration) \
+    if(anim_duration > anim_max_duration)
         anim_duration = anim_max_duration;
 
     lv_anim_t throw_anim;
@@ -455,9 +418,8 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    tileview_register_all_menu(obj, ui_act_id_null, \
-        ui_act_id_null, ui_act_id_null, ui_act_id_null, \
-            ui_act_id_menu);
+    tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
+        ui_act_id_null, ui_act_id_null, ui_act_id_menu);
 
     return;
 }

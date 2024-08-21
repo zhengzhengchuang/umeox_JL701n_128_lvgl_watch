@@ -49,38 +49,24 @@ static u8 tws_sibling_bat_level = 0xff;
 static u8 tws_sibling_bat_percent_level = 0xff;
 static u8 cur_bat_st = VBAT_NORMAL;
 
-//user 控制电池使能管教 0:不使能 1:使能
-int vbat_power_ctrl(uint8_t on)
-{
-    on = !on;
 
-    gpio_set_die(IO_PORTB_00, 1);
-    gpio_direction_output(IO_PORTB_00, on);
-
-    printf("%s\n", __func__);
-
-    return 0;
-}
 
 static int vm_vbat_value=0;
 void write_vm_vbat_value(int vm_value){
     if(vm_value<0){
         vm_value=0;
-    }
-    else if(vm_value>100){
+    }else if(vm_value>100){
         vm_value=100;
     }
-    // if(lcd_backlight_status()){
-        // log_sylon("change voltage to VM if lcd backlight is ok = %d",vm_value);
     syscfg_write(VM_BAT_PRESENT, &vm_value, sizeof(vm_value));
-    // }
 }
 
 void read_vm_vbat_value()
 {
     int vm_value=0;
     int ret = syscfg_read(VM_BAT_PRESENT, &vm_value, sizeof(vm_value));
-    if(ret > 0) {
+    if(ret > 0) 
+    {
         if(vm_value<0){
             vm_value=0;
         }
@@ -102,27 +88,29 @@ void read_vm_vbat_value()
 5、vbat_calculate_loop() 此函数传充电前后的差值，估算电流值，计算vbat的线性值
 time:2023 05 24 <<<<<<<<<<<<<<<<<<<
 ************************************************************************************/
-const float charge_k = 0.6;//充电电流系数。需要测量实际电流大小与打印值的差异
-#define BATTERY_CAPACITY    460.0 // 电池总容量，单位mAh
-static float BATTERY_RESISTOR  =  0.360;   //电池内阻
+const float charge_k = 0.6f;//充电电流系数。需要测量实际电流大小与打印值的差异
+#define BATTERY_CAPACITY    390.0f // 电池总容量，单位mAh
+static float BATTERY_RESISTOR  =  0.360f;   //电池内阻
 
-#define BATTERY_MAX_I	+300.0	//最大充电电流
-#define BATTERY_MIN_I	-200.0	//最大放电电流
-#define BATTERY_INVAID_I		(50.0)	//电流校验失效电流
-#define BATTERY_CHARGE_SMALL_I	(30.0)	//充电最小电流
+#define BATTERY_MAX_I	+300.0f	//最大充电电流
+#define BATTERY_MIN_I	-200.0f	//最大放电电流
+#define BATTERY_INVAID_I		(50.0f)	//电流校验失效电流
+#define BATTERY_CHARGE_SMALL_I	(30.0f)	//充电最小电流
 
 // 实际应用的电池曲线
 #define NEW_NUM_POINTS 20
 #define abs(x) ((x)>0?(x):-(x))
 
-const float capacity[NEW_NUM_POINTS] = {
- 1.0000, 0.9500, 0.9000, 0.8501, 0.8000, 0.7502, 0.7003, 0.6316, 0.5789, 0.5263,
- 0.4737, 0.4211, 0.3684, 0.3158, 0.2632, 0.2105, 0.1579, 0.1053, 0.0526, 0.0000,
+const float capacity[NEW_NUM_POINTS] = 
+{
+    1.0000, 0.9500, 0.9000, 0.8501, 0.8000, 0.7502, 0.7003, 0.6316, 0.5789, 0.5263,
+    0.4737, 0.4211, 0.3684, 0.3158, 0.2632, 0.2105, 0.1579, 0.1053, 0.0526, 0.0000,
 };
 
-const float open_circuit_voltage[NEW_NUM_POINTS] = {
- 4.3477, 4.2916, 4.2283, 4.1793, 4.1322, 4.0776, 4.0398, 3.9837, 3.9428, 3.9012,
- 3.8668, 3.8423, 3.8191, 3.8014, 3.7981, 3.7614, 3.7406, 3.7183, 3.6914, 3.4400,
+const float open_circuit_voltage[NEW_NUM_POINTS] = 
+{
+    4.3477, 4.2916, 4.2283, 4.1793, 4.1322, 4.0776, 4.0398, 3.9837, 3.9428, 3.9012,
+    3.8668, 3.8423, 3.8191, 3.8014, 3.7981, 3.7614, 3.7406, 3.7183, 3.6914, 3.4400,
 };
 
 // const float capacity[NEW_NUM_POINTS] = {
@@ -135,6 +123,7 @@ const float open_circuit_voltage[NEW_NUM_POINTS] = {
 //  3.7000, 3.6500, 3.6000, 3.5500, 3.5000, 3.4500, 3.4000, 3.4000, 3.4000, 3.4000,
 // };
 
+#if 1
 static int is_sleep = 0;
 void sleep_check()
 {
@@ -150,6 +139,7 @@ void sleep_check()
         is_sleep = 0; 
     }
 }
+#endif
 
 /* 线性差值算法 */
 /*
@@ -161,23 +151,29 @@ void sleep_check()
 注意的是，由于浮点数的精度问题，当输入值x非常接近数据点的边界时，可能会出现精度丢失的情况，
 因此函数在边界处进行了特殊处理。
 */
-void linear_interpolation(float x, float* y, float* x_values, float* y_values, int num_points) {
-    for (int i = 0; i < num_points - 1; i++) {
-        if (x <= x_values[i] && x >= x_values[i+1]) {
+void linear_interpolation(float x, float *y, float *x_values, float *y_values, int num_points) 
+{
+    for (int i = 0; i < num_points - 1; i++) 
+    {
+        if (x <= x_values[i] && x >= x_values[i+1]) 
+        {
             float x1 = x_values[i];
             float y1 = y_values[i];
             float x2 = x_values[i+1];
             float y2 = y_values[i+1];
-            if(x2-x1==0){
-                printf("%s %d 除0错误",__func__,__LINE__);
+            if(x2-x1==0)
+            {
+                printf("%s div0 error",__func__);
                 return;
             }
             *y = y1 + ((y2 - y1) / (x2 - x1)) * (x - x1);
             break;
         }
     }
+
     //FLOAT边界精度丢失处理
-    if(x<x_values[num_points-1]){
+    if(x<x_values[num_points-1])
+    {
         *y = y_values[num_points-1];
     }else if(x>x_values[0]){
         *y = y_values[0];
@@ -185,11 +181,11 @@ void linear_interpolation(float x, float* y, float* x_values, float* y_values, i
 }
 
 // 实时电池虚拟开路电压函数 OCV(SOC)
-float OCV(float soc) {
+float OCV(float soc) 
+{
     float open_circuit_voltage_value=0.0;
     linear_interpolation(soc, &open_circuit_voltage_value, capacity, open_circuit_voltage, NEW_NUM_POINTS);
     return open_circuit_voltage_value;
-
 }
 
 float SOC(float ocv){
@@ -203,23 +199,26 @@ float SOC(float ocv){
 float predicted_current(float real_vbat_value, float soc) {
 
     float ocv = OCV(soc);
-    //log_sylon("real_vbat_value:%f soc:%f", real_vbat_value,soc);
-    return (real_vbat_value - ocv) / BATTERY_RESISTOR *1000; // 10 is battery resistor
-
+    printf("%s:ocv = %f\n", __func__, ocv);
+    //printf("real_vbat_value:%f soc:%f", real_vbat_value,soc);
+    return (real_vbat_value - ocv) / BATTERY_RESISTOR * 1000; // 10 is battery resistor
 }
 
 #define Vbat_Log_En (0)
 static float current_soc;
 void vbat_calculate_loop() 
 {
+    printf("____%s\n", __func__);
+
     // 模拟每 8 秒更新一次电池电压 real_vbat_value
     int real_vbat_value;
     float current_vbat;
     // 空载状态下，直接根据 SOC-OCV 反向函数计算 SOC
-    current_vbat = (float)(adc_get_voltage(AD_CH_VBAT) * 4)/1000.0;
-    #if Vbat_Log_En
+    current_vbat = (float)(adc_get_voltage(AD_CH_VBAT) * 4)/1000.0f;
+    printf("current_vbat = %f\n", current_vbat);
+#if Vbat_Log_En
     printf("is_sleep = %d 实际检测出vbat值>>>>>>>>>>>> current_vbat = %f,current_soc = %.2f",is_sleep,current_vbat,current_soc);
-    #endif
+#endif
     if(is_sleep>2000 && !LVCMP_DET_GET() && 0) { //长时间休眠且非充电状态直接校准 is_sleep累加作为休眠时间设置
         if (current_vbat >= OCV(1.0)) {
             current_soc = 1.0;
@@ -228,8 +227,10 @@ void vbat_calculate_loop()
         } else {
             current_soc = SOC(current_vbat);
         }
-    } else {
+    } else 
+    {
 		float I = predicted_current(current_vbat, current_soc);
+        printf("%s:I = %f\n", __func__, I);
 		if(I < BATTERY_MIN_I){
 			printf(">>>>>>BATTERY_MIN_I");
 			I = BATTERY_MIN_I;
@@ -253,12 +254,14 @@ void vbat_calculate_loop()
             #endif
         }
     }
+
     // 防止 SOC 值超出范围
     if (current_soc < 0.0) {
         current_soc = 0.0;
     } else if (current_soc > 1.0/*BATTERY_CAPACITY*/) {
         current_soc = 1.0/*BATTERY_CAPACITY*/;
     }
+    
     // 输出当前 SOC 值
     real_vbat_value = (int)(current_soc*100);
     #if Vbat_Log_En
@@ -267,7 +270,7 @@ void vbat_calculate_loop()
     
      // 防止电压回弹
      u8 update = 0;
-    if( get_charge_online_flag() ) {
+    if(get_charge_online_flag()) {
         //充电过程中电量下降使用之前电量
         if(real_vbat_value <= vm_vbat_value) {  
             #if Vbat_Log_En
@@ -288,6 +291,7 @@ void vbat_calculate_loop()
             update = 1;
         }
     }
+
     if(update){
         #if Vbat_Log_En
 	    printf("储存到vm的电量值 vm_vbat_value is %d \n",vm_vbat_value);
@@ -316,7 +320,6 @@ time: 2023 05 24 >>>>>>>>>>>>>>>>>>>
 u8 get_vbat_averge_percent(void);
 u8 battery_precent_lel = 100;
 #endif
-
 
 void vbat_check(void *priv);
 void sys_enter_soft_poweroff(void *priv);
@@ -647,23 +650,27 @@ void get_real_vbat()
     vm_vbat_value = (int)(current_soc*100.0);
     write_vm_vbat_value(vm_vbat_value);
     vbat_calculate_loop();
-    //log_sylon("current_soc = %.2f vm_vbat_value = %d  ",current_soc,vm_vbat_value);
+    printf("current_soc = %.2f vm_vbat_value = %d  ",current_soc,vm_vbat_value);
 }
 extern u16 vbat_voltage_array[17];
 void vbat_check_init(void)
-{    
+{  
+    printf("%s\n", __func__);
+
 #if TCFG_BATTERY_POWER_MANAGE_ENABLE   
     read_vm_vbat_value();
+    printf("vm_vbat_value = %d\n", vm_vbat_value);
 
 	if(!get_charge_online_flag()) 
     {
-		current_soc = (float)vm_vbat_value/100.0;
+		current_soc = (float)vm_vbat_value/100.0f;//1.0f
 		float current_vbat;
 		// 空载状态下，直接根据 SOC-OCV 反向函数计算 SOC
-		current_vbat = (float)(adc_get_voltage(AD_CH_VBAT) * 4)/1000.0;
-		float I = predicted_current(current_vbat, current_soc);
+		current_vbat = (float)(adc_get_voltage(AD_CH_VBAT) * 4)/1000.0f;
+		float I = predicted_current(current_vbat, current_soc);//4.12V  80
 		printf("VBAT INIT I = %f", I);
-		if(abs(I) > BATTERY_INVAID_I){
+		if(abs(I) > BATTERY_INVAID_I)
+        {
 			printf("BATTERY_INVAID_I REREAD VBAT P!!!!!!!");
 			vm_vbat_value = 0;	//当前电流不可靠，重新读取
 		}
@@ -680,20 +687,22 @@ void vbat_check_init(void)
         } else {
             get_real_vbat();
         }
-
-        printf("____vbat_check_init____\n");
     } else {
         current_soc = (float)vm_vbat_value/100.0;
         //log_sylon("current_soc = %.2f ",current_soc);
     }
+
     //usr_timer_add(NULL, sleep_check, 10, 0);//检查是否进入低功耗
     vbat_calculate_loop();
     sys_timer_add(NULL, vbat_calculate_loop, 8000);
+
+#if 0
 	if (vbat_slow_timer == 0) {
         vbat_slow_timer = sys_timer_add(NULL, vbat_check_slow, 10 * 1000);
     } else {
         sys_timer_modify(vbat_slow_timer, 10 * 1000);
     }
+#endif
 #else
 
     if (vbat_slow_timer == 0) {
@@ -703,10 +712,12 @@ void vbat_check_init(void)
     }
 #endif
 
+#if 0
     if(vbat_fast_timer == 0) 
     {
         vbat_fast_timer = usr_timer_add(NULL, vbat_check, 10, 1);
     }
+#endif
 }
 
 void vbat_timer_delete(void)
@@ -720,8 +731,6 @@ void vbat_timer_delete(void)
         vbat_fast_timer = 0;
     }
 }
-
-
 
 void vbat_check(void *priv)
 {
@@ -754,7 +763,8 @@ void vbat_check(void *priv)
 
     /* log_info("unit_cnt:%d\n", unit_cnt); */
 
-    if (unit_cnt >= VBAT_DETECT_CNT) {
+    if (unit_cnt >= VBAT_DETECT_CNT) 
+    {
 
         if (get_charge_online_flag() == 0) {
             if (low_off_cnt > (VBAT_DETECT_CNT / 2)) { //低电关机
@@ -826,28 +836,27 @@ bool vbat_is_low_power(void)
     return (cur_bat_st != VBAT_NORMAL);
 }
 
+#include "../../common/ui/lv_watch/comm_func/power_manage.h"
 void check_power_on_voltage(void)
 {
 #if(TCFG_SYS_LVD_EN == 1)
-
     u16 val = 0;
     u8 normal_power_cnt = 0;
     u8 low_power_cnt = 0;
 
-    while (1) {
+    while(1) 
+    {
         clr_wdt();
         val = get_vbat_level();
-        printf("vbat: %d\n", val);
-        //printf("poweroff_tone_v: %d\n", app_var.poweroff_tone_v);//3.3v
-        if((val < app_var.poweroff_tone_v) || adc_check_vbat_lowpower()) 
+        printf("%s:vbat: %d\n", __func__, val);
+        if((val < app_var.poweroff_tone_v)/* || adc_check_vbat_lowpower()*/) 
         {
             low_power_cnt++;
             normal_power_cnt = 0;
             if(low_power_cnt > 10) 
             {
-                //ui_update_status(STATUS_POWERON_LOWPOWER);
-                printf("power on low power , enter softpoweroff!\n");
-
+                printf("low power , enter softpoweroff!\n");
+                BatPowerSetZero();
                 power_set_soft_poweroff();
             }
         }else 
@@ -855,7 +864,8 @@ void check_power_on_voltage(void)
             normal_power_cnt++;
             low_power_cnt = 0;
             if (normal_power_cnt > 10) {
-                vbat_check_init();
+                //vbat_check_init();
+                BatPowerInit();
                 return;
             }
         }

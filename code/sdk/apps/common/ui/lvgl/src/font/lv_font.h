@@ -256,15 +256,11 @@ static inline const lv_font_t * lv_font_default(void)
 
 //用户自定义
 LV_FONT_DECLARE(font_common_32);
-LV_FONT_DECLARE(font_common_num_12);
 LV_FONT_DECLARE(font_common_num_18);
 LV_FONT_DECLARE(font_common_num_24);
 LV_FONT_DECLARE(font_common_num_32);
 LV_FONT_DECLARE(font_common_num_36);
-LV_FONT_DECLARE(font_common_num_42);
-LV_FONT_DECLARE(font_common_num_52);
 LV_FONT_DECLARE(font_common_num_64);
-LV_FONT_DECLARE(font_common_num_78);
 LV_FONT_DECLARE(font_common_24_no_ch);
 //LV_FONT_DECLARE(font_common_28_no_ch);
 //LV_FONT_DECLARE(font_common_30_no_ch);

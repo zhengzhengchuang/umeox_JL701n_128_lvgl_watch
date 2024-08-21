@@ -58,7 +58,7 @@ static void menu_display_cb(lv_obj_t *obj)
     bool valid = SlpPara.valid;
     slp_valid = valid;
 
-    u32 slp_dur = (u32)(SlpPara.slp_dur);
+    u32 slp_dur = SlpPara.slp_dur;
 
     int time_format = \
         GetVmParaCacheByLabel(vm_label_time_format);

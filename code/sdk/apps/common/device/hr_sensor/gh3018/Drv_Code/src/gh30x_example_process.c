@@ -1707,10 +1707,10 @@ void gh30x_fifo_evt_handler(void)
 
         //HOOK_FUNC_CALL(g_pGh30xGetRawdataHookFunc, (g_UNGh30xRawdataBuf.stRawdataBuf.unPpgRawdataBuf, usFifoSamplePointNum));
         if(g_pGh30xGetRawdataHookFunc)
-            g_pGh30xGetRawdataHookFunc(g_UNGh30xRawdataBuf.stRawdataBuf.unPpgRawdataBuf, usFifoSamplePointNum);
+            g_pGh30xGetRawdataHookFunc(g_UNGh30xRawdataBuf.stRawdataBuf.unPpgRawdataBuf, usFifoSamplePointNum/g_uchNeedReadRawdataCount);//user add
 #ifdef __FUNC_TYPE_AGC_ENABLE__
         //auto led
-        uchAutoLedFail = HBD_AutoLedbyFifoInt(g_UNGh30xRawdataBuf.stRawdataBuf.unPpgRawdataBuf, usFifoSamplePointNum / g_uchNeedReadRawdataCount);
+        uchAutoLedFail = HBD_AutoLedbyFifoInt(g_UNGh30xRawdataBuf.stRawdataBuf.unPpgRawdataBuf, usFifoSamplePointNum/g_uchNeedReadRawdataCount);
 #endif
 
         if (uchAutoLedFail)

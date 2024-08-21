@@ -76,26 +76,25 @@ static void menu_display_cb(lv_obj_t *obj)
 
     struct sys_time time;
     SecToUtcTime(r_message.timestamp, &time);
-    
     uint8_t hour = time.hour;
     uint8_t minute = time.min;
     static char time_str[6];
     memset(time_str, 0, sizeof(time_str));
     sprintf(time_str, "%02d:%02d", hour, minute);
-    widget_label_para.label_w = 80;
-    widget_label_para.label_h = Label_Line_Height;
-    widget_label_para.long_mode = LV_LABEL_LONG_CLIP;
-    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = lv_color_hex(0xffffff);
-    widget_label_para.label_ver_center = false;
-    widget_label_para.user_text_font = NULL;
-    widget_label_para.label_parent = msg_detail_container;
-    widget_label_para.label_text = time_str;
-    lv_obj_t *time_str_label = common_widget_label_create(&widget_label_para);
+    memset(&num_str_para, 0, sizeof(widget_num_str_para_t));
+    num_str_para.parent = msg_detail_container;
     if(menu_align == menu_align_right)
-        lv_obj_align(time_str_label, LV_ALIGN_TOP_LEFT, 20, 10);
+        num_str_para.num_obj_x = 20;
     else
-        lv_obj_align(time_str_label, LV_ALIGN_TOP_RIGHT, -20, 10); 
+        num_str_para.num_obj_x = 240;
+    num_str_para.num_obj_y = 20;
+    num_str_para.p_num_str = time_str;
+    num_str_para.num_str_len = 5;
+    num_str_para.num_obj = NULL;
+    num_str_para.num_obj_max = 0;
+    num_str_para.num_dsc_idx = NULL;
+    num_str_para.file_00_index = comm_num_14x22_wh_00_index;
+    common_widget_num_str_create(&num_str_para);
 
     char *ctx_str = r_message.msg_ctx;
     uint32_t str_len = strlen(ctx_str);

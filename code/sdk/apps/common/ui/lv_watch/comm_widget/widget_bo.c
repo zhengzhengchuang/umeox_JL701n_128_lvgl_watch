@@ -58,11 +58,11 @@ void common_bo_widget_init(void)
     if(!bo_group_num)
         return;
 
-    memset(bo_dsc_idx, 0xffff, \
+    memset(bo_dsc_idx, 0xff, \
         sizeof(bo_dsc_idx));
 
-    memset(common_bo_widget, 0, \
-        sizeof(common_bo_widget));
+    // for(uint8_t i = 0; i < bo_group_num; i++)
+    //     common_bo_widget[i] = NULL;
 
     memset(bo_para_cache, 0, \
         sizeof(widget_data_para_t)*\

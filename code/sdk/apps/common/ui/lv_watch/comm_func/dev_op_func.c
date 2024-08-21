@@ -1,13 +1,7 @@
 #include "../lv_watch.h"
 
-static u16 timer_id;
-
 static void shutdown_cb(void *priv)
 {
-    if(timer_id)
-        sys_timeout_del(timer_id);
-    timer_id = 0;
-
     int task_post[1];
     task_post[0] = comm_msg_dev_shutdown;
     PostCommTaskMsg(task_post, 1);
@@ -17,10 +11,6 @@ static void shutdown_cb(void *priv)
 
 static void restart_cb(void *priv)
 {
-    if(timer_id)
-        sys_timeout_del(timer_id);
-    timer_id = 0;
-
     int task_post[1];
     task_post[0] = comm_msg_dev_restart;
     PostCommTaskMsg(task_post, 1);
@@ -30,10 +20,6 @@ static void restart_cb(void *priv)
 
 static void reset_cb(void *priv)
 {
-    if(timer_id)
-        sys_timeout_del(timer_id);
-    timer_id = 0;
-
     int task_post[1];
     task_post[0] = comm_msg_dev_reset;
     PostCommTaskMsg(task_post, 1);
@@ -52,9 +38,7 @@ static void DevAllSensorDisable(void)
 
 void DevOpMenuPopUp(void)
 {
-    //当前菜单是否支持弹窗
-    if(!MenuSupportPopup())
-        return;
+    if(!MenuSupportPopup()) return;
 
     ui_menu_jump(ui_act_id_device_op);
 
@@ -63,39 +47,48 @@ void DevOpMenuPopUp(void)
 
 void DevOpResetHandle(void)
 {
+    /* 充电中... */ 
+    // u8 charge_state = GetChargeState();
+    // if(charge_state == 1) return;
+
     ResetAllVmData();
 
     int ui_msg_post[1];
     ui_msg_post[0] = ui_msg_nor_data_clear;
     post_ui_msg(ui_msg_post, 1);
   
-    DevAllSensorDisable();
+    //DevAllSensorDisable();
     common_offscreen_handle(); 
-    timer_id = sys_timeout_add(NULL, reset_cb, 200);
+    sys_timeout_add(NULL, reset_cb, 200);
 
     return;
 }
 
 void DevOpRestartHandle(void)
 {
+    /* 充电中... */ 
+    // u8 charge_state = GetChargeState();
+    // if(charge_state == 1) return;
+
     PowerOffVmDataWrite();
-    DevAllSensorDisable();
+    //DevAllSensorDisable();
     common_offscreen_handle(); 
-    timer_id = sys_timeout_add(NULL, restart_cb, 200);
+    sys_timeout_add(NULL, restart_cb, 200);
 
     return;
 }
 
 void DevOpShutdownHandle(void)
-{
+{  
+    /* 充电中... */ 
+    // u8 charge_state = GetChargeState();
+    // if(charge_state == 1) return;
+
     PowerOffVmDataWrite();
-    DevAllSensorDisable();
+    //DevAllSensorDisable();
     common_offscreen_handle(); 
     motor_run(1, sdw_motor_duty);
-    timer_id = sys_timeout_add(NULL, shutdown_cb, 200);
+    sys_timeout_add(NULL, shutdown_cb, 300);
 
     return;
 }
-
-
-

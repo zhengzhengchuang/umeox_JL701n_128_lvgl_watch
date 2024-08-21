@@ -135,6 +135,7 @@ void update_result_set(u16 result)
         memset(p, 0x00, sizeof(UPDATA_PARM));
         p->parm_result = result;
         p->parm_crc = CRC16(((u8 *)p) + 2, sizeof(UPDATA_PARM) - 2);
+        //printf("%s\n", __func__);
     }
 }
 void update_clear_result()

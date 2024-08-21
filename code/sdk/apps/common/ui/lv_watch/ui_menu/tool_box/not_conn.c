@@ -4,8 +4,7 @@ static void exit_cb(lv_event_t *e)
 {
     if(!e) return;
 
-    ui_act_id_t act_id = \
-        read_menu_return_level_id();
+    ui_act_id_t act_id = read_menu_return_level_id();
     ui_menu_jump(act_id);
 
     return;
@@ -15,8 +14,7 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_act_id_t prev_act_id = \
-        read_menu_return_level_id();
+    ui_act_id_t prev_act_id = read_menu_return_level_id();
     if(!lang_txt_is_arabic())
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             prev_act_id, ui_act_id_null, ui_act_id_not_conn);

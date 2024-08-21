@@ -94,7 +94,7 @@ static void menu_display_cb(lv_obj_t *obj)
     lv_obj_align(num_name_label, LV_ALIGN_TOP_MID, 0, 80);
 
     char online_duration_str[9];
-    uint32_t online_duration = GetCallOnlineDuration();
+    uint32_t online_duration = GetCallOnlineDur();
     memset(online_duration_str, 0, sizeof(online_duration_str));
     sprintf(online_duration_str, "%02d:%02d:%02d", \
         online_duration/3600, (online_duration%3600)/60, (online_duration%3600)%60);

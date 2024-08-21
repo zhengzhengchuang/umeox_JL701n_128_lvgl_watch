@@ -93,21 +93,21 @@ static void app_smartbox_task_start(void)
     case SMARTBOX_TASK_ACTION_FILE_TRANSFER:
         if (!app_smartbox_action_mode()) {
             UI_WINDOW_PREEMPTION_POSH(ID_WINDOW_UPGRADE, NULL, NULL, UI_WINDOW_PREEMPTION_TYPE_UPGRADE);
-            UI_MSG_POST("upgrade:wait=%4", 4);
+            //UI_MSG_POST("upgrade:wait=%4", 4);
         }
         file_transfer_init(app_smartbox_action_end_callback);
         break;
     case SMARTBOX_TASK_ACTION_FILE_DELETE:
         if (!app_smartbox_action_mode()) {
             UI_WINDOW_PREEMPTION_POSH(ID_WINDOW_UPGRADE, NULL, NULL, UI_WINDOW_PREEMPTION_TYPE_UPGRADE);
-            UI_MSG_POST("upgrade:wait=%4", 4);
+            //UI_MSG_POST("upgrade:wait=%4", 4);
         }
         file_delete_init(app_smartbox_action_end_callback);
         break;
     case SMARTBOX_TASK_ACTION_DEV_FORMAT:
         if (!app_smartbox_action_mode()) {
             UI_WINDOW_PREEMPTION_POSH(ID_WINDOW_UPGRADE, NULL, NULL, UI_WINDOW_PREEMPTION_TYPE_UPGRADE);
-            UI_MSG_POST("upgrade:wait=%4", 4);
+            //UI_MSG_POST("upgrade:wait=%4", 4);
         }
         dev_format_init(app_smartbox_action_end_callback);
         break;
@@ -187,6 +187,7 @@ static void app_smartbox_task_stop(void)
         bt_task_close();
         bt_ble_exit();
         btstack_exit();
+        printf("________%s\n", __func__);
     }
     UI_WINDOW_PREEMPTION_POP(ID_WINDOW_UPGRADE);
 }

@@ -26,14 +26,17 @@ void VmCallLogCtxFlashWrite(void);
 void UpdateContactsVmFlash(void);
 char *GetContactsNameByNumber(char *number);
 
+void CallInRingPlayStop(void);
+void CallInRingPlayStart(void);
+
 void CallOutOrInProcess(void);
 void CallHangUpAfterHandle(void);
 void CallAnswerAfterHandle(void);
 
-u16 GetCallOnlineTimerId(void);
-u32 GetCallOnlineDuration(void);
-void CallOnlineDurationTimerCreate(void);
-void CallOnlineDurationTimerDelete(void);
+u16 GetCallOnlineTimer(void);
+u32 GetCallOnlineDur(void);
+void CallOnlineDurTimerCreate(void);
+void CallOnlineDurTimerDelete(void);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

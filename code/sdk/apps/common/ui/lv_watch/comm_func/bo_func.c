@@ -120,14 +120,16 @@ void WBoParaInit(void)
 
 void PowerOnSetBoVmCache(void)
 {
+    printf("%s:%d\n", __func__, sizeof(vm_bo_ctx_t));
+
     WBoParaInit();
+
+    u8 num = VmBoItemNum();
+    printf("%s:bo_num = %d\n", __func__, num);
 
     /*读取vm的最新一条数据*/
     bool data_ret = GetBoData();
     if(data_ret == false) return;
-
-    u8 num = VmBoItemNum();
-    printf("%s:bo_num = %d\n", __func__, num);
 
     /*判断vm的最新数据是否已经过期*/
     bool IsPast = BoVmDataIsPast(r_bo.timestamp);
@@ -278,7 +280,8 @@ void BoUtcMinProcess(struct sys_time *ptime)
     w_bo.CurIdx = idx;
     u8 on = timestamp%Bo_Inv_Dur;
     int auto_sw = GetVmParaCacheByLabel(vm_label_auto_bo_sw);
-    if(on == 0 && auto_sw == 1)
+    u8 charge_state = GetChargeState();
+    if(on == 0 && auto_sw == 1 && charge_state == 0)
     {
         /* 自动血氧 */
         u8 work = GetPpgWorkType();

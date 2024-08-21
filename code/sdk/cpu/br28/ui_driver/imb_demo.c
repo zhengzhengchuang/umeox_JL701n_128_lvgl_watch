@@ -8958,7 +8958,7 @@ void lv_open_ex_res(int phyaddr, struct file_index_t res, lv_img_dsc_t *img_dst)
     return;
 }
 
-#define FONT_LEN (512)
+#define FONT_LEN (1024)
 static u8 g_font_buf[FONT_LEN];
 void lv_open_font(int offset, int len)
 {

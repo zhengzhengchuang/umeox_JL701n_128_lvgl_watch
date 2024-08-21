@@ -1,5 +1,6 @@
 #include "app_main.h"
 #include "../lv_watch.h"
+#include "../../../../watch/include/tone_player.h"
 #include "../../../../../include_lib/btstack/avctp_user.h"
 
 extern BT_USER_PRIV_VAR bt_user_priv_var;
@@ -28,13 +29,10 @@ void CtrlCallOutByNum(char *num, u8 len)
     if(num == NULL || len == 0)
         return;
 
-    uint8_t ble_bt_connect = \
-        GetDevBleBtConnectStatus();
-    if(ble_bt_connect == 0 || \
-        ble_bt_connect == 1)
+    uint8_t ble_bt_connect = GetDevBleBtConnectStatus();
+    if(ble_bt_connect == 0 || ble_bt_connect == 1)
     {
         ui_menu_jump(ui_act_id_call_disc);
-        
         return;
     }
 
@@ -49,36 +47,26 @@ char *GetCallNumName(void)
     static char *call_name;
     static uint8_t *call_num;
 
-    uint8_t len = \
-        bt_user_priv_var.income_phone_len;
+    uint8_t len = bt_user_priv_var.income_phone_len;
+    if(len == 0) return NULL;
 
-    if(len == 0)
-        return NULL;
-
-    call_num = \
-        bt_user_priv_var.income_phone_num;
-
-    call_name = \
-        GetContactsNameByNumber((char *)call_num);
-
-    if(call_name) 
-        return call_name;
+    call_num = bt_user_priv_var.income_phone_num;
+    call_name = GetContactsNameByNumber((char *)call_num);
+    if(call_name) return call_name;
 
     return call_num;
 }
 
 void CtrlCallAnswer(void)
 {
-    user_send_cmd_prepare(USER_CTRL_HFP_CALL_ANSWER, \
-        0, NULL);
+    user_send_cmd_prepare(USER_CTRL_HFP_CALL_ANSWER, 0, NULL);
 
     return;
 }
 
 void CtrlCallHangUp(void)
 {
-    user_send_cmd_prepare(USER_CTRL_HFP_CALL_HANGUP, \
-        0, NULL);
+    user_send_cmd_prepare(USER_CTRL_HFP_CALL_HANGUP, 0, NULL);
 
     return;
 }
@@ -181,27 +169,19 @@ char *GetContactsNameByNumber(char *number)
 {
     contacts_name = NULL;
 
-    if(!number) 
-        return contacts_name;
+    if(!number) return contacts_name;
 
-    uint8_t num = \
-        VmContactsItemNum();
-
-    if(num == 0)
-        return contacts_name;
+    uint8_t num = VmContactsItemNum();
+    if(num == 0) return contacts_name;
 
     for(uint8_t idx = 0; idx < num; idx++)
     {
-        bool ret = \
-            VmContactsCtxByIdx(idx);
-        if(ret == false)
-            continue;
+        bool ret = VmContactsCtxByIdx(idx);
+        if(ret == false) continue;
 
         if(strcmp(number, r_contacts.number_str) == 0)
         {
-            contacts_name = \
-                r_contacts.name_str;
-
+            contacts_name = r_contacts.name_str;
             break;
         }
     }
@@ -243,39 +223,89 @@ void SetProcessValid(bool valid)
     return;
 }
 
+/* 重复提示音播放 */
+static u8 rr_flag;
+static u16 rr_timer;
+static void RepeatRingTimerDestory(void)
+{
+    if(rr_timer)
+        sys_timer_del(rr_timer);
+    rr_timer = 0;
+}
+
+static void PlayEnd(void *priv, int flag)
+{
+    if(rr_timer)
+        sys_timer_re_run(rr_timer);
+
+    rr_flag = 1;
+
+    return;
+}
+
+static void RRTimerCb(void *priv)
+{
+    if(rr_flag == 0) return;
+
+    rr_flag = 0;
+    tone_play_with_callback_by_name(tone_table[IDEX_TONE_CALL_IN], 1, PlayEnd, NULL);
+
+    return;
+}
+
+static void RepeatRingTimerCreate(void)
+{
+    if(rr_timer == 0)
+        rr_timer = sys_timer_add(NULL, RRTimerCb, 200);
+
+    return;
+}
+
+void CallInRingPlayStop(void)
+{
+    RepeatRingTimerDestory();
+    tone_play_stop();
+    return;
+}
+
+void CallInRingPlayStart(void)
+{
+    rr_flag = 0;
+    RepeatRingTimerCreate();
+    tone_play_with_callback_by_name(tone_table[IDEX_TONE_CALL_IN], 1, PlayEnd, NULL);
+    
+    return;
+}
+
 void CallOutOrInProcess(void)
 {
     bool valid = false;
     SetProcessValid(valid);
 
     bool BondFlag = GetDevBondFlag();
-    if(BondFlag == false)
-        return;
+    if(BondFlag == false) return;
 
-    //判断当前是否符合弹出的条件
-    if(!MenuSupportPopup())
-        return;
+    if(!MenuSupportPopup()) return;
 
-    /*勿扰模开启*/
-    int dnd_state = \
-        GetVmParaCacheByLabel(vm_label_dnd_state);
+    int dnd_state = GetVmParaCacheByLabel(vm_label_dnd_state);
     if(dnd_state == dnd_state_enable) return;
 
-    u8 OutOrIn = \
-        GetCallOutOrIn();
-    
-    /*来电马达震动*/
-    if(OutOrIn == 2)
+    u8 OutOrIn = GetCallOutOrIn();
+        
+    if(OutOrIn == 1)
+    {
+        ui_menu_jump(ui_act_id_call_out);
+    }else if(OutOrIn == 2)
+    {
+        /* 马达震动 */
         motor_run(3, def_motor_duty);
 
-    /*响铃*/
-    //...
+        /* 响铃 */
+        CallInRingPlayStart();
 
-    if(OutOrIn == 1)
-        ui_menu_jump(ui_act_id_call_out); 
-    else if(OutOrIn == 2)
-        ui_menu_jump(ui_act_id_call_in); 
-
+        ui_menu_jump(ui_act_id_call_in);
+    }
+         
     valid = true;
     SetProcessValid(valid);  
 
@@ -284,20 +314,17 @@ void CallOutOrInProcess(void)
 
 void CallHangUpAfterHandle(void)
 {
-    bool valid = \
-        GetProcessValid();
-    if(valid == false)
-        return;
+    bool valid = GetProcessValid();
+    if(valid == false) return;
 
-    CallOnlineDurationTimerDelete();
+    CallInRingPlayStop();
 
-    ui_act_id_t act_id = \
-        read_menu_return_level_id();
+    CallOnlineDurTimerDelete();
 
-    bool state = \
-        GetCallAnswerState();
-    if(state == true)
-        act_id = ui_act_id_call_end;
+    ui_act_id_t act_id = read_menu_return_level_id();
+
+    bool state = GetCallAnswerState();
+    if(state == true) act_id = ui_act_id_call_end;
 
     ui_menu_jump(act_id);
 
@@ -306,23 +333,23 @@ void CallHangUpAfterHandle(void)
 
 void CallAnswerAfterHandle(void)
 {
-    bool valid = \
-        GetProcessValid();
-    if(valid == false)
-        return;
+    bool valid = GetProcessValid();
+    if(valid == false) return;
+
+    CallInRingPlayStop();
 
     ui_menu_jump(ui_act_id_call_online);
 
     return;
 }
 
-static u16 online_timer_id = 0;
+static u16 online_timer = 0;
 static u32 online_duration = 0;
-u16 GetCallOnlineTimerId(void)
+u16 GetCallOnlineTimer(void)
 {
-    return online_timer_id;
+    return online_timer;
 }
-u32 GetCallOnlineDuration(void)
+u32 GetCallOnlineDur(void)
 {
     return online_duration;
 }
@@ -334,25 +361,23 @@ static void timer_cb(void *priv)
 
     return;
 }
-void CallOnlineDurationTimerCreate(void)
+void CallOnlineDurTimerCreate(void)
 {
-    if(online_timer_id)
+    if(online_timer)
         return;
 
-    online_timer_id = \
-        sys_hi_timer_add(NULL, timer_cb, 1000);
+    online_timer = sys_hi_timer_add(NULL, timer_cb, 1000);
 
     online_duration = 0;
 
     return;
 }
-void CallOnlineDurationTimerDelete(void)
+void CallOnlineDurTimerDelete(void)
 {
-    if(online_timer_id)
-        sys_hi_timer_del(\
-            online_timer_id);
+    if(online_timer)
+        sys_hi_timer_del(online_timer);
 
-    online_timer_id = 0;
+    online_timer = 0;
 
     return;
 }

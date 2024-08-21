@@ -428,10 +428,8 @@ void cfg_file_parse(u8 idx)
     if (ret < 0) {
         log_info("read music play mode err\n");
     }
-    printf("cycle_mode = %d\n", \
-        app_var.cycle_mode);
-    if (app_var.cycle_mode >= FCYCLE_MAX || \
-        app_var.cycle_mode == 0) 
+    printf("cycle_mode = %d\n", app_var.cycle_mode);
+    if (app_var.cycle_mode >= FCYCLE_MAX || app_var.cycle_mode == 0) 
         app_var.cycle_mode = FCYCLE_ALL;
 #endif
 

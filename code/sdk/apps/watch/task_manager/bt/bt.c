@@ -1362,9 +1362,9 @@ void app_bt_task()
     int msg[32];
     ui_update_status(STATUS_EXIT_LOWPOWER);
 
-    if (!__this->cmd_flag) { //蓝牙后台拉回蓝牙模式不播放提示音
-        tone_play_by_path(tone_table[IDEX_TONE_BT_MODE], 1);
-    }
+    // if (!__this->cmd_flag) { //蓝牙后台拉回蓝牙模式不播放提示音
+    //     tone_play_by_path(tone_table[IDEX_TONE_BT_MODE], 1);
+    // }
 
     bt_task_start();
 

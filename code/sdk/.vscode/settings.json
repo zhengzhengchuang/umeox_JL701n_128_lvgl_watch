@@ -457,7 +457,19 @@
         "big_data_send.h": "c",
         "history_data.h": "c",
         "le_history_data.h": "c",
-        "_default_types.h": "c"
+        "_default_types.h": "c",
+        "tone_player.h": "c",
+        "charge_func.h": "c",
+        "azkar_func.h": "c",
+        "power_manage.h": "c",
+        "raise_func.h": "c",
+        "widget_power.h": "c",
+        "config.h": "c",
+        "uart.h": "c",
+        "ota_func.h": "c",
+        "lv_label.h": "c",
+        "upay.h": "c",
+        "alipay.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

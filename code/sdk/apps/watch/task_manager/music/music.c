@@ -1112,7 +1112,6 @@ void music_set_start_auto_play(u8 on)
     __this->auto_play = !!on;
 }
 
-
 //*----------------------------------------------------------------------------*/
 /**@brief    music 主任务
    @param    无
@@ -1136,7 +1135,7 @@ void app_music_task()
 #else
     /* tone_play_with_callback_by_name(tone_table[IDEX_TONE_MUSIC], 1, music_tone_play_end_callback, (void *)IDEX_TONE_MUSIC); */
 #endif
-
+    
     if (bt_get_music_device_style() != SET_MUSIC_IN_WATCH) {
         bt_set_music_device_style(SET_MUSIC_IN_WATCH);
         bt_set_a2dp_en_status(0);

@@ -117,7 +117,7 @@ static void check_power_on_key(void)
 
 static void app_init()
 {
-    int update;
+    int update = 0;
 
     do_early_initcall();
     do_platform_initcall();
@@ -132,9 +132,13 @@ static void app_init()
     audio_enc_init();
     audio_dec_init();
 
+//user add 升级完成越过开机按键监测
+#if 0
     if (!UPDATE_SUPPORT_DEV_IS_NULL()) {
         update = update_result_deal();
+        printf("%s:update = %d\n", __func__, update);
     }
+#endif
 
     app_var.play_poweron_tone = 1;
 
@@ -149,7 +153,8 @@ static void app_init()
         if ((!update && cpu_reset_by_soft()) || is_ldo5v_wakeup() || get_alarm_wkup_flag()) {
 #else
     
-        if((!update && cpu_reset_by_soft()) || get_alarm_wkup_flag()) {
+        if((!update && cpu_reset_by_soft()) || get_alarm_wkup_flag() || \
+            (is_reset_source(P33_VDDIO_LVD_RST) | is_reset_source(P33_VDDIO_POR_RST))) {
 #endif
             app_var.play_poweron_tone = 0;
         } else {
@@ -188,7 +193,8 @@ static void app_init()
 #endif
 
 #if (TCFG_CHARGE_ENABLE && TCFG_CHARGE_POWERON_ENABLE)
-    if (is_ldo5v_wakeup()) 
+#if 0 //user add
+    if(is_ldo5v_wakeup()) 
     {   //LDO5V唤醒
         extern u8 get_charge_online_flag(void);
         if (get_charge_online_flag()) { //关机时，充电插入
@@ -197,6 +203,7 @@ static void app_init()
             power_set_soft_poweroff();
         }
     }
+#endif
 #endif
 
     motor_run(1, def_motor_duty);

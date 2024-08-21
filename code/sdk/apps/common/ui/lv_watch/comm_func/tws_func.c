@@ -83,6 +83,16 @@ void TwsBtUserDiscHandle(void)
     return;
 }
 
+void TwsBtUserCloseHandle(void)
+{
+    /*初始化连接设备*/
+    TwsConn.dev = TwsNone;
+    TwsConn.state = TWS_DISCONNECT;
+    memset(&TwsConn.Conn, 0, sizeof(TwsDsc_t));
+    
+    return;
+}
+
 void TwsBtEmitterStart(void)
 {
     TwsBtEmitterDisc();

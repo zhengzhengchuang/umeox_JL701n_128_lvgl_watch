@@ -36,9 +36,9 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_img_para.img_click_attr = false;
     widget_img_para.event_cb = NULL;
     lv_obj_t *off_wrist_icon = common_widget_img_create(&widget_img_para, NULL);
-    lv_obj_align(off_wrist_icon, LV_ALIGN_TOP_MID, 0, 40);
+    lv_obj_align(off_wrist_icon, LV_ALIGN_TOP_MID, 0, 32);
 
-    widget_label_para.label_w = 300;
+    widget_label_para.label_w = 330;
     widget_label_para.label_h = Label_Line_Height*2;
     widget_label_para.long_mode = LV_LABEL_LONG_WRAP;
     widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;

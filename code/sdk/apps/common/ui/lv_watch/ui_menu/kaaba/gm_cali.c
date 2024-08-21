@@ -19,9 +19,7 @@ static void menu_create_cb(lv_obj_t *obj)
 
 static void menu_destory_cb(lv_obj_t *obj)
 {
-    /*熄屏不关闭地磁*/
-    bool OffScr = GetIsEnterOffScreen();
-    if(OffScr == false) DisableGmModule();
+    DisableGmModule();
 
     return;
 }

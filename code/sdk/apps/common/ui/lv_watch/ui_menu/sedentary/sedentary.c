@@ -32,15 +32,14 @@ static void menu_display_cb(lv_obj_t *obj)
     if(!obj) return;
   
     widget_img_para.img_parent = obj;
-    widget_img_para.img_x = 44;
-    widget_img_para.img_y = 32;
     widget_img_para.file_img_dat = remind_sedentary_00_index;
     widget_img_para.img_click_attr = false;
     widget_img_para.event_cb = NULL;
     widget_img_para.user_data = NULL;
-    common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_t *sed_icon = common_widget_img_create(&widget_img_para, NULL);
+    lv_obj_align(sed_icon, LV_ALIGN_TOP_MID, 0, 32);
 
-    widget_label_para.label_w = 300;
+    widget_label_para.label_w = 330;
     widget_label_para.label_h = Label_Line_Height*2;
     widget_label_para.long_mode = LV_LABEL_LONG_WRAP;
     widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;

@@ -14,6 +14,8 @@
 #include "../../../../../../cpu/br28/ui_driver/lvgl/lvgl_main.h"
 
 
+
+
 typedef struct{
     uint16_t min;
     uint16_t max;
@@ -36,11 +38,11 @@ typedef struct{
 static x_header_t __g_xbf_hd = {
     .min = 0x000a,
     .max = 0xff1f,
-    .bpp = 2,
+    .bpp = 4,
 };
 
 
-//static uint8_t __g_font_buf[704];//如bin文件存在SPI FLASH可使用此buff
+//static uint8_t __g_font_buf[1408];//如bin文件存在SPI FLASH可使用此buff
 
 
 static uint8_t *__user_font_getdata(int offset, int size){

@@ -18,6 +18,7 @@ extern "C" {
 #include "../include/ui_menu.h"
 #include "../poc_modem/poc_modem_vm.h"
 
+
 void nor_flash_vm_init(void);
 void nor_flash_vm_clear(void);
 void *nor_flash_vm_file(nor_vm_type_t nor_vm_type);

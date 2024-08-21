@@ -122,6 +122,8 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_slider_para.event_cb = slider_cb;
     widget_slider_para.user_data = NULL;
     vol_slider = common_widget_slider_create(&widget_slider_para);
+    lv_obj_set_style_radius(vol_slider, 26, LV_PART_MAIN);
+    lv_obj_set_style_radius(vol_slider, 26, LV_PART_INDICATOR);
     lv_obj_align(vol_slider, LV_ALIGN_TOP_MID, 0, 80);
 
     widget_img_para.event_cb = NULL;

@@ -182,6 +182,14 @@ const char lang_str_table[Lang_Num]\
         "حذف جهاز الصوت؟",
         "فصل جهاز الصوت؟",
         "لم يتم العثور على أي جهاز، يرجى المحاولة مرة أخرى.",
+        "منذ 0 دقيقة",
+        "بعد 0 دقيقة",
+        "جاري الشحن",
+        "تم الشحن",
+        "البطارية منخفضة، يرجى الشحن",
+        "جاري الترقية",
+        "تمت الترقية بنجاح",
+        "فشلت الترقية",
     },
 #endif
 #if Conf_Lang_En
@@ -363,6 +371,14 @@ const char lang_str_table[Lang_Num]\
         "Delete audio device?",
         "Disconnect audio device?",
         "No device found, please try again.",
+        "0 minutes ago",
+        "0 minutes later",
+        "Charging",
+        "Charging completed",
+        "Battery is low, please charge",
+        "Upgrading",
+        "Upgrade successful",
+        "Upgrade failed",
     },
 #endif
 
@@ -545,7 +561,15 @@ const char lang_str_table[Lang_Num]\
         "Supprimer l'appareil audio ?",
         "Déconnecter l'appareil audio ?",
         "Aucun appareil trouvé, veuillez réessayer.",
-    }, 
+        "il y a 0 minutes",
+        "0 minutes plus tard",
+        "Chargement",
+        "Chargement terminé",
+        "La batterie est faible, veuillez la charger",
+        "Mise à niveau",
+        "Mise à niveau réussie",
+        "Échec de la mise à niveau",
+    },
 #endif
 
 #if Conf_Lang_Ur
@@ -739,6 +763,14 @@ const char lang_str_table[Lang_Num]\
         "取消配对音频设备？",
         "断开音频设备？",
         "未找到设备，请重试。",
+        "0分钟前",
+        "0分钟后",
+        "充电中",
+        "已充满",
+        "电量低，请充电",
+        "升级中",
+        "升级成功",
+        "升级失败",
     },
 #endif
 
@@ -790,4 +822,3 @@ const char lang_str_table[Lang_Num]\
     },
 #endif
 };
-

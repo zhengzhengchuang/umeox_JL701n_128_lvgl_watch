@@ -177,6 +177,7 @@ void charge_start(void)
         set_charge_mA(__this->data->charge_mA);
         power_awakeup_gpio_enable(IO_CHGFL_DET, 1);
         check_full = 1;
+        printf("constant current charge\n");
     } else {
         power_set_mode(PWR_LDO15);
         //涓流阶段系统不进入低功耗,防止电池电量更新过慢导致涓流切恒流时间过长
@@ -184,6 +185,7 @@ void charge_start(void)
         if (!__this->cc_timer) {
             __this->cc_timer = usr_timer_add(NULL, charge_cc_check, 1000, 1);
         }
+        printf("trickle charge\n");
     }
 
     CHARGE_EN(1);
@@ -234,8 +236,10 @@ static void charge_full_detect(void *priv)
 {
     static u16 charge_full_cnt = 0;
 
+#if 1
     if (CHARGE_FULL_FILTER_GET()) {
         /* putchar('F'); */
+        //putchar('F');
         if (CHARGE_FULL_FLAG_GET() && LVCMP_DET_GET()) {
             /* putchar('1'); */
             if (charge_full_cnt < 10) {
@@ -253,10 +257,12 @@ static void charge_full_detect(void *priv)
         }
     } else {
         /* putchar('K'); */
+        //putchar('K');
         charge_full_cnt = 0;
         usr_timer_del(__this->charge_timer);
         __this->charge_timer = 0;
     }
+#endif
 }
 
 static void ldo5v_detect(void *priv)
@@ -292,9 +298,12 @@ static void ldo5v_detect(void *priv)
             if ((charge_flag & BIT_LDO5V_IN) == 0) {
                 charge_flag = BIT_LDO5V_IN;
                 charge_event_to_user(CHARGE_EVENT_LDO5V_IN);
+                //printf("---------%s\n", __func__);
             }
+
+            //printf("+++++++%s\n", __func__);
         }
-    } else if (LDO5V_DET_GET() == 0) 
+    } else if(LDO5V_DET_GET() == 0) 
     {	//ldoin<拔出电压（0.6）
         /* putchar('Q'); */
         if (ldo5v_off_cnt < (__this->data->ldo5v_off_filter + 20)) {
@@ -316,7 +325,7 @@ static void ldo5v_detect(void *priv)
                 charge_event_to_user(CHARGE_EVENT_LDO5V_OFF);
             }
         }
-    } else {	//拔出电压（0.6左右）< ldoin < vbat
+    }else {	//拔出电压（0.6左右）< ldoin < vbat
         /* putchar('E'); */
         if (ldo5v_keep_cnt < __this->data->ldo5v_keep_filter) {
             ldo5v_keep_cnt++;
@@ -347,7 +356,7 @@ void ldoin_wakeup_isr(void)
     if (!__this->init_ok) {
         return;
     }
-    /* printf(" %s \n", __func__); */
+    // printf(" %s \n", __func__);
     if (__this->ldo5v_timer == 0) {
         __this->ldo5v_timer = usr_timer_add(0, ldo5v_detect, 2, 1);
     }
@@ -358,11 +367,13 @@ void charge_wakeup_isr(void)
     if (!__this->init_ok) {
         return;
     }
-    /* printf(" %s \n", __func__); */
+
+#if 1
+    printf(" %s \n", __func__);
     if (__this->charge_timer == 0) {
-        __this->charge_timer = \
-            usr_timer_add(0, charge_full_detect, 2, 1);
+        __this->charge_timer = usr_timer_add(0, charge_full_detect, 2, 1);
     }
+#endif
 }
 
 void charge_set_ldo5v_detect_stop(u8 stop)
@@ -489,10 +500,11 @@ int charge_init(const struct dev_node *node, void *arg)
 
     charge_config();
 
-    if(check_charge_state()) {
+    u8 state = check_charge_state();
+    printf("%s:state = %d\n", __func__, state);
+    if(state) {
         if (__this->ldo5v_timer == 0) {
-            __this->ldo5v_timer = \
-                usr_timer_add(0, ldo5v_detect, 2, 1);
+            __this->ldo5v_timer = usr_timer_add(0, ldo5v_detect, 2, 1);
         }
     } else {
         charge_flag = BIT_LDO5V_OFF;

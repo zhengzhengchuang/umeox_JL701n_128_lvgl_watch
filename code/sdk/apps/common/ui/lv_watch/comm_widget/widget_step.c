@@ -59,11 +59,11 @@ void common_step_widget_init(void)
     if(!step_group_num)
         return;
 
-    memset(step_dsc_idx, 0xffff, \
+    memset(step_dsc_idx, 0xff, \
         sizeof(step_dsc_idx));
 
-    memset(common_step_widget, 0, \
-        sizeof(common_step_widget));
+    // memset(common_step_widget, 0, \
+    //     sizeof(common_step_widget));
 
     memset(step_para_cache, 0, \
         sizeof(widget_data_para_t)* \

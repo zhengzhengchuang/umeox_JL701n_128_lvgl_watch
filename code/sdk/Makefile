@@ -538,15 +538,11 @@ c_SRC_FILES := \
     apps/common/ui/lvgl/src/font/lv_font_fmt_txt.c  \
     apps/common/ui/lvgl/src/font/lv_font_loader.c  \
 	apps/common/ui/lvgl/src/font/font_common_32.c  \
-	apps/common/ui/lvgl/src/font/font_common_num_12.c  \
 	apps/common/ui/lvgl/src/font/font_common_num_18.c  \
 	apps/common/ui/lvgl/src/font/font_common_num_24.c  \
 	apps/common/ui/lvgl/src/font/font_common_num_32.c  \
 	apps/common/ui/lvgl/src/font/font_common_num_36.c  \
-	apps/common/ui/lvgl/src/font/font_common_num_42.c  \
-	apps/common/ui/lvgl/src/font/font_common_num_52.c  \
 	apps/common/ui/lvgl/src/font/font_common_num_64.c  \
-	apps/common/ui/lvgl/src/font/font_common_num_78.c  \
 	apps/common/ui/lvgl/src/font/font_common_24_no_ch.c  \
     apps/common/ui/lvgl/src/font/lv_font_montserrat_12.c  \
     apps/common/ui/lvgl/src/hal/lv_hal_disp.c  \
@@ -967,6 +963,7 @@ c_SRC_FILES := \
 	apps/common/ui/lv_watch/comm_widget/widget_date.c \
 	apps/common/ui/lv_watch/comm_widget/widget_week.c \
 	apps/common/ui/lv_watch/comm_widget/widget_clock.c \
+	apps/common/ui/lv_watch/comm_widget/widget_power.c \
 	apps/common/ui/lv_watch/comm_widget/common_widget.c \
 	apps/common/ui/lv_watch/comm_widget/widget_refresh.c \
 	apps/common/ui/lv_watch/comm_func/call_func.c \
@@ -997,6 +994,10 @@ c_SRC_FILES := \
 	apps/common/ui/lv_watch/comm_func/data_mana_func.c \
 	apps/common/ui/lv_watch/comm_func/quran_play_func.c \
 	apps/common/ui/lv_watch/comm_func/tws_func.c \
+	apps/common/ui/lv_watch/comm_func/charge_func.c \
+	apps/common/ui/lv_watch/comm_func/power_manage.c \
+	apps/common/ui/lv_watch/comm_func/raise_func.c \
+	apps/common/ui/lv_watch/comm_func/ota_func.c \
 	apps/common/ui/lv_watch/pedo_data/pedo_data.c \
 	apps/common/ui/lv_watch/comm_task/comm_task.c \
 	apps/common/ui/lv_watch/comm_task/utc_time_task.c \
@@ -1022,17 +1023,13 @@ c_SRC_FILES := \
 	apps/common/ui/lv_watch/ui_menu/set/set_main.c \
 	apps/common/ui/lv_watch/ui_menu/sound_ctrl/sound_ctrl.c \
 	apps/common/ui/lv_watch/ui_menu/menu_view/menu_view.c \
-	apps/common/ui/lv_watch/ui_menu/watchface/watchface_00.c \
 	apps/common/ui/lv_watch/ui_menu/watchface/watchface_01.c \
 	apps/common/ui/lv_watch/ui_menu/watchface/watchface_02.c \
 	apps/common/ui/lv_watch/ui_menu/watchface/watchface_03.c \
 	apps/common/ui/lv_watch/ui_menu/watchface/watchface_04.c \
 	apps/common/ui/lv_watch/ui_menu/watchface/watchface_05.c \
 	apps/common/ui/lv_watch/ui_menu/watchface/watchface_06.c \
-	apps/common/ui/lv_watch/ui_menu/watchface/watchface_07.c \
 	apps/common/ui/lv_watch/ui_menu/watchface/watchface_08.c \
-	apps/common/ui/lv_watch/ui_menu/watchface/watchface_09.c \
-	apps/common/ui/lv_watch/ui_menu/watchface/watchface_10.c \
 	apps/common/ui/lv_watch/ui_menu/watchface/watchface_11.c \
 	apps/common/ui/lv_watch/ui_menu/watchface/watchface_main.c \
 	apps/common/ui/lv_watch/ui_menu/tool_box/tool_box.c \
@@ -1111,6 +1108,8 @@ c_SRC_FILES := \
 	apps/common/ui/lv_watch/ui_menu/tws/tws_list.c \
 	apps/common/ui/lv_watch/ui_menu/tws/tws_unpair.c \
 	apps/common/ui/lv_watch/ui_menu/tws/scan_timeout.c \
+	apps/common/ui/lv_watch/ui_menu/charge/charge.c \
+	apps/common/ui/lv_watch/ui_menu/ota_update/ota_update.c \
 	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_main.c \
 	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_contacts.c \
 	apps/common/ui/lv_watch/comm_nor_vm/nor_vm_weather.c \

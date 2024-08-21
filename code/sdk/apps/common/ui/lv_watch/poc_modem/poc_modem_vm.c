@@ -7,12 +7,12 @@
 vm_para_info_t *p_vm_para_cache = NULL;
 static vm_para_info_t vm_para_cache = {0};
 const ui_menu_load_info_t *watchface_load_info[] = {
-    &menu_load_watchface_00, &menu_load_watchface_01, \
+    /*&menu_load_watchface_00, */&menu_load_watchface_01, \
     &menu_load_watchface_02, &menu_load_watchface_03, \
     &menu_load_watchface_04, &menu_load_watchface_05, \
-    &menu_load_watchface_06, &menu_load_watchface_07, \
-    &menu_load_watchface_08, &menu_load_watchface_09, \
-    &menu_load_watchface_10, &menu_load_watchface_11,
+    &menu_load_watchface_06, /*&menu_load_watchface_07,*/ \
+    &menu_load_watchface_08, /*&menu_load_watchface_09,*/ \
+    /*&menu_load_watchface_10,*/ &menu_load_watchface_11,
 };
 
 const ui_menu_load_info_t *menu_style_load_info[] = {
@@ -47,7 +47,7 @@ static const vm_ctx_t vm_def[Vm_Num] = {
     {.label = vm_label_watchface_sel, .val = ui_watchface_id_00},
 
     /*********系统语言*********/
-    {.label = vm_label_sys_language, .val = lang_id_arabic},
+    {.label = vm_label_sys_language, .val = lang_id_english},
 
     /*********系统声音开启*********/
     {.label = vm_label_sys_sound, .val = 1},

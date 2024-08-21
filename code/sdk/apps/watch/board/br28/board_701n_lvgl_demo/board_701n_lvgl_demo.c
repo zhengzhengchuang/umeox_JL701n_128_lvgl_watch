@@ -32,10 +32,10 @@
 #include "include/nandflash_ftl.h"
 #include "usb/otg.h"
 #include "le_smartbox_adv.h"
-#include "../../../common/ui/lv_watch/comm_task/comm_task.h"
+//#include "../../../common/ui/lv_watch/comm_task/comm_task.h"
 #include "../../../../common/device/sensor_iic/sensor_iic.h"
 #include "../../../../../cpu/br28/ui_driver/lvgl/lvgl_main.h"
-
+#include "../../../../common/ui/lv_watch/lv_watch.h"
 #if TCFG_PAY_ALIOS_ENABLE
 #if (TCFG_PAY_ALIOS_WAY_SEL == TCFG_PAY_ALIOS_WAY_ALIYUN)
 #include "upay.h"
@@ -139,8 +139,8 @@ void sd_power_config(int enable)
 	if (enable) {
         gpio_set_pull_up(TCFG_SD0_POWER_PORT, 0);
         gpio_set_pull_down(TCFG_SD0_POWER_PORT, 0);
-        gpio_set_output_value(TCFG_SD0_POWER_PORT, 1);
         gpio_set_direction(TCFG_SD0_POWER_PORT, 0);
+        gpio_set_output_value(TCFG_SD0_POWER_PORT, 1);
 	}else {
         gpio_set_pull_up(TCFG_SD0_POWER_PORT, 0);
         gpio_set_pull_down(TCFG_SD0_POWER_PORT, 0);
@@ -476,7 +476,7 @@ const struct soft_iic_config soft_iic_cfg[] = {
         .scl = TCFG_SW_I2C0_CLK_PORT,                   //IIC0 CLK脚
         .sda = TCFG_SW_I2C0_DAT_PORT,                   //IIC0 DAT脚
         .delay = TCFG_SW_I2C0_DELAY_CNT,                //软件IIC延时参数，影响通讯时钟频率
-        .io_pu = 1,                                     //是否打开上拉电阻，如果外部电路没有焊接上拉电阻需要置1
+        .io_pu = 0,                                     //是否打开上拉电阻，如果外部电路没有焊接上拉电阻需要置1
     },
 
     //iic1 data
@@ -484,7 +484,7 @@ const struct soft_iic_config soft_iic_cfg[] = {
         .scl = TCFG_SW_I2C1_CLK_PORT,                   //IIC1 CLK脚
         .sda = TCFG_SW_I2C1_DAT_PORT,                   //IIC1 DAT脚
         .delay = TCFG_SW_I2C0_DELAY_CNT,                //软件IIC延时参数，影响通讯时钟频率
-        .io_pu = 1,                                     //是否打开上拉电阻，如果外部电路没有焊接上拉电阻需要置1
+        .io_pu = 0,                                     //是否打开上拉电阻，如果外部电路没有焊接上拉电阻需要置1
     },
 #if TCFG_PAY_ALIOS_ENABLE && (TCFG_PAY_ALIOS_WAY_SEL==TCFG_PAY_ALIOS_WAY_T_HEAD)
     //iic1 data
@@ -1212,8 +1212,8 @@ void board_init()
     cfg_file_parse(0);
     /* devices_init(); */
 
+    BatEnableCtrl(1);
     ldo_power_ctrl(1);
-    vbat_power_ctrl(1);
 
 #if TCFG_PSRAM_DEV_ENABLE
 	psram_init();
@@ -1246,7 +1246,7 @@ void board_init()
     /* } */
 
 #if (TCFG_SD0_ENABLE || TCFG_SD1_ENABLE)
-	sd_power_config(4);
+	sd_power_config(1);
 #endif
 
     extern void motor_init(void);
@@ -1400,12 +1400,14 @@ void board_init()
 extern void dac_power_off(void);
 void board_set_soft_poweroff(void)
 {
+    printf("%s\n", __func__);
+
 #if (TCFG_SD0_ENABLE || TCFG_SD1_ENABLE)
 	sd_power_config(0);
 #endif
 
     soff_gpio_protect(IO_PORTB_00);
-
+    soff_gpio_protect(IO_PORTA_05);
     ldo_power_ctrl(0);
 
 	//power按键
@@ -1567,9 +1569,8 @@ static void port_wakeup_callback(u8 index, u8 gpio)
 
 static void aport_wakeup_callback(u8 index, u8 gpio, u8 edge)
 {
-    log_info("%s:%d,%d",__FUNCTION__,index,gpio);
-    printf("%d, %d, %d\n", IO_CHGFL_DET, IO_VBTCH_DET, \
-        IO_LDOIN_DET);
+    // log_info("%s:%d,%d",__FUNCTION__,index, gpio);
+    // printf("%d, %d, %d\n", IO_CHGFL_DET, IO_VBTCH_DET, IO_LDOIN_DET);
 #if TCFG_CHARGE_ENABLE
     switch (gpio) {
         case IO_CHGFL_DET://charge port
@@ -1606,7 +1607,7 @@ bool port_active_is_keyio_query(u8 gpio)
 
 void board_power_init(void)
 {
-    log_info("Power init : %s", __FILE__);
+    log_info("Power init : %s", __func__);
 
 #if (TCFG_EX_FLASH_POWER_IO != NO_CONFIG_PORT)
 	// ext flash power
@@ -1617,6 +1618,7 @@ void board_power_init(void)
 	gpio_direction_output(TCFG_EX_FLASH_POWER_IO, 1);
     udelay(200);
 	gpio_set_hd(TCFG_EX_FLASH_POWER_IO, 1);
+
 	/* os_time_dly(5); */
 #endif /* #if (TCFG_EX_FLASH_POWER_IO != NO_CONFIG_PORT) */
 

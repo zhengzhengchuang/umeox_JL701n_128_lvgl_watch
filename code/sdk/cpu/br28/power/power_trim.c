@@ -258,18 +258,18 @@ void volatage_trim_init()
     u8 wvdd_lev = 0;
     u8 pvdd_lev = 0;
 
+    printf("_____%s\n", __func__);
     extern bool vm_need_recover(void);
     if (vm_need_recover()) { // 升级完后重新trim
         trim = 0xff;
     }
+    printf("+++++%s\n", __func__);
 
     printf("trim = 0x%x\n", trim);
 
 
     wvdd_lev = wvdd_trim((trim & TRIM_WVDD) ? 1 : 0);
     pvdd_lev = pvdd_trim((trim & TRIM_PVDD) ? 1 : 0);
-
-
 
     u8 miovdd_lev = 0;
     u8 wiovdd_lev = 0;

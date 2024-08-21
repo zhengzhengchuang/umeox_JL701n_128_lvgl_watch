@@ -9,6 +9,18 @@ static u8 vib_cnt;
 static u8 inv_cnt;
 static u16 motor_timer;
 
+static u8 motor_work;
+u8 get_motor_work_flag(void)
+{
+    return motor_work;
+}
+
+void set_motor_work_flag(u8 f)
+{
+    motor_work = f;
+    return;
+}
+
 static void pwm_ch_sleep(void)
 {
     mcpwm_close(motor_pwm_ch);
@@ -59,6 +71,7 @@ static void timer_cb(void *priv)
     {
         motor_stop();
         motor_start();
+        set_motor_work_flag(true);
     }else if(vib_cnt == vib_max)
     {
         motor_stop();
@@ -73,6 +86,7 @@ static void timer_cb(void *priv)
         if(run_cnt == 0)
         {
             motor_timer_del();
+            set_motor_work_flag(false);
 
             return;
         }
@@ -94,8 +108,7 @@ static void motor_timer_create(void)
 {
     motor_timer_del();
 
-    motor_timer = \
-        sys_timer_add(NULL, timer_cb, 20);
+    motor_timer = sys_timer_add(NULL, timer_cb, 20);
 
     return;
 }
@@ -106,8 +119,7 @@ void motor_run(u8 cnt, u8 duty)
     run_cnt = cnt;
     motor_duty = duty;
 
-    if(cnt == 0 || \
-        motor_duty == 0) 
+    if(cnt == 0 || motor_duty == 0) 
         return;
 
     motor_disable();

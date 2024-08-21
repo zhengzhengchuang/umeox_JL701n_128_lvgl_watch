@@ -16,65 +16,44 @@ static void scroll_cb(lv_event_t *e)
     return;
 }
 
-static void ptime_preview_container_create(\
-    lv_obj_t *obj)
+static void ptime_preview_container_create(lv_obj_t *obj)
 {
-    widget_obj_para.obj_parent = \
-        obj;
+    widget_obj_para.obj_parent = obj;
     widget_obj_para.obj_x = 0;
-    widget_obj_para.obj_y = \
-        LCD_UI_Y_OFFSET;
-    widget_obj_para.obj_width = \
-        LCD_WIDTH;
-    widget_obj_para.obj_height = \
-        LCD_HEIGHT - LCD_UI_Y_OFFSET;
-    widget_obj_para.obj_bg_opax = \
-        LV_OPA_0;
-    widget_obj_para.obj_bg_color = \
-        lv_color_hex(0x000000);
-    widget_obj_para.obj_border_opax = \
-        LV_OPA_0;
+    widget_obj_para.obj_y = LCD_UI_Y_OFFSET;
+    widget_obj_para.obj_width = LCD_WIDTH;
+    widget_obj_para.obj_height = LCD_HEIGHT - LCD_UI_Y_OFFSET;
+    widget_obj_para.obj_bg_opax = LV_OPA_0;
+    widget_obj_para.obj_bg_color = lv_color_hex(0x000000);
+    widget_obj_para.obj_border_opax = LV_OPA_0;
     widget_obj_para.obj_border_width = 0;
-    widget_obj_para.obj_border_color = \
-        lv_color_hex(0x000000);
+    widget_obj_para.obj_border_color = lv_color_hex(0x000000);
     widget_obj_para.obj_radius = 0;
-    widget_obj_para.obj_is_scrollable = \
-        true;
-    PT_preview_container = \
-        common_widget_obj_create(&widget_obj_para);
-    lv_obj_add_event_cb(PT_preview_container, scroll_cb, \
-        LV_EVENT_SCROLL, NULL);
+    widget_obj_para.obj_is_scrollable = true;
+    PT_preview_container = common_widget_obj_create(&widget_obj_para);
+    lv_obj_add_event_cb(PT_preview_container, scroll_cb, LV_EVENT_SCROLL, NULL);
  
     return;
 }
 
 static void ptime_preview_elem_container_create(void)
 {
-    widget_obj_para.obj_parent = \
-        PT_preview_container;
+    widget_obj_para.obj_parent = PT_preview_container;
     widget_obj_para.obj_x = 0;
-    widget_obj_para.obj_width = \
-        LCD_WIDTH;
-    widget_obj_para.obj_height = \
-        ec_h;
-    widget_obj_para.obj_bg_opax = \
-        LV_OPA_0;
-    widget_obj_para.obj_bg_color = \
-        lv_color_hex(0x000000);
-    widget_obj_para.obj_border_opax = \
-        LV_OPA_0;
+    widget_obj_para.obj_width = LCD_WIDTH;
+    widget_obj_para.obj_height = ec_h;
+    widget_obj_para.obj_bg_opax = LV_OPA_0;
+    widget_obj_para.obj_bg_color = lv_color_hex(0x000000);
+    widget_obj_para.obj_border_opax = LV_OPA_0;
     widget_obj_para.obj_border_width = 0;
-    widget_obj_para.obj_border_color = \
-        lv_color_hex(0x000000);
+    widget_obj_para.obj_border_color = lv_color_hex(0x000000);
     widget_obj_para.obj_radius = 0;
-    widget_obj_para.obj_is_scrollable = \
-        false;
+    widget_obj_para.obj_is_scrollable = false;
 
     for(u8 i = Fajr; i < PT_Num - 1; i++)
     {
         widget_obj_para.obj_y = i*ec_h;
-        PT_preview_elem_container[i] = \
-            common_widget_obj_create(&widget_obj_para);
+        PT_preview_elem_container[i] = common_widget_obj_create(&widget_obj_para);
     }
 
     return;
@@ -82,37 +61,25 @@ static void ptime_preview_elem_container_create(void)
 
 static void ptime_preview_elem_label_create(void)
 {
-    widget_label_para.label_w = \
-        288;
-    widget_label_para.label_h = \
-        Label_Line_Height;
-    widget_label_para.long_mode = \
-        LV_LABEL_LONG_SCROLL;
-    widget_label_para.text_align = \
-        LV_TEXT_ALIGN_CENTER;
-    widget_label_para.label_text_color = \
-        lv_color_hex(0xffffff);
-    widget_label_para.label_ver_center = \
-        false;
-    widget_label_para.user_text_font = \
-        NULL;
+    widget_label_para.label_w = 288;
+    widget_label_para.label_h = Label_Line_Height;
+    widget_label_para.long_mode = LV_LABEL_LONG_SCROLL;
+    widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
+    widget_label_para.label_text_color = lv_color_hex(0xffffff);
+    widget_label_para.label_ver_center = false;
+    widget_label_para.user_text_font = NULL;
 
     for(u8 i = Fajr; i < PT_Num; i++)
     {
-        if(i == Sunset)
-            continue;
+        if(i == Sunset) continue;
         
         if(i > Sunset)
-            widget_label_para.label_parent = \
-                PT_preview_elem_container[i - 1];
+            widget_label_para.label_parent = PT_preview_elem_container[i - 1];
         else
-            widget_label_para.label_parent = \
-                PT_preview_elem_container[i];
+            widget_label_para.label_parent = PT_preview_elem_container[i];
 
-        widget_label_para.label_text = \
-            get_lang_txt_with_id(lang_txtid_Fajr + i);
-        lv_obj_t *PT_type_label = \
-            common_widget_label_create(&widget_label_para);
+        widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_Fajr + i);
+        lv_obj_t *PT_type_label = common_widget_label_create(&widget_label_para);
         lv_obj_align(PT_type_label, LV_ALIGN_TOP_MID, 0, 30);
     }
 
@@ -124,24 +91,20 @@ static void ptime_preview_elem_time_create(void)
     char PTNumStr[6];
 
     u8 am_pm = 0;
-    u8 PT_type = \
-        GetPTimeType();
+    u8 PT_type = GetPTimeType();
 
-    int time_format = \
-        GetVmParaCacheByLabel(\
-            vm_label_time_format);
+    int time_format = GetVmParaCacheByLabel(vm_label_time_format);
 
     for(u8 i = Fajr; i < PT_Num; i++)
     {
-        if(i == Sunset)
-            continue;
+        if(i == Sunset) continue;
+
+        uint8_t PTResultHour = PT_Info.result_timestamp[i]/3600;
+        uint8_t PTResultMinute = (PT_Info.result_timestamp[i]%3600)/60;
+        //printf("%d:H = %d, M = %d\n", i, PTResultHour, PTResultMinute);
 
         memset(PTNumStr, 0, sizeof(PTNumStr));
 
-        uint8_t PTResultHour = \
-            PT_Info.result_timestamp[i]/3600;
-        uint8_t PTResultMinute = \
-            (PT_Info.result_timestamp[i]%3600)/60;
         if(time_format == time_format_12)
         {
             if(PTResultHour >= 12)
@@ -155,72 +118,48 @@ static void ptime_preview_elem_time_create(void)
             PTResultHour = 12; 
         }
 
-        sprintf(PTNumStr, "%02d:%02d", \
-            PTResultHour, PTResultMinute);
+        sprintf(PTNumStr, "%02d:%02d", PTResultHour, PTResultMinute);
 
         if(i > Sunset)
-            num_str_para.parent = \
-                PT_preview_elem_container[i - 1];
+            num_str_para.parent = PT_preview_elem_container[i - 1];
         else
-            num_str_para.parent = \
-                PT_preview_elem_container[i];
-        num_str_para.num_obj_x = \
-            103;
-        num_str_para.num_obj_y = \
-            114;
-        num_str_para.p_num_str = \
-            PTNumStr;
-        num_str_para.num_str_len = \
-            5;
-        num_str_para.num_obj = \
-            NULL;
-        num_str_para.num_obj_max = \
-            0;
-        num_str_para.num_dsc_idx = \
-            NULL;
+            num_str_para.parent = PT_preview_elem_container[i];
+        num_str_para.num_obj_x = 103;
+        num_str_para.num_obj_y = 114;
+        num_str_para.p_num_str = PTNumStr;
+        num_str_para.num_str_len = 5;
+        num_str_para.num_obj = NULL;
+        num_str_para.num_obj_max = 0;
+        num_str_para.num_dsc_idx = NULL;
         
         if(PT_type == i)
-            num_str_para.file_00_index = \
-                comm_num_34x56_ye_00_index;
+            num_str_para.file_00_index = comm_num_34x56_ye_00_index;
         else
-            num_str_para.file_00_index = \
-                comm_num_34x56_wh_00_index;
-        int16_t end_x = \
-            common_widget_num_str_create(&num_str_para);
+            num_str_para.file_00_index = comm_num_34x56_wh_00_index;
+        int16_t end_x = common_widget_num_str_create(&num_str_para);
 
         if(i > Sunset)
-            widget_img_para.img_parent = \
-                PT_preview_elem_container[i - 1];
+            widget_img_para.img_parent = PT_preview_elem_container[i - 1];
         else
-            widget_img_para.img_parent = \
-                PT_preview_elem_container[i];
-        widget_img_para.img_x = \
-            end_x + 10;
-        widget_img_para.img_y = \
-            140;
+            widget_img_para.img_parent = PT_preview_elem_container[i];
+        widget_img_para.img_x = end_x + 10;
+        widget_img_para.img_y = 140;
         if(am_pm == 0)
         {
             if(PT_type == i)
-                widget_img_para.file_img_dat = \
-                    comm_icon_22_index;
+                widget_img_para.file_img_dat = comm_icon_22_index;
             else
-               widget_img_para.file_img_dat = \
-                    comm_icon_24_index; 
+               widget_img_para.file_img_dat = comm_icon_24_index; 
         }else
         {
             if(PT_type == i)
-                widget_img_para.file_img_dat = \
-                    comm_icon_23_index;
+                widget_img_para.file_img_dat = comm_icon_23_index;
             else
-               widget_img_para.file_img_dat = \
-                    comm_icon_25_index;
+               widget_img_para.file_img_dat = comm_icon_25_index;
         }
-        widget_img_para.img_click_attr = \
-            false;
-        widget_img_para.event_cb = \
-            NULL;
-        lv_obj_t *comm_ampm_icon = \
-            common_widget_img_create(&widget_img_para, NULL);
+        widget_img_para.img_click_attr = false;
+        widget_img_para.event_cb = NULL;
+        lv_obj_t *comm_ampm_icon = common_widget_img_create(&widget_img_para, NULL);
         if(time_format == time_format_24)
             lv_obj_add_flag(comm_ampm_icon, LV_OBJ_FLAG_HIDDEN);
     }
@@ -232,8 +171,7 @@ static void menu_create_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    ui_act_id_t prev_act_id = \
-        ui_act_id_prayer_time_main;
+    ui_act_id_t prev_act_id = ui_act_id_prayer_time_main;
     if(!lang_txt_is_arabic())
         tileview_register_all_menu(obj, ui_act_id_null, ui_act_id_null, \
             prev_act_id, ui_act_id_null, ui_act_id_prayer_time_preview);

@@ -212,6 +212,7 @@ static const attr_set_func common_function_set_tab[COMMON_FUNCTION_ATTR_TYPE_MAX
 
 static u32 common_function_attr_battery_get(void *priv, u8 attr, u8 *buf, u16 buf_size, u32 offset)
 {
+    printf("%s\n", __func__);
     u32 rlen = 0;
     extern u8 get_vbat_percent(void);
     u8 vbat = get_vbat_percent();

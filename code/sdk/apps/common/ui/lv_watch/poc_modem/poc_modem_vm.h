@@ -118,7 +118,7 @@ enum
 };
 
 #define Vm_Num (vm_label_num)
-#define Vm_Mask (0x55c2)//每次更新vm参数的时候都需要更改
+#define Vm_Mask (0x55aa)//每次更新vm参数的时候都需要更改
 
 typedef struct
 {

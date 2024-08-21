@@ -140,7 +140,7 @@ void smartbox_config(struct smartbox *smart)
 #endif
 
     // 设置0升级不去检查是否低电；设置非0，则电量需要高于(n+1)*10才能升级
-    smart->low_battery_level = 2;
+    smart->low_battery_level = 1;
 
     bt_3th_type_dev_select(RCSP_BLE);
     bt_3th_set_ble_callback_priv(smart);

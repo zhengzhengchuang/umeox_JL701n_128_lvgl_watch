@@ -21,11 +21,11 @@ void common_time_widget_init(void)
         
     time_group_num = 0;
 
-    memset(time_dsc_idx, 0xffff, \
+    memset(time_dsc_idx, 0xff, \
         sizeof(time_dsc_idx));
 
-    memset(common_time_widget, 0, \
-        sizeof(common_time_widget));
+    // memset(common_time_widget, 0, \
+    //     sizeof(common_time_widget));
 
     return;
 }

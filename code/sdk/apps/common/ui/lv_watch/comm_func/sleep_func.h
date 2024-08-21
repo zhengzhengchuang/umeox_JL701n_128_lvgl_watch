@@ -15,16 +15,11 @@ typedef struct
     u16 vm_mask;
 
     bool valid;        //数据是否有效 
-    float slp_dur;     //睡眠总时间
-    float d_slp_dur;   //深睡时长
-    float l_slp_dur;   //浅睡时长
-    float r_slp_dur;   //快速眼动时长
-    float wake_dur;    //清醒时长
-
-    float d_slp_radio; //深睡比例
-    float l_slp_radio; //浅睡比例
-    float r_slp_radio; //快速眼动比例
-    float wake_radio;  //清醒比例
+    u32 slp_dur;     //睡眠总时间:min
+    u32 d_slp_dur;   //深睡时长:min
+    u32 l_slp_dur;   //浅睡时长:min
+    u32 r_slp_dur;   //快速眼动时长:min
+    u32 wake_dur;    //清醒时长:min
 
     u32 slp_start_ts;  //睡眠开始时间戳
     u32 slp_end_ts;    //睡眠结束时间戳
@@ -40,11 +35,20 @@ void SetSleepEnState(bool en);
 bool GetFallAsleepFlag(void);
 void SetFallAsleepFlag(bool f);
 
+u8 GetSlpPpgEnState(void);
+void SetSlpPpgEnState(u8 en);
+
+u8 GetSlpHrRawDataLen(void);
+float *GetSlpHrRawData(void);
+void SetSlpHrRawData(u32 *buf, u16 len);
+
 void PowerOnSetSleepData(void);
 void VmFlashSleepCtxWrite(void);
 
-void SleepPpgSensorOnOff(s8 onoff);
-void SleepStatusOutHandle(u8 status);
+void SleepPpgSensorOnOff(struct sys_time *ptime, s8 onoff);
+void SleepStatusOutHandle(struct sys_time *ptime, u8 status);
+
+void ManualEndSleepHandle(void);
 
 void SleepUtcMinProcess(struct sys_time *ptime);
 

@@ -58,11 +58,11 @@ void common_hr_widget_init(void)
     if(!hr_group_num)
         return;
     
-    memset(hr_dsc_idx, 0xffff, \
+    memset(hr_dsc_idx, 0xff, \
         sizeof(hr_dsc_idx));
 
-    memset(common_hr_widget, 0, \
-        sizeof(common_hr_widget));
+    // memset(common_hr_widget, 0, \
+    //     sizeof(common_hr_widget));
 
     memset(hr_para_cache, 0, \
         sizeof(widget_data_para_t)*\

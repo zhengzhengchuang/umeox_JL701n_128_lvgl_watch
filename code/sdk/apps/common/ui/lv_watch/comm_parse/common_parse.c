@@ -20,9 +20,12 @@ void umeox_common_le_cmd_parse(u8 *buf, u8 len)
 {
     le_cmd_t cmd = buf[0];
 
-    bool le_crc = \
-        umeox_common_le_crc(buf, len);
-    if(le_crc == false)
+    /* 充电中、升级中、crc检验均回复app失败指令 */
+    u8 charge_state = GetChargeState();
+    u8 upgrade_state = GetOtaUpgradeState();
+    bool le_crc = umeox_common_le_crc(buf, len);
+    if(le_crc == false || charge_state == 1 || \
+        upgrade_state != upgrade_none)
     {
         umeox_common_le_reply_fail(buf, len);
 

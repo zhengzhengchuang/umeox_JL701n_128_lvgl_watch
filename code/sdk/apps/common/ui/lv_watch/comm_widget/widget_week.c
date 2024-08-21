@@ -21,11 +21,11 @@ void common_week_widget_init(void)
 
     week_group_num = 0;
 
-    memset(week_dsc_idx, 0xffff, \
+    memset(week_dsc_idx, 0xff, \
         sizeof(week_dsc_idx));
 
-    memset(common_week_widget, 0, \
-        sizeof(common_week_widget));
+    // memset(common_week_widget, 0, \
+    //     sizeof(common_week_widget));
 
     return;
 }

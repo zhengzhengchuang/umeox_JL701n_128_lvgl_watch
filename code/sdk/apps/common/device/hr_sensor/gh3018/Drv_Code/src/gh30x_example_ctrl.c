@@ -5475,7 +5475,8 @@ GU16 Gh30xGetFifoRawdata(GU8 *puchRawdataFifo, GU8 *puchNeedForceReadAgain)
     GU16 usIrqFifoFullRegValue = 0; //add to deal xiaoxun bug   20220208_goodix4318
 
     puchNeedForceReadAgain[0] = 0;
-    EXAMPLE_DEBUG_LOG_L1("[Gh30xGetFifoRawdata] usRawdataFifoRealCnt = %d, %d.\r", (int)usRawdataFifoRealCnt, g_uchNeedReadRawdataCount);
+    //EXAMPLE_DEBUG_LOG_L1("[Gh30xGetFifoRawdata] usRawdataFifoRealCnt = %d, %d.\r", (int)usRawdataFifoRealCnt, g_uchNeedReadRawdataCount);
+    printf("[Gh30xGetFifoRawdata] usRawdataFifoRealCnt = %d, %d.\r", (int)usRawdataFifoRealCnt, g_uchNeedReadRawdataCount);
 
     if (usRawdataFifoRealCnt > GH30X_RAWDATA_FIFO_BUF_SAMPLE_POINT_NUM_MAX)
     {

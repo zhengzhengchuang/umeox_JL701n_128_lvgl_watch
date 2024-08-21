@@ -14,7 +14,7 @@ void utc_day_task_handle(int priv)
     struct sys_time *ptime = (struct sys_time *)priv;
 
     /* 新的一天，朝拜时间更新 */
-    PTimeInfoParaUpdate();
+    PTimeDayProcess(ptime);
 
     /* 新的一天，回历更新 */
     HcalendarInfoParaUpdate();
@@ -61,13 +61,19 @@ void utc_second_task_handle(int priv)
     struct sys_time *ptime = (struct sys_time *)priv;
 
     /* 隔秒，判断朝拜时间是否到 */
-    PTimeProcess(ptime);
+    PTimeSecProcess(ptime);
 
     /* 隔秒，判断回历节日是否到 */
     HcalendarProcess(ptime);
 
     /* 隔秒，gomore算法process */
     GoMoreAlgoProcess(ptime);
+
+    /* 隔秒，低电提醒process */
+    LPRemindProcess(ptime);
+
+    /* 隔秒，低电关机process */
+    LPShutdownProcess(ptime);
 
     return;
 }

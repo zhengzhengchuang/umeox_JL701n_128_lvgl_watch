@@ -20,8 +20,7 @@ static void timer_cb(lv_timer_t *timer)
 
     exit_timer_destroy();
 
-    ui_act_id_t act_id = \
-        ui_act_id_watchface;
+    ui_act_id_t act_id = ui_act_id_watchface;
     ui_menu_jump(act_id);
 
     return;
@@ -31,8 +30,7 @@ static void exit_timer_create(void)
 {
     exit_timer_destroy();
 
-    exit_timer = \
-        lv_timer_create(timer_cb, 5*1000, NULL);
+    exit_timer = lv_timer_create(timer_cb, 5*1000, NULL);
 
     return;
 }
@@ -80,8 +78,8 @@ static void menu_display_cb(lv_obj_t *obj)
 {
     if(!obj) return;
 
-    widget_label_para.label_w = 300;
-    widget_label_para.label_h = Label_Line_Height*2;
+    widget_label_para.label_w = 330;
+    widget_label_para.label_h = Label_Line_Height*3;
     widget_label_para.long_mode = LV_LABEL_LONG_WRAP;
     widget_label_para.text_align = LV_TEXT_ALIGN_CENTER;
     widget_label_para.label_text_color = lv_color_hex(0xffffff);
@@ -90,7 +88,7 @@ static void menu_display_cb(lv_obj_t *obj)
     widget_label_para.label_parent = obj;
     widget_label_para.label_text = get_lang_txt_with_id(lang_txtid_new_bond);
     lv_obj_t *reset_tips_label = common_widget_label_create(&widget_label_para);
-    lv_obj_align(reset_tips_label, LV_ALIGN_TOP_MID, 0, 132);
+    lv_obj_align(reset_tips_label, LV_ALIGN_TOP_MID, 0, 88);
 
     widget_img_para.img_parent = obj;
     widget_img_para.file_img_dat = comm_icon_11_index;

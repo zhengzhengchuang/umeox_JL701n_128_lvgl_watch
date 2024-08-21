@@ -58,11 +58,11 @@ void common_distance_widget_init(void)
     if(!distance_group_num)
         return;
 
-    memset(distance_dsc_idx, 0xffff, \
+    memset(distance_dsc_idx, 0xff, \
         sizeof(distance_dsc_idx));
 
-    memset(common_distance_widget, 0, \
-        sizeof(common_distance_widget));
+    // memset(common_distance_widget, 0, \
+    //     sizeof(common_distance_widget));
 
     memset(distance_para_cache, 0, \
         sizeof(widget_data_para_t)* \

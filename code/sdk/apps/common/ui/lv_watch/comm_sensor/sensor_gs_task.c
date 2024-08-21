@@ -25,6 +25,20 @@ static void GsIntProcess(void)
     
     u32 fifo_len = fifo*Gs_Fifo_Num*6;
 
+#if 0
+    s16 AccData[3];
+    u8 len = 0;
+    for(u8 i = 0; i < fifo_len; i++)
+    {
+        AccData[0] = (s16)(((u16)GsFifoData[1]<<8)|(GsFifoData[0]));
+        AccData[1] = (s16)(((u16)GsFifoData[3]<<8)|(GsFifoData[2]));
+        AccData[2] = (s16)(((u16)GsFifoData[5]<<8)|(GsFifoData[4]));
+        printf("x = %d, y = %d, z = %d\n", AccData[0], AccData[1], AccData[2]);
+
+        i += 6;
+    }
+#endif
+
     /*运动心率与Gs数据的配套使用*/
     HrGsDataFifoWrite(GsFifoData, fifo_len);
 
@@ -33,6 +47,9 @@ static void GsIntProcess(void)
 
     /* gomore与Gs数据配套使用 */
     GoGsDataFifoWrite(GsFifoData, fifo_len);
+
+    /* 抬腕亮屏与Gs数据配套使用 */
+    RaiseGsDataHandle(GsFifoData, fifo_len);
 
     return;
 }

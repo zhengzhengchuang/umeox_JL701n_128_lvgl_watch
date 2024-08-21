@@ -55,7 +55,6 @@ void common_menu_lock_timer_add(void)
 void common_offscreen_handle(void)
 {
     common_offscreen_timer_destroy();
-    
     SetIsEnterOffScreen(true);
 
     int ui_msg_post[1];

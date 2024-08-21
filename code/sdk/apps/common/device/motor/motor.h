@@ -25,12 +25,15 @@ enum
     motor_duty_10 = 100,
 };
 
-#define sdw_motor_duty  (motor_duty_8) //关机震动强度
-#define def_motor_duty  (motor_duty_10)//默认震动强度
+#define sdw_motor_duty  (motor_duty_5) //关机震动强度
+#define def_motor_duty  (motor_duty_8)//默认震动强度
 
 void motor_init(void);
 void motor_disable(void);
 void motor_run(u8 cnt, u8 duty);
+
+u8 get_motor_work_flag(void);
+void set_motor_work_flag(u8 f);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
